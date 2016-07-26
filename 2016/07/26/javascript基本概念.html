@@ -1,0 +1,306 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>javascript基本概念 | Welkin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="welkin">
+    
+    <meta name="description" content="标识符 指变量，函数，属性的名字，或者函数的参数，规则：1.第一个字符必须是一个字母，下划线，活一个美元符号；           2.其他字符可以是字母，下划线，美元符号或数字；
+javascript关键字和保留字在 JavaScript 中，一些标识符是保留关键字，不能用作变量名或函数名。有些保">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="Welkin" title="Welkin"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Welkin">Welkin</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/07/26/javascript基本概念.html" title="javascript基本概念" itemprop="url">javascript基本概念</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="welkin">welkin</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2016-07-26T06:55:09.000Z" itemprop="datePublished">2016-07-26</time>
+    Updated:<time datetime="2016-07-26T08:39:40.487Z" itemprop="dateModified">2016-07-26</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		
+		</div>
+		
+		<p>标识符<br> 指变量，函数，属性的名字，或者函数的参数，<br>规则：1.第一个字符必须是一个字母，下划线，活一个美元符号；<br>           2.其他字符可以是字母，下划线，美元符号或数字；</p>
+<p>javascript关键字和保留字<br>在 JavaScript 中，一些标识符是保留关键字，不能用作变量名或函数名。有些保留关键字是作为 Javascript 以后扩展使用。（详见javascript高级程序设计p21页）</p>
+<p>javascript变量<br>与代数一样，JavaScript 变量可用于存放值（比如 x=5）和表达式（比如 z=x+y）。<br>变量可以使用短名称（比如 x 和 y），也可以使用描述性更好的名称（比如 age, sum, totalvolume）。<br>注意：1.变量必须以字母开头；<br>          2.变量也能以 $ 和 _ 符号开头（不过我们不推荐这么做）；</p>
+<pre><code>3. 变量名称对大小写敏感（y 和 Y 是不同的变量）；
+4.javascript对大小写敏感；
+</code></pre><p>定义变量时要用 var操作符，后加变量名（例：var：message）；则定义了一个名字为message的变量；且改变量可以用来保存任何值（注意：象这种未初始化的变量，会保存一个特殊的值-undefined）；<br>例：var message=”hi”‘   message=100;<br>在这个例子中变量message保存了一个字符串，然后又被一个数字覆盖；<br>局部变量：<br>即在函数中使用一个var定义的一个变量，那么这个变量在函数完成后就会被销毁；<br>例如：Function test(){<br>           var     message=”hi”; //全局变量<br>             }<br>            test()<br>            alert(message);           //错误</p>
+<p>全局变量<br>例：function test(){<br>               message =”hi”;  //全局变量<br>          }<br>         test();<br>          alerrt(essage);   //hi<br>这个例子省略了操作符，所以message成为全局变量，只要调用过一次test，则这个函数就有了意义；<br>在定义变量时也可以一条语句定义多个变量，只需要用逗号分开即可；<br>例：var message=”hi”,found-false,age=29;<br>这个例子定义了三个变量，可放在一条语句里完成；</p>
+<p>数据类型</p>
+<p>1.typeof操作符<br>用来检测给定变量的数据类型，且该操作符的操作数可以是变量也可以是数值字面量；<br>“undefined”—–表示该值未定义<br> “boolean”—–表示该值是布尔值<br>“string”—-表示该值是字符串<br>“number”—–表示该值是数值<br>“object”—–表示该值是对象或者是null<br>“function”——表示该值是函数<br>例：var message =”some string”;<br>       alert(typeof message);  //string;<br>       alerrt(typeof (message));   //string;<br>       alert(typeof 68);            //number;</p>
+<p>undefined  类型<br>在使用var生命变量但未对其加以初始化时，这个变量的值就是undefined，一般而言，不需用显示的把一个变量设置为undefined值，因为为经过初始化的值默认就会取得undefined值；<br>注意：对于初始化的变量和为声明的变量利用typeof操作符是都返回了undefined值；</p>
+<p>NULL类型<br>null值表示一个空对象指针，可以通过将变量的值设置为 null 来清空变量。<br>如果定义的变量在将来用来保存对象，那么可以将该变量初始化为null而不是其他值，这样一来，只要检查努力了值就可以知道相应的变量是否保存了一个对象的引用；注意：位于null和undefined之间的操作符（==）总是返回true，不过，要记住，在定义变量的时候，不要把变量定义为unedfined，应该明确的让改变量保存null值；</p>
+<p>Boolean类型<br>该类型只有两个字面值：true和false，要将一个值转换为对应的Boolean值，可以调用转型函数Boolean（),<br>例：var message =“hello”；<br>     var  messageabc=Boolean（massage）；<br>在这个例子中message被转换成了一个Boolean值，且被保存在messageabc这个变量中。所以，对任何数据类型的值调用Boolean函数，而且总会根据转换值的数据类型返回一个Boolean值；<br>数据类型                                 转换为true的值                    转换为false的值<br>Boolean                                                    true                                                 false<br>string                                                    任何非空字符串                            “ ”空字符串<br>Number                                     任何菲零数字值（包括无穷大）             0和NaN<br>object                                                         任何对象                              null<br>Undefined                           不适用                             undefined</p>
+<p>Number类型<br>1.浮点数值<br>浮点数值要求该数值中必须包含一个小数点，并且小数点后面必须至少有一位数字，如果小数点后面没有跟任何数字，那么这个数值就可以作为整数数值来保存；<br>例：var fnumber=1.1  //有效；<br>     var fnumber=10.0  //小数点后面没有数字解析为10<br>对于那些极大或绩效的数值，可以使用科学计数法；<br>例：  var fnumber=3.125e7;    //31250000<br>       var fnumber=3e-17;     //.00000000000000003<br>注意：   永远不要测试某个特定的浮点数值；浮点数值计算会产生摄入误差。</p>
+<p>2.数值范围<br>由于内存的限制，在大多数浏览器中，最小数值保存在Number.MIN_VALUE, 这个值是5e-324；最大数值保存在Number .MAX_VALUE中  ，这个值是1.7976937348623157e+308；如果某次计算的结果超出了一个javascrpt数值范围的值，那么这个数值会自动转换成特殊的Infinity值，若被返回了正的或者负的Infinity值，那么该值将无法参与下一次的计算。要想确定一个数值是否是有穷的。可以通过isFinite（）函数。若存在，则返回true，反之，则返回，false；<br>例：var result=Number.MAX_VALUE+Number.MAX_VALUE;<br>        alert(isFinite(result));                 //false</p>
+<p>3.NaN   非数值<br>该数值用于表示一个本来要返回数值的操作数未返回数值的情况；<br>特点：1.任何涉及NaN的操作都会返回NaN；<br>          2.NaN和任何值都不相等，包括本身；<br>针对NaN的特点，有了isNaN（）函数。这个函数接受一个参数，该参数可以是任何类型，而函数会帮我们确定这个参数是否是“不是数值”，该函数在接受到一个值后，会常试将这个值转化为数值，而任何不能被转换为数值的值都会导致这个函数返回true。<br>例：alerrt(isNaN(NaN));    //true;<br>       alert(isNaN(10));    //false;<br>注意：isNaN（）也可使用于对象，在基于对象调用该函数时，会首先调用对象的alueOf（）方法，然后确定该方法返回的值是否可以转换为数值，若不能，则基于这个返回值再调用toSring（）方法，再测试返回值。</p>
+<p>4.数值转换<br>Number（）可用于任何数据类型，将非数值转换为数值；paresInt（）和paresInt（）专门用于把字符串转换为数值。<br>Number（）函数的转换规则（）：<br>1.如果是Boolean值，true和false将被转换为1或0；<br>2.如果是数值，则是简单的传入和返回；<br>3.如果是null值，返回0；<br>4.如果是undefined，返回NaN；<br>5.如果是字符串：a.如果字符串只包含数字，则将其转换为十进制数值；<br>                     b.如果字符串中包含有效的浮点格式，则将其转换为对应的浮点数值；<br>                     c.如果字符串中包含有效的十六进制格式，则将其转换为相同大小的十进制整数值；<br>                     d.如果字符串是空的，则将其转换为0；<br>                       e.如果字符串包含上述格式之外的字符，则将其转换为NaN；<br>6.如果是对象，则调用对象的alueOf（）方法，然后依照前面的规则转换返回的值；如果转换的简介国是NaN，则调用对象的toString方法，然后再依照前面的规则转换返回的字符串值。</p>
+<p>5.String类型<br>字符串一旦创建，则它们的值就不可以改变要改变某个变量保存的字符串，首先要销毁原来的字符串，然后再用另一个包含新值的字符串来填充该变量；<br>字符串的转换方法：将一个值转换为字符串；<br>1.toString（）函数；针对数值，布尔值，对象和字符串；<br>例： var age=11;    var  agestring=age.toString()   //   “11”<br>       var  foud=true;<br>     var foundstrring =found.toString()    //  “true”<br>2.String（），可将任何类型的值转换为字符串；<br>规则：a. 如果有toString（）方法，则调用该方法并返回相应的结果；<br>             b.如果值是null，则返回“null”；<br>              c.如果值是undefined，则返回“undefined”；</p>
+<p>6.object类型<br>对象是遗嘱数据和功能的集合，对象可以通过执行new操作符后跟要创建的对象类型名称来创建；而创建object类型的实例并为其添加属性或方法，就可以创建自定义对象；<br>例： var o =new Object();<br>Object 对象<br>Object 对象表示一个 HTML 元素。<br>元素用于在网页中包含对象，比如：图像、音频、视频、Java applet、ActiveX、PDF、Flash 等。<br>访问 Object 对象<br>您可以使用 getElementById() 来访问 元素：<br>varx = document.getElementById(“myObject”);<br>创建 Object 对象<br>您可以使用 document.createElement() 方法来创建 元素：<br>var x = document.createElement(“OBJECT”);<br>仅仅创建Objject的实例并没有什么用处，但Object类型是所有他的实例的基础，Object类型所具有的任何属性和方法页同样存在于更具体的对象中；</p>
+<p>Object的每个实例都具有的属性和方法：<br>   1.constructor :保存着用于创建当前对象的函数； 对于前边的例子而言，构造函数就是Object;<br>   2.hasOwnProperty(propertyName):用于检查给定的属性在当前的实例中是否存在，其中要注意的是：作为参数的属性名（propertyName）必须要以字符串形式指定，例如：o.hasOwnpropertty(“name”))。<br>   3.isPrototypeOf(object):用于检查传入的对象是否是当前对象的原型；<br>   4.propertyIsEnumerable(propertyName):用于检查给定的属性能否使用for-in语句来枚举，同时，作为参数的属性名必须要以字符串形式指定；<br>   5.toLocaleString():返回对象的字符串表示，该字符串与执行环境地区对应；<br>   6.toString（）：返回对象的字符串表示；<br>   7.valueOf :返回对象的字符串，数值，或布尔值表示，通常与toString()方法的返回值相同；<br>注意：Object是所有对象的基础，因此所有对象都具有这些基本的属性和方法。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2016/07/26/javascript基本概念.html" data-title="javascript基本概念 | Welkin" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2016/07/26/~$vascript基本概念.html" title="">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  (no title)</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2016/07/26/hello-world.html"  title="Hello World">
+ <strong>NEXT:</strong><br/> 
+ <span>Hello World
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2016 
+		
+		<a href="http://yoursite.com" target="_blank" title="welkin">welkin</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>
