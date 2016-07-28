@@ -1,0 +1,334 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>博客搭建经验交流 | Welkin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="welkin">
+    
+    <meta name="description" content="刚开始我也是很不理解为什么要利用github+hexo搭建博客，现在差不多能理解，首先逼格很高，其次用github搭建可以学习使用github并且空间很大，也可以便于交流。再次声明本篇是基于windows系统下搭建的博客。我最开始搭博客时是用的linux，结果错误好多，于是还是决定放弃原来的，在wi">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="Welkin" title="Welkin"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Welkin">Welkin</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/07/28/博客搭建经验交流.html" title="博客搭建经验交流" itemprop="url">博客搭建经验交流</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="welkin">welkin</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2016-07-28T12:46:00.000Z" itemprop="datePublished">2016-07-28</time>
+    更新日期:<time datetime="2016-07-28T12:46:56.017Z" itemprop="dateModified">2016-07-28</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		<ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">声明：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number"></span> <span class="toc-text">1.准备node.js和git</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#undefined"><span class="toc-number">0.1.</span> <span class="toc-text">对于node：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#undefined"><span class="toc-number">0.2.</span> <span class="toc-text">对于git：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number"></span> <span class="toc-text">2.注册github添加仓库并申请秘钥</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">注册github并且建立仓库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">添加秘钥</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#undefined"><span class="toc-number">2.1.</span> <span class="toc-text">1.现在点击鼠标右键打开git bash，首先检查是否有ssh key；</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#undefined"><span class="toc-number">2.2.</span> <span class="toc-text">2.备份和删除原来的ssh key设置；</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#undefined"><span class="toc-number">2.3.</span> <span class="toc-text">3.生成新的ssh key</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#undefined"><span class="toc-number">2.4.</span> <span class="toc-text">4.添加ssh key到github</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number"></span> <span class="toc-text">配置hexo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number"></span> <span class="toc-text">初始化hexo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number"></span> <span class="toc-text">体验hexo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number"></span> <span class="toc-text">使用hexo </span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number"></span> <span class="toc-text">配置Deployment</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number"></span> <span class="toc-text">文章发布</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number"></span> <span class="toc-text">更换主题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number"></span> <span class="toc-text">更新主题</span></a>
+		</div>
+		
+		<p>刚开始我也是很不理解为什么要利用github+hexo搭建博客，现在差不多能理解，首先逼格很高，其次用github搭建可以学习使用github并且空间很大，也可以便于交流。<br>再次声明本篇是基于windows系统下搭建的博客。<br>我最开始搭博客时是用的linux，结果错误好多，于是还是决定放弃原来的，在windows上重新搭建，虽然说自己也找了好多教程但是还是觉得自己写下自己在搭建博客时遇到的问题，以便和大家分享。</p>
+<p></p><h4>声明：</h4>本篇文章禁止转载，仅供参考。<p></p>
+<p></p><h3>1.准备node.js和git</h3><br>node地址：<a href="https://nodejs.org/en/" target="_blank" rel="external">https://nodejs.org/en/</a><br>git地址：<a href="http://rj.baidu.com/soft/detail/30195.html?ald" target="_blank" rel="external">http://rj.baidu.com/soft/detail/30195.html?ald</a><br>下载时尽量不要把它们移在其他盘，最好放在c盘；<p></p>
+<h5>对于node：</h5>
+
+<p><img src="http://upload-images.jianshu.io/upload_images/2549157-b96072ebc1b63c4b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>选好这个之后其他的next就好；在先使用之前我们先看看是否安装好，同时按下win+R，会屏幕左下会弹出一个小框，输入cmd回车即可；</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2549157-98eb797d9c5e97e9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>然后输入：   node -v   和       npm -v<br>出现如下图所示就说明安装正确；</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2549157-8daa1c943f765c04.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p></p><h5>对于git：</h5><br>按照下图要求选好即可：<p></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2549157-9f0c7f1476dba2e0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2549157-2b0fc7291a5c3551.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>同样现在检查git是否安装正确，输入    git –version；出现如下图所示即可；</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2549157-5384c8a6ad0ae679.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p></p><h3>2.注册github添加仓库并申请秘钥</h3><p></p>
+<p></p><h4>注册github并且建立仓库</h4><br>没有github的话可以先进官网注册一个，然后进入主页后点击右上角的加号<br>github地址：<a href="https://github.com/" target="_blank" rel="external">https://github.com/</a><p></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2549157-749f2cafee4395b6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>然后点击new repository（p.s.我原来已经建了一个，所以大家不要管我的就好）</p>
+<p>注意：自己仓库的名字最好和自己github的名字一致，Description 这一栏可以不用填写，只需用勾选public就可以，然后自己的仓库就建好了。<br><br><img src="http://upload-images.jianshu.io/upload_images/2549157-387c1fbff1f56d20.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>（p.s.注意自己仓库名的后缀为github.io）<br></p>
+<p></p><h4>添加秘钥</h4><p></p>
+<p></p><h5>1.现在点击鼠标右键打开git bash，首先检查是否有ssh key；</h5><br>输入：cd ~/.ssh<br>如果显示“no such file or directory”,则跳转第三步，否则继续；<p></p>
+<p></p><h5>2.备份和删除原来的ssh key设置；</h5><br>$ ls<br>$ mkdir key_backup<br>$ cp id_rsa<em> key_backup<br>$ rm id_rsa</em><p></p>
+<p></p><h5>3.生成新的ssh key</h5><br>输入 $ ssh-keygen -t rsa -C”邮箱地址@youremail.com”<br>回车就好；<br>如果要让你输入密码，输入密码就好；<br>看到这样的画面就说明你已经设置好了；<p></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2549157-8d5e81090d6ab2af.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p></p><h5>4.添加ssh key到github</h5><br>首先到github上点击自己右上角头像，下边有个setting，点击setting；<p></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2549157-fde46218a31494fe.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>选择ssh and GPG keys添加秘钥就好，可以不用填写名称。如图所示；</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2549157-fd29197cb1d8d938.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>其实到这一步了，也可以给自己的github加个主题，但其实到最后因为要去克隆主题所以可以不用；<br>主题的设置，进入仓库后，点击setting，往下翻，直到找到github pages这个专栏就好，如图所示（p.S.因为我已经设置过了，所以不用看我的）</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2549157-59716f085a476391.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>然后点击那个框就好，会进入一个页面，选择同意就好，然后就可以挑选主题了。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2549157-13f62030453f4ca7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p></p><h3>配置hexo</h3><br>在桌面建一个文件夹，自己喜欢就好，我们暂时叫做git pages；然后打开文件夹，在空白处点击右键，打开git bash；输入命令行 npm install hexo-cli -g<p></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2549157-531583f993ee2bf8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>可能出现一个WARN不要担心，然后输入 npm install hexo –save，然后会看到窗口刷了一大堆白字，不用管，再输入 hexo -v，如果看到下面的图，则说明安装正确了；</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2549157-60e1fd0b27723e94.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p></p><h3>初始化hexo</h3><br>接着上面的操作，输入 hexo init；<p></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2549157-c5bef450e319bece.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>再输入 npm install 然后等待安装；</p>
+<p></p><h3>体验hexo</h3><br>接着上面的操作，输入hexo g；<p></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2549157-5570a46e10d9c90f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>如图，输入hexo s；</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2549157-904820df858deb24.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>会有一个网址，打开就可以看见最初的hexo在本地的配置了；</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2549157-83689cb93099202e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p></p><h3>使用hexo </h3><br>进入自己的文件夹，打开一个config文件，如图所示；<p></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2549157-9aa8ac12b42bfe2e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>将下列找到改成自己的设置；</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2549157-8d7d7522a62be10a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p></p><h3>配置Deployment</h3><br>打开命令行输入git config –global user.name “yourname”<br>                      git config –global user.email “youremail”<br>带引号的是自己的github账号和github相同的邮箱；<br>完了之后，还是在config文件里。找到deployment修改自己的参数；<p></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2549157-b7f7d95ac848f735.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>输完之后，输入hexo d；就可以通过自己设置的github名称访问自己的主页了；</p>
+<p></p><h3>文章发布</h3><br>打开命令行输入 hexo new “文章名”<p></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2549157-7b8c0584e608c5ed.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>如图现在已经建了一个名为123456的markdown文件，而这个文件保存在source文件夹下的post文件里，如图所示：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2549157-41a5c03651c6c1f5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>下面你可以用sublime 或者其他的markdown编辑器打开，进行编辑；<br>写完之后保存下来，再输入，hexo clean，清空原来的文件，再输入 hexo g，和hexo d，然后就可以刷新网站看到自己推送的文章了；<br></p>
+<p></p><h3>更换主题</h3><br>因为默认主题实在太丑了，所以都想着换主题；下面介绍主题的更换方法；<br>下面有三个主题，可以克隆，大家任选一个，如果有的不行，可以重新挑选克隆；<br>$ git clone <a href="https://github.com/cnfeat/cnfeat.git" target="_blank" rel="external">https://github.com/cnfeat/cnfeat.git</a> themes/jacman<br>$ git clone <a href="https://github.com/wuchong/jacman.git" target="_blank" rel="external">https://github.com/wuchong/jacman.git</a> themes/jacman<br>$ git clone <a href="https://github.com/A-limon/pacman.git" target="_blank" rel="external">https://github.com/A-limon/pacman.git</a> themes/pacman<br>然后再将config文件的theme值改好，复制哪个改成哪个<br>例:theme： jacman；<br><p></p>
+<p></p><h3>更新主题</h3><br>输入;<br>$ cd themes/jacman<br>$ git pull<br>为避免出错先备份你的config文件；<br>然后再输入：<br>hexo g<br>hexo s；进行预览；<br>hexo d -g再刷新网页就可以看到新的主题了；<p></p>
+<p>好了，一个博客也就搭好了，下面介绍两篇文章，我是参考他们写出来的，你们要是也有不懂得也可以参考，因为事物在更新，所以很多东西不适合现在的搭建，我将他们的总结下来加上自己的经验，希望可以帮助到所有搭建博客遇到问题的小伙伴们。<br><a href="https://xuanwo.org/2015/03/26/hexo-intor/" target="_blank" rel="external">https://xuanwo.org/2015/03/26/hexo-intor/</a><br><a href="http://www.jianshu.com/p/05289a4bc8b2" target="_blank" rel="external">http://www.jianshu.com/p/05289a4bc8b2</a><br>大家也可以进我的博客里进行学习交流，欢迎来访：<br><a href="https://welkin-qing.github.io/" target="_blank" rel="external">https://welkin-qing.github.io/</a></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2016/07/28/博客搭建经验交流.html" data-title="博客搭建经验交流 | Welkin" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2016/07/28/~$搭建经验交流.html" title="">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  (no title)</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2016/07/26/javascript基本概念.html"  title="javascript基本概念">
+ <strong>NEXT:</strong><br/> 
+ <span>javascript基本概念
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+  <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">声明：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number"></span> <span class="toc-text">1.准备node.js和git</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#undefined"><span class="toc-number">0.1.</span> <span class="toc-text">对于node：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#undefined"><span class="toc-number">0.2.</span> <span class="toc-text">对于git：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number"></span> <span class="toc-text">2.注册github添加仓库并申请秘钥</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">注册github并且建立仓库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">添加秘钥</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#undefined"><span class="toc-number">2.1.</span> <span class="toc-text">1.现在点击鼠标右键打开git bash，首先检查是否有ssh key；</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#undefined"><span class="toc-number">2.2.</span> <span class="toc-text">2.备份和删除原来的ssh key设置；</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#undefined"><span class="toc-number">2.3.</span> <span class="toc-text">3.生成新的ssh key</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#undefined"><span class="toc-number">2.4.</span> <span class="toc-text">4.添加ssh key到github</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number"></span> <span class="toc-text">配置hexo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number"></span> <span class="toc-text">初始化hexo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number"></span> <span class="toc-text">体验hexo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number"></span> <span class="toc-text">使用hexo </span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number"></span> <span class="toc-text">配置Deployment</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number"></span> <span class="toc-text">文章发布</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number"></span> <span class="toc-text">更换主题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number"></span> <span class="toc-text">更新主题</span></a>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2016 
+		
+		<a href="http://yoursite.com" target="_blank" title="welkin">welkin</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>
