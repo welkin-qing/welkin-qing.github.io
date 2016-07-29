@@ -1,0 +1,314 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>javascript操作符 | Welkin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="welkin">
+    
+    <meta name="description" content="一元操作符
+只能操作一个值得的操作符叫做一元操作符
+1.递增和递减操作符递增和递减操作符借鉴于c，具有前置型和后置型，即a++，++a，a–，–a；计算方式和c语言类似，并且这四个操作符对任何值都适用（整数，字符串，布尔值，浮点数值和对象）；在应用不同的值时，递增和递减遵循下列规则：1.在用于一个包">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="Welkin" title="Welkin"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Welkin">Welkin</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/07/29/javascript操作符.html" title="javascript操作符" itemprop="url">javascript操作符</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="welkin">welkin</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2016-07-29T10:30:10.000Z" itemprop="datePublished">2016-07-29</time>
+    Updated:<time datetime="2016-07-29T10:35:38.609Z" itemprop="dateModified">2016-07-29</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">一元操作符</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">1.0.1.</span> <span class="toc-text">1.递增和递减操作符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">1.0.2.</span> <span class="toc-text">2.一元加和减操作符</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#undefined"><span class="toc-number">1.0.2.1.</span> <span class="toc-text">注意：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">1.0.3.</span> <span class="toc-text">布尔操作符</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#undefined"><span class="toc-number">1.0.3.1.</span> <span class="toc-text">1.逻辑非NOT</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#undefined"><span class="toc-number">1.0.3.1.1.</span> <span class="toc-text">a.首先将它的操作数转换为一个布尔值，然后对其求反，规则如下：</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#undefined"><span class="toc-number">1.0.3.1.2.</span> <span class="toc-text">b.利用Boolean函数，可以同时使用两个逻辑非进行操作；第一个逻辑非会基于无论什么操作数返回一个布尔值，第二个对返回的这个布尔值进行求反</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#undefined"><span class="toc-number">1.0.3.2.</span> <span class="toc-text">2.逻辑与AND</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#undefined"><span class="toc-number">1.0.3.3.</span> <span class="toc-text">3.逻辑或</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">1.1.</span> <span class="toc-text">乘性操作符</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#undefined"><span class="toc-number">1.1.0.1.</span> <span class="toc-text">1.乘法</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#undefined"><span class="toc-number">1.1.0.2.</span> <span class="toc-text">2.除法</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#undefined"><span class="toc-number">1.1.0.3.</span> <span class="toc-text">3.求模</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">1.1.1.</span> <span class="toc-text">关系操作符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">1.1.2.</span> <span class="toc-text">相等操作符</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#undefined"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">1.相等和不相等</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#undefined"><span class="toc-number">1.1.2.1.1.</span> <span class="toc-text">a.在转换不同的数据类型时，遵循的规则：</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#undefined"><span class="toc-number">1.1.2.1.2.</span> <span class="toc-text">b.操作符在进行比较是遵循的规则：</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#undefined"><span class="toc-number">1.1.2.2.</span> <span class="toc-text">2.全等和不全等</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#undefined"><span class="toc-number">1.1.2.2.1.</span> <span class="toc-text">注意：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">1.1.3.</span> <span class="toc-text">条件操作符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">1.1.4.</span> <span class="toc-text">逗号操作符</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#undefined"><span class="toc-number">1.1.4.1.</span> <span class="toc-text">1.声明多个变量</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#undefined"><span class="toc-number">1.1.4.2.</span> <span class="toc-text">2.赋值</span></a></li></ol></li></ol></li></ol></li></ol>
+		</div>
+		
+		<p></p><h2>一元操作符</h2><p></p>
+<p></p><p>只能操作一个值得的操作符叫做一元操作符</p><p></p>
+<p></p><h4>1.递增和递减操作符</h4><br>递增和递减操作符借鉴于c，具有前置型和后置型，即a++，++a，a–，–a；计算方式和c语言类似，并且这四个操作符对任何值都适用（整数，字符串，布尔值，浮点数值和对象）；在应用不同的值时，递增和递减遵循下列规则：<br><br>1.在用于一个包含有效数字字符的字符串时，先将其转换为数字值，再执行加减1的操作。字符串变量变成数值变量；<br>例：<br> var s=”2”;<br>s++ ； //值为3<br>2.在应用于一个不包含有效数字字符的字符串时，将变量的值设为NaN，字符串变量变成数值变量；<br>例：<br> var s=”z”;<br>      s++;   //值为NaN<br>3.在应用于布尔值false时，先将其转换为数值0再进行计算，同理，对于true一样；<br>例：<br> var s= false;<br>     s++;  //值为1<br>4.在运用浮点数值时，直接进行加减1的操作；但是会由于浮点舍入出现错误；<br>例：<br> var s=1.1;<br>  s– ;  //值为0.10000000000000009<br>5.在应用于对象时，先调用对象的valueOf()方法来获得一个可操作的值，然后再进行前面的计算，若结果是NaN，则在调用toString()方法后再应用前述规则，使对象变量变成数值变量；<br><p></p>
+<p></p><h4>2.一元加和减操作符</h4><br>一元加和减操作符主要用于算数的基本运算，当非数值应用于一元操作符时，转换规则和Number()方式相同；同时一元减操作符主要用于表示负数，当用于数值时，该值会变成负数，当用于非数值时，运用和加相同的规则，最后将得到的数值转换为负数；<br>例：<br> var s=”01”;<br>       s=-s;  //结果为-1<p></p>
+<p></p><h5>注意：</h5>同时也可以运用到字符串当中：<br>1.可以将多个字符串变量连起来；<br>例：<br>txt1=”What a very”;<br> txt2=”nice day”;<br> txt3=txt1+” “+txt2;  //What a very nice day<br>2.若为字符串和数字相加时，则直接相加；<br>例：<br>var x=5+5;  //10<br> var y=”5”+5;   //55<br> var z=”Hello”+5;  //hello5<br><p></p>
+<p></p><h4>布尔操作符</h4><p></p>
+<p></p><h5>1.逻辑非NOT</h5><br>逻辑非用！来表示，可以运用任何值，不管这个值是什么类型，这个操作符都会返回一个布尔值；下面有两种方法运算逻辑非：<p></p>
+<p></p><h6>a.首先将它的操作数转换为一个布尔值，然后对其求反，规则如下：</h6><br>1.如果操作数是一个空的字符串，返回true；<br>2.如果操作数是0；返回true；<br>3.如果操作数是null，返回true；<br>4.如果操作数是NaN，返回true；<br>5.如果操作数是undefined，返回true；<br>6.如果操作数是一个对象，返回false；<br>7.如果操作数是一个非空字符串，返回false；<br>8.如果操作数是任意非0数值（包括infinity），则返回false；<br>例：<br>alert(!0);  //true;<br> alert(!NaN);   //true<br> alert(!” “);    //true<br>alerrt(!123456);   //false<br><p></p>
+<p></p><h6>b.利用Boolean函数，可以同时使用两个逻辑非进行操作；第一个逻辑非会基于无论什么操作数返回一个布尔值，第二个对返回的这个布尔值进行求反</h6><br>例：<br>alert(!!NaN);  //false<br>alert(!!” “);    //false<br>alert(!!123456);  //true<br><p></p>
+<p></p><h5>2.逻辑与AND</h5><br>逻辑与操作符用&amp;&amp;表示，是一个短路操作符（即如果第一个操作数能决定结果，那么就不会再对第二个操作数求值），该操作符可以运用任何类型的操作数，不仅仅是布尔值。在有一个操作数不是布尔值的情况下，逻辑与操作就不一定返回布尔值；规则如下：<br>1.如果第一个操作数是对象，则返回第二个操作数；<br>2.如果两个操作数都是对象，则返回第二个操作数；<br>3.如果第二个操作数是对象，只有当第一个操作数的求值结果为true的情况下才会返回对象；<br>4.如果有一个操作数是null，则返回null；<br>5.如果有一个操作数是NaN，则返回NaN；<br>6.如果有一个操作数是undefined，则返回undefined；<br>例：<br> var found =true;<br>var result=(found &amp;&amp; a);  //这里会出现错误，因为a未定义<br>alert(result);<br>若将found定义为false，则可以执行第三步alert(result);因为result整个值为false；用不着对&amp;&amp;右侧操作数进行求值。<br><p></p>
+<p></p><h5>3.逻辑或</h5><br>逻辑或操作符由||表示，同时也是一个短路操作符，当第一个操作符时true时，就不需用对第二个操作符求值，如果第一个操作数不是布尔值，则不一定返回布尔值，规则如下：<br>1.如果第一个操作数是对象，则返回第一个操作数；<br>2.如果两个操作数都是对象，则返回第一个操作数；<br>3.如果第一个操作数的求值结果为false，则返回第二个操作数；<br>4.如果两个操作数都是NaN，则返回NaN；<br>5.如果两个操作数都是null，则返回null；<br>6.如果两个操作数都是undefined，则返回undefined；<br>例：<br>var found = true;<br>var result =found||a;<br>alert(result);  //会执行true，<br>若将found改成false，就会在第二步发生错误；<p></p>
+<p></p><h3>乘性操作符</h3><p></p>
+<p></p><h5>1.乘法</h5><br>用*表示，用来计算两个数的乘积类似于c；规则如下；<br>1.如果操作数都是数值，按常规进行；若乘积超出了数值表示范围，则返回Infinity和-Infinity；<br>2.若有一个操作数是NaN，则返回NaN；<br>3.如果是Infinity与0相乘，则结果是NaN；如果与非0数值相乘，则结果是Infinity或-Infinity，且正负号取决于有符号操作数的符号；如果是Infinity与Infinity相乘，则结果还是Infinity；<br>4.如果有一个数不是数值，则在后台调用Number（）将其转换为数值，然后再应用上面的规则。<br><p></p>
+<p></p><h5>2.除法</h5><br>符号为/，与乘法类似，处理规则如下：<br>1.如果操作数都是数值，按常规进行；若乘积超出了数值表示范围，则返回Infinity和-Infinity；<br>2.若有一个操作数是NaN，则返回NaN；<br>3.如果是Infinity被Infinity除，则结果还是NaN；<br>4.如果是0被0除，则结果是NaN；<br>5.如果是非0的有限数被0除，则结果是Infinity或-Infinity，且正负号取决于有符号操作数的符号；<br>6.如果是Infinity被任何非0的数值除，则结果是Infinity或-Infinity，且正负号取决于有符号操作数的符号；<br>7.如果有一个数不是数值，则在后台调用Number（）将其转换为数值，然后再应用上面的规则。<br><p></p>
+<p></p><h5>3.求模</h5><br>符号为%，与前两个乘性操作符类似，用法如下：<br>1.如果操作数都是数值，按常规进行，返回除得的余数；<br>2.如果被除数是无穷大值，而除数是有限大的数值，则结果是NaN；<br>3.如果被除数是有限大的数值，而除数是无限大值，则结果是被除数；<br>4.如果被除数是有限大的数值，而除数是0，则结果是NaN；<br>5.如果被除数是0，则结果是0；<br>6.如果是Infinity被 Infinity除，则结果是NaN；<br>7.如果有一个数不是数值，则在后台调用Number（）将其转换为数值，然后再应用上面的规则。<br><p></p>
+<p></p><h4>关系操作符</h4><br>小于（&lt;）,大于（&gt;）,小于等于（&lt;=）,大于等于（&gt;=）；用于两个值进行比较，并且这两个操作符都会返回一个布尔值；规则如下：<br>1.如果两个操作数都是数值，则进行数值比较；<br>2.如果两个操作数都是字符串，则比较两个字符串对应的字符编码值；<br>3.如果一个操作数是数值，则将另一个操作数转换为数值进行比较；<br>4.如果一个操作数是布尔值，则先将其转换为数值，然后再进行比较；<br>5.任何操作数与NaN进行比较，结果都是NaN；<br>6.如果一个操作数是对象，则调用该对象的valueOf()方法，用得到的结果按前面的规则进行计算，如果对象没有valueOf()方法，则调用toString()方法，并用得到的结果根据前面的规则进行比较；<br>例：<br> var result =”23” &lt;”3” ;  //true<br>因为两个操作数都是字符串，且”2”的字符编码是50，而”3”的是51；<br>var result=”23” <3; false="" var="" result="NaN<3;">=3;  //false<br>因为其中一个操作数是数值，所以”23”要转换为数值才进行比较；<br><p></p>
+<p></p><h4>相等操作符</h4><br>当相等操作符涉及到对象时，问题较复杂，所以提供两种比较方法，相等和不相等–线比较再转换；全等和不全等–仅比较而不转换；<br><p></p>
+<p></p><h5>1.相等和不相等</h5><p></p>
+<p></p><h6>a.在转换不同的数据类型时，遵循的规则：</h6><br>1.如果当中有一个操作数是布尔值，则在转换前先将其转换为数值：false转换为1，true转换为2；<br>2.如果一个操作数是字符串，另一个操作数是数值，在比较之前先将字符串转换为数值；<br>3.如果一个操作数是对象，另一个操作数不是，则调用对象的valueOf()方法，用得到的基本类型值按前面的规则进行比较；<br><p></p>
+<p></p><h6>b.操作符在进行比较是遵循的规则：</h6><br>1.null和undefined是相等的；<br>2.要比较相等性之前，不能将null和undefined转换成其他任何值；<br>3.如果有一个操作数是NaN，则相等操作符返回false；不相等操作符返回true；（p.s.即使两个操作数都是NaN，则相等操作符也返回false，NaN不等于NaN）；<br>4.如果两个操作数都是对象，则比较他们是不是同一个对象；如果两个操作数都指向同一个对象则返回true，反之，返回false；<br>例：<br>null==undefined;   //true<br>“NaN”==NaN;      //false<br>NaN!=NaN;     //true<br>undefined==0;   //false<br>null==0;     //false<br><p></p>
+<p></p><h5>2.全等和不全等</h5><br>全等操作符（===），不全等操作符（！==），在比较两个操作数之前不进行转换，其余和相等和不相等操作符没有什么区别；<br>例：<br> var result(“55”==55);    //true 可以通过转换使字符串变成数值<br>var result(‘55”===55);    //false数据类型不同<p></p>
+<p></p><h6>注意：</h6>null==undefined会返回true，而null===undefined会返回false；<br><p></p>
+<p></p><h4>条件操作符</h4><br>该操作符和C语言中条件操作符类似，例：<br>var max = (num1&gt;num2) ? num1 : num2;<br>在这里，这个表达式的意思是；如果num1&gt;num2，则关系表达式返回true，将num1的值赋给max，反之，返回false，并将num2的值赋给max；<br><p></p>
+<p></p><h4>逗号操作符</h4><br>逗号操作符有两个用途：<p></p>
+<p></p><h5>1.声明多个变量</h5><br>例：<br>var num1=1,num2=2,num3=3;<br><p></p>
+<p></p><h5>2.赋值</h5><br>在进行赋值时，逗号操作符返回表达式中最后一项；<br>例：<br>var num=(1,2,3,4,5,6);  //num最后的值为6<p></p>
+</3;>  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2016/07/29/javascript操作符.html" data-title="javascript操作符 | Welkin" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2016/07/29/~$vascript操作符.html" title="">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  (no title)</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2016/07/28/博客搭建经验交流.html"  title="博客搭建经验交流">
+ <strong>NEXT:</strong><br/> 
+ <span>博客搭建经验交流
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">一元操作符</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">1.0.1.</span> <span class="toc-text">1.递增和递减操作符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">1.0.2.</span> <span class="toc-text">2.一元加和减操作符</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#undefined"><span class="toc-number">1.0.2.1.</span> <span class="toc-text">注意：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">1.0.3.</span> <span class="toc-text">布尔操作符</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#undefined"><span class="toc-number">1.0.3.1.</span> <span class="toc-text">1.逻辑非NOT</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#undefined"><span class="toc-number">1.0.3.1.1.</span> <span class="toc-text">a.首先将它的操作数转换为一个布尔值，然后对其求反，规则如下：</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#undefined"><span class="toc-number">1.0.3.1.2.</span> <span class="toc-text">b.利用Boolean函数，可以同时使用两个逻辑非进行操作；第一个逻辑非会基于无论什么操作数返回一个布尔值，第二个对返回的这个布尔值进行求反</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#undefined"><span class="toc-number">1.0.3.2.</span> <span class="toc-text">2.逻辑与AND</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#undefined"><span class="toc-number">1.0.3.3.</span> <span class="toc-text">3.逻辑或</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">1.1.</span> <span class="toc-text">乘性操作符</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#undefined"><span class="toc-number">1.1.0.1.</span> <span class="toc-text">1.乘法</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#undefined"><span class="toc-number">1.1.0.2.</span> <span class="toc-text">2.除法</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#undefined"><span class="toc-number">1.1.0.3.</span> <span class="toc-text">3.求模</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">1.1.1.</span> <span class="toc-text">关系操作符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">1.1.2.</span> <span class="toc-text">相等操作符</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#undefined"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">1.相等和不相等</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#undefined"><span class="toc-number">1.1.2.1.1.</span> <span class="toc-text">a.在转换不同的数据类型时，遵循的规则：</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#undefined"><span class="toc-number">1.1.2.1.2.</span> <span class="toc-text">b.操作符在进行比较是遵循的规则：</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#undefined"><span class="toc-number">1.1.2.2.</span> <span class="toc-text">2.全等和不全等</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#undefined"><span class="toc-number">1.1.2.2.1.</span> <span class="toc-text">注意：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">1.1.3.</span> <span class="toc-text">条件操作符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">1.1.4.</span> <span class="toc-text">逗号操作符</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#undefined"><span class="toc-number">1.1.4.1.</span> <span class="toc-text">1.声明多个变量</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#undefined"><span class="toc-number">1.1.4.2.</span> <span class="toc-text">2.赋值</span></a></li></ol></li></ol></li></ol></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2016 
+		
+		<a href="http://yoursite.com" target="_blank" title="welkin">welkin</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>
