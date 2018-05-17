@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>Welkin</title>
+    <title>again | Welkin</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="welkin">
@@ -58,70 +58,68 @@
 
     </header>
     <div id="container">
-      <div id="main">
-
-  <section class="post" itemscope itemprop="blogPost">
-  
-    <a href="/2018/05/17/again.html" title="again" itemprop="url">
-  
-    <h1 itemprop="name">again</h1>
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
     
-     
-           <p itemprop="description" ></p>
-        
+      <a href="/2018/05/17/again.html" title="again" itemprop="url">again</a>
+  </h1>
+  <p class="article-author">By
     
+      <a href="http://yoursite.com" title="welkin">welkin</a>
+    </p>
+  <p class="article-time">
     <time datetime="2018-05-17T13:06:42.000Z" itemprop="datePublished">2018-05-17</time>
-  </a>
-</section>
+    Updated:<time datetime="2018-05-17T13:06:42.446Z" itemprop="dateModified">2018-05-17</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		
+		</div>
+		
+		  
+	</div>
+		<footer class="article-footer clearfix">
 
-  <section class="post" itemscope itemprop="blogPost">
-  
-    <a href="/2016/07/29/javascript操作符.html" title="javascript操作符" itemprop="url">
-  
-    <h1 itemprop="name">javascript操作符</h1>
-    
-     
-           <p itemprop="description" >一元操作符
-只能操作一个值得的操作符叫做一元操作符
-1.递增和递减操作符递增和递减操作符借鉴于c，具有前置型和后置型，即a++，++a，a–，–a；计算方式和c语言类似，并且这四个操作符对任何值都适用（整数，字符串，布尔值，浮点数值和对象）；在应用不同的值时，递增和递减遵循下列规</p>
-        
-    
-    <time datetime="2016-07-29T10:30:10.000Z" itemprop="datePublished">2016-07-29</time>
-  </a>
-</section>
 
-  <section class="post" itemscope itemprop="blogPost">
-  
-    <a href="/2016/07/28/博客搭建经验交流.html" title="博客搭建经验交流" itemprop="url">
-  
-    <h1 itemprop="name">博客搭建经验交流</h1>
-    
-     
-           <p itemprop="description" >刚开始我也是很不理解为什么要利用github+hexo搭建博客，现在差不多能理解，首先逼格很高，其次用github搭建可以学习使用github并且空间很大，也可以便于交流。再次声明本篇是基于windows系统下搭建的博客。我最开始搭博客时是用的linux，结果错误好多，于是还是决</p>
-        
-    
-    <time datetime="2016-07-28T12:46:00.000Z" itemprop="datePublished">2016-07-28</time>
-  </a>
-</section>
 
-  <section class="post" itemscope itemprop="blogPost">
-  
-    <a href="/2016/07/26/javascript基本概念.html" title="javascript基本概念" itemprop="url">
-  
-    <h1 itemprop="name">javascript基本概念</h1>
-    
-     
-           <p itemprop="description" >标识符 指变量，函数，属性的名字，或者函数的参数，规则：1.第一个字符必须是一个字母，下划线，活一个美元符号；           2.其他字符可以是字母，下划线，美元符号或数字；
-javascript关键字和保留字在 JavaScript 中，一些标识符是保留关键字，不能用作变</p>
-        
-    
-    <time datetime="2016-07-26T06:55:09.000Z" itemprop="datePublished">2016-07-26</time>
-  </a>
-</section>
 
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2018/05/17/again.html" data-title="again | Welkin" data-tsina="null" class="share clearfix">
+  </div>
 
 </div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2016/07/29/javascript操作符.html"  title="javascript操作符">
+ <strong>NEXT:</strong><br/> 
+ <span>javascript操作符
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
       <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  
+  </div>
 
 <div id="asidepart">
 <div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
@@ -187,6 +185,8 @@ $(document).ready(function(){
       m.removeClass('moveMain');
       a.css('display', 'block').removeClass('fadeOut');
       o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
         
     }
   });
@@ -206,6 +206,66 @@ $(document).ready(function(){
 });
 </script>
 
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
 
 
 
@@ -213,4 +273,4 @@ $(document).ready(function(){
 
 
   </body>
- </html>
+</html>
