@@ -4,10 +4,14 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>again | Welkin</title>
+    <title>系统重装后，如何找回hexo+github搭建的博客 | Welkin</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="welkin">
+    
+    <meta name="description" content="声明：此文是针对于windows环境下hexo+github搭建的博客，对于linux下我也尝试过，但是最好还是在windows下搭建。个人建议：博客最好还是在csdn或者博客园上写，因为系统更新后真的不好找。
+我的博客是在2016年搭建的，可以先给大家看看我的博客：
+8分钟那个上传的是测试文章，总">
     
     
     
@@ -63,15 +67,15 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2018/05/17/again.html" title="again" itemprop="url">again</a>
+      <a href="/2018/05/17/系统重装后，如何找回hexo-github搭建的博客.html" title="系统重装后，如何找回hexo+github搭建的博客" itemprop="url">系统重装后，如何找回hexo+github搭建的博客</a>
   </h1>
   <p class="article-author">By
     
       <a href="http://yoursite.com" title="welkin">welkin</a>
     </p>
   <p class="article-time">
-    <time datetime="2018-05-17T13:06:42.000Z" itemprop="datePublished">2018-05-17</time>
-    Updated:<time datetime="2018-05-17T13:06:42.446Z" itemprop="dateModified">2018-05-17</time>
+    <time datetime="2018-05-17T14:13:42.000Z" itemprop="datePublished">2018-05-17</time>
+    Updated:<time datetime="2018-05-17T14:14:42.361Z" itemprop="dateModified">2018-05-17</time>
     
   </p>
 </header>
@@ -83,7 +87,14 @@
 		
 		</div>
 		
-		  
+		<p>声明：此文是针对于windows环境下hexo+github搭建的博客，对于linux下我也尝试过，但是最好还是在windows下搭建。<br>个人建议：博客最好还是在csdn或者博客园上写，因为系统更新后真的不好找。</p>
+<p>我的博客是在2016年搭建的，可以先给大家看看我的博客：</p>
+<p>8分钟那个上传的是测试文章，总算找回来了，开心<br>好，现在我们开始切入正题：<br>前提：我需要说几个条件;<br>1.当初搭建博客时的ssh没有删除，如果删除那就再重新配置一个，配置方法参照我上一篇博客；<br>2.当初搭建博客的仓库没有删除，如果删除，那就再重新搭一个吧，剩下的教程几乎没有关系了<br>3.如果，当时搭建博客时，如果按照我的教程，或者说按照网上大多数教程，有建了一个文件夹（例如：git pages或者hexo），这个文件夹在重装系统后还有保留下来，那最好不过。</p>
+<p>先说第一种情况：如果那个文件夹在的情况下：<br>不知道你们有没有按照其他的教程去配置静态页面，我按照那个方法有在github上新建了一个branch，如下图</p>
+<p>那个gh-pages是我新建的branch，如果建了没关系<br>我们只需用点击master就好，回到原来的地方<br>然后再你原来的那个文件夹里打开git bash here<br>输入<br>npm install hexo –save</p>
+<p>然后可以试着输入hexo g 和hexo d<br>如果有提示<br>hexo g<br>hexo d<br>提示你需要重新配置邮箱和用户名，那么按照原来的邮箱和原来的用户名输入就好；<br>再次输入hexo g，如果有提示</p>
+<p>就说明已经重新配置好了；<br>如果没有保留当初在桌面配置的文件夹<br>首先先看看自己电脑上有没有ssh<br>在自己的一个盘里建一个文件夹，里面分别有三个文件夹（git，node，git pages）<br>分别在git和node里配置好git和node<br>然后再git pages里打开git bash here检查有没有ssh<br>cd ~/. ssh<br>如果有<br>No such file or directory<br>说明是第一次使用，那么按照上一篇博客配置，<br>如果提示有，那么你可以先试试这个ssh能用不，先别急着删；<br>按照刚刚的步骤再输入<br>npm install hexo –save<br>然后按照刚刚的步骤再来一次；<br>如果最后hexo d后，文章没有推上去，那么就说明没有成功，需要重新配置ssh<br>先删除原来的ssh<br>ssh-add -D<br>rm -r ~/.ssh<br>最好查看一下上一篇博客里，Deployment的config.yml文件里面的deploy值有没有改好（参照上一篇）<br>配置好了之后再按照刚刚的步骤再来一次（记得配置邮箱和用户名）<br>如果git bash在这儿没有起作用的话，<br>那么win+r打开cmd，安装一个类似刚刚操作的扩展<br>npm install hexo-deployer-git –save<br>然后<br>hexo g<br>hexo d<br>然后再进入自己的博客页面查看。<br>好了，到此为止，重新配置已经完成，是我个人尝试很久才配置成功，愿与大家分享。<br>我的博客<br><a href="https://welkin-qing.github.io/" target="_blank" rel="noopener">https://welkin-qing.github.io/</a><br>我的github：<br><a href="https://github.com/welkin-qing" target="_blank" rel="noopener">https://github.com/welkin-qing</a><br>我的简书：<br><a href="https://www.jianshu.com/u/2371723aab5f" target="_blank" rel="noopener">https://www.jianshu.com/u/2371723aab5f</a><br>欢迎大家提出建议。</p>
+  
 	</div>
 		<footer class="article-footer clearfix">
 
@@ -92,7 +103,7 @@
 
 <div class="article-share" id="share">
 
-  <div data-url="http://yoursite.com/2018/05/17/again.html" data-title="again | Welkin" data-tsina="null" class="share clearfix">
+  <div data-url="http://yoursite.com/2018/05/17/系统重装后，如何找回hexo-github搭建的博客.html" data-title="系统重装后，如何找回hexo+github搭建的博客 | Welkin" data-tsina="null" class="share clearfix">
   </div>
 
 </div>
@@ -101,19 +112,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2018/05/17/系统重装后，如何找回hexo-github搭建的博客.html" title="系统重装后，如何找回hexo+github搭建的博客">
-  <strong>PREVIOUS:</strong><br/>
-  <span>
-  系统重装后，如何找回hexo+github搭建的博客</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2016/07/29/javascript操作符.html"  title="javascript操作符">
+<a href="/2018/05/17/again.html"  title="again">
  <strong>NEXT:</strong><br/> 
- <span>javascript操作符
+ <span>again
 </span>
 </a>
 </div>
