@@ -1,0 +1,325 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>MATLAB GUI实现计算器 | Welkin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="welkin">
+    
+    <meta name="description" content="1.先打开matlab新建GUI文件
+2.选择路径（左边是默认的不用改）
+
+然后点击ok
+3.此时界面会弹出一个小框
+4.建立计算器界面（贴上我设计的界面，不许嘲笑我的设计）
+
+5.细致讲解一下，这里的按键和显示框的是怎么实现的
+A.显示框：选择edit text在右边屏幕拉取即可如图所示，新建两个">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="Welkin" title="Welkin"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Welkin">Welkin</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/05/28/MATLAB-GUI实现计算器.html" title="MATLAB GUI实现计算器" itemprop="url">MATLAB GUI实现计算器</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="welkin">welkin</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2018-05-28T13:54:23.000Z" itemprop="datePublished">2018-05-28</time>
+    Updated:<time datetime="2018-05-28T13:55:21.329Z" itemprop="dateModified">2018-05-28</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		
+		</div>
+		
+		<p><strong>1.先打开matlab新建GUI文件</strong><br><img src="http://upload-images.jianshu.io/upload_images/2549157-25057279e709b9c9?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="新建GUI文件"></p>
+<p><strong>2.选择路径（左边是默认的不用改）</strong></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/2549157-e32a156e7fc588e6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="选择路径"></p>
+<p>然后点击ok</p>
+<p><strong>3.此时界面会弹出一个小框</strong></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/2549157-86a1764d430ef3a3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="弹出框"><br><strong>4.建立计算器界面（贴上我设计的界面，不许嘲笑我的设计）</strong></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/2549157-0ea1ae4562e0d632.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="界面设计"></p>
+<p><strong>5.细致讲解一下，这里的按键和显示框的是怎么实现的</strong></p>
+<p><strong>A.显示框：</strong>选择edit text<br><img src="https://upload-images.jianshu.io/upload_images/2549157-0f268cfbbb217aad.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="显示框"><br>在右边屏幕拉取即可<br><img src="https://upload-images.jianshu.io/upload_images/2549157-bbc19d6c7b3ed2f1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="显示框"><br>如图所示，新建两个即可，左边作为输入屏，右边作为输入结果的显示屏<br>双击该框，弹出一个窗口，窗口下拉，里面有该显示框的属性<br><img src="https://upload-images.jianshu.io/upload_images/2549157-05cd03e36752d7a0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="显示框的属性"><br><strong>string值为显示框显示的值</strong><br><strong>Tag为显示框的名字</strong><br><strong>（现在这个计算器需要显示框和输出框，如果没有新建其他的edit框，默认新建的第一个edit框的名字为edit1，第二个为edit2）</strong><br><strong>B.数字按钮和字符按钮</strong><br>点击push button 新建按钮，需要几个建几个<br><img src="https://upload-images.jianshu.io/upload_images/2549157-f350bb4712ee3164.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="按钮"><br><strong>双击之后在string那一栏改成你所需要的按钮</strong><br><img src="https://upload-images.jianshu.io/upload_images/2549157-bc238c5a3882bc1c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="按钮值"><br>回车之后，如图所示<br><img src="https://upload-images.jianshu.io/upload_images/2549157-a63a7d7374a1f913.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="改好的按钮值"></p>
+<p><strong>6.把界面雏形做出之后，我们需要去实现计算器的操作</strong></p>
+<p><strong>A.首先改0~9的数字键（需要点击后在edit1上显示该数字）</strong><br><strong>右键点击你需要改的button之后会出现一个窗口选择view callbacks-&gt;callback，然后会打开一个函数，蓝色字体所在的位置是该button所在的位置的代码</strong><br><img src="https://upload-images.jianshu.io/upload_images/2549157-47e956e982a69ce6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="代码所在"><br>按照这个方式将自己的代码改成自己所需要的数字<br><strong>handles.后面加的是自己所需要将显示的文本框的名字</strong></p>
+<blockquote>
+<p>textString = get(handles.edit1,’String’);<br>textString = strcat(textString,’6’);<br>set(handles.edit1,’String’,textString);<br>guidata(hObject, handles);</p>
+</blockquote>
+<p><strong>B.对于计算符号</strong><br><img src="https://upload-images.jianshu.io/upload_images/2549157-3211c986264f5b71.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="计算符号"></p>
+<blockquote>
+<p>textString = get(handles.edit1,’String’);<br>textString = strcat(textString,’+’);<br>set(handles.edit1,’String’,textString);<br>guidata(hObject, handles);</p>
+</blockquote>
+<p><strong>加减乘除只需用换一下就好</strong><br><strong>C.对于AE操作</strong><br><img src="https://upload-images.jianshu.io/upload_images/2549157-b4f642159cfcc904.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="AE"></p>
+<blockquote>
+<p>textString = get(handles.edit1,’String’);<br>textString = get(handles.edit2,’String’);<br>set(handles.edit1,’String’,’’);<br>set(handles.edit2,’String’,’’);<br>guidata(hObject, handles);</p>
+</blockquote>
+<p><strong>D.对于back操作</strong><br><img src="https://upload-images.jianshu.io/upload_images/2549157-372ea757f4a16f67.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="back"></p>
+<blockquote>
+<p>textString=get(handles.edit1,’String’);<br>as=char(textString);<br>n=length(textString);<br>textString=as(1:n-1);<br>set(handles.edit1,’String’,textString)<br>guidata(hObject, handles);</p>
+</blockquote>
+<p><strong>E.退出操作</strong><br><img src="https://upload-images.jianshu.io/upload_images/2549157-709f53b371bd0d8f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="退出"></p>
+<blockquote>
+<p>close(gcf);</p>
+</blockquote>
+<p><strong>7.初始化操作</strong><br><strong>A.需要对edit1和edit2进行初始化，使代码运行时，文本框里为空白（需要在opening里改函数）</strong><br><img src="https://upload-images.jianshu.io/upload_images/2549157-9d5ad38db2ed12f9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="初始化"></p>
+<blockquote>
+<p>set(handles.edit1,’string’,’’);<br>set(handles.edit2,’string’,’’);</p>
+</blockquote>
+<p><strong>B.需要将edit1的结果在edit2中显示出来（需要改计算那个button的函数值）</strong><br><img src="https://upload-images.jianshu.io/upload_images/2549157-f1513fdca8fc0fd8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="计算"></p>
+<blockquote>
+<p>textString = get(handles.edit1,’String’);<br>aa = eval(textString);<br>set(handles.edit2,’String’,aa);<br>guidata(hObject, handles);</p>
+</blockquote>
+<p>使其显示在edit2上<br>点击运行即可实现计算器。<br><img src="https://upload-images.jianshu.io/upload_images/2549157-302903a52ffb25e2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="计算器"></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2018/05/28/MATLAB-GUI实现计算器.html" data-title="MATLAB GUI实现计算器 | Welkin" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2018/05/27/线程-思维导图.html"  title="线程[思维导图]">
+ <strong>NEXT:</strong><br/> 
+ <span>线程[思维导图]
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2018 
+		
+		<a href="http://yoursite.com" target="_blank" title="welkin">welkin</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>
