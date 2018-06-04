@@ -4,14 +4,15 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>JS数据类型及数据类型转换 | Welkin</title>
+    <title>JS中的NaN和isNaN | Welkin</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="welkin">
     
-    <meta name="description" content="#一、JS数据类型ECMAScript 是数据类型的一个标准及核心首先我先提一下HTML的标签类型HTML标签类型：block，inline，inline-block，table注意：在JS里我们需要利用typeof来判断数据类型JS数据类型：
-##1.数字 number
-##2.字符串 strin">
+    <meta name="description" content="#一、NaN：not a number  不是个数字的数字类型
+#但是属于数字类型123var a = number (&amp;apos;abc&amp;apos;);alert(a);  //NaNalert(typeof(a));  //number
+注意：一旦程序出现NaN，肯定进行非法操作
+#特性：1.N">
     
     
     
@@ -67,15 +68,15 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2018/06/04/JS数据类型及数据类型转换.html" title="JS数据类型及数据类型转换" itemprop="url">JS数据类型及数据类型转换</a>
+      <a href="/2018/06/05/JS中的NaN和isNaN.html" title="JS中的NaN和isNaN" itemprop="url">JS中的NaN和isNaN</a>
   </h1>
   <p class="article-author">By
     
       <a href="http://yoursite.com" title="welkin">welkin</a>
     </p>
   <p class="article-time">
-    <time datetime="2018-06-04T07:12:48.000Z" itemprop="datePublished">2018-06-04</time>
-    Updated:<time datetime="2018-06-04T07:13:28.173Z" itemprop="dateModified">2018-06-04</time>
+    <time datetime="2018-06-04T17:10:48.000Z" itemprop="datePublished">2018-06-05</time>
+    Updated:<time datetime="2018-06-04T17:11:22.334Z" itemprop="dateModified">2018-06-05</time>
     
   </p>
 </header>
@@ -87,54 +88,24 @@
 		
 		</div>
 		
-		<p>#一、JS数据类型<br><strong>ECMAScript 是数据类型的一个标准及核心</strong><br>首先我先提一下HTML的标签类型<br><strong>HTML标签类型：</strong>block，inline，inline-block，table<br><strong>注意：在JS里我们需要利用typeof来判断数据类型</strong><br><strong>JS数据类型：</strong></p>
-<p>##1.数字 number</p>
-<p>##2.字符串 string<br>可对字符串进行的操作有：</p>
-<p>###(1).求字符串的长度 </p>
+		<p>#一、NaN：not a number  不是个数字的数字类型</p>
+<p>#但是属于数字类型<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var a = number (&apos;abc&apos;);</span><br><span class="line">alert(a);  //NaN</span><br><span class="line">alert(typeof(a));  //number</span><br></pre></td></tr></table></figure></p>
+<p><strong>注意：一旦程序出现NaN，肯定进行非法操作</strong></p>
+<p>#特性：1.NaN是假的布尔值<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var a = number (&apos;abc&apos;);</span><br><span class="line">if(a)&#123;</span><br><span class="line">  alert(&apos;真&apos;);</span><br><span class="line">&#125;else&#123;</span><br><span class="line">  (&apos;假&apos;)</span><br><span class="line">&#125;  //假</span><br></pre></td></tr></table></figure></p>
+<p>#2.NaN与自己都不相等<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var a = number (&apos;abc&apos;);</span><br><span class="line">alert(a===a);  //false</span><br></pre></td></tr></table></figure></p>
+<p>#二、isNaN </p>
+<p>#is not a number 是不是不是一个数字（不是数字）<br><strong>作用：1.可以判断某些值是不是数字</strong><br>返回true  or false</p>
+<p>#2.不喜欢数字，讨厌数字</p>
+<p>##(1).对于数字</p>
 <blockquote>
-<p>string.length</p>
-<p>###(2).求字符串所在的位置<br>string.charAt(2)</p>
+<p>alert(isNaN(250));       //false</p>
+<p>##(2).对于字符串。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">alert(isNaN(&apos;我爱你&apos;));   //true</span><br><span class="line">alert(isNaN(&apos;250&apos;));   //false</span><br></pre></td></tr></table></figure></p>
 </blockquote>
-<p>找到该字符串中从左往右第三个字符所在的位置</p>
-<p>##3.布尔值 boolean<br>true – 真<br>false – 假<br>可以进行if或者for语句的判断</p>
-<p>##4.函数类型 function</p>
-<p>##5.对象</p>
-<p>对象的基本操作有：<br>1.添加属性<br>2.添加方法（函数）</p>
-<p>###(1).obiect (window,document)</p>
-<p>###(2).数组<br>a.往数组里添加东西可以利用数组原本的性质</p>
-<blockquote>
-<p>arr.push()</p>
-</blockquote>
-<p>b.利用对象的性质添加属性和方法</p>
-<p>###(3).json</p>
-<p>###(4).null</p>
-<p>##6.未定义 undefined</p>
-<p>#二、数据类型的转换</p>
-<p>##1.Number()  字符串转成数字</p>
-<p>###对于前面有符号的可将符号转成对应的数字（只针对加减）</p>
-<blockquote>
-<p>var a=’100’;  alert(Number(a));     //100<br>var a=’+100;’  alert(Number(a));     //100<br>var a=’-100;’  alert(Number(a));     //-100<br>var a=’0’;        alert(Number(a));           //0<br>var a=’*100;’  alert(Number(a));     //NaN</p>
-</blockquote>
-<p>###对于数组<br>var a=[];            alert(Number(a));         //0<br>var a=[‘’];           alert(Number(a));        //0<br>var a=[123];      alert(Number(a));        //123<br>var a=[‘123’];     alert(Number(a));       //123<br>var a=[1,2,3];     alert(Number(a));      //NaN</p>
-<p>###对于函数</p>
-<blockquote>
-<p>var a = function(){<br>  alert(1);<br>}                              //NaN</p>
-<p>###对于json<br>var json = {<br>  abc:123;<br>}<br>alert(Number(json));                       //NaN</p>
-</blockquote>
-<p>###对于null</p>
-<blockquote>
-<p>var a=null;<br>alert(Number(a));  //0</p>
-<p>###对于未定义<br>var a;<br>alert(Number(a));  //NaN</p>
-<p>###对于空的josn<br>var json = { };<br>alert(Number(json));                       //NaN</p>
-<p>##2.parseInt() 解析为整型<br><strong>注意：是从左到右依次转换</strong><br>var b = ‘100px’   alert(parseInt(b));       //100<br>var b = ‘100px113’   alert(parseInt(b));   //100<br>var b = ‘+100px’   alert(parseInt(b));      //100<br>var b = ‘-100px’   alert(parseInt(b));       //-100<br>var b = ‘12.34’   alert(parseInt(b));         //12<br>var b = ‘200元’   alert(parseInt(b));        //200</p>
-</blockquote>
-<p>###对于布尔值</p>
-<blockquote>
-<p>var b = true   alert(parseInt(b));   //NaN</p>
-<p>###对于空的函数<br>var b = function(){} alert(parseInt(b));   //NaN</p>
-<p>##parseFloat() 解析为浮点型<br>var c= ‘200.45’   alert(parseFloat(c));   //200.45<br>var c= ‘200.45元’  alert(parseFloat(c));  //200.45<br>var c= ‘200.45px’  alert(parseFloat(c));  //200.45</p>
-</blockquote>
-<p>#数据类型中的隐式转换</p>
+<p><strong>isNaN是内部基于Number()的判断，所以对于字符串我爱你，Number()返回NaN，则isNaN返回true；对于字符串250，Number()先将’250’转化为数字250，然后isNaN再做出判断。</strong></p>
+<p>##(3).对于函数<br><figure class="highlight plain"><figcaption><span>//true```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">##(4).对于布尔值</span><br><span class="line">```alert(isNaN(true));  //false</span><br></pre></td></tr></table></figure></p>
+<p>##(5).对于空数组<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alert(isNaN([ ]));  //false</span><br></pre></td></tr></table></figure></p>
+<p>#三、HTML中拿到的内容，类型都是字符串<br><strong>所以当需要判断数据类型时，需要用到isNaN()</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">window.onload = function ()&#123;</span><br><span class="line">	var aInp = document.getElementsByTagName(&apos;input&apos;);</span><br><span class="line">	var str = &apos;&apos;;</span><br><span class="line">	aInp[1].onclick = function ()&#123;</span><br><span class="line">		str = aInp[0].value;</span><br><span class="line">		// HTML 中拿到的内容，类型都是字符串</span><br><span class="line">		// alert( typeof str );</span><br><span class="line"></span><br><span class="line">		if( isNaN(str) )&#123;</span><br><span class="line">			alert( str + &apos;不是数字&apos; );</span><br><span class="line">		&#125;else&#123;</span><br><span class="line">			alert( str + &apos;是数字&apos; );</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -144,7 +115,7 @@
 
 <div class="article-share" id="share">
 
-  <div data-url="http://yoursite.com/2018/06/04/JS数据类型及数据类型转换.html" data-title="JS数据类型及数据类型转换 | Welkin" data-tsina="null" class="share clearfix">
+  <div data-url="http://yoursite.com/2018/06/05/JS中的NaN和isNaN.html" data-title="JS中的NaN和isNaN | Welkin" data-tsina="null" class="share clearfix">
   </div>
 
 </div>
@@ -153,19 +124,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2018/06/05/JS中的NaN和isNaN.html" title="JS中的NaN和isNaN">
-  <strong>PREVIOUS:</strong><br/>
-  <span>
-  JS中的NaN和isNaN</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2018/05/28/MATLAB-GUI实现计算器.html"  title="MATLAB GUI实现计算器">
+<a href="/2018/06/04/JS数据类型及数据类型转换.html"  title="JS数据类型及数据类型转换">
  <strong>NEXT:</strong><br/> 
- <span>MATLAB GUI实现计算器
+ <span>JS数据类型及数据类型转换
 </span>
 </a>
 </div>
