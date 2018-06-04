@@ -1,0 +1,328 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>JS数据类型及数据类型转换 | Welkin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="welkin">
+    
+    <meta name="description" content="#一、JS数据类型ECMAScript 是数据类型的一个标准及核心首先我先提一下HTML的标签类型HTML标签类型：block，inline，inline-block，table注意：在JS里我们需要利用typeof来判断数据类型JS数据类型：
+##1.数字 number
+##2.字符串 strin">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="Welkin" title="Welkin"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Welkin">Welkin</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/06/04/JS数据类型及数据类型转换.html" title="JS数据类型及数据类型转换" itemprop="url">JS数据类型及数据类型转换</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="welkin">welkin</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2018-06-04T07:12:48.000Z" itemprop="datePublished">2018-06-04</time>
+    Updated:<time datetime="2018-06-04T07:13:28.173Z" itemprop="dateModified">2018-06-04</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		
+		</div>
+		
+		<p>#一、JS数据类型<br><strong>ECMAScript 是数据类型的一个标准及核心</strong><br>首先我先提一下HTML的标签类型<br><strong>HTML标签类型：</strong>block，inline，inline-block，table<br><strong>注意：在JS里我们需要利用typeof来判断数据类型</strong><br><strong>JS数据类型：</strong></p>
+<p>##1.数字 number</p>
+<p>##2.字符串 string<br>可对字符串进行的操作有：</p>
+<p>###(1).求字符串的长度 </p>
+<blockquote>
+<p>string.length</p>
+<p>###(2).求字符串所在的位置<br>string.charAt(2)</p>
+</blockquote>
+<p>找到该字符串中从左往右第三个字符所在的位置</p>
+<p>##3.布尔值 boolean<br>true – 真<br>false – 假<br>可以进行if或者for语句的判断</p>
+<p>##4.函数类型 function</p>
+<p>##5.对象</p>
+<p>对象的基本操作有：<br>1.添加属性<br>2.添加方法（函数）</p>
+<p>###(1).obiect (window,document)</p>
+<p>###(2).数组<br>a.往数组里添加东西可以利用数组原本的性质</p>
+<blockquote>
+<p>arr.push()</p>
+</blockquote>
+<p>b.利用对象的性质添加属性和方法</p>
+<p>###(3).json</p>
+<p>###(4).null</p>
+<p>##6.未定义 undefined</p>
+<p>#二、数据类型的转换</p>
+<p>##1.Number()  字符串转成数字</p>
+<p>###对于前面有符号的可将符号转成对应的数字（只针对加减）</p>
+<blockquote>
+<p>var a=’100’;  alert(Number(a));     //100<br>var a=’+100;’  alert(Number(a));     //100<br>var a=’-100;’  alert(Number(a));     //-100<br>var a=’0’;        alert(Number(a));           //0<br>var a=’*100;’  alert(Number(a));     //NaN</p>
+</blockquote>
+<p>###对于数组<br>var a=[];            alert(Number(a));         //0<br>var a=[‘’];           alert(Number(a));        //0<br>var a=[123];      alert(Number(a));        //123<br>var a=[‘123’];     alert(Number(a));       //123<br>var a=[1,2,3];     alert(Number(a));      //NaN</p>
+<p>###对于函数</p>
+<blockquote>
+<p>var a = function(){<br>  alert(1);<br>}                              //NaN</p>
+<p>###对于json<br>var json = {<br>  abc:123;<br>}<br>alert(Number(json));                       //NaN</p>
+</blockquote>
+<p>###对于null</p>
+<blockquote>
+<p>var a=null;<br>alert(Number(a));  //0</p>
+<p>###对于未定义<br>var a;<br>alert(Number(a));  //NaN</p>
+<p>###对于空的josn<br>var json = { };<br>alert(Number(json));                       //NaN</p>
+<p>##2.parseInt() 解析为整型<br><strong>注意：是从左到右依次转换</strong><br>var b = ‘100px’   alert(parseInt(b));       //100<br>var b = ‘100px113’   alert(parseInt(b));   //100<br>var b = ‘+100px’   alert(parseInt(b));      //100<br>var b = ‘-100px’   alert(parseInt(b));       //-100<br>var b = ‘12.34’   alert(parseInt(b));         //12<br>var b = ‘200元’   alert(parseInt(b));        //200</p>
+</blockquote>
+<p>###对于布尔值</p>
+<blockquote>
+<p>var b = true   alert(parseInt(b));   //NaN</p>
+<p>###对于空的函数<br>var b = function(){} alert(parseInt(b));   //NaN</p>
+<p>##parseFloat() 解析为浮点型<br>var c= ‘200.45’   alert(parseFloat(c));   //200.45<br>var c= ‘200.45元’  alert(parseFloat(c));  //200.45<br>var c= ‘200.45px’  alert(parseFloat(c));  //200.45</p>
+</blockquote>
+<p>#数据类型中的隐式转换</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2018/06/04/JS数据类型及数据类型转换.html" data-title="JS数据类型及数据类型转换 | Welkin" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2018/05/28/MATLAB-GUI实现计算器.html"  title="MATLAB GUI实现计算器">
+ <strong>NEXT:</strong><br/> 
+ <span>MATLAB GUI实现计算器
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2018 
+		
+		<a href="http://yoursite.com" target="_blank" title="welkin">welkin</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>
