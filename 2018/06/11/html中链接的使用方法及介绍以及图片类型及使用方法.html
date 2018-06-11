@@ -1,0 +1,410 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>html中链接的使用方法及介绍以及图片类型及使用方法 | Welkin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="welkin">
+    
+    <meta name="description" content="html 超链接：
+HTML使用标签 来设置超文本链接。
+超链接可以是一个字，一个词，或者一组词，也可以是一幅图像，您可以点击这些内容来跳转到新的文档或者当前文档中的某个部分。
+当您把鼠标指针移动到网页中的某个链接上时，箭头会变为一只小手。
+在标签 中使用了href属性来描述链接的地址。
+默认情况下">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="Welkin" title="Welkin"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Welkin">Welkin</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/06/11/html中链接的使用方法及介绍以及图片类型及使用方法.html" title="html中链接的使用方法及介绍以及图片类型及使用方法" itemprop="url">html中链接的使用方法及介绍以及图片类型及使用方法</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="welkin">welkin</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2018-06-11T01:44:22.000Z" itemprop="datePublished">2018-06-11</time>
+    Updated:<time datetime="2018-06-11T01:45:04.053Z" itemprop="dateModified">2018-06-11</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#假设在www根目录下建了一个目录叫HTML-tutorials，然后在该目录下放了一个文件index-HTML，这个文件的绝对路径就是"><span class="toc-number">1.</span> <span class="toc-text">假设在www根目录下建了一个目录叫HTML_tutorials，然后在该目录下放了一个文件index.HTML，这个文件的绝对路径就是</span></a></li></ol>
+		</div>
+		
+		<p>html 超链接：</p>
+<p>HTML使用标签 <a>来设置超文本链接。</a></p>
+<p>超链接可以是一个字，一个词，或者一组词，也可以是一幅图像，您可以点击这些内容来跳转到新的文档或者当前文档中的某个部分。</p>
+<p>当您把鼠标指针移动到网页中的某个链接上时，箭头会变为一只小手。</p>
+<p>在标签<a> 中使用了href属性来描述链接的地址。</a></p>
+<p>默认情况下，链接将以以下形式出现在浏览器中：</p>
+<ul>
+<li>一个未访问过的链接显示为蓝色字体并带有下划线</li>
+<li>访问过的链接显示为紫色并带上下划线</li>
+<li>点击链接时，链接显示为红色并带上下划线</li>
+</ul>
+<p>html语法：</p>
+<blockquote>
+<p><a href="*url*"><em>链接文本</em></a></p>
+</blockquote>
+<p>href 表示链接的目标</p>
+<blockquote>
+<p><a href="http://www.runoob.com/" target="_blank" rel="noopener">访问菜鸟教程</a></p>
+</blockquote>
+<p>表示这句可以带到菜鸟教程的网页，并且链接文本不一定是文字，可以是图片或者html元素</p>
+<p>*targt属性，可以使链接在任意窗口打开，</p>
+<blockquote>
+<p><a href="http://www.runoob.com/" target="_blank">访问菜鸟教程!</a></p>
+</blockquote>
+<p>上面语法是链接在新窗口打开该网页</p>
+<p>#ID属性</p>
+<p>id属性可用于创建在一个HTML文档书签标记。</p>
+<p>在HTML文档中插入ID:</p>
+<blockquote>
+<p><a id="tips">有用的提示部分</a></p>
+</blockquote>
+<p>在HTML文档中创建一个链接到”有用的提示部分(id=”tips”）”：</p>
+<blockquote>
+<p><a href="#tips">访问有用的提示部分</a></p>
+</blockquote>
+<p>或者，从另一个页面创建一个链接到”有用的提示部分(id=”tips”）”：</p>
+<blockquote>
+<p><a href="http://www.runoob.com/html-links.htm#tips" target="_blank" rel="noopener"></a></p>
+</blockquote>
+<p>访问有用的提示部分</p>
+<p>#图片链接</p>
+<p>在 HTML 中，图像由<img> 标签定义。</p>
+<p>###<img> 是空标签，意思是说，它只包含属性，并且没有闭合标签。</p>
+<p>要在页面上显示图像，你需要使用源属性（src）。src 指 “source”。源属性的值是图像的 URL 地址。</p>
+<p>语法</p>
+<blockquote>
+<p><img src="*url*" alt="*some_text*"></p>
+</blockquote>
+<p>scr 是源属性</p>
+<p>####URL 指存储图像的位置。如果名为 “boat.gif” 的图像位于 www.w3school.com.cn 的 images 目录中，那么其 URL 为 <a href="http://www.w3school.com.cn/images/boat.gif。" target="_blank" rel="noopener">http://www.w3school.com.cn/images/boat.gif。</a></p>
+<p>浏览器将图像显示在文档中图像标签出现的地方。如果你将图像标签置于两个段落之间，那么浏览器会首先显示第一个段落，然后显示图片，最后显示第二段。</p>
+<p>###alt 属性用来为图像定义一串预备的可替换的文本。</p>
+<p>替换文本属性的值是用户定义的。</p>
+<blockquote>
+<p><img src="boat.gif" alt="Big Boat"></p>
+</blockquote>
+<p>alt  替换文本   在浏览器无法载入图像时，替换文本属性告诉读者她们失去的信息。此时，浏览器将显示这个替代性的文本而不是图像。为页面上的图像都加上替换文本属性是个好习惯，这样有助于更好的显示信息，并且对于那些使用纯文本浏览器的人来说是非常有用的。</p>
+<p>当连接图片时分为绝对路径和相对路径；</p>
+<p>相对路径 即在同一个目录里；直接引用文件名即可，</p>
+<p>假设info.HTML路径是：d:\tomcat\webapps\hello\blabla\info.HTML假设index.HTML路径是：d:\tomcat\webapps\hello\blabla\index.HTML在info.HTML加入index.HTML超链接的代码应该这样写： </p>
+<p>代码如下:</p>
+<blockquote>
+<p><a href="index.HTML">index.HTML</a>直接写出文件名即可 </p>
+</blockquote>
+<p> <strong>如何表示上级目录</strong>../表示源文件所在目录的上一级目录，../../表示源文件所在目录的上上级目录，以此类推。假设info.HTML路径是：d:\tomcat\webapps\hello\blabla\info.HTML假设index.HTML路径是：d:\tomcat\webapps\hello\index.HTML在info.HTML加入index.HTML超链接的代码应该这样写：    如果被插入文件的目录要多一级时，插入文件时需要用../表示返回上一即目录。 </p>
+<p>代码如下:</p>
+<blockquote>
+<p><a href="../index.HTML">index.HTML</a> </p>
+</blockquote>
+<p>假设info.HTML路径是：d:\tomcat\webapps\hello\blabla\wowstory\info.HTML假设index.HTML路径是：d:\tomcat\webapps\hello\index.HTML在info.HTML加入index.HTML超链接的代码应该这样写： </p>
+<p>代码如下:</p>
+<blockquote>
+<p><a href="../../index.HTML">index.HTML</a> </p>
+</blockquote>
+<p> 假设info.HTML路径是：d:\tomcat\webapps\hello\blabla\info.HTML假设index.HTML路径是：d:\tomcat\webapps\hello\wowstory\index.HTML在info.HTML加入index.HTML超链接的代码应该这样写：如果上一级目录不同则需要返回同一级后再表示出不同的目录 </p>
+<p>代码如下:</p>
+<blockquote>
+<p><a href="../wowstory/index.HTML">index.HTML</a> </p>
+</blockquote>
+<p>*引用下级目录的文件，直接写下级目录文件的路径即可。假设info.HTML路径是：d:\tomcat\webapps\hello\blabla\info.HTML假设index.HTML路径是：d:\tomcat\webapps\hello\blabla\HTML\index.HTML在info.HTML加入index.HTML超链接的代码应该这样写： </p>
+<p>代码如下:</p>
+<blockquote>
+<p><a href="HTML/index.HTML">index.HTML</a></p>
+</blockquote>
+<p>直接写出目录相同时的目录即可 </p>
+<p> 假设info.HTML路径是：d:\tomcat\webapps\hello\blabla\info.HTML假设index.HTML路径是：d:\tomcat\webapps\hello\blabla\HTML\tutorials\index.HTML在info.HTML加入index.HTML超链接的代码应该这样写： </p>
+<p>代码如下:</p>
+<blockquote>
+<p><a href="HTML/tutorials/index.HTML">index.HTML</a> </p>
+</blockquote>
+<p>#绝对路径， 即从网页中通过域名找到的文件，即带域名的完整文件类型</p>
+<p>当你注册域名时，并且申请一个虚拟主机，这时候便会给一个目录，则这个目录就是文件的根目录，再在这个根目录下放一个文件，则这个文件的路径就是域名加上文件名。</p>
+<p>###例：假设在www根目录下放了一个文件index.HTML，这个文件的绝对路径就是： </p>
+<blockquote>
+<p><a href="http://www.jb51.net/index.html" target="_blank" rel="noopener">http://www.jb51.net/index.html</a>. </p>
+</blockquote>
+<h3 id="假设在www根目录下建了一个目录叫HTML-tutorials，然后在该目录下放了一个文件index-HTML，这个文件的绝对路径就是"><a href="#假设在www根目录下建了一个目录叫HTML-tutorials，然后在该目录下放了一个文件index-HTML，这个文件的绝对路径就是" class="headerlink" title="假设在www根目录下建了一个目录叫HTML_tutorials，然后在该目录下放了一个文件index.HTML，这个文件的绝对路径就是"></a>假设在www根目录下建了一个目录叫HTML_tutorials，然后在该目录下放了一个文件index.HTML，这个文件的绝对路径就是</h3><blockquote>
+<p><a href="http://www.jb51.net/article/32759.htm。" target="_blank" rel="noopener">http://www.jb51.net/article/32759.htm。</a></p>
+</blockquote>
+<p>#*当存放图片时需要注意的格式：png，jpg，gif，svg，ico</p>
+<p>##png：       </p>
+<p>PNG是目前保证最不失真的格式，它汲取了GIF和JPG二者的优点，存贮形式丰富，兼有GIF和JPG的色彩模式；它的另一个特点能把图像<a href="http://baike.baidu.com/view/738126.htm" target="_blank" rel="noopener">文件压缩</a>到极限以利于网络传输，但又能保留所有与图像品质有关的信息，因为PNG是采用<a href="http://baike.baidu.com/view/156047.htm" target="_blank" rel="noopener">无损压缩</a>方式来减少文件的大小，这一点与牺牲图像品质以换取高<a href="http://baike.baidu.com/view/354638.htm" target="_blank" rel="noopener">压缩率</a>的JPG有所不同；它的第三个特点是显示速度很快，只需下载1/64的图像信息就可以显示出低分辨率的预览图像；第四，PNG同样支持透明图像的制作，透明图像在制作网页图像的时候很有用，我们可以把图象背景设为透明，用网页本身的颜色信息来代替设为透明的色彩，这样可让图像和网页背景很和谐地融合在一起。</p>
+<p>PNG的缺点是不支持动画应用效果，如果在这方面能有所加强，简直就可以完全替代GIF和JPEG了</p>
+<p>##svg             </p>
+<p>SVG是矢量图形。它是基于XML（Extensible Markup Language），严格来说应该是一种开放标准的矢量图形语言，可让你设计激动人心的、高分辨率的Web图形页面。用户可以直接用代码来描绘图像，可以用任何文字处理工具打开SVG图像，通过改变部分代码来使图像具有互交功能，并可以随时插入到HTML中通过浏览器来观看。</p>
+<p>它提供了目前网络流行格式GIF和JPEG无法具备了优势：可以任意放大图形显示，但绝不会以牺牲图像质量为代价；字在SVG图像中保留可编辑和可搜寻的状态；平均来讲，SVG文件比JPEG和GIF格式的文件要小很多，因而下载也很快。</p>
+<p>##ipg/jpng      最适合于使用<a href="http://baike.baidu.com/view/189672.htm" target="_blank" rel="noopener">真彩色</a>或平滑过渡式的照片和图片。该格式使用<a href="http://baike.baidu.com/view/128147.htm" target="_blank" rel="noopener">有损压缩</a>来减少图片的大小，因此用户将看到随着文件的减小，图片的质量也降低了，当图片转换成.jpg文件时，图片中的透明区域将转化为纯色。</p>
+<p>##gif             </p>
+<p><a href="http://baike.baidu.com/view/7966.htm" target="_blank" rel="noopener">GIF</a>（<a href="http://baike.baidu.com/view/185363.htm" target="_blank" rel="noopener">图形交换格式</a>）最适合用于线条图（如最多含有256色）的剪贴画以及使用大块纯色的图片。该格式使用无损压缩来减少图片的大小，当用户要保存图片为.GIF时，可以自行决定是否保存透明区域或者转换为纯色。同时，通过多幅图片的转换，GIF格式还可以保存动画文件。但要注意的是，GIF最多只能支持256色</p>
+<p>目前，网页上较普遍使用的<a href="http://baike.baidu.com/view/19666.htm" target="_blank" rel="noopener">图片格式</a>为<a href="http://baike.baidu.com/view/7966.htm" target="_blank" rel="noopener">gif</a> 和 jpg(jpeg)这两种图片<a href="http://baike.baidu.com/view/2954654.htm" target="_blank" rel="noopener">压缩格式</a>，因其在网上的装载速度很快，所有较新的图像软件都支持 GIF 、 JPG 格式，因此，要创建一张 GIF 或 JPG 图片，只需将图像软件中的图片保存为这两种格式即可。</p>
+<p>##ico       </p>
+<p>图标有一套标准的大小和属性格式，且通常是小尺寸的。每个图标都含有多张相同显示内容的图片，每一张图片具有不同的尺寸和发色数。一个图标就是一套相似的图片，每一张图片有不同的格式。从这一点上说图标是三维的。图标还有另一个特性：它含有透明区域，在透明区域内可以透出图标下的桌面背景。在结构上图标其实和麦当劳的巨无霸汉堡差不多。</p>
+<p>一个图标实际上是多张不同格式的图片的集合体，并且还包含了一定的透明区域。</p>
+<p>###一般静态图片可使用.png保存</p>
+<p>可设置高度和宽度</p>
+<p>height（高度） 与 width（宽度）属性用于设置图像的高度与宽度。</p>
+<p>属性值默认单位为像素:</p>
+<blockquote>
+<p><img src="pulpit.jpg" alt="Pulpit rock" width="304" height="228"></p>
+</blockquote>
+<p><strong>提示:</strong> 指定图像的高度和宽度的一个很好的习惯。如果图像指定了高度宽度，页面加载时就会保留指定的尺寸。如果没有指定图片的大小，加载页面时有可能会破坏HTML页面的整体布局。</p>
+<p>  注意： 可根据align=“”来设置图片的位置，与文字顶对齐或是在文字中间，一般情况下默认为与文字底对齐。</p>
+<pre><code>可根据style=&quot;float:right/left来设置图片浮动。若不设置浮动时一般在文字左边。
+</code></pre><p>例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line"></span><br><span class="line">&lt;p&gt;</span><br><span class="line">&lt;img src=&quot;smiley.gif&quot; alt=&quot;Smiley face&quot; style=&quot;float:left&quot; width=&quot;32&quot; height=&quot;32&quot;&gt; A paragraph with an image. The image will float to the left of this text.</span><br><span class="line">&lt;/p&gt;</span><br><span class="line"></span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></p>
+<p>即，该所插图片就在A paragraph with an image. The image will float to the left of this text.这句话的左边</p>
+<p>创建图片超链接<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line"></span><br><span class="line">&lt;p&gt;点击太阳或其他行星，注意变化：&lt;/p&gt;</span><br><span class="line"></span><br><span class="line">&lt;img src=&quot;planets.gif&quot; width=&quot;145&quot; height=&quot;126&quot; alt=&quot;Planets&quot; usemap=&quot;#planetmap&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;map name=&quot;planetmap&quot;&gt;</span><br><span class="line">  &lt;area shape=&quot;rect&quot; coords=&quot;0,0,82,126&quot; alt=&quot;Sun&quot; href=&quot;sun.htm&quot;&gt;</span><br><span class="line">  &lt;area shape=&quot;circle&quot; coords=&quot;90,58,3&quot; alt=&quot;Mercury&quot; href=&quot;mercur.htm&quot;&gt;</span><br><span class="line">  &lt;area shape=&quot;circle&quot; coords=&quot;124,58,8&quot; alt=&quot;Venus&quot; href=&quot;venus.htm&quot;&gt;</span><br><span class="line">&lt;/map&gt;</span><br><span class="line"></span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></p>
+<p>即当你点击图片内容时，会在新窗口打开一张图片，利用map和area元素，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;img&gt;定义图片</span><br><span class="line"></span><br><span class="line">&lt;map&gt;定义图片地图</span><br><span class="line"></span><br><span class="line">&lt;area&gt;定义图片可点击的地方</span><br></pre></td></tr></table></figure></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2018/06/11/html中链接的使用方法及介绍以及图片类型及使用方法.html" data-title="html中链接的使用方法及介绍以及图片类型及使用方法 | Welkin" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2018/06/07/大数据的结构和特征.html"  title="大数据的结构和特征">
+ <strong>NEXT:</strong><br/> 
+ <span>大数据的结构和特征
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#假设在www根目录下建了一个目录叫HTML-tutorials，然后在该目录下放了一个文件index-HTML，这个文件的绝对路径就是"><span class="toc-number">1.</span> <span class="toc-text">假设在www根目录下建了一个目录叫HTML_tutorials，然后在该目录下放了一个文件index.HTML，这个文件的绝对路径就是</span></a></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2018 
+		
+		<a href="http://yoursite.com" target="_blank" title="welkin">welkin</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>
