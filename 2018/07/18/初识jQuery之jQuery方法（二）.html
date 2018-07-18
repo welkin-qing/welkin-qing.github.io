@@ -1,0 +1,336 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>初识jQuery之jQuery方法（二） | Welkin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="welkin">
+    
+    <meta name="description" content="#1.jQuery方法之filter，not，has
+##filter : 过滤
+##not : filter的反义词1234$(&amp;apos;div&amp;apos;).filter(&amp;apos;.box&amp;apos;).css(&amp;apos;background&amp;apos;,&amp;apos;red&amp;apos;)">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="Welkin" title="Welkin"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Welkin">Welkin</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/07/18/初识jQuery之jQuery方法（二）.html" title="初识jQuery之jQuery方法（二）" itemprop="url">初识jQuery之jQuery方法（二）</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="welkin">welkin</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2018-07-18T14:29:11.000Z" itemprop="datePublished">2018-07-18</time>
+    Updated:<time datetime="2018-07-18T14:29:29.152Z" itemprop="dateModified">2018-07-18</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		
+		</div>
+		
+		<p>#1.jQuery方法之filter，not，has</p>
+<p>##filter : 过滤</p>
+<p>##not : filter的反义词<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$(&apos;div&apos;).filter(&apos;.box&apos;).css(&apos;background&apos;,&apos;red&apos;);</span><br><span class="line">//筛选出css为.box的div</span><br><span class="line">$(&apos;div&apos;).filter(&apos;.box&apos;).css(&apos;background&apos;,&apos;red&apos;);</span><br><span class="line">//筛选出css不是.box的div</span><br></pre></td></tr></table></figure></p>
+<p>##has : 包含<br>看元素里面的元素，即内部<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">$(function()&#123;</span><br><span class="line">      </span><br><span class="line">	$(&apos;div&apos;).has(&apos;span&apos;).css(&apos;background&apos;,&apos;red&apos;);</span><br><span class="line">        //变红的为span</span><br><span class="line">	$(&apos;div&apos;).has(&apos;.box&apos;).css(&apos;background&apos;,&apos;red&apos;);</span><br><span class="line">        //变红的为css为box的span</span><br><span class="line">	$(&apos;div&apos;).filter(&apos;.box&apos;).css(&apos;background&apos;,&apos;red&apos;);</span><br><span class="line">        //变红的为div2</span><br><span class="line">	</span><br><span class="line">&#125;);</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;div&gt;div1&lt;span class=&quot;box&quot;&gt;span&lt;/span&gt;&lt;/div&gt;</span><br><span class="line">&lt;div class=&quot;box&quot;&gt;div2&lt;/div&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure></p>
+<p>#2.jQuery方法之next，prev，find，eq，index，attr</p>
+<p>##next：下一个节点</p>
+<p>##prev：上一个节点<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">$(function()&#123;</span><br><span class="line"></span><br><span class="line">	$(&apos;div&apos;).next().css(&apos;background&apos;,&apos;red&apos;);	</span><br><span class="line">	//变红的为span</span><br><span class="line">&#125;);</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;div&gt;div&lt;/div&gt;</span><br><span class="line">&lt;span&gt;span&lt;/span&gt;</span><br><span class="line">&lt;p&gt;p&lt;/p&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure></p>
+<p>prev同理</p>
+<p>##find：找节点</p>
+<p>##eq：类似原生中的下标<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">$(function()&#123;</span><br><span class="line"></span><br><span class="line">	$(&apos;div&apos;).find(&apos;h2&apos;).css(&apos;background&apos;,&apos;red&apos;);</span><br><span class="line">	//找到所有h2的节点</span><br><span class="line">	$(&apos;div&apos;).find(&apos;h2&apos;).eq(1).css(&apos;background&apos;,&apos;red&apos;);</span><br><span class="line">	//找到所有h2，且找到其中第二个节点</span><br><span class="line">&#125;);</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;div&gt;</span><br><span class="line">    &lt;h3&gt;h3&lt;/h3&gt;</span><br><span class="line">    &lt;h2&gt;h2&lt;/h2&gt;</span><br><span class="line">    &lt;h3&gt;h3&lt;/h3&gt;</span><br><span class="line">    &lt;h3&gt;h3&lt;/h3&gt;</span><br><span class="line">    &lt;h2&gt;h2&lt;/h2&gt;</span><br><span class="line">    &lt;h2&gt;h2&lt;/h2&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;h2&gt;h2&lt;/h2&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure></p>
+<p>##index：索引就是当前元素在所有兄弟节点中的位置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">$(function()&#123;</span><br><span class="line"></span><br><span class="line">	alert( $(&apos;#h&apos;).index() );  // 2</span><br><span class="line">	</span><br><span class="line">&#125;);</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;div&gt;</span><br><span class="line">    &lt;h3&gt;h3&lt;/h3&gt;</span><br><span class="line">    &lt;h2&gt;h2&lt;/h2&gt;</span><br><span class="line">    &lt;h3&gt;h3&lt;/h3&gt;</span><br><span class="line">    &lt;h3 id=&quot;h&quot;&gt;h3&lt;/h3&gt;</span><br><span class="line">    &lt;h2&gt;h2&lt;/h2&gt;</span><br><span class="line">    &lt;h2&gt;h2&lt;/h2&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;h2&gt;h2&lt;/h2&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure></p>
+<p>##attr：设置属性，可获取（已在上一篇讲过，详情请看上一篇）</p>
+<p>#3.jQuery方法之属性操作</p>
+<p>##addClass()：添加class</p>
+<p>##removeClass()：删除class<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">$(function()&#123;</span><br><span class="line"></span><br><span class="line">	$(&apos;div&apos;).addClass(&apos;box2 box4&apos;);</span><br><span class="line">	//box1,box2,box4</span><br><span class="line">	$(&apos;div&apos;).removeClass(&apos;box1&apos;);</span><br><span class="line">	//box2,box4</span><br><span class="line">&#125;);</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;div class=&quot;box1 box2&quot;&gt;div&lt;/div&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure></p>
+<p>##width():width</p>
+<p>##innerWidth():width + padding</p>
+<p>##outerWidth():width + padding + border</p>
+<p>##outerWidth(true) :width + padding + border + margin<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">div&#123; width:100px; height:100px; background:red; padding:10px; border:10px #000 solid; margin:10px;&#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">$(function()&#123;</span><br><span class="line"></span><br><span class="line">	alert( $(&apos;div&apos;).width() );  //width  100</span><br><span class="line">	</span><br><span class="line">	alert( $(&apos;div&apos;).innerWidth() );  //width + padding120</span><br><span class="line">	</span><br><span class="line">	alert( $(&apos;div&apos;).outerWidth() );  //width + padding + border130</span><br><span class="line">	</span><br><span class="line">	alert( $(&apos;div&apos;).outerWidth(true) );  //width + padding + border + margin</span><br><span class="line">	//150</span><br><span class="line">&#125;);</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;div&gt;div&lt;/div&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure></p>
+<p>#4.jQuery方法之Dom操作</p>
+<p>##insertBefore(  )：剪切功能</p>
+<p>##insertAfter(  );</p>
+<p>##appendTo(  )：类似原生里的appendChild</p>
+<p>##prependTo(  )：最开始的位置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">$(function()&#123;</span><br><span class="line"></span><br><span class="line">	$(&apos;span&apos;).insertBefore( $(&apos;div&apos;) );</span><br><span class="line">	//span在div之前</span><br><span class="line">	$(&apos;div&apos;).insertAfter( $(&apos;span&apos;) );</span><br><span class="line">	//和上面操作一样</span><br><span class="line">	$(&apos;div&apos;).appendTo( $(&apos;span&apos;) );</span><br><span class="line">	//sapn在div之前</span><br><span class="line">	$(&apos;div&apos;).prependTo( $(&apos;span&apos;) );</span><br><span class="line">	//div在span之里面</span><br><span class="line">&#125;);</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;div&gt;div&lt;/div&gt;</span><br><span class="line">&lt;span&gt;span&lt;/span&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure></p>
+<p>###注意：后续操作变了，只针对于最前面的元素<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$(&apos;span&apos;).insertBefore( $(&apos;div&apos;) ).css(&apos;background&apos;,&apos;red&apos;);</span><br><span class="line">//span变红</span><br><span class="line">$(&apos;div&apos;).before( $(&apos;span&apos;) ).css(&apos;background&apos;,&apos;red&apos;);</span><br><span class="line">//div变红</span><br></pre></td></tr></table></figure></p>
+<p>#5.jQuery方法之事件操作和scrolliop</p>
+<p>##remove：删除节点</p>
+<p>##on：加载事件</p>
+<p>##off：取消事件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">$(function()&#123;</span><br><span class="line"></span><br><span class="line">	$(&apos;div&apos;).remove();</span><br><span class="line">	//删除div</span><br><span class="line">&#125;);</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;div&gt;div&lt;/div&gt;</span><br><span class="line">&lt;span&gt;span&lt;/span&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">//加载事件</span><br><span class="line">$(&apos;div&apos;).click(function()&#123;</span><br><span class="line">		alert(123);</span><br><span class="line">	&#125;);</span><br><span class="line">	</span><br><span class="line">$(&apos;div&apos;).on(&apos;click&apos;,function()&#123;</span><br><span class="line">		alert(123);</span><br><span class="line">	&#125;);</span><br><span class="line">	</span><br><span class="line">$(&apos;div&apos;).on(&apos;click mouseover&apos;,function()&#123;</span><br><span class="line">		alert(123);</span><br><span class="line">	&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$(&apos;div&apos;).on(&apos;click mouseover&apos;,function()&#123;</span><br><span class="line">		alert(123);</span><br><span class="line">		$(&apos;div&apos;).off(&apos;mouseover&apos;);</span><br><span class="line">	&#125;);</span><br><span class="line">//取消鼠标移入事件</span><br></pre></td></tr></table></figure>
+<p>##scrollTop：纵向滚动条，获取滚动距离<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$(function()&#123;</span><br><span class="line"></span><br><span class="line">	$(document).click(function()&#123;</span><br><span class="line">		</span><br><span class="line">		alert( $(window).scrollTop() );  //滚动距离</span><br><span class="line">		</span><br><span class="line">	&#125;);</span><br><span class="line">	</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>#6.jQuery方法之事件细节</p>
+<p>###ev :   event对象        </p>
+<p>###ev.pageX(相对于文档) : </p>
+<p>###clientX(相对于可视区)：    表示鼠标坐标</p>
+<p>###ev.which : keyCode，找键盘的键值</p>
+<p>###ev.preventDefault()：阻止默认事件        </p>
+<p>###ev.stopPropagation()：阻止冒泡的操作    </p>
+<p>###return false：阻止默认事件 + 阻止冒泡的操作</p>
+<p>###one()：事件只执行一次</p>
+<p>#7.jQuery方法之位置操作</p>
+<p>##parent() : 获取父级</p>
+<p>##offsetParent() : 获取有定位的父级<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">$(function()&#123;</span><br><span class="line"></span><br><span class="line">	$(&apos;#div2&apos;).parent().css(&apos;background&apos;,&apos;blue&apos;);</span><br><span class="line">	//div1变蓝</span><br><span class="line">	$(&apos;#div2&apos;).offsetParent().css(&apos;background&apos;,&apos;blue&apos;);</span><br><span class="line">        //当div1有定位时变蓝</span><br><span class="line">&#125;);</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;div id=&quot;div1&quot;&gt;</span><br><span class="line">	&lt;div id=&quot;div2&quot;&gt;&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure></p>
+<p>##val()：获取元素的val值</p>
+<p>##size()：获取一组元素的长度<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">alert( $(&apos;input&apos;).val() );  //获取</span><br><span class="line">$(&apos;input&apos;).val(456);  //赋值</span><br><span class="line">alert( $(&apos;li&apos;).size() );  //=4 像length</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$(&apos;li&apos;).each(function(i,elem)&#123;   //一参：下标 二参 : 每个元素，类似for循环</span><br><span class="line">		</span><br><span class="line">		$(elem).html(i);</span><br><span class="line">		</span><br><span class="line">	&#125;);</span><br></pre></td></tr></table></figure>
+<p>#8.jQuery方法之hover和简单动画</p>
+<p>##hover：参一移入，参二移出</p>
+<p>##hide：隐藏   （有运动效果）</p>
+<p>##show：显示</p>
+<p>##fade in：淡入  （可指定时间，默认为400ms）</p>
+<p>##fade out：淡出</p>
+<p>##slideup：向上卷起</p>
+<p>##slidedown：向下展开</p>
+<p>##fadeTo：参数一：时间；参数二：透明度的值<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">$(function()&#123;</span><br><span class="line"></span><br><span class="line">	$(&apos;#div1&apos;).hover(function()&#123;</span><br><span class="line">		</span><br><span class="line">		$(this).css(&apos;background&apos;,&apos;blue&apos;);</span><br><span class="line">		</span><br><span class="line">		$(&apos;#div2&apos;).hide(3000);</span><br><span class="line">		</span><br><span class="line">		$(&apos;#div2&apos;).fadeOut(1000);  //默认400</span><br><span class="line">		</span><br><span class="line">		$(&apos;#div2&apos;).slideUp();</span><br><span class="line">		</span><br><span class="line">		$(&apos;#div2&apos;).fadeTo(1000,0.5);</span><br><span class="line">		</span><br><span class="line">	&#125;,function()&#123;</span><br><span class="line">		</span><br><span class="line">		$(this).css(&apos;background&apos;,&apos;red&apos;);</span><br><span class="line">		</span><br><span class="line">		$(&apos;#div2&apos;).show(3000);</span><br><span class="line">		</span><br><span class="line">		$(&apos;#div2&apos;).fadeIn(1000);</span><br><span class="line">		</span><br><span class="line">		$(&apos;#div2&apos;).slideDown();</span><br><span class="line">		</span><br><span class="line">		$(&apos;#div2&apos;).fadeTo(1000,1);</span><br><span class="line">		</span><br><span class="line">	&#125;);</span><br><span class="line"></span><br><span class="line">&#125;);</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;div id=&quot;div1&quot;&gt;&lt;/div&gt;</span><br><span class="line">&lt;div id=&quot;div2&quot;&gt;&lt;/div&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2018/07/18/初识jQuery之jQuery方法（二）.html" data-title="初识jQuery之jQuery方法（二） | Welkin" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2018/07/18/初识jQuery之jQuery设计思想（一）.html"  title="初识jQuery之jQuery设计思想（一）">
+ <strong>NEXT:</strong><br/> 
+ <span>初识jQuery之jQuery设计思想（一）
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2018 
+		
+		<a href="http://yoursite.com" target="_blank" title="welkin">welkin</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>
