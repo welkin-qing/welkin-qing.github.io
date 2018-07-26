@@ -1,0 +1,271 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>初识jQuery之jQuery基础扩展（三） | Welkin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="welkin">
+    
+    <meta name="description" content="#一、get()函数
+####在上一篇博客里说到：jq中的语法和js不能混淆使用，而get的出现就是可以将两者语法混淆使用；
+####原生js:
+
+document.getElementById(‘div1’).innerHTML
+####jq:alert( $(‘#div1’).html() );">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="Welkin" title="Welkin"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Welkin">Welkin</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="w" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/07/26/初识jQuery之jQuery基础扩展（三）.html" title="初识jQuery之jQuery基础扩展（三）" itemprop="url">初识jQuery之jQuery基础扩展（三）</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="welkin">welkin</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2018-07-26T08:03:03.000Z" itemprop="datePublished">2018-07-26</time>
+    Updated:<time datetime="2018-07-26T08:03:26.200Z" itemprop="dateModified">2018-07-26</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		
+		</div>
+		
+		<p>#一、get()函数</p>
+<p>####在上一篇博客里说到：jq中的语法和js不能混淆使用，而get的出现就是可以将两者语法混淆使用；</p>
+<p>####原生js:</p>
+<blockquote>
+<p>document.getElementById(‘div1’).innerHTML</p>
+<p>####jq:<br>alert( $(‘#div1’).html() );</p>
+<p>####利用get函数后<br>alert( $(‘#div1’).get(0).innerHTML );</p>
+<p>###注意：对于单个对象，get()函数括号写0；对于一组对象，括号不用写数字<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul&gt;</span><br><span class="line">    &lt;li&gt;&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;&lt;/li&gt;</span><br><span class="line">&lt;/ul&gt;</span><br><span class="line">for(var i=0;i&lt;$(&apos;li&apos;).get().length;i++)&#123;   //表示一组li</span><br><span class="line">		$(&apos;li&apos;).get(i).style.background = &apos;red&apos;;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>#二、outerWidth()与原生的区别</p>
+<p>##区别：offsetWidth : 是获取不到隐藏元素的值；而outerWidth()可以；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">#div1&#123; width:100px; height:100px; background:red; display:none;&#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;div id=&quot;div1&quot;&gt;div&lt;/div&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">$(function()&#123;</span><br><span class="line"></span><br><span class="line">	alert( $(&apos;#div1&apos;).get(0).offsetWidth );//显示不出来</span><br><span class="line">	</span><br><span class="line">	alert( $(&apos;#div1&apos;).outerWidth() );    //100px</span><br><span class="line"></span><br><span class="line">&#125;);</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure></p>
+<p>#三、text()和html()</p>
+<p>###text()：  会获取所有的内容(特例)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">&lt;div&gt;div1&lt;span&gt;span&lt;/span&gt;&lt;/div&gt;</span><br><span class="line">&lt;div&gt;div2&lt;/div&gt;</span><br><span class="line">&lt;div&gt;div3&lt;/div&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">$(function()&#123;</span><br><span class="line"></span><br><span class="line">	alert( $(&apos;div&apos;).html() );   //div1&lt;span&gt;span&lt;/span&gt;</span><br><span class="line">      //只获得了第一个div里面的内容</span><br><span class="line">	alert( $(&apos;div&apos;).text() );   //div1spandiv2div3</span><br><span class="line">    //获得了所有div里面的内容，并且将div里的内容解析了</span><br><span class="line">&#125;);</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure></p>
+<p>###利用text添加标签<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(&apos;div&apos;).text(&apos;&lt;h3&gt;h3&lt;/h3&gt;&apos;);</span><br></pre></td></tr></table></figure></p>
+<p>结果为：每个div里都有一个h3<br><img src="https://upload-images.jianshu.io/upload_images/2549157-2d7b18d3ca1db9fb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="添加标签"></p>
+<p>#四、remove()和detach()</p>
+<p>###remove()：删除的返回值为删除的节点，删除节点后，可以再回到body中，但原有事件不在；</p>
+<p>###detach() ：跟remove方法一样，只不过会保留删除这个元素的操作行为，即remove删除节点后，有关这节点的事件也会删除，即使再添加上，但事件不再执行；而detach删除后再添加上，事件仍然可以执行。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$(function()&#123;</span><br><span class="line"></span><br><span class="line">	$(&apos;div&apos;).click(function()&#123;</span><br><span class="line">		alert(123);</span><br><span class="line">	&#125;);</span><br><span class="line"></span><br><span class="line">	var oDiv = $(&apos;div&apos;).detach();</span><br><span class="line">	</span><br><span class="line">	$(&apos;body&apos;).append( oDiv );</span><br><span class="line">	//点击div仍然会弹出123</span><br><span class="line"></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>#五、$()<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$() ===</span><br><span class="line">$(function()&#123;  //等DOM加载完就可以执行了 , 性能要好</span><br><span class="line"></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>###注意：加载速度比window.onload快</p>
+<p>###DOMContentLoaded  ：Dom事件，等Dom加载完<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(document).ready(function()&#123;</span><br><span class="line">	</span><br><span class="line">&#125;);  //  ===$();</span><br></pre></td></tr></table></figure></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2018/07/26/初识jQuery之jQuery基础扩展（三）.html" data-title="初识jQuery之jQuery基础扩展（三） | Welkin" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2018/07/25/JavaScript数组方法及json.html"  title="JavaScript数组方法及json">
+ <strong>NEXT:</strong><br/> 
+ <span>JavaScript数组方法及json
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2018 
+		
+		<a href="http://yoursite.com" target="_blank" title="welkin">welkin</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+
+
+
+
+
+  </body>
+ </html>
