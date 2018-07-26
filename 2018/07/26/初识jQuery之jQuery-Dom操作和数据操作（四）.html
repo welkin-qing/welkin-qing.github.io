@@ -1,0 +1,306 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>初识jQuery之jQuery-Dom操作和数据操作（四） | Welkin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="welkin">
+    
+    <meta name="description" content="#一、Dom操作
+##1.parents() ：获取当前元素的所有祖先节点，参数就是筛选功能；
+##2.closest() : 获取最近的指定的祖先节点(包括当前元素自身),必须要写筛选的参数,只能找到一个元素123456789101112131415&amp;lt;script&amp;gt;$(function">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="Welkin" title="Welkin"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Welkin">Welkin</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/07/26/初识jQuery之jQuery-Dom操作和数据操作（四）.html" title="初识jQuery之jQuery-Dom操作和数据操作（四）" itemprop="url">初识jQuery之jQuery-Dom操作和数据操作（四）</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="welkin">welkin</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2018-07-26T08:05:50.000Z" itemprop="datePublished">2018-07-26</time>
+    Updated:<time datetime="2018-07-26T08:06:33.746Z" itemprop="dateModified">2018-07-26</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		
+		</div>
+		
+		<p>#一、Dom操作</p>
+<p>##1.parents() ：获取当前元素的所有祖先节点，参数就是筛选功能；</p>
+<p>##2.closest() : 获取最近的指定的祖先节点(包括当前元素自身),必须要写筛选的参数,只能找到一个元素<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line"></span><br><span class="line">$(function()&#123;</span><br><span class="line">	</span><br><span class="line">	$(&apos;#div2&apos;).parents(&apos;.box&apos;).css(&apos;background&apos;,&apos;red&apos;);</span><br><span class="line">	//body会变红</span><br><span class="line">	$(&apos;#div2&apos;).closest(&apos;.box&apos;).css(&apos;background&apos;,&apos;red&apos;);</span><br><span class="line">	//只有div2变红</span><br><span class="line">&#125;);</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;body class=&quot;box&quot;&gt;</span><br><span class="line">&lt;div id=&quot;div1&quot;&gt;aaa</span><br><span class="line">	&lt;div id=&quot;div2&quot; class=&quot;box&quot;&gt;bbb&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure></p>
+<p>##3.siblings()、nextAll()和prevAll() </p>
+<p>###siblings() : 找所有的兄弟节点，参数是筛选功能</p>
+<p>###nextAll() : 下面所有的兄弟节点，参数是筛选功能</p>
+<p>###prevAll() : 上面所有的兄弟节点，参数是筛选功能</p>
+<p>##4.Until()、parentsUntil()和nextUntil(),prevUntil</p>
+<p>###Until() : 截止，参数指定截止位置，不包括自身<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line"></span><br><span class="line">$(function()&#123;</span><br><span class="line">	</span><br><span class="line">	$(&apos;span&apos;).nextUntil(&apos;h2&apos;).css(&apos;background&apos;,&apos;red&apos;);</span><br><span class="line">	</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;div&gt;div&lt;/div&gt;</span><br><span class="line">&lt;span&gt;span&lt;/span&gt;</span><br><span class="line">&lt;p&gt;p&lt;/p&gt;</span><br><span class="line">&lt;h1&gt;h1&lt;/h1&gt;</span><br><span class="line">&lt;h2&gt;h2&lt;/h2&gt;</span><br><span class="line">&lt;em&gt;em&lt;/em&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure></p>
+<p>结果：<br><img src="https://upload-images.jianshu.io/upload_images/2549157-25e5348719668cd8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>#二、Dom操作和数据操作</p>
+<p>##1.clone() : 可以接收一个参数 ，作用可以复制之前的操作行为<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$(function()&#123;</span><br><span class="line">	</span><br><span class="line">	$(&apos;div&apos;).click(function()&#123;</span><br><span class="line">		alert(123);</span><br><span class="line">	&#125;);</span><br><span class="line">	</span><br><span class="line">	$(&apos;div&apos;).clone(true).appendTo( $(&apos;span&apos;) );</span><br><span class="line">	//点击新生成的div会有123弹出</span><br><span class="line">&#125;);</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;div&gt;div&lt;/div&gt;</span><br><span class="line">&lt;span&gt;span&lt;/span&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure></p>
+<p>结果：<br><img src="https://upload-images.jianshu.io/upload_images/2549157-16cde1fbe4067998.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>###注意：clone(true)使克隆版也具有原版的操作</p>
+<p>##2.wrap() : 包装</p>
+<p>###wrapAll() : 整体包装</p>
+<p>###wrapInner() : 内部包装</p>
+<p>###unwrap() : 删除包装 ( 删除父级 : 不包括body )</p>
+<p>####wrapInner()性质：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">$(function()&#123;</span><br><span class="line">	</span><br><span class="line">	$(&apos;span&apos;).wrapInner(&apos;&lt;div&gt;&apos;);</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">&#125;);</span><br><span class="line">&lt;span&gt;span&lt;/span&gt;</span><br><span class="line">&lt;div&gt;</span><br><span class="line">	&lt;span&gt;span&lt;/span&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;span&gt;span&lt;/span&gt;</span><br><span class="line"></span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure></p>
+<p>####结果：<br><img src="https://upload-images.jianshu.io/upload_images/2549157-db513df1e4a89319.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="wrapInner"></p>
+<p>####unwrap()性质：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$(function()&#123;</span><br><span class="line">	</span><br><span class="line">	$(&apos;span&apos;).unwrap();</span><br><span class="line">	</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>结果：<br><img src="https://upload-images.jianshu.io/upload_images/2549157-b29663117644fdf4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="unwrap"></p>
+<p>##3.add()：对节点添加组合的一种方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">$(function()&#123;</span><br><span class="line">	</span><br><span class="line">	var elem = $(&apos;div&apos;);</span><br><span class="line">	</span><br><span class="line">	var elem2 = elem.add(&apos;span&apos;);</span><br><span class="line">	</span><br><span class="line">	elem.css(&apos;color&apos;,&apos;red&apos;);</span><br><span class="line">	elem2.css(&apos;background&apos;,&apos;yellow&apos;);</span><br><span class="line">	//div和span背景都变黄</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;div&gt;div&lt;/div&gt;</span><br><span class="line">&lt;span&gt;span&lt;/span&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure></p>
+<p>##4.slice()：截取数组的范围<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">&lt;ul&gt;</span><br><span class="line">    &lt;li&gt;&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;&lt;/li&gt;</span><br><span class="line">&lt;/ul&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">$(&apos;li&apos;).slice(1,4).css(&apos;background&apos;,&apos;red&apos;);</span><br><span class="line">//使1到3的li都变红</span><br></pre></td></tr></table></figure></p>
+<p>####注意：第二个参数表示截止前</p>
+<p>##serialize()和serializeArray()：对数据进行数据化串联，解析操作<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">$(function()&#123;</span><br><span class="line">	</span><br><span class="line">	console.log($(&apos;form&apos;).serialize());  //string : a=1&amp;b=2&amp;c=3</span><br><span class="line">	</span><br><span class="line">	console.log( $(&apos;form&apos;).serializeArray() );</span><br><span class="line">	/*输出</span><br><span class="line">	[</span><br><span class="line">		&#123; name : &apos;a&apos; , value : &apos;1&apos; &#125;,</span><br><span class="line">		&#123; name : &apos;b&apos; , value : &apos;2&apos; &#125;,</span><br><span class="line">		&#123; name : &apos;c&apos; , value : &apos;3&apos; &#125;</span><br><span class="line">	]</span><br><span class="line">	*</span><br><span class="line">&#125;);</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;form&gt;</span><br><span class="line">	&lt;input type=&quot;text&quot; name=&quot;a&quot; value=&quot;1&quot;&gt;</span><br><span class="line">    &lt;input type=&quot;text&quot; name=&quot;b&quot; value=&quot;2&quot;&gt;</span><br><span class="line">    &lt;input type=&quot;text&quot; name=&quot;c&quot; value=&quot;3&quot;&gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2018/07/26/初识jQuery之jQuery-Dom操作和数据操作（四）.html" data-title="初识jQuery之jQuery-Dom操作和数据操作（四） | Welkin" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2018/07/26/初识jQuery之jQuery基础扩展（三）.html"  title="初识jQuery之jQuery基础扩展（三）">
+ <strong>NEXT:</strong><br/> 
+ <span>初识jQuery之jQuery基础扩展（三）
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2018 
+		
+		<a href="http://yoursite.com" target="_blank" title="welkin">welkin</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>
