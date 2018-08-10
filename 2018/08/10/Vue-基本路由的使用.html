@@ -1,0 +1,294 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Vue - 基本路由的使用 | Welkin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="welkin">
+    
+    <meta name="description" content="#一、导入包注意：导入的包要在vue下边123&amp;lt;title&amp;gt;基本路由的使用&amp;lt;/title&amp;gt;&amp;lt;script src=&amp;quot;./lib/vue-2.4.0.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;&amp;lt;script src=&amp;quot;./lib/vu">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="Welkin" title="Welkin"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Welkin">Welkin</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/08/10/Vue-基本路由的使用.html" title="Vue - 基本路由的使用" itemprop="url">Vue - 基本路由的使用</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="welkin">welkin</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2018-08-10T12:10:00.000Z" itemprop="datePublished">2018-08-10</time>
+    Updated:<time datetime="2018-08-10T12:10:29.582Z" itemprop="dateModified">2018-08-10</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		
+		</div>
+		
+		<p>#一、导入包<br><strong>注意：</strong>导入的包要在vue下边<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;title&gt;基本路由的使用&lt;/title&gt;</span><br><span class="line">&lt;script src=&quot;./lib/vue-2.4.0.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;script src=&quot;./lib/vue-router-3.0.1.js&quot;&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure></p>
+<p>#二、创建子组件<br><strong>注意：</strong>是在vm实例上边创建<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var login = &#123;</span><br><span class="line">    template: &apos;&lt;h3&gt;这是登录子组件，这个组件是 奔波霸 开发的。&lt;/h3&gt;&apos;</span><br><span class="line">&#125;</span><br><span class="line">var register = &#123;</span><br><span class="line">    template: &apos;&lt;h3&gt;这是注册子组件，这个组件是 霸波奔 开发的。&lt;/h3&gt;&apos;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>#三、创建一个路由对象<br><strong>创建路由对象，当导入包之后，在window全局对象中有路由构造函数–VueRouter，在new路由对象时，可以为构造函数传递一个配置对象。</strong></p>
+<p><hr><br><strong>注意1：</strong>这个配置对象中的route表示路由匹配规则，每个路由规则，都是一个对象，这个规则对象都有必须的两个属性<br><strong>1.</strong>path，表示监听哪个路由链接的地址<br><strong>2.</strong>component，表示如果路由是前面匹配到的path，则展示component属性对应的那个组件<br><strong>注意2：</strong>component的属性值，必须为一个组件的模板对象，不能是组件的引用名称<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var router = new VueRouter(&#123;</span><br><span class="line">    routes: [ //路由规则数组</span><br><span class="line">        &#123;path: &apos;/login&apos;, component: login&#125;,</span><br><span class="line">        &#123;path: &apos;/register&apos;, component: register&#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>#四、创建 Vue 实例，得到 ViewModel<br>将路由规则对象注册到vm实例上，用来监听url地址变化，并展示相应的组件<br><strong>法一：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var vm = new Vue(&#123;</span><br><span class="line">  el: &apos;#app&apos;,</span><br><span class="line">  data: &#123;&#125;,</span><br><span class="line">  methods: &#123;&#125;,</span><br><span class="line">  router</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p><strong>法二：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var vm = new Vue(&#123;</span><br><span class="line">  el: &apos;#app&apos;,</span><br><span class="line">  data: &#123;&#125;,</span><br><span class="line">  methods: &#123;&#125;,</span><br><span class="line">  router: router</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>#五、在页面中导入容器<br>由VueRouter提供的元素，用来做占位符，由路由规则匹配到的组件来展示。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=&quot;app&quot;&gt;</span><br><span class="line">      &lt;router-link to=&quot;/login&quot;&gt;登录&lt;/router-link&gt;</span><br><span class="line">      &lt;router-link to=&quot;/register&quot;&gt;注册&lt;/router-link&gt;</span><br><span class="line"></span><br><span class="line">      &lt;router-view&gt;&lt;/router-view&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure></p>
+<p><strong>注意：</strong>router-link默认类似于a标签<br><img src="https://upload-images.jianshu.io/upload_images/2549157-a700bec7e2f61bc9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="类似a标签"></p>
+<p>####可以利用tag来修改<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=&quot;app&quot;&gt;</span><br><span class="line">      &lt;router-link to=&quot;/login&quot; tag=&quot;span&quot;&gt;登录&lt;/router-link&gt;</span><br><span class="line">      &lt;router-link to=&quot;/register&quot;&gt;注册&lt;/router-link&gt;</span><br><span class="line"></span><br><span class="line">      &lt;router-view&gt;&lt;/router-view&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/2549157-27b356199da8b724.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="修改为span"></p>
+<p>最终页面结果：<br><img src="https://upload-images.jianshu.io/upload_images/2549157-7a4d95c11e12937f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>#六、重定向设置初识打开的页面<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var router = new VueRouter(&#123;</span><br><span class="line">     routes: [ //路由规则数组</span><br><span class="line">         &#123;path: &apos;/&apos;,redirect:&apos;/login&apos;&#125;,</span><br><span class="line">         &#123;path: &apos;/login&apos;, component: login&#125;,</span><br><span class="line">         &#123;path: &apos;/register&apos;, component: register&#125;</span><br><span class="line">     ],</span><br><span class="line">   // linkActiveClass: &apos;myactive&apos; // 和激活相关的类</span><br><span class="line"> &#125;)</span><br></pre></td></tr></table></figure></p>
+<p>结果：<br>打开页面就是我们设置的login，包括导航栏地址<br><img src="https://upload-images.jianshu.io/upload_images/2549157-9fb5b501591548f9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="结果"></p>
+<p>#七、给路由设置样式<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var router = new VueRouter(&#123;</span><br><span class="line">    routes: [ //路由规则数组</span><br><span class="line">        &#123;path: &apos;/&apos;,redirect:&apos;/login&apos;&#125;,</span><br><span class="line">        &#123;path: &apos;/login&apos;, component: login&#125;,</span><br><span class="line">        &#123;path: &apos;/register&apos;, component: register&#125;</span><br><span class="line">    ],</span><br><span class="line">   linkActiveClass: &apos;myactive&apos; // 和激活相关的类</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">  .router-link-active,</span><br><span class="line">  .myactive &#123;</span><br><span class="line">  color: red;</span><br><span class="line">  font-weight: 800;</span><br><span class="line">  font-style: italic;</span><br><span class="line">  font-size: 80px;</span><br><span class="line">  text-decoration: underline;</span><br><span class="line">  background-color: green;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>结果如下：<br><img src="https://upload-images.jianshu.io/upload_images/2549157-b08bf09ddbb9dcf4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="设置样式"></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2018/08/10/Vue-基本路由的使用.html" data-title="Vue - 基本路由的使用 | Welkin" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2018/08/10/Vue-父子组件之间的传值.html"  title="Vue - 父子组件之间的传值">
+ <strong>NEXT:</strong><br/> 
+ <span>Vue - 父子组件之间的传值
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2018 
+		
+		<a href="http://yoursite.com" target="_blank" title="welkin">welkin</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>
