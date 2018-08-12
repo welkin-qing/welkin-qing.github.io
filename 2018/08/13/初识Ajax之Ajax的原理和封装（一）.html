@@ -1,0 +1,337 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>初识Ajax之Ajax的原理和封装（一） | Welkin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="welkin">
+    
+    <meta name="description" content="Ajax：    Asynchronous JavaScript and XML （中文翻译：异步JavaScript和XML）即：用javascript异步形式去操作xml，完成数据交互。
+#一、第一个Ajax程序话不多说，先附上一段代码，是请求1.txt里的内容
+1234567891011121">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="Welkin" title="Welkin"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Welkin">Welkin</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/08/13/初识Ajax之Ajax的原理和封装（一）.html" title="初识Ajax之Ajax的原理和封装（一）" itemprop="url">初识Ajax之Ajax的原理和封装（一）</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="welkin">welkin</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2018-08-12T22:54:11.000Z" itemprop="datePublished">2018-08-13</time>
+    Updated:<time datetime="2018-08-12T22:54:48.255Z" itemprop="dateModified">2018-08-13</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		
+		</div>
+		
+		<p><strong>Ajax：</strong>    Asynchronous JavaScript and XML （中文翻译：异步JavaScript和XML）<br>即：用javascript异步形式去操作xml，完成数据交互。</p>
+<p>#一、第一个Ajax程序<br>话不多说，先附上一段代码，是请求1.txt里的内容<br><img src="https://upload-images.jianshu.io/upload_images/2549157-45a9e069d6fe082e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="请求内容"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">window.onload = function()&#123;</span><br><span class="line">	oBtn = document.getElementById(&apos;btn&apos;);</span><br><span class="line"></span><br><span class="line">	oBtn.onclick = function()&#123;</span><br><span class="line">		var xhr = new XMLHttpRequest();</span><br><span class="line">		xhr.open(&apos;get&apos;, &apos;1.txt&apos;,true);</span><br><span class="line">		xhr.send();</span><br><span class="line">		xhr.onreadystatechange = function()&#123;</span><br><span class="line">			if(xhr.readyState == 4)&#123;</span><br><span class="line">				alert(xhr.responseText);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line"></span><br><span class="line">&lt;body&gt;</span><br><span class="line">	&lt;input type=&quot;button&quot; value=&quot;按钮&quot; id=&quot;btn&quot; /&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure>
+<p>结果如下：<br><img src="https://upload-images.jianshu.io/upload_images/2549157-6c608ce919cb4759.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="结果"><br><strong>注意：</strong><br><code>-</code>1.我用的是appserv，和wamp大致一样<br><code>-</code>2.给网页命名的时候最好不要出现汉字<br><code>-</code>3.访问时直接localhost+自己的文件目录，省略www<br>下面来讲解一下每一步的操作，我将重点的步骤，注释在代码旁边，请自行理解<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">oBtn.onclick = function()&#123;</span><br><span class="line">		var xhr = new XMLHttpRequest();  //打开浏览器</span><br><span class="line">		xhr.open(&apos;get&apos;, &apos;1.txt&apos;,true);  //在地址栏输入地址</span><br><span class="line">		xhr.send();                     //提交并发送请求</span><br><span class="line">		xhr.onreadystatechange = function()&#123;//等待服务器返回内容</span><br><span class="line">			if(xhr.readyState == 4)&#123;</span><br><span class="line">				alert(xhr.responseText);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></p>
+<p>#二、Ajax流程 - 对象的创建和兼容处理<br>从上边的代码可以看出，第一步是打开浏览器<br>打开浏览器我们需要做的重要一步是<strong>创建Ajax对象</strong>—-XMLHttpRequest;( chrome和 firefox 和ie7，8都可以)<br><strong>注意：</strong>   ie6以下是</p>
+<blockquote>
+<p>new ActiveXObject(‘Microsoft.XMLHTTP’)</p>
+</blockquote>
+<p>所以为了适应所有浏览器，我们可以将打开浏览器这一步做兼容性处理</p>
+<p>####1.if-else方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var xhr = null;</span><br><span class="line">if (window.XMLHttpRequest) &#123;</span><br><span class="line">  xhr = new XMLHttpRequest();</span><br><span class="line">&#125; else &#123;</span><br><span class="line">  xhr = new ActiveXObject(&apos;Microsoft.XMLHTTP&apos;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><hr></p>
+<p>####2.try-catch方法</p>
+<p>#####A.try-catch方法讲解<br>代码在try中尝试执行这个块中的内容,如果有错误，则会执行catch{}，    并且传入错误信息参数<br>例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">alert(a);</span><br><span class="line">alert(&apos;到这里了&apos;);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure></p>
+<p>这段代码会出错，因为没有定义a，我们可以看看错误信息：<br><img src="https://upload-images.jianshu.io/upload_images/2549157-5c0b83c1a69e8277.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="错误信息"><br>但是利用try-catch之后<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">try &#123;</span><br><span class="line">	alert(a);</span><br><span class="line">&#125; catch (e) &#123;</span><br><span class="line">	alert(1);   //1</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">alert(&apos;到这里了&apos;);  //到这里了</span><br></pre></td></tr></table></figure></p>
+<p>浏览器会依次弹出 1 和 到这里了<br><strong>注意：</strong>    e为错误信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">try &#123;</span><br><span class="line">	alert(a);</span><br><span class="line">&#125; catch (e) &#123;</span><br><span class="line">	alert(e);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>结果：<br><img src="https://upload-images.jianshu.io/upload_images/2549157-b2fdbaf779362f51.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="错误信息"></p>
+<p>#####B.try-catch方法兼容处理<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">try &#123;</span><br><span class="line">	xhr = new XMLHttpRequest();</span><br><span class="line">&#125; catch (e) &#123;</span><br><span class="line">	xhr = new ActiveXObject(&apos;Microsoft.XMLHTTP&apos;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>#三、Ajax流程 - open方法和表单</p>
+<p>####1.open方法<br>open方法有<strong>三个参数</strong>：<br><strong>参一：</strong>打开方式<br><strong>参二：</strong>地址<br><strong>参三：</strong>是否异步<br>    <code>-</code>异步:非阻塞 前面的代码不会影响后面代码的执行 true<br>    <code>-</code>同步:阻塞 前面的代码会影响后面代码的执行  false<br><strong>在实际过程中我们选取异步，避免堵塞</strong></p>
+<p><hr></p>
+<p>####2.表单<br>类似的，表单也有三个参数：<br>表单：数据的提交<br><strong>参一：</strong>  action : 数据提交的地址，默认是当前页面<br><strong>参二：</strong> method : 数据提交的方式，默认是get方式<br>            <code>-</code>1.get<br>                把数据名称和数据值用=连接，如果有多个的话，那么他会把多个数据组合用&amp;进行连接，然后把数据放到url?后面传到指定页面<br>            <code>-</code>2.post<br>        <strong>参三：</strong>  enctype : 提交的数据格式，默认为application/x-www-form-urlencoded</p>
+<p><hr><br><strong>注意：</strong></p>
+<p>#####后端数据的接收</p>
+<blockquote>
+<p>$ GET</p>
+</blockquote>
+<p>通过URL传递给该脚本的变量的数组</p>
+<blockquote>
+<p>$ POST</p>
+</blockquote>
+<p>通过HTTP POST方法(表单)传递给该脚本的变量的数组<br><strong>要求：</strong><br><code>-</code>前后台键名和传输方式必须一致<br><code>-</code>数据传输方式<br><code>-</code>数据获取方式</p>
+<p><hr></p>
+<p>#####A.get方法请求<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;form action=&quot;1.get.php&quot;&gt;</span><br><span class="line">    	&lt;input type=&quot;text&quot; name=&quot;username&quot; /&gt;</span><br><span class="line">        &lt;input type=&quot;text&quot; name=&quot;age&quot; /&gt;</span><br><span class="line">        &lt;input type=&quot;submit&quot; value=&quot;提交&quot; /&gt;</span><br><span class="line">    &lt;/form&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure></p>
+<p>新建一个文件，名字为1.get.php<br>以下是php内容：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">header(&apos;content-type:text/html;charset=&quot;utf-8&quot;&apos;);</span><br><span class="line">error_reporting(0);</span><br><span class="line"></span><br><span class="line">$username = $_GET[&apos;username&apos;];</span><br><span class="line">$age = $_GET[&apos;age&apos;];</span><br><span class="line"></span><br><span class="line">echo &quot;你的名字：&#123;$username&#125;，年龄：&#123;$age&#125;&quot;;</span><br></pre></td></tr></table></figure></p>
+<p>当输入leo 34 后：<br><img src="https://upload-images.jianshu.io/upload_images/2549157-77401f87f329ebf3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="输入"><br>输出为：<br><img src="https://upload-images.jianshu.io/upload_images/2549157-a139bcce7243a67a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="输出"></p>
+<p>#####B.post方法请求<br>post方法时，需要注明method为post，并且修改php内的语法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;form action=&quot;1.post.php&quot; method=&quot;post&quot;&gt;</span><br><span class="line">    	&lt;input type=&quot;text&quot; name=&quot;username&quot; /&gt;</span><br><span class="line">        &lt;input type=&quot;text&quot; name=&quot;age&quot; /&gt;</span><br><span class="line">        &lt;input type=&quot;submit&quot; value=&quot;提交&quot; /&gt;</span><br><span class="line">    &lt;/form&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure></p>
+<p>修改1.post.php内的语法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">header(&apos;content-type:text/html;charset=&quot;utf-8&quot;&apos;);</span><br><span class="line">error_reporting(0);</span><br><span class="line"></span><br><span class="line">$username = $_POST[&apos;username&apos;];</span><br><span class="line">$age = $_POST[&apos;age&apos;];</span><br><span class="line"></span><br><span class="line">echo &quot;你的名字：&#123;$username&#125;，年龄：&#123;$age&#125;&quot;;</span><br></pre></td></tr></table></figure></p>
+<p>内容和上面一致。</p>
+<p>#####C.REQUEST获取get或者post<br>无论get或者post都可以利用REQUEST来获取<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">header(&apos;content-type:text/html;charset=&quot;utf-8&quot;&apos;);</span><br><span class="line">error_reporting(0);</span><br><span class="line"></span><br><span class="line">$username = $_REQUEST[&apos;username&apos;];</span><br><span class="line">$age = $_REQUEST[&apos;age&apos;];</span><br><span class="line"></span><br><span class="line">echo &quot;你的名字：&#123;$username&#125;，年龄：&#123;$age&#125;&quot;;</span><br></pre></td></tr></table></figure></p>
+<p>内容和上面一致。</p>
+<p>#四、Ajax流程 - 数据的获取</p>
+<p>####请求状态监控</p>
+<p>#####- onreadystatechange事件<br>  <strong>1.readyState属性：</strong>请求状态<br> <code>-</code> 0 (初始化)还没有调用open()方法<br>  <code>-</code>1(载入)已调用send()方法，正在发送请求<br>  <code>-</code>2 (载入完成) send()方法完成， 已收到全部响应内容<br> <code>-</code>3  (解析)正在解析响应内容<br> <code>-</code>4  (完成)响应内容解析完成，可以在客户端调用了status属性:服务器(请求资源)的状态返回的内容<br><strong>2.  responseText：</strong>返回以文本形式存放的内容<br><strong>3.responseXML：</strong> 返回XML形式的内容<br><strong>4.status :</strong> 服务器状态，http状态码（404）</p>
+<p>因此我们可以将请求成功进行细致化：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">xhr.onreadystatechange = function() &#123;</span><br><span class="line">			</span><br><span class="line">			if ( xhr.readyState == 4 ) &#123;</span><br><span class="line">				if ( xhr.status == 200 ) &#123; </span><br><span class="line"> //请求已成功，请求所希望的响应头或数据体将随此响应返回。出现此状态码是表示正常状态。</span><br><span class="line">					alert( xhr.responseText );</span><br><span class="line">				&#125; else &#123;</span><br><span class="line">					alert(&apos;出错了,Err：&apos; + xhr.status);</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure></p>
+<p>#五、应用中get和post的区别处理</p>
+<p>####1.get方式</p>
+<p>######a.会出现缓存，所以要在url？后面加一个时间戳或者随机数</p>
+<blockquote>
+<p>xhr.open(‘get’,’2.get.php?username=leo&amp;age=30&amp;’ + new Date().getTime(),true);</p>
+<p>######b.出现乱码<br>编码encodeURI<br>xhr.open(‘get’,’2.get.php?username=’+encodeURI(‘刘伟’)+’&amp;age=30&amp;’ + new Date().getTime(),true);</p>
+<p><hr></p>
+<p>####2.post方式<br>类似于form，有三个参数<br>xhr.open(‘post’,’2.post.php’,true);</p>
+</blockquote>
+<p>post方式，数据放在send()里面作为参数传递<br>但是在这之前需要利用setRequestHeader声明发送的数据类型,即：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">xhr.open(&apos;post&apos;,&apos;2.post.php&apos;,true);</span><br><span class="line">xhr.setRequestHeader(&apos;content-type&apos;, &apos;application/x-www-form-urlencoded&apos;);</span><br><span class="line">xhr.send(&apos;username=刘伟&amp;age=30&apos;);</span><br></pre></td></tr></table></figure></p>
+<p><strong>注意：</strong><br>1.post没有缓存问题<br>2.无需编码</p>
+<p>#六、附上Ajax的封装<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">function ajax(method, url, data, success) &#123;</span><br><span class="line">	var xhr = null;</span><br><span class="line">	try &#123;</span><br><span class="line">		xhr = new XMLHttpRequest();</span><br><span class="line">	&#125; catch (e) &#123;</span><br><span class="line">		xhr = new ActiveXObject(&apos;Microsoft.XMLHTTP&apos;);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	if (method == &apos;get&apos; &amp;&amp; data) &#123;</span><br><span class="line">		url += &apos;?&apos; + data;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	xhr.open(method,url,true);</span><br><span class="line">	if (method == &apos;get&apos;) &#123;</span><br><span class="line">		xhr.send();</span><br><span class="line">	&#125; else &#123;</span><br><span class="line">		xhr.setRequestHeader(&apos;content-type&apos;, &apos;application/x-www-form-urlencoded&apos;);</span><br><span class="line">		xhr.send(data);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	xhr.onreadystatechange = function() &#123;</span><br><span class="line">		</span><br><span class="line">		if ( xhr.readyState == 4 ) &#123;</span><br><span class="line">			if ( xhr.status == 200 ) &#123;</span><br><span class="line">				success &amp;&amp; success(xhr.responseText);</span><br><span class="line">			&#125; else &#123;</span><br><span class="line">				alert(&apos;出错了,Err：&apos; + xhr.status);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2018/08/13/初识Ajax之Ajax的原理和封装（一）.html" data-title="初识Ajax之Ajax的原理和封装（一） | Welkin" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2018/08/11/Vue-监听文本框数据的三种方法.html"  title="Vue - 监听文本框数据的三种方法">
+ <strong>NEXT:</strong><br/> 
+ <span>Vue - 监听文本框数据的三种方法
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2018 
+		
+		<a href="http://yoursite.com" target="_blank" title="welkin">welkin</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>
