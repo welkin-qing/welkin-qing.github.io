@@ -1,0 +1,299 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>初识java及java知识总结 | Welkin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="welkin">
+    
+    <meta name="description" content="一、java程序开发
+创建、编辑java源文件，后缀名为.java
+使用java编译器来编译java源文件生成字节码文件，后缀名为.class
+使用java虚拟机来执行生成的字节码文件，完成java程序要实现的功能今天上课老师提出了一个问题：为什么java是跨平台的语言？
+
+
+因为java平台是由j">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="Welkin" title="Welkin"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Welkin">Welkin</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/09/25/初识java及java知识总结.html" title="初识java及java知识总结" itemprop="url">初识java及java知识总结</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="welkin">welkin</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2018-09-25T15:06:08.000Z" itemprop="datePublished">2018-09-25</time>
+    Updated:<time datetime="2018-09-25T15:07:13.949Z" itemprop="dateModified">2018-09-25</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、java程序开发"><span class="toc-number">1.</span> <span class="toc-text">一、java程序开发</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#今天上课老师提出了一个问题：为什么java是跨平台的语言？"><span class="toc-number">1.0.0.1.</span> <span class="toc-text">今天上课老师提出了一个问题：为什么java是跨平台的语言？</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、几个简单的java小程序"><span class="toc-number">2.</span> <span class="toc-text">二、几个简单的java小程序</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-hello-wrold"><span class="toc-number">2.0.0.1.</span> <span class="toc-text">1. hello wrold</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-welcome"><span class="toc-number">2.0.0.2.</span> <span class="toc-text">2.welcome</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-求五边形的面积和周长"><span class="toc-number">2.0.0.3.</span> <span class="toc-text">3.求五边形的面积和周长</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-摄氏温度转华氏温度"><span class="toc-number">2.0.0.4.</span> <span class="toc-text">4.摄氏温度转华氏温度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-关系运算符的计算"><span class="toc-number">2.0.0.5.</span> <span class="toc-text">5.关系运算符的计算</span></a></li></ol></li></ol></li></ol></li></ol>
+		</div>
+		
+		<h1 id="一、java程序开发"><a href="#一、java程序开发" class="headerlink" title="一、java程序开发"></a>一、java程序开发</h1><ul>
+<li>创建、编辑java源文件，后缀名为.java</li>
+<li>使用java编译器来编译java源文件生成字节码文件，后缀名为.class</li>
+<li>使用java虚拟机来执行生成的字节码文件，完成java程序要实现的功能<h4 id="今天上课老师提出了一个问题：为什么java是跨平台的语言？"><a href="#今天上课老师提出了一个问题：为什么java是跨平台的语言？" class="headerlink" title="今天上课老师提出了一个问题：为什么java是跨平台的语言？"></a>今天上课老师提出了一个问题：为什么java是跨平台的语言？</h4></li>
+</ul>
+<ol>
+<li>因为java平台是由java虚拟机和java应用编程接口构成，且java程序的跨平台主要指的是字节码文件可以在任何具有java虚拟机的电子设备上运行</li>
+<li>java语言是完全统一的版本</li>
+<li>由编译器产生的字节码是与平台无关的</li>
+<li>java虚拟机隐藏了不同平台的差异，保证了字节码文件运行的正确性<br>（附上我的一张思维脑图，上面有java概念和部分java的数据类型，可以帮助理解）<br><img src="https://img-blog.csdn.net/20180925225406835?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="java"><h1 id="二、几个简单的java小程序"><a href="#二、几个简单的java小程序" class="headerlink" title="二、几个简单的java小程序"></a>二、几个简单的java小程序</h1><h4 id="1-hello-wrold"><a href="#1-hello-wrold" class="headerlink" title="1. hello wrold"></a>1. hello wrold</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">App1</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		System.out.println(<span class="string">"hello,world"</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="2-welcome"><a href="#2-welcome" class="headerlink" title="2.welcome"></a>2.welcome</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">welcom</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">		Scanner s = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">		System.out.println(<span class="string">"Hello!What's your name :"</span>);</span><br><span class="line">		String name = s.nextLine();</span><br><span class="line">		System.out.println(name+<span class="string">",Welcome to learn OOP using java!"</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="3-求五边形的面积和周长"><a href="#3-求五边形的面积和周长" class="headerlink" title="3.求五边形的面积和周长"></a>3.求五边形的面积和周长</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Area</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		Scanner number = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">		<span class="keyword">double</span> r = number.nextDouble();</span><br><span class="line">		System.out.printf(<span class="string">"%.4f"</span>, (r*r*(Math.sqrt(<span class="number">25</span>+<span class="number">10</span>*Math.sqrt(<span class="number">5</span>)))/<span class="number">4</span>));</span><br><span class="line">		System.out.printf(<span class="string">"\n"</span>);</span><br><span class="line">		System.out.printf(<span class="string">"%.0f"</span>, <span class="number">5</span>*r);</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="4-摄氏温度转华氏温度"><a href="#4-摄氏温度转华氏温度" class="headerlink" title="4.摄氏温度转华氏温度"></a>4.摄氏温度转华氏温度</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Exam3_1</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		<span class="keyword">float</span> c,f=<span class="number">0.0f</span>;</span><br><span class="line">		System.out.println(<span class="string">""</span>);</span><br><span class="line">		Scanner in=<span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">		System.out.println(<span class="string">"请输入摄氏温度："</span>);</span><br><span class="line">		c=in.nextFloat();</span><br><span class="line">		f=c*<span class="number">9</span>/<span class="number">5</span>+<span class="number">32</span>;</span><br><span class="line">		System.out.println(<span class="string">"转换成华氏温度为："</span>+f);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="5-关系运算符的计算"><a href="#5-关系运算符的计算" class="headerlink" title="5.关系运算符的计算"></a>5.关系运算符的计算</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Exam2_7</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		<span class="keyword">boolean</span> x,y,z,a,b;</span><br><span class="line">		a = <span class="string">'c'</span> &gt; <span class="string">'C'</span>;</span><br><span class="line">		b = <span class="string">'r'</span> != <span class="string">'r'</span>;</span><br><span class="line">		x = !a;</span><br><span class="line">		y = a &amp;&amp; b;</span><br><span class="line">		z = a || b;</span><br><span class="line">		System.out.println(<span class="string">"x="</span>+x);</span><br><span class="line">		System.out.println(<span class="string">"y="</span>+y);</span><br><span class="line">		System.out.println(<span class="string">"z="</span>+z);</span><br><span class="line">		System.out.println(<span class="string">"a="</span>+a);</span><br><span class="line">		System.out.println(<span class="string">"b="</span>+b);</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2018/09/25/初识java及java知识总结.html" data-title="初识java及java知识总结 | Welkin" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2018/09/23/初识Node使用引擎实现Apach功能.html"  title="初识Node使用引擎实现Apach功能">
+ <strong>NEXT:</strong><br/> 
+ <span>初识Node使用引擎实现Apach功能
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、java程序开发"><span class="toc-number">1.</span> <span class="toc-text">一、java程序开发</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#今天上课老师提出了一个问题：为什么java是跨平台的语言？"><span class="toc-number">1.0.0.1.</span> <span class="toc-text">今天上课老师提出了一个问题：为什么java是跨平台的语言？</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、几个简单的java小程序"><span class="toc-number">2.</span> <span class="toc-text">二、几个简单的java小程序</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-hello-wrold"><span class="toc-number">2.0.0.1.</span> <span class="toc-text">1. hello wrold</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-welcome"><span class="toc-number">2.0.0.2.</span> <span class="toc-text">2.welcome</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-求五边形的面积和周长"><span class="toc-number">2.0.0.3.</span> <span class="toc-text">3.求五边形的面积和周长</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-摄氏温度转华氏温度"><span class="toc-number">2.0.0.4.</span> <span class="toc-text">4.摄氏温度转华氏温度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-关系运算符的计算"><span class="toc-number">2.0.0.5.</span> <span class="toc-text">5.关系运算符的计算</span></a></li></ol></li></ol></li></ol></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2018 
+		
+		<a href="http://yoursite.com" target="_blank" title="welkin">welkin</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>
