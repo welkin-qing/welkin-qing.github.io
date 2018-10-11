@@ -1,0 +1,326 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>npm介绍及使用 | Welkin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="welkin">
+    
+    <meta name="description" content="我们在使用node时会经常下载node_modules和配置package.json文件，今天刚好学习到了其中原理，所以写下来和大家分享。
+一、npm1. npm网站用来搜索第三方包，或者上传第三方包npm网站https://www.npmjs.com.cn/
+2. npm命令行工具只要安装了nod">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="Welkin" title="Welkin"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Welkin">Welkin</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/10/11/npm介绍及使用.html" title="npm介绍及使用" itemprop="url">npm介绍及使用</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="welkin">welkin</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2018-10-11T14:45:07.000Z" itemprop="datePublished">2018-10-11</time>
+    Updated:<time datetime="2018-10-11T14:46:01.019Z" itemprop="dateModified">2018-10-11</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、npm"><span class="toc-number">1.</span> <span class="toc-text">一、npm</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-npm网站"><span class="toc-number">1.0.1.</span> <span class="toc-text">1. npm网站</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-npm命令行工具"><span class="toc-number">1.0.2.</span> <span class="toc-text">2. npm命令行工具</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#a-查看npm版本信息"><span class="toc-number">1.0.2.0.1.</span> <span class="toc-text">a.查看npm版本信息</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#b-升级npm"><span class="toc-number">1.0.2.1.</span> <span class="toc-text">b. 升级npm</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解决npm墙的问题"><span class="toc-number">1.0.3.</span> <span class="toc-text">解决npm墙的问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#a-安装cnpm"><span class="toc-number">1.0.3.1.</span> <span class="toc-text">a. 安装cnpm</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#b-使用淘宝镜像的地址来下载"><span class="toc-number">1.0.3.2.</span> <span class="toc-text">b. 使用淘宝镜像的地址来下载</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#当下载某个包时（我已jquery为例）"><span class="toc-number">1.0.3.2.1.</span> <span class="toc-text">当下载某个包时（我已jquery为例）</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#将淘宝镜像加入到配置文件中"><span class="toc-number">1.0.3.3.</span> <span class="toc-text">将淘宝镜像加入到配置文件中</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、-包说明文件package-json"><span class="toc-number">2.</span> <span class="toc-text">二、 包说明文件package.json</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-配置package-json"><span class="toc-number">2.0.0.1.</span> <span class="toc-text">1.配置package.json</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#keywords-是配置搜索的关键字"><span class="toc-number">2.0.0.2.</span> <span class="toc-text">keywords 是配置搜索的关键字</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-快速生成package-json文件"><span class="toc-number">2.0.0.3.</span> <span class="toc-text">2.快速生成package.json文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-package-json的作用"><span class="toc-number">2.0.0.4.</span> <span class="toc-text">3. package.json的作用</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#通过–save可自动在package-json的dependencies中保存第三方依赖包的信息"><span class="toc-number">2.0.0.4.1.</span> <span class="toc-text">通过–save可自动在package.json的dependencies中保存第三方依赖包的信息</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#三、npm常用命令"><span class="toc-number">3.</span> <span class="toc-text">三、npm常用命令</span></a></li></ol>
+		</div>
+		
+		<p>我们在使用node时会经常下载node_modules和配置package.json文件，今天刚好学习到了其中原理，所以写下来和大家分享。</p>
+<h1 id="一、npm"><a href="#一、npm" class="headerlink" title="一、npm"></a>一、npm</h1><h3 id="1-npm网站"><a href="#1-npm网站" class="headerlink" title="1. npm网站"></a>1. npm网站</h3><p>用来搜索第三方包，或者上传第三方包<br><a href="https://www.npmjs.com.cn/" target="_blank" rel="noopener">npm网站https://www.npmjs.com.cn/</a></p>
+<h3 id="2-npm命令行工具"><a href="#2-npm命令行工具" class="headerlink" title="2. npm命令行工具"></a>2. npm命令行工具</h3><p>只要安装了node，则安装了npm<br>但是npm也有版本的概念<br><a href="https://www.npmjs.com/search?q=%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7" target="_blank" rel="noopener">npm命令行工具https://www.npmjs.com/search?q=%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7</a></p>
+<h5 id="a-查看npm版本信息"><a href="#a-查看npm版本信息" class="headerlink" title="a.查看npm版本信息"></a>a.查看npm版本信息</h5><blockquote>
+<p>npm –version // 查看npm版本信息</p>
+</blockquote>
+<p><img src="https://img-blog.csdn.net/20181011224128735?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="查看npm版本信息"></p>
+<h4 id="b-升级npm"><a href="#b-升级npm" class="headerlink" title="b. 升级npm"></a>b. 升级npm</h4><blockquote>
+<p>npm install –global npm //自己升级自己</p>
+</blockquote>
+<h3 id="解决npm墙的问题"><a href="#解决npm墙的问题" class="headerlink" title="解决npm墙的问题"></a>解决npm墙的问题</h3><p>因为npm是国外的，所以使用起来则会缓慢，所以可以使用国内的来进行下载<br>可以使用淘宝镜像<br><a href="http://npm.taobao.org/" target="_blank" rel="noopener">淘宝镜像http://npm.taobao.org/</a><br>使用方法如下:</p>
+<h4 id="a-安装cnpm"><a href="#a-安装cnpm" class="headerlink" title="a. 安装cnpm"></a>a. 安装cnpm</h4><blockquote>
+<p>npm install –global cnpm</p>
+</blockquote>
+<p>以后使用npm时就可以将npm换成cnpm即可</p>
+<h4 id="b-使用淘宝镜像的地址来下载"><a href="#b-使用淘宝镜像的地址来下载" class="headerlink" title="b. 使用淘宝镜像的地址来下载"></a>b. 使用淘宝镜像的地址来下载</h4><h5 id="当下载某个包时（我已jquery为例）"><a href="#当下载某个包时（我已jquery为例）" class="headerlink" title="当下载某个包时（我已jquery为例）"></a>当下载某个包时（我已jquery为例）</h5><blockquote>
+<p>npm install jquery –registry=<a href="https://registry.npm.taobao.org" target="_blank" rel="noopener">https://registry.npm.taobao.org</a></p>
+</blockquote>
+<h4 id="将淘宝镜像加入到配置文件中"><a href="#将淘宝镜像加入到配置文件中" class="headerlink" title="将淘宝镜像加入到配置文件中"></a>将淘宝镜像加入到配置文件中</h4><blockquote>
+<p>npm config set registry <a href="https://registry.npm.taobao.org" target="_blank" rel="noopener">https://registry.npm.taobao.org</a></p>
+</blockquote>
+<p>只要配置了上面的命令，则以后所有的npm install 都会默认通过淘宝镜像来下载</p>
+<hr>
+
+<h1 id="二、-包说明文件package-json"><a href="#二、-包说明文件package-json" class="headerlink" title="二、 包说明文件package.json"></a>二、 包说明文件package.json</h1><h4 id="1-配置package-json"><a href="#1-配置package-json" class="headerlink" title="1.配置package.json"></a>1.配置package.json</h4><blockquote>
+<p>npm init</p>
+</blockquote>
+<p>这个命令需要自己手动配置文件里的选项，如下图所示：<br><img src="https://img-blog.csdn.net/20181011220935254?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="在这里插入图片描述"></p>
+<h4 id="keywords-是配置搜索的关键字"><a href="#keywords-是配置搜索的关键字" class="headerlink" title="keywords 是配置搜索的关键字"></a>keywords 是配置搜索的关键字</h4><hr>
+
+<h4 id="2-快速生成package-json文件"><a href="#2-快速生成package-json文件" class="headerlink" title="2.快速生成package.json文件"></a>2.快速生成package.json文件</h4><blockquote>
+<p>npm init -y    //可以快速跳过向导，快速生成package.json文件</p>
+</blockquote>
+<h4 id="3-package-json的作用"><a href="#3-package-json的作用" class="headerlink" title="3. package.json的作用"></a>3. package.json的作用</h4><p>当下载安装包时，需要在package.json文件中的dependencies中写入下载的第三方依赖包的依赖关系，当node_module文件删除时可以直接通过npm install文件配置好所有的第三方依赖包</p>
+<h5 id="通过–save可自动在package-json的dependencies中保存第三方依赖包的信息"><a href="#通过–save可自动在package-json的dependencies中保存第三方依赖包的信息" class="headerlink" title="通过–save可自动在package.json的dependencies中保存第三方依赖包的信息"></a>通过–save可自动在package.json的dependencies中保存第三方依赖包的信息</h5><blockquote>
+<p>npm install 包名 –save<br>npm i -S 包名  //简写</p>
+</blockquote>
+<h1 id="三、npm常用命令"><a href="#三、npm常用命令" class="headerlink" title="三、npm常用命令"></a>三、npm常用命令</h1><blockquote>
+<p>npm init<br>npm init -y //快速生成package.json文件<br>npm install //一次性把dependencies选项中的依赖项全部安装==npm i<br>npm install –save 包名  // == npm i -S包名<br>npm uninstall 包名 // 只删除，如果有依赖项会保存<br>npm uninstall –save 包名 //将依赖项也会删除</p>
+<p>npm help //查看使用帮助</p>
+</blockquote>
+<p><img src="https://img-blog.csdn.net/20181011223952532?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="npm --help"></p>
+<blockquote>
+<p>npm 命令 –help //查看指定命令的使用帮助</p>
+</blockquote>
+<p><img src="https://img-blog.csdn.net/20181011224050889?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="查看指定命令帮助"></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2018/10/11/npm介绍及使用.html" data-title="npm介绍及使用 | Welkin" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2018/09/25/初识java及java知识总结.html"  title="初识java及java知识总结">
+ <strong>NEXT:</strong><br/> 
+ <span>初识java及java知识总结
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、npm"><span class="toc-number">1.</span> <span class="toc-text">一、npm</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-npm网站"><span class="toc-number">1.0.1.</span> <span class="toc-text">1. npm网站</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-npm命令行工具"><span class="toc-number">1.0.2.</span> <span class="toc-text">2. npm命令行工具</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#a-查看npm版本信息"><span class="toc-number">1.0.2.0.1.</span> <span class="toc-text">a.查看npm版本信息</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#b-升级npm"><span class="toc-number">1.0.2.1.</span> <span class="toc-text">b. 升级npm</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解决npm墙的问题"><span class="toc-number">1.0.3.</span> <span class="toc-text">解决npm墙的问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#a-安装cnpm"><span class="toc-number">1.0.3.1.</span> <span class="toc-text">a. 安装cnpm</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#b-使用淘宝镜像的地址来下载"><span class="toc-number">1.0.3.2.</span> <span class="toc-text">b. 使用淘宝镜像的地址来下载</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#当下载某个包时（我已jquery为例）"><span class="toc-number">1.0.3.2.1.</span> <span class="toc-text">当下载某个包时（我已jquery为例）</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#将淘宝镜像加入到配置文件中"><span class="toc-number">1.0.3.3.</span> <span class="toc-text">将淘宝镜像加入到配置文件中</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、-包说明文件package-json"><span class="toc-number">2.</span> <span class="toc-text">二、 包说明文件package.json</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-配置package-json"><span class="toc-number">2.0.0.1.</span> <span class="toc-text">1.配置package.json</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#keywords-是配置搜索的关键字"><span class="toc-number">2.0.0.2.</span> <span class="toc-text">keywords 是配置搜索的关键字</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-快速生成package-json文件"><span class="toc-number">2.0.0.3.</span> <span class="toc-text">2.快速生成package.json文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-package-json的作用"><span class="toc-number">2.0.0.4.</span> <span class="toc-text">3. package.json的作用</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#通过–save可自动在package-json的dependencies中保存第三方依赖包的信息"><span class="toc-number">2.0.0.4.1.</span> <span class="toc-text">通过–save可自动在package.json的dependencies中保存第三方依赖包的信息</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#三、npm常用命令"><span class="toc-number">3.</span> <span class="toc-text">三、npm常用命令</span></a></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2018 
+		
+		<a href="http://yoursite.com" target="_blank" title="welkin">welkin</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>
