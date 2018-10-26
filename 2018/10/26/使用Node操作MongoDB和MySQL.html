@@ -1,0 +1,386 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>使用Node操作MongoDB和MySQL | Welkin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="welkin">
+    
+    <meta name="description" content="一、 MongoDB 的介绍详情参考教程：MongDB教程
+1.简单介绍一下关系型数据库和非关系型数据库a. 关系数据库
+表 === 关系（表与表之间存在关系）
+所有的关系型数据库都需要通过sql语言来操作
+所有的关系数据库在操作之前都需要设计表结构
+而且数据表还支持约束
+唯一的
+主键
+默认值
+非空">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="Welkin" title="Welkin"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Welkin">Welkin</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/10/26/使用Node操作MongoDB和MySQL.html" title="使用Node操作MongoDB和MySQL" itemprop="url">使用Node操作MongoDB和MySQL</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="welkin">welkin</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2018-10-26T13:42:56.000Z" itemprop="datePublished">2018-10-26</time>
+    Updated:<time datetime="2018-10-26T13:44:48.065Z" itemprop="dateModified">2018-10-26</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、-MongoDB-的介绍"><span class="toc-number">1.</span> <span class="toc-text">一、 MongoDB 的介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-简单介绍一下关系型数据库和非关系型数据库"><span class="toc-number">1.0.1.</span> <span class="toc-text">1.简单介绍一下关系型数据库和非关系型数据库</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#a-关系数据库"><span class="toc-number">1.0.1.1.</span> <span class="toc-text">a. 关系数据库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#b-非关系型数据库"><span class="toc-number">1.0.1.2.</span> <span class="toc-text">b. 非关系型数据库</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、-MongDB-的下载及安装"><span class="toc-number">2.</span> <span class="toc-text">二、 MongDB 的下载及安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-下载地址"><span class="toc-number">2.0.1.</span> <span class="toc-text">1. 下载地址</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-配置环境变量"><span class="toc-number">2.0.2.</span> <span class="toc-text">2. 配置环境变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-检查是否安装了MongoDB"><span class="toc-number">2.0.3.</span> <span class="toc-text">3. 检查是否安装了MongoDB</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#三、启动和关闭MongoDB"><span class="toc-number">3.</span> <span class="toc-text">三、启动和关闭MongoDB</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-创建-data-db"><span class="toc-number">3.0.0.1.</span> <span class="toc-text">1. 创建/data/db</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-启动"><span class="toc-number">3.0.0.2.</span> <span class="toc-text">2. 启动</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-关闭"><span class="toc-number">3.0.0.3.</span> <span class="toc-text">3. 关闭</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#四、-基本感知MongoDB"><span class="toc-number">4.</span> <span class="toc-text">四、 基本感知MongoDB</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-连接"><span class="toc-number">4.0.0.1.</span> <span class="toc-text">1. 连接</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-退出"><span class="toc-number">4.0.0.2.</span> <span class="toc-text">2. 退出</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-基本命令"><span class="toc-number">4.0.0.3.</span> <span class="toc-text">3. 基本命令</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#a-查看数据库列表（查看显示所有的数据库）"><span class="toc-number">4.0.0.3.1.</span> <span class="toc-text">a. 查看数据库列表（查看显示所有的数据库）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#b-切换指定的数据库"><span class="toc-number">4.0.0.3.2.</span> <span class="toc-text">b. 切换指定的数据库</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#c-查看当前数据库"><span class="toc-number">4.0.0.3.3.</span> <span class="toc-text">c. 查看当前数据库</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#d-插入数据"><span class="toc-number">4.0.0.3.4.</span> <span class="toc-text">d. 插入数据</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#e-查看数据"><span class="toc-number">4.0.0.3.5.</span> <span class="toc-text">e. 查看数据</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#f-查看所有集合"><span class="toc-number">4.0.0.3.6.</span> <span class="toc-text">f. 查看所有集合</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#五、使用-Node操作MySQL"><span class="toc-number">5.</span> <span class="toc-text">五、使用 Node操作MySQL</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-安装"><span class="toc-number">5.0.1.</span> <span class="toc-text">1. 安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-连接数据库"><span class="toc-number">5.0.2.</span> <span class="toc-text">2. 连接数据库</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#打开navicat将第一步改成自己的数据库"><span class="toc-number">5.0.2.1.</span> <span class="toc-text">打开navicat将第一步改成自己的数据库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#修改第一步的代码"><span class="toc-number">5.0.2.2.</span> <span class="toc-text">修改第一步的代码</span></a></li></ol></li></ol></li></ol></li></ol>
+		</div>
+		
+		<h1 id="一、-MongoDB-的介绍"><a href="#一、-MongoDB-的介绍" class="headerlink" title="一、 MongoDB 的介绍"></a>一、 MongoDB 的介绍</h1><p>详情参考教程：<a href="http://www.runoob.com/mongodb/mongodb-tutorial.html" target="_blank" rel="noopener">MongDB教程</a></p>
+<h3 id="1-简单介绍一下关系型数据库和非关系型数据库"><a href="#1-简单介绍一下关系型数据库和非关系型数据库" class="headerlink" title="1.简单介绍一下关系型数据库和非关系型数据库"></a>1.简单介绍一下关系型数据库和非关系型数据库</h3><h4 id="a-关系数据库"><a href="#a-关系数据库" class="headerlink" title="a. 关系数据库"></a>a. 关系数据库</h4><ul>
+<li>表 === 关系（表与表之间存在关系）</li>
+<li>所有的关系型数据库都需要通过sql语言来操作</li>
+<li>所有的关系数据库在操作之前都需要设计表结构</li>
+<li>而且数据表还支持约束<ul>
+<li>唯一的</li>
+<li>主键</li>
+<li>默认值</li>
+<li>非空</li>
+</ul>
+</li>
+</ul>
+<h4 id="b-非关系型数据库"><a href="#b-非关系型数据库" class="headerlink" title="b. 非关系型数据库"></a>b. 非关系型数据库</h4><ul>
+<li>灵活</li>
+<li>有的非关系型数据库就是键值段（key-value对）</li>
+<li>但是MongoDB是长的最像关系型数据库的非关系型数据库 <ul>
+<li>数据库 –&gt; 数据库</li>
+<li>数据表 –&gt; 集合（数组）</li>
+<li>表记录 –&gt; （文档对象）<ul>
+<li>MongDB 不需要设计表结构</li>
+<li>可以任意的往里面存数据，没有结构性一说</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="二、-MongDB-的下载及安装"><a href="#二、-MongDB-的下载及安装" class="headerlink" title="二、 MongDB 的下载及安装"></a>二、 MongDB 的下载及安装</h1><h3 id="1-下载地址"><a href="#1-下载地址" class="headerlink" title="1. 下载地址"></a>1. 下载地址</h3><p><a href="https://www.mongodb.com/" target="_blank" rel="noopener">https://www.mongodb.com/</a><br>点进去之后点击右上角进入download页面<br>选择servers，如下图所示，选择MSI文件格式<br><img src="https://img-blog.csdnimg.cn/20181025224906771.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_27,color_FFFFFF,t_70" alt="下载页面"></p>
+<p>然后下载之后一直next就好了<br>对于数据库来说，建议还是下载在c盘比较好</p>
+<h3 id="2-配置环境变量"><a href="#2-配置环境变量" class="headerlink" title="2. 配置环境变量"></a>2. 配置环境变量</h3><p>照如图所示找到以下bin文件夹<br><img src="https://img-blog.csdnimg.cn/20181025225221835.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_27,color_FFFFFF,t_70" alt="路径"></p>
+<p>添加环境变量：<br><img src="https://img-blog.csdnimg.cn/20181025225346552.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_27,color_FFFFFF,t_70" alt="添加环境变量"></p>
+<h3 id="3-检查是否安装了MongoDB"><a href="#3-检查是否安装了MongoDB" class="headerlink" title="3. 检查是否安装了MongoDB"></a>3. 检查是否安装了MongoDB</h3><p>win + r 打开 cmd，输入</p>
+<blockquote>
+<p>mongod –version</p>
+</blockquote>
+<p>如下图所示就说明安装成功了<br><img src="https://img-blog.csdnimg.cn/20181025225625389.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_27,color_FFFFFF,t_70" alt="检查是否安装成功"></p>
+<h1 id="三、启动和关闭MongoDB"><a href="#三、启动和关闭MongoDB" class="headerlink" title="三、启动和关闭MongoDB"></a>三、启动和关闭MongoDB</h1><h4 id="1-创建-data-db"><a href="#1-创建-data-db" class="headerlink" title="1. 创建/data/db"></a>1. 创建/data/db</h4><p>mongodb 默认使用执行mongod命令所处盘符根目录下的/data/db作为自己的数据存储目录，所以在第一次执行命令之前先自己手动创建一个/data/db<br>如下图所示：<br><img src="https://img-blog.csdnimg.cn/20181025230044161.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_27,color_FFFFFF,t_70" alt="创建data/db"></p>
+<h4 id="2-启动"><a href="#2-启动" class="headerlink" title="2. 启动"></a>2. 启动</h4><blockquote>
+<p>mongod</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20181025230424981.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_27,color_FFFFFF,t_70" alt="启动"></p>
+<p><strong>若想要修改默认的数据存储目录</strong></p>
+<blockquote>
+<p>mongod –dbpath=数据存储目录路径</p>
+</blockquote>
+<h4 id="3-关闭"><a href="#3-关闭" class="headerlink" title="3. 关闭"></a>3. 关闭</h4><blockquote>
+<p>ctrl +c </p>
+</blockquote>
+<p>或者直接关闭窗口</p>
+<h1 id="四、-基本感知MongoDB"><a href="#四、-基本感知MongoDB" class="headerlink" title="四、 基本感知MongoDB"></a>四、 基本感知MongoDB</h1><h4 id="1-连接"><a href="#1-连接" class="headerlink" title="1. 连接"></a>1. 连接</h4><p> 打开一个cmd 启动mongodb，然后再打开一个cmd 输入mongo，会默认连接本地的数据库<br> 如下图所示，就表示连接成功了<br> <img src="https://img-blog.csdnimg.cn/20181025230835438.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_27,color_FFFFFF,t_70" alt="连接成功"></p>
+<h4 id="2-退出"><a href="#2-退出" class="headerlink" title="2. 退出"></a>2. 退出</h4><p>输入exit即可</p>
+<blockquote>
+<p>exit</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20181025230948804.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_27,color_FFFFFF,t_70" alt="退出"></p>
+<h4 id="3-基本命令"><a href="#3-基本命令" class="headerlink" title="3. 基本命令"></a>3. 基本命令</h4><h5 id="a-查看数据库列表（查看显示所有的数据库）"><a href="#a-查看数据库列表（查看显示所有的数据库）" class="headerlink" title="a. 查看数据库列表（查看显示所有的数据库）"></a>a. 查看数据库列表（查看显示所有的数据库）</h5><blockquote>
+<p>show dbs</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20181025231214854.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_27,color_FFFFFF,t_70" alt="查看数据库列表"></p>
+<p><strong>注意</strong>默认会有admin和local两个系统数据库（那个welkin是我自己新建的）</p>
+<h5 id="b-切换指定的数据库"><a href="#b-切换指定的数据库" class="headerlink" title="b. 切换指定的数据库"></a>b. 切换指定的数据库</h5><blockquote>
+<p>use  数据库名称</p>
+</blockquote>
+<p> 如果没有会新建</p>
+<h5 id="c-查看当前数据库"><a href="#c-查看当前数据库" class="headerlink" title="c. 查看当前数据库"></a>c. 查看当前数据库</h5><blockquote>
+<p>db</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20181025231526533.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_27,color_FFFFFF,t_70" alt="查看当前数据库"></p>
+<p><strong>注意</strong> ： 会默认连接数据库，但是我们刚刚查询所有数据库的时候并没有显示test，原因是，test没有插入数据，如果插入数据之后就会显示了</p>
+<h5 id="d-插入数据"><a href="#d-插入数据" class="headerlink" title="d. 插入数据"></a>d. 插入数据</h5><blockquote>
+<p>db.students.insertOne({“name”: “Jack”})</p>
+</blockquote>
+<p>下图就表示插入成功了<br><img src="https://img-blog.csdnimg.cn/2018102619532461.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_27,color_FFFFFF,t_70" alt="插入数据"></p>
+<h5 id="e-查看数据"><a href="#e-查看数据" class="headerlink" title="e. 查看数据"></a>e. 查看数据</h5><p>查看了当前集合中所有数据</p>
+<blockquote>
+<p>db.students.find()</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20181026195507560.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_27,color_FFFFFF,t_70" alt="查看数据"></p>
+<h5 id="f-查看所有集合"><a href="#f-查看所有集合" class="headerlink" title="f. 查看所有集合"></a>f. 查看所有集合</h5><blockquote>
+<p>show collections</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20181026195823692.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_27,color_FFFFFF,t_70" alt="查看所有集合"></p>
+<h1 id="五、使用-Node操作MySQL"><a href="#五、使用-Node操作MySQL" class="headerlink" title="五、使用 Node操作MySQL"></a>五、使用 Node操作MySQL</h1><p>创建一个文件夹</p>
+<h3 id="1-安装"><a href="#1-安装" class="headerlink" title="1. 安装"></a>1. 安装</h3><blockquote>
+<p>npm install –save mysql</p>
+</blockquote>
+<p>在这里给大家推荐一个网站可以参考教程,我们使用npmjs搜索mysql就可以参考教程了<br><a href="https://www.npmjs.com/package/mysql" target="_blank" rel="noopener">mysql使用教程</a></p>
+<p><img src="https://img-blog.csdnimg.cn/20181025205758338.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_27,color_FFFFFF,t_70" alt="网站推荐"></p>
+<h3 id="2-连接数据库"><a href="#2-连接数据库" class="headerlink" title="2. 连接数据库"></a>2. 连接数据库</h3><p>打开网站之后的第一个代码直接拿过来，进行修改<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">var</span> mysql      = <span class="built_in">require</span>(<span class="string">'mysql'</span>);</span><br><span class="line"><span class="comment">//1.创建连接</span></span><br><span class="line"><span class="keyword">var</span> connection = mysql.createConnection(&#123;</span><br><span class="line">  host     : <span class="string">'localhost'</span>,</span><br><span class="line">  user     : <span class="string">'me'</span>,</span><br><span class="line">  password : <span class="string">'secret'</span>,</span><br><span class="line">  database : <span class="string">'my_db'</span></span><br><span class="line">&#125;);</span><br><span class="line">  <span class="comment">//2.连接数据库</span></span><br><span class="line">connection.connect();</span><br><span class="line"> <span class="comment">// 3. 执行数据库操作</span></span><br><span class="line">connection.query(<span class="string">'SELECT 1 + 1 AS solution'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">error, results, fields</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (error) <span class="keyword">throw</span> error;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'The solution is: '</span>, results[<span class="number">0</span>].solution);</span><br><span class="line">&#125;);</span><br><span class="line">  <span class="comment">// 4. 关闭连接</span></span><br><span class="line">connection.end();</span><br></pre></td></tr></table></figure></p>
+<h4 id="打开navicat将第一步改成自己的数据库"><a href="#打开navicat将第一步改成自己的数据库" class="headerlink" title="打开navicat将第一步改成自己的数据库"></a>打开navicat将第一步改成自己的数据库</h4><p><img src="https://img-blog.csdnimg.cn/20181025211805441.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_27,color_FFFFFF,t_70" alt="navicat"></p>
+<h4 id="修改第一步的代码"><a href="#修改第一步的代码" class="headerlink" title="修改第一步的代码"></a>修改第一步的代码</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">//1.创建连接</span></span><br><span class="line"><span class="keyword">var</span> connection = mysql.createConnection(&#123;</span><br><span class="line">  host     : <span class="string">'localhost'</span>,</span><br><span class="line">  user     : <span class="string">'root'</span>,</span><br><span class="line">  password : <span class="string">'wenqing123'</span>,</span><br><span class="line">  database : <span class="string">'welkin'</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>点击新建数据库，排序规则不需要选择（welkin是我新建的名字）</p>
+<p><img src="https://img-blog.csdnimg.cn/20181025212107565.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_27,color_FFFFFF,t_70" alt="新建数据库"></p>
+<p>然后在这个数据库中新建表</p>
+<p><img src="https://img-blog.csdnimg.cn/20181025212506269.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_27,color_FFFFFF,t_70" alt="表"></p>
+<p>并且把id设为主键，将该表保存名为users，然后添加数据<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">connection.query(<span class="string">'INSERT INTO users VALUES(NULL, "admin", "123456")'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">error, results, fields</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (error) <span class="keyword">throw</span> error;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'The solution is: '</span>, results);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure></p>
+<p>查询数据：（将添加数据的语句注释）<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">connection.query(<span class="string">'SELECT * FROM `users`'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">error, results, fields</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (error) <span class="keyword">throw</span> error;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'The solution is: '</span>, results);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>输出：<br><img src="https://img-blog.csdnimg.cn/20181025214117763.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_27,color_FFFFFF,t_70" alt="输出"></p>
+<p>同样的方法次序可以再添加一条，先添加数据，然后再查询，就可以看到自己添加的数据了，其实mysql操作真的很简单翻来覆去只需用一句话就可以了</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2018/10/26/使用Node操作MongoDB和MySQL.html" data-title="使用Node操作MongoDB和MySQL | Welkin" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2018/10/15/初识Express之express基本操作.html"  title="初识Express之express基本操作">
+ <strong>NEXT:</strong><br/> 
+ <span>初识Express之express基本操作
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、-MongoDB-的介绍"><span class="toc-number">1.</span> <span class="toc-text">一、 MongoDB 的介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-简单介绍一下关系型数据库和非关系型数据库"><span class="toc-number">1.0.1.</span> <span class="toc-text">1.简单介绍一下关系型数据库和非关系型数据库</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#a-关系数据库"><span class="toc-number">1.0.1.1.</span> <span class="toc-text">a. 关系数据库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#b-非关系型数据库"><span class="toc-number">1.0.1.2.</span> <span class="toc-text">b. 非关系型数据库</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、-MongDB-的下载及安装"><span class="toc-number">2.</span> <span class="toc-text">二、 MongDB 的下载及安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-下载地址"><span class="toc-number">2.0.1.</span> <span class="toc-text">1. 下载地址</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-配置环境变量"><span class="toc-number">2.0.2.</span> <span class="toc-text">2. 配置环境变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-检查是否安装了MongoDB"><span class="toc-number">2.0.3.</span> <span class="toc-text">3. 检查是否安装了MongoDB</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#三、启动和关闭MongoDB"><span class="toc-number">3.</span> <span class="toc-text">三、启动和关闭MongoDB</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-创建-data-db"><span class="toc-number">3.0.0.1.</span> <span class="toc-text">1. 创建/data/db</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-启动"><span class="toc-number">3.0.0.2.</span> <span class="toc-text">2. 启动</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-关闭"><span class="toc-number">3.0.0.3.</span> <span class="toc-text">3. 关闭</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#四、-基本感知MongoDB"><span class="toc-number">4.</span> <span class="toc-text">四、 基本感知MongoDB</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-连接"><span class="toc-number">4.0.0.1.</span> <span class="toc-text">1. 连接</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-退出"><span class="toc-number">4.0.0.2.</span> <span class="toc-text">2. 退出</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-基本命令"><span class="toc-number">4.0.0.3.</span> <span class="toc-text">3. 基本命令</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#a-查看数据库列表（查看显示所有的数据库）"><span class="toc-number">4.0.0.3.1.</span> <span class="toc-text">a. 查看数据库列表（查看显示所有的数据库）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#b-切换指定的数据库"><span class="toc-number">4.0.0.3.2.</span> <span class="toc-text">b. 切换指定的数据库</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#c-查看当前数据库"><span class="toc-number">4.0.0.3.3.</span> <span class="toc-text">c. 查看当前数据库</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#d-插入数据"><span class="toc-number">4.0.0.3.4.</span> <span class="toc-text">d. 插入数据</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#e-查看数据"><span class="toc-number">4.0.0.3.5.</span> <span class="toc-text">e. 查看数据</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#f-查看所有集合"><span class="toc-number">4.0.0.3.6.</span> <span class="toc-text">f. 查看所有集合</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#五、使用-Node操作MySQL"><span class="toc-number">5.</span> <span class="toc-text">五、使用 Node操作MySQL</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-安装"><span class="toc-number">5.0.1.</span> <span class="toc-text">1. 安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-连接数据库"><span class="toc-number">5.0.2.</span> <span class="toc-text">2. 连接数据库</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#打开navicat将第一步改成自己的数据库"><span class="toc-number">5.0.2.1.</span> <span class="toc-text">打开navicat将第一步改成自己的数据库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#修改第一步的代码"><span class="toc-number">5.0.2.2.</span> <span class="toc-text">修改第一步的代码</span></a></li></ol></li></ol></li></ol></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2018 
+		
+		<a href="http://yoursite.com" target="_blank" title="welkin">welkin</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>
