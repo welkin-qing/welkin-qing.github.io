@@ -1,0 +1,370 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Node之使用Mongoose操作MongoDB | Welkin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="welkin">
+    
+    <meta name="description" content="在上一篇博客里介绍了MongoDB数据库，也基本上感知了MongoDB的基本用法，这一篇将介绍一下如何在node中使用mongodb
+一、在Node中如何操作MongoDB 数据库使用官方的MongoDB包来操作https://www.npmjs.com/package/mongodb在上边有官方的">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="Welkin" title="Welkin"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Welkin">Welkin</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/10/26/Node之使用Mongoose操作MongoDB.html" title="Node之使用Mongoose操作MongoDB" itemprop="url">Node之使用Mongoose操作MongoDB</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="welkin">welkin</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2018-10-26T13:46:14.000Z" itemprop="datePublished">2018-10-26</time>
+    Updated:<time datetime="2018-10-26T13:47:45.105Z" itemprop="dateModified">2018-10-26</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、在Node中如何操作MongoDB-数据库"><span class="toc-number">1.</span> <span class="toc-text">一、在Node中如何操作MongoDB 数据库</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#使用官方的MongoDB包来操作"><span class="toc-number">1.0.1.</span> <span class="toc-text">使用官方的MongoDB包来操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用第三方mongoose来操作MongoDB数据库"><span class="toc-number">1.0.2.</span> <span class="toc-text">使用第三方mongoose来操作MongoDB数据库</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-装包"><span class="toc-number">1.0.2.0.1.</span> <span class="toc-text">1. 装包</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-基本感知"><span class="toc-number">1.0.2.0.2.</span> <span class="toc-text">2. 基本感知</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、-Mongoose-基本感知"><span class="toc-number">2.</span> <span class="toc-text">二、 Mongoose 基本感知</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-连接数据库"><span class="toc-number">2.0.1.</span> <span class="toc-text">1. 连接数据库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-设计文档结构（表结构）"><span class="toc-number">2.0.2.</span> <span class="toc-text">2. 设计文档结构（表结构）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-将文档结构发布为模型"><span class="toc-number">2.0.3.</span> <span class="toc-text">3. 将文档结构发布为模型</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#三、-基本操作"><span class="toc-number">3.</span> <span class="toc-text">三、 基本操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-新增数据"><span class="toc-number">3.0.1.</span> <span class="toc-text">1. 新增数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-查询数据"><span class="toc-number">3.0.2.</span> <span class="toc-text">2.查询数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-删除数据"><span class="toc-number">3.0.3.</span> <span class="toc-text">3. 删除数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-更新数据"><span class="toc-number">3.0.4.</span> <span class="toc-text">4. 更新数据</span></a></li></ol></li></ol></li></ol>
+		</div>
+		
+		<p>在上一篇博客里介绍了MongoDB数据库，也基本上感知了MongoDB的基本用法，这一篇将介绍一下如何在node中使用mongodb</p>
+<h1 id="一、在Node中如何操作MongoDB-数据库"><a href="#一、在Node中如何操作MongoDB-数据库" class="headerlink" title="一、在Node中如何操作MongoDB 数据库"></a>一、在Node中如何操作MongoDB 数据库</h1><h3 id="使用官方的MongoDB包来操作"><a href="#使用官方的MongoDB包来操作" class="headerlink" title="使用官方的MongoDB包来操作"></a>使用官方的MongoDB包来操作</h3><p><a href="https://www.npmjs.com/package/mongodb" target="_blank" rel="noopener">https://www.npmjs.com/package/mongodb</a><br>在上边有官方的教程和步骤（比较源生）</p>
+<h3 id="使用第三方mongoose来操作MongoDB数据库"><a href="#使用第三方mongoose来操作MongoDB数据库" class="headerlink" title="使用第三方mongoose来操作MongoDB数据库"></a>使用第三方mongoose来操作MongoDB数据库</h3><p>mongoose是一个基于MongoDB官方的做了再一次封装的mongodb包<br><a href="https://mongoosejs.com/" target="_blank" rel="noopener">Mongoose</a></p>
+<h5 id="1-装包"><a href="#1-装包" class="headerlink" title="1. 装包"></a>1. 装包</h5><blockquote>
+<p>npm init -y<br>npm install –save mongoose</p>
+</blockquote>
+<h5 id="2-基本感知"><a href="#2-基本感知" class="headerlink" title="2. 基本感知"></a>2. 基本感知</h5><p>我们创建demo1，然后将官网上的代码直接拿过来，我在下面进行了注释<br>然后打开cmd 输入mongod 连接mongodb，再运行下面代码<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 引包</span></span><br><span class="line"><span class="keyword">var</span> mongoose = <span class="built_in">require</span>(<span class="string">'mongoose'</span>);</span><br><span class="line"><span class="comment">//连接 MongoDB 数据库</span></span><br><span class="line">mongoose.connect(<span class="string">'mongodb://localhost/test'</span>);</span><br><span class="line">mongoose.Promise = global.Promise;</span><br><span class="line"><span class="comment">//创建一个模型（设计数据库）</span></span><br><span class="line"> <span class="keyword">var</span> Cat = mongoose.model(<span class="string">'Cat'</span>, &#123; <span class="attr">name</span>: <span class="built_in">String</span> &#125;);</span><br><span class="line">  <span class="comment">// 实例化一个 Cat</span></span><br><span class="line"> <span class="keyword">var</span> kitty = <span class="keyword">new</span> Cat(&#123; <span class="attr">name</span>: <span class="string">'喵喵'</span>&#125;)</span><br><span class="line">   <span class="comment">// 持久化保存 kitty 实例</span></span><br><span class="line">kitty.save(<span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (err) &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(err);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'meow'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure></p>
+<p>当我们运行该段代码会输出 meow<br><img src="https://img-blog.csdnimg.cn/20181026203318817.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_27,color_FFFFFF,t_70" alt="输出"></p>
+<p>然后我们可以再打开一个cmd 输入mongo 然后输入 show dbs查看当前数据库<br><img src="https://img-blog.csdnimg.cn/20181026203444104.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_27,color_FFFFFF,t_70" alt="查看当前数据库"></p>
+<p>就会出现test，说明mongdb是动态的。<br>我们可以切换到test数据库下查看当前集合和集合中的数据</p>
+<blockquote>
+<p>use test<br>show collections<br>db.cats.find</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20181026203731264.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_27,color_FFFFFF,t_70" alt="查看数据"></p>
+<p>那个students是我之前建立的<br><strong>输出100个meow</strong><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// 引包</span></span><br><span class="line"><span class="keyword">var</span> mongoose = <span class="built_in">require</span>(<span class="string">'mongoose'</span>);</span><br><span class="line"><span class="comment">//连接 MongoDB 数据库</span></span><br><span class="line">mongoose.connect(<span class="string">'mongodb://localhost/test'</span>);</span><br><span class="line">mongoose.Promise = global.Promise;</span><br><span class="line"><span class="comment">//创建一个模型（设计数据库）</span></span><br><span class="line"> <span class="keyword">var</span> Cat = mongoose.model(<span class="string">'Cat'</span>, &#123; <span class="attr">name</span>: <span class="built_in">String</span> &#125;);</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">var</span> = <span class="number">0</span>; i &lt; <span class="number">100</span>; i++) &#123;</span><br><span class="line">    <span class="keyword">var</span> kitty = <span class="keyword">new</span> Cat(&#123; <span class="attr">name</span>: <span class="string">'喵喵'</span> + i&#125;)</span><br><span class="line">    kitty.save(<span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (err) &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(err);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'meow'</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="二、-Mongoose-基本感知"><a href="#二、-Mongoose-基本感知" class="headerlink" title="二、 Mongoose 基本感知"></a>二、 Mongoose 基本感知</h1><h3 id="1-连接数据库"><a href="#1-连接数据库" class="headerlink" title="1. 连接数据库"></a>1. 连接数据库</h3><p>连接的是本机的test数据库，如果想改就可以改<br><strong>注意</strong>：指定连接的数据库不需要存在，当你插入第一条数据之后就会自动被创建出来</p>
+<blockquote>
+<p>mongoose.connect(‘mongodb://localhost/test’)</p>
+</blockquote>
+<h3 id="2-设计文档结构（表结构）"><a href="#2-设计文档结构（表结构）" class="headerlink" title="2. 设计文档结构（表结构）"></a>2. 设计文档结构（表结构）</h3><p>字段名称就是表结构中的属性名称，值可以是其他类型（js数据类型）<br>需要对字段进行约束，约束的目的是为了保证数据的完整性，不要有脏数据<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> userSchema = <span class="keyword">new</span> Schema(&#123;</span><br><span class="line">  username: &#123;</span><br><span class="line">    type: <span class="built_in">String</span>,</span><br><span class="line">    required: <span class="literal">true</span> <span class="comment">// 必须有</span></span><br><span class="line">  &#125;,</span><br><span class="line">  password: &#123;</span><br><span class="line">    type: <span class="built_in">String</span>,</span><br><span class="line">    required: <span class="literal">true</span></span><br><span class="line">  &#125;,</span><br><span class="line">  email: &#123;</span><br><span class="line">    type: <span class="built_in">String</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<h3 id="3-将文档结构发布为模型"><a href="#3-将文档结构发布为模型" class="headerlink" title="3. 将文档结构发布为模型"></a>3. 将文档结构发布为模型</h3><p> mongoose.model 方法就是用来将一个架构发布为 model</p>
+<ul>
+<li><p>第一个参数：传入一个大写名词单数字符串用来表示你的数据库名称，mongoose 会自将大写名词的字符串生成 小写复数 的集合名称，例如这里的 User 最终会变为 users 集合名称</p>
+<ul>
+<li><p>第二个参数：架构 Schema</p>
+</li>
+<li><p>返回值：模型构造函数</p>
+<blockquote>
+<p>var User = mongoose.model(‘User’, userSchema)</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<p>下面附上源码<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">var</span> mongoose = <span class="built_in">require</span>(<span class="string">'mongoose'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> Schema = mongoose.Schema</span><br><span class="line"><span class="comment">//连接数据库</span></span><br><span class="line">mongoose.connect(<span class="string">'mongodb://localhost/test'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> userSchema = <span class="keyword">new</span> Schema(&#123;</span><br><span class="line">  username: &#123;</span><br><span class="line">    type: <span class="built_in">String</span>,</span><br><span class="line">    required: <span class="literal">true</span> <span class="comment">// 必须有</span></span><br><span class="line">  &#125;,</span><br><span class="line">  password: &#123;</span><br><span class="line">    type: <span class="built_in">String</span>,</span><br><span class="line">    required: <span class="literal">true</span></span><br><span class="line">  &#125;,</span><br><span class="line">  email: &#123;</span><br><span class="line">    type: <span class="built_in">String</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> User = mongoose.model(<span class="string">'User'</span>, userSchema)</span><br></pre></td></tr></table></figure></p>
+<h1 id="三、-基本操作"><a href="#三、-基本操作" class="headerlink" title="三、 基本操作"></a>三、 基本操作</h1><h3 id="1-新增数据"><a href="#1-新增数据" class="headerlink" title="1. 新增数据"></a>1. 新增数据</h3><p>我插入了一条name为zs的数据</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">//新增数据</span></span><br><span class="line"><span class="keyword">var</span> admin = <span class="keyword">new</span> User(&#123;</span><br><span class="line">    username: <span class="string">'zs'</span>,</span><br><span class="line">    password: <span class="string">'123456'</span>,</span><br><span class="line">    email: <span class="string">'admin@admin.com'</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">admin.save(<span class="function"><span class="keyword">function</span> (<span class="params">err, ret</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (err) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'保存失败'</span>)</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'保存成功'</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(ret)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>结果：<br><img src="https://img-blog.csdnimg.cn/20181026205852867.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_27,color_FFFFFF,t_70" alt="新增数据"><br>result表示新增的数据</p>
+<h3 id="2-查询数据"><a href="#2-查询数据" class="headerlink" title="2.查询数据"></a>2.查询数据</h3><ul>
+<li>查询所有<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">User.find(<span class="function"><span class="keyword">function</span> (<span class="params">err, ret</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (err) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'查询失败'</span>)</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(ret)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>如下图可以看见查询出来的是一个数组</p>
+<p><img src="https://img-blog.csdnimg.cn/20181026210247859.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_27,color_FFFFFF,t_70" alt="查询所有"></p>
+<ul>
+<li>按条件查询<br>在此之前我又插入一条name为李四的数据，利用上一步方法，可以查询到所有结果<br><img src="https://img-blog.csdnimg.cn/20181026210810403.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_27,color_FFFFFF,t_70" alt="所有查询结果"></li>
+</ul>
+<p>使用以下代码查询名字为zs的数据<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">User.find(&#123;</span><br><span class="line">  username: <span class="string">'zs'</span></span><br><span class="line">&#125;, <span class="function"><span class="keyword">function</span> (<span class="params">err, ret</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (err) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'查询失败'</span>)</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(ret)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>输出为：<br><img src="https://img-blog.csdnimg.cn/20181026210924264.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_27,color_FFFFFF,t_70" alt="按条件查询"></p>
+<ul>
+<li>按条件查询单个</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">User.findOne(&#123;</span><br><span class="line">  username: <span class="string">'zs'</span></span><br><span class="line">  password: <span class="string">'123456'</span></span><br><span class="line">&#125;, <span class="function"><span class="keyword">function</span> (<span class="params">err, ret</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (err) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'查询失败'</span>)</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(ret)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>以下为输出结果，可以看书输出不是数组，而是对象</p>
+<p><img src="https://img-blog.csdnimg.cn/20181026211155243.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_27,color_FFFFFF,t_70" alt="按条件查询单个"></p>
+<p><strong>注意</strong>： 若查询条件为空，默认输出第一条数据</p>
+<h3 id="3-删除数据"><a href="#3-删除数据" class="headerlink" title="3. 删除数据"></a>3. 删除数据</h3><ul>
+<li>根据条件删除所有<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">User.remove(&#123;</span><br><span class="line">  username: <span class="string">'zs'</span></span><br><span class="line">&#125;, <span class="function"><span class="keyword">function</span> (<span class="params">err, ret</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (err) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'删除失败'</span>)</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'删除成功'</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(ret)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>查询所有输出结果为：<br><img src="https://img-blog.csdnimg.cn/20181026212228301.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_27,color_FFFFFF,t_70" alt="根据条件删除所有"></p>
+<ul>
+<li><p>根据条件删除一个</p>
+<blockquote>
+<p>model.findOneAndRemove(conditions, [options], [callback])</p>
+</blockquote>
+</li>
+<li><p>根据id删除一个</p>
+<blockquote>
+<p>model.fingByIdAndRemove(id, [options], [callback])</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="4-更新数据"><a href="#4-更新数据" class="headerlink" title="4. 更新数据"></a>4. 更新数据</h3><ul>
+<li>根据id更新一个</li>
+</ul>
+<p>这里的id是和刚刚查询出来的保持一致<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">User.findByIdAndUpdate(<span class="string">'5bd3117b5db711042015908f'</span>, &#123;</span><br><span class="line">  password: <span class="string">'123'</span></span><br><span class="line">&#125;, <span class="function"><span class="keyword">function</span> (<span class="params">err, ret</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (err) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'更新失败'</span>)</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'更新成功'</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>初始李四密码结果如下：<br><img src="https://img-blog.csdnimg.cn/20181026212615172.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_27,color_FFFFFF,t_70" alt="初始密码"></p>
+<p>得到更新后的李四密码：<br><img src="https://img-blog.csdnimg.cn/20181026212804802.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_27,color_FFFFFF,t_70" alt="更新之后"></p>
+<ul>
+<li><p>根据条件更新所有</p>
+<blockquote>
+<p>model.update(conditions, doc, [options], [callback])</p>
+</blockquote>
+</li>
+<li><p>根据指定条件更新一个</p>
+<blockquote>
+<p>model.findOneAndUpdate(conditions, [update], [options], [callback])</p>
+</blockquote>
+</li>
+</ul>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2018/10/26/Node之使用Mongoose操作MongoDB.html" data-title="Node之使用Mongoose操作MongoDB | Welkin" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2018/10/26/使用Node操作MongoDB和MySQL.html"  title="使用Node操作MongoDB和MySQL">
+ <strong>NEXT:</strong><br/> 
+ <span>使用Node操作MongoDB和MySQL
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、在Node中如何操作MongoDB-数据库"><span class="toc-number">1.</span> <span class="toc-text">一、在Node中如何操作MongoDB 数据库</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#使用官方的MongoDB包来操作"><span class="toc-number">1.0.1.</span> <span class="toc-text">使用官方的MongoDB包来操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用第三方mongoose来操作MongoDB数据库"><span class="toc-number">1.0.2.</span> <span class="toc-text">使用第三方mongoose来操作MongoDB数据库</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-装包"><span class="toc-number">1.0.2.0.1.</span> <span class="toc-text">1. 装包</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-基本感知"><span class="toc-number">1.0.2.0.2.</span> <span class="toc-text">2. 基本感知</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、-Mongoose-基本感知"><span class="toc-number">2.</span> <span class="toc-text">二、 Mongoose 基本感知</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-连接数据库"><span class="toc-number">2.0.1.</span> <span class="toc-text">1. 连接数据库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-设计文档结构（表结构）"><span class="toc-number">2.0.2.</span> <span class="toc-text">2. 设计文档结构（表结构）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-将文档结构发布为模型"><span class="toc-number">2.0.3.</span> <span class="toc-text">3. 将文档结构发布为模型</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#三、-基本操作"><span class="toc-number">3.</span> <span class="toc-text">三、 基本操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-新增数据"><span class="toc-number">3.0.1.</span> <span class="toc-text">1. 新增数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-查询数据"><span class="toc-number">3.0.2.</span> <span class="toc-text">2.查询数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-删除数据"><span class="toc-number">3.0.3.</span> <span class="toc-text">3. 删除数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-更新数据"><span class="toc-number">3.0.4.</span> <span class="toc-text">4. 更新数据</span></a></li></ol></li></ol></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2018 
+		
+		<a href="http://yoursite.com" target="_blank" title="welkin">welkin</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>
