@@ -1,0 +1,282 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>数据结构与算法之复杂度分析 | Welkin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="welkin">
+    
+    <meta name="description" content="最近在看王争的数据结构与算法之美，里面有讲到数据结构中的复杂度分析，于是做个总结。
+一、复杂度是什么？复杂度分为时间、空间复杂度，是考量代码执行效率的一个重要指标
+二、为什么需要复杂度分析？在书中，老师给了两个原因，如下：做分别解释：
+
+测试结果非常依赖测试环境比如同样的代码在不同的处理机上执行的速">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="Welkin" title="Welkin"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Welkin">Welkin</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="w" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/10/26/数据结构与算法之复杂度分析.html" title="数据结构与算法之复杂度分析" itemprop="url">数据结构与算法之复杂度分析</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="welkin">welkin</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2018-10-26T14:56:02.000Z" itemprop="datePublished">2018-10-26</time>
+    Updated:<time datetime="2018-10-26T14:56:51.152Z" itemprop="dateModified">2018-10-26</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、复杂度是什么？"><span class="toc-number">1.</span> <span class="toc-text">一、复杂度是什么？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、为什么需要复杂度分析？"><span class="toc-number">2.</span> <span class="toc-text">二、为什么需要复杂度分析？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#三、如何表示"><span class="toc-number">3.</span> <span class="toc-text">三、如何表示</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#四、时间复杂度分析"><span class="toc-number">4.</span> <span class="toc-text">四、时间复杂度分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#几种常见的时间复杂度实例分析"><span class="toc-number">4.0.1.</span> <span class="toc-text">几种常见的时间复杂度实例分析</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-O-1"><span class="toc-number">4.0.1.1.</span> <span class="toc-text">1. O(1)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-O-logn-、O-nlogn"><span class="toc-number">4.0.1.2.</span> <span class="toc-text">2. O(logn)、O(nlogn)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-O-m-n-、O-m-n"><span class="toc-number">4.0.1.3.</span> <span class="toc-text">3. O(m+n)、O(m*n)</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#五、空间复杂度"><span class="toc-number">5.</span> <span class="toc-text">五、空间复杂度</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#六、浅析最好、最坏、平均、均摊时间复杂度"><span class="toc-number">6.</span> <span class="toc-text">六、浅析最好、最坏、平均、均摊时间复杂度</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-最好、最坏时间复杂度"><span class="toc-number">6.0.1.</span> <span class="toc-text">1. 最好、最坏时间复杂度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-平均时间复杂度"><span class="toc-number">6.0.2.</span> <span class="toc-text">2.平均时间复杂度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-均摊时间复杂度"><span class="toc-number">6.0.3.</span> <span class="toc-text">3. 均摊时间复杂度</span></a></li></ol></li></ol></li></ol>
+		</div>
+		
+		<p>最近在看王争的数据结构与算法之美，里面有讲到数据结构中的复杂度分析，于是做个总结。</p>
+<h1 id="一、复杂度是什么？"><a href="#一、复杂度是什么？" class="headerlink" title="一、复杂度是什么？"></a>一、复杂度是什么？</h1><p>复杂度分为时间、空间复杂度，是考量代码执行效率的一个重要指标</p>
+<h1 id="二、为什么需要复杂度分析？"><a href="#二、为什么需要复杂度分析？" class="headerlink" title="二、为什么需要复杂度分析？"></a>二、为什么需要复杂度分析？</h1><p>在书中，老师给了两个原因，如下：做分别解释：</p>
+<ol>
+<li>测试结果非常依赖测试环境<br>比如同样的代码在不同的处理机上执行的速度不一样</li>
+<li><p>测试结果受数据规模的影响很大<br>对于测试较小的规模，执行时间的差别很大。</p>
+<h1 id="三、如何表示"><a href="#三、如何表示" class="headerlink" title="三、如何表示"></a>三、如何表示</h1><p><strong>大O复杂度表示法</strong><br>所有代码执行时间T(n)与每行代码的执行次数n成正比<br>即：T(n) = O f(n)<br>举例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> <span class="function"><span class="keyword">int</span> <span class="title">cal</span> <span class="params">(<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> i = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(; i&lt;=n; i++)&#123;</span><br><span class="line">		sum = sum + i;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>这个代码第2、3行分别需要1个unit_time的执行时间，4、5行都运行了n遍，所以需要2n*unit_time的执行时间，所以这段代码的执行时间就是(2n+2)unit_time。</p>
+<p>可以看出，所有代码的执行时间T(n)与每行代码的执行次数n成正比<br>T(n) = O( 2n+2 )</p>
+<p>大O复杂度实际上并不具体代表代码真正的执行时间，而是表示代码执行时间随数据规模增长的变化趋势，所以也叫<strong>渐进时间复杂度</strong>，简称<strong>时间复杂度</strong>。</p>
+<p> 当n很大时，公式中的低阶、常量、系数不会左右增长趋势，所以都可以忽略。只需用记录一个最大量级就可以了，所以上段代码就可以表示为 T(n) = O(n)。</p>
+<h1 id="四、时间复杂度分析"><a href="#四、时间复杂度分析" class="headerlink" title="四、时间复杂度分析"></a>四、时间复杂度分析</h1><ol>
+<li>只关注循环执行次数最多的一段代码</li>
+<li>加法法则：总复杂度等于量级最大的那段代码的复杂度</li>
+<li>乘法法则：嵌套代码的复杂度等于嵌套内外代码复杂度的乘积<h3 id="几种常见的时间复杂度实例分析"><a href="#几种常见的时间复杂度实例分析" class="headerlink" title="几种常见的时间复杂度实例分析"></a>几种常见的时间复杂度实例分析</h3><h4 id="1-O-1"><a href="#1-O-1" class="headerlink" title="1. O(1)"></a>1. O(1)</h4>O(1)只是常量级时间复杂度的一种表示方法，并不是指只执行了一行代码。<br>只要代码的执行时间不随n的增大而增大，这样的代码时间复杂的都为O(1)。<br>一般情况下，只要不出现循环、递归，成千上万的代码，其时间复杂度也都是O(1)<h4 id="2-O-logn-、O-nlogn"><a href="#2-O-logn-、O-nlogn" class="headerlink" title="2. O(logn)、O(nlogn)"></a>2. O(logn)、O(nlogn)</h4></li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">i=<span class="number">1</span>;</span><br><span class="line"><span class="keyword">while</span>(i&lt;=n)&#123;</span><br><span class="line">	i=i*<span class="number">2</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>时间复杂度为O(log2n)<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">i=<span class="number">1</span>;</span><br><span class="line"><span class="keyword">while</span>(i&lt;=n)&#123;</span><br><span class="line"> i=i*<span class="number">3</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>同理，时间复杂为O(log3n)<br>实际上不管是以2还是3为底，我们都把对数阶的时间复杂度都记为O(logn)</p>
+<p>同理，对于O(nlogn)，我们循环执行n遍，时间复杂度就是O(nlogn)了</p>
+<h4 id="3-O-m-n-、O-m-n"><a href="#3-O-m-n-、O-m-n" class="headerlink" title="3. O(m+n)、O(m*n)"></a>3. O(m+n)、O(m*n)</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">cal</span><span class="params">(<span class="keyword">int</span> m, intn)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> sum_ <span class="number">1</span> = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> i= <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(;i&lt; m; ++i)&#123;</span><br><span class="line">		sum_ _1=sum_ <span class="number">1</span> + i;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> sum_ <span class="number">2</span>=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> j= <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(;j&lt;n;++j) &#123;</span><br><span class="line">		sum_ <span class="number">2</span>=sum_ <span class="number">2</span> + j;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> sum_ <span class="number">1</span> + sum_ _2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这段代码的时间复杂度就是 O(m+n)<br>换成乘法，时间复杂度就是O(m*n)</p>
+<h1 id="五、空间复杂度"><a href="#五、空间复杂度" class="headerlink" title="五、空间复杂度"></a>五、空间复杂度</h1><p>空间复杂度全称<strong>渐进空间复杂度</strong>，表示算法的存储空间与数据规模之间的增长关系。<br>我们常见的空间复杂度就是0(1)、0(n)、0(n*n)<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i= <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span>[] a = <span class="keyword">new</span> <span class="keyword">int</span>[n];</span><br><span class="line">	<span class="keyword">for</span> (i;i&lt;n; ++i) &#123;</span><br><span class="line">		a[i]=i*i;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(i=n<span class="number">-1</span>;i&gt;=<span class="number">0</span>;--i)&#123;</span><br><span class="line">		print out a[i]</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在这段代码中，第3行申请了一个大小为n的int类型数组，除此之外，剩下的代码没有占用更多的空间，所以整段代码的时间复杂度就是0(n)。</p>
+<h1 id="六、浅析最好、最坏、平均、均摊时间复杂度"><a href="#六、浅析最好、最坏、平均、均摊时间复杂度" class="headerlink" title="六、浅析最好、最坏、平均、均摊时间复杂度"></a>六、浅析最好、最坏、平均、均摊时间复杂度</h1><h3 id="1-最好、最坏时间复杂度"><a href="#1-最好、最坏时间复杂度" class="headerlink" title="1. 最好、最坏时间复杂度"></a>1. 最好、最坏时间复杂度</h3><p>假如在一个无序数组中，需要查找一个数字，如果这个数字在最后面，那么这段代码的时间复杂度就是0(n)，<br>同理，这个数字要是在首位，则就是0(1)<br>因此，最好时间复杂度就是在最理想的情况下，查找的变量x是数组的第一个元素<br>同理，最坏时间复杂度就是在最糟糕的情况下，执行这段代码的时间复杂度</p>
+<hr>
+
+<h3 id="2-平均时间复杂度"><a href="#2-平均时间复杂度" class="headerlink" title="2.平均时间复杂度"></a>2.平均时间复杂度</h3><p>对于平均时间复杂度<br>比如，元素x在数组有n+1种情况，就是把每种情况下需要遍历的元素个数累加起来，然后再除以n+1，就可以得到需要遍历的元素的个数的平均值</p>
+<h3 id="3-均摊时间复杂度"><a href="#3-均摊时间复杂度" class="headerlink" title="3. 均摊时间复杂度"></a>3. 均摊时间复杂度</h3><p>就是将耗时多的操作均摊到耗时少的操作上。<br>比如在数组中插入数据，每一次O(n)的插入操作，都会跟着n-1次0(1)的插入操作，所以把耗时多的那次操作均摊到接下来的n-1次耗时少的操作上，均摊下来，这一组连续的操作的均摊时间复杂度就是0(1)。这就是均摊分析的大致思路。</p>
+<p>这些大致是我的个人总结，如果还是看不太懂，最好是读原著加以理解</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2018/10/26/数据结构与算法之复杂度分析.html" data-title="数据结构与算法之复杂度分析 | Welkin" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2018/10/26/Node之使用Mongoose操作MongoDB.html"  title="Node之使用Mongoose操作MongoDB">
+ <strong>NEXT:</strong><br/> 
+ <span>Node之使用Mongoose操作MongoDB
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2018 
+		
+		<a href="http://yoursite.com" target="_blank" title="welkin">welkin</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+
+
+
+
+
+  </body>
+ </html>
