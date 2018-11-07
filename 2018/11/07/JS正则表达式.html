@@ -1,0 +1,365 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>JS正则表达式 | Welkin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="welkin">
+    
+    <meta name="description" content="一、正则表达式的基础1. 复习字符串操作
+search: 返回要查找的字符串第一次出现的位置，没有返回-1
+Substring：获取子字符串
+charAt：获取某个字符
+split：分割字符串，获得数组
+
+例 1：search12345var str=&#39;abcdef&#39;;alert(str.searc">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="Welkin" title="Welkin"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Welkin">Welkin</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/11/07/JS正则表达式.html" title="JS正则表达式" itemprop="url">JS正则表达式</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="welkin">welkin</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2018-11-07T05:06:14.000Z" itemprop="datePublished">2018-11-07</time>
+    Updated:<time datetime="2018-11-07T05:11:14.135Z" itemprop="dateModified">2018-11-07</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、正则表达式的基础"><span class="toc-number">1.</span> <span class="toc-text">一、正则表达式的基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-复习字符串操作"><span class="toc-number">1.0.1.</span> <span class="toc-text">1. 复习字符串操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-正则表达式的优势"><span class="toc-number">1.0.2.</span> <span class="toc-text">2. 正则表达式的优势</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、正则表达式基本操作"><span class="toc-number">2.</span> <span class="toc-text">二、正则表达式基本操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-什么是正则表达式？"><span class="toc-number">2.0.1.</span> <span class="toc-text">1. 什么是正则表达式？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-RegExp对象"><span class="toc-number">2.0.2.</span> <span class="toc-text">2. RegExp对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-字符串与正则配合"><span class="toc-number">2.0.3.</span> <span class="toc-text">3. 字符串与正则配合</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#a-search"><span class="toc-number">2.0.3.0.1.</span> <span class="toc-text">a. search</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#b-match"><span class="toc-number">2.0.3.0.2.</span> <span class="toc-text">b. match</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#c-replace"><span class="toc-number">2.0.3.0.3.</span> <span class="toc-text">c. replace</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-字符类"><span class="toc-number">2.0.4.</span> <span class="toc-text">4. 字符类</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#S—–-表示非空格"><span class="toc-number">2.1.</span> <span class="toc-text">\S—– 表示非空格[^ ]</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-量词"><span class="toc-number">2.1.1.</span> <span class="toc-text">5. 量词</span></a></li></ol></li></ol></li></ol>
+		</div>
+		
+		<h1 id="一、正则表达式的基础"><a href="#一、正则表达式的基础" class="headerlink" title="一、正则表达式的基础"></a>一、正则表达式的基础</h1><h3 id="1-复习字符串操作"><a href="#1-复习字符串操作" class="headerlink" title="1. 复习字符串操作"></a>1. 复习字符串操作</h3><ul>
+<li>search: 返回要查找的字符串第一次出现的位置，没有返回-1</li>
+<li>Substring：获取子字符串</li>
+<li>charAt：获取某个字符</li>
+<li>split：分割字符串，获得数组</li>
+</ul>
+<p>例 1：search<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str=<span class="string">'abcdef'</span>;</span><br><span class="line">alert(str.search(<span class="string">'b'</span>));  <span class="comment">//1</span></span><br><span class="line">alert(str.search(<span class="string">'a'</span>));  <span class="comment">//0</span></span><br><span class="line">alert(str.search(<span class="string">'de'</span>));  <span class="comment">//3</span></span><br><span class="line">alert(str.search(<span class="string">'g'</span>)); <span class="comment">//-1</span></span><br></pre></td></tr></table></figure></p>
+<p>例 2： Substring：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str=<span class="string">'abcdef'</span>;</span><br><span class="line">alert(str.substring(<span class="number">1</span>, <span class="number">4</span>));  <span class="comment">//bcd</span></span><br><span class="line">alert(str.substring(<span class="number">1</span>));  <span class="comment">//bcdef</span></span><br></pre></td></tr></table></figure></p>
+<p>例 3：charAt：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str=<span class="string">'abcdef'</span>;</span><br><span class="line">alert(str.charAt(<span class="number">2</span>));  <span class="comment">//c</span></span><br></pre></td></tr></table></figure></p>
+<p>例 4 ：split：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str=<span class="string">'abc-12-u-qw'</span>;</span><br><span class="line"><span class="keyword">var</span> arr=str.split(<span class="string">'-'</span>);  </span><br><span class="line">alert(arr[<span class="number">0</span>]);  <span class="comment">//abc</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="2-正则表达式的优势"><a href="#2-正则表达式的优势" class="headerlink" title="2. 正则表达式的优势"></a>2. 正则表达式的优势</h3><p>例如，我们需要将下面这个字符串中的数字找出来</p>
+<blockquote>
+<p>str=’12,87 76 -ddf e dd 89 ff76 9’; </p>
+<p>利用原生js：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str=<span class="string">'12,87 76 -ddf e dd 89 ff76 9'</span>;</span><br><span class="line"><span class="keyword">var</span> arr=[];</span><br><span class="line"><span class="keyword">var</span> tmp=<span class="string">''</span>;</span><br><span class="line"><span class="keyword">var</span> i=<span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;str.length;i++)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span>(str.charAt(i)&gt;=<span class="string">'0'</span> &amp;&amp; str.charAt(i)&lt;=<span class="string">'9'</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		tmp+=str.charAt(i);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(tmp)</span><br><span class="line">		&#123;</span><br><span class="line">			arr.push(tmp);</span><br><span class="line">			tmp=<span class="string">''</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(tmp)</span><br><span class="line">&#123;</span><br><span class="line">	arr.push(tmp);</span><br><span class="line">	tmp=<span class="string">''</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">alert(arr);<span class="comment">//12,87,76,89,76,9</span></span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>利用正则：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str=<span class="string">'12,87 76 -ddf e dd 89 ff76 9'</span>;</span><br><span class="line"><span class="keyword">var</span> re=<span class="regexp">/\d+/g</span>;</span><br><span class="line">alert(str.match(re));<span class="comment">//12,87,76,89,76,9</span></span><br></pre></td></tr></table></figure></p>
+<p>可以看出大大缩短了代码量，而且方式也更加简便</p>
+<h1 id="二、正则表达式基本操作"><a href="#二、正则表达式基本操作" class="headerlink" title="二、正则表达式基本操作"></a>二、正则表达式基本操作</h1><h3 id="1-什么是正则表达式？"><a href="#1-什么是正则表达式？" class="headerlink" title="1. 什么是正则表达式？"></a>1. 什么是正则表达式？</h3><ul>
+<li>用计算机语言来描述规则，是一种规则、模式</li>
+<li>强大的字符串匹配工具<h3 id="2-RegExp对象"><a href="#2-RegExp对象" class="headerlink" title="2. RegExp对象"></a>2. RegExp对象</h3></li>
+<li>js风格  <blockquote>
+<p>new RegExp(“a”, “i”);</p>
+</blockquote>
+</li>
+</ul>
+<p>-perl 风格</p>
+<blockquote>
+<p>/a/i</p>
+</blockquote>
+<p>例：js风格<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str=<span class="string">'abcdef'</span>;</span><br><span class="line"><span class="keyword">var</span> re=<span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">'a'</span>, <span class="string">'i'</span>);</span><br><span class="line">alert(re.test(str));  <span class="comment">//true</span></span><br></pre></td></tr></table></figure></p>
+<p>例：perl风格<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str=<span class="string">'abcdef'</span>;</span><br><span class="line"><span class="keyword">var</span> re=<span class="regexp">/a/i</span>;</span><br><span class="line">alert(re.test(str));<span class="comment">//true</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="3-字符串与正则配合"><a href="#3-字符串与正则配合" class="headerlink" title="3. 字符串与正则配合"></a>3. 字符串与正则配合</h3><h5 id="a-search"><a href="#a-search" class="headerlink" title="a. search"></a>a. search</h5><p><strong>字符串搜索</strong></p>
+<ul>
+<li><p>对于查找字符和上面提到search的操作一致</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str=<span class="string">'abcdef'</span>;</span><br><span class="line">alert(str.search(<span class="regexp">/b/</span>));<span class="comment">//1</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>优势在于可以简便查找数字，有空格也没有关系</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str=<span class="string">'asdf 443 vczxv 55'</span>;</span><br><span class="line"><span class="keyword">var</span> re=<span class="regexp">/\d/</span>;</span><br><span class="line"></span><br><span class="line">alert(str.search(re));<span class="comment">//5</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>还可以忽略大小写进行查找： i——ignore</p>
+</li>
+<li>判断浏览器类型（userAgent 浏览器版本）<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="built_in">window</span>.navigator.userAgent.search(<span class="regexp">/firefox/i</span>)!=<span class="number">-1</span>)</span><br><span class="line">&#123;</span><br><span class="line">	alert(<span class="string">'ff'</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span>(<span class="built_in">window</span>.navigator.userAgent.search(<span class="regexp">/chrome/i</span>)!=<span class="number">-1</span>)</span><br><span class="line">&#123;</span><br><span class="line">	alert(<span class="string">'chrome'</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span>(<span class="built_in">window</span>.navigator.userAgent.search(<span class="regexp">/msie 9/i</span>)!=<span class="number">-1</span>)</span><br><span class="line">&#123;</span><br><span class="line">	alert(<span class="string">'IE9'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h5 id="b-match"><a href="#b-match" class="headerlink" title="b. match"></a>b. match</h5><p><strong>获取匹配的项目</strong><br>例： 找出所有数字<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str=<span class="string">'sdf e443 fedef  55 66gg 333322312 dff 99'</span>;</span><br><span class="line"><span class="keyword">var</span> re=<span class="regexp">/\d/g</span>;</span><br><span class="line"></span><br><span class="line">alert(str.match(re));<span class="comment">//4,4,3,5,5,6,6,3,3,3,3,2,2,3,1,2,9,9</span></span><br></pre></td></tr></table></figure></p>
+<p>当为\d\d时：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> re=<span class="regexp">/\d\d/g</span>;</span><br><span class="line"></span><br><span class="line">alert(str.match(re)); <span class="comment">//44,55,66,33,33,22,31,99</span></span><br></pre></td></tr></table></figure></p>
+<p>若想要按照本来间隔输出，可以使用\d+<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str=<span class="string">'sdf e443 fedef  55 66gg 333322312 dff 99'</span>;</span><br><span class="line"><span class="keyword">var</span> re=<span class="regexp">/\d+/g</span>;</span><br><span class="line"></span><br><span class="line">alert(str.match(re));<span class="comment">//443,55,66,333322312,99</span></span><br></pre></td></tr></table></figure></p>
+<h5 id="c-replace"><a href="#c-replace" class="headerlink" title="c. replace"></a>c. replace</h5><p><strong>替换所有匹配</strong></p>
+<ul>
+<li>返回替换后的字符串<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str=<span class="string">'abacdAef'</span>;</span><br><span class="line">alert(str.replace(<span class="regexp">/a/</span>, <span class="string">'T'</span>));<span class="comment">//TbacdAef</span></span><br><span class="line">alert(str.replace(<span class="regexp">/a/g</span>, <span class="string">'T'</span>));<span class="comment">//TbTcdAef</span></span><br><span class="line">alert(str.replace(<span class="regexp">/a/gi</span>, <span class="string">'T'</span>));<span class="comment">//TbTcdTef</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>下面是一个小例子，将敏感词替换，之前用原生js做过这个，花费了很大精力<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">xmlns</span>=<span class="string">"http://www.w3.org/1999/xhtml"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"Content-Type"</span> <span class="attr">content</span>=<span class="string">"text/html; charset=utf-8"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span>无标题文档<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript"><span class="built_in">window</span>.onload=<span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span></span></span><br><span class="line"><span class="undefined">&#123;</span></span><br><span class="line"><span class="javascript">	<span class="keyword">var</span> oTxt1=<span class="built_in">document</span>.getElementById(<span class="string">'txt1'</span>);</span></span><br><span class="line"><span class="javascript">	<span class="keyword">var</span> oTxt2=<span class="built_in">document</span>.getElementById(<span class="string">'txt2'</span>);</span></span><br><span class="line"><span class="javascript">	<span class="keyword">var</span> oBtn=<span class="built_in">document</span>.getElementById(<span class="string">'btn1'</span>);</span></span><br><span class="line"><span class="undefined">	</span></span><br><span class="line"><span class="javascript">	oBtn.onclick=<span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span></span></span><br><span class="line"><span class="undefined">	&#123;</span></span><br><span class="line"><span class="javascript">		<span class="keyword">var</span> re=<span class="regexp">/我们|你们|他们/g</span>;</span></span><br><span class="line"><span class="undefined">		</span></span><br><span class="line"><span class="javascript">		oTxt2.value=oTxt1.value.replace(re, <span class="string">'***'</span>);</span></span><br><span class="line"><span class="undefined">	&#125;;</span></span><br><span class="line"><span class="undefined">&#125;;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">转换前<span class="tag">&lt;<span class="name">textarea</span> <span class="attr">id</span>=<span class="string">"txt1"</span> <span class="attr">rows</span>=<span class="string">"10"</span> <span class="attr">cols</span>=<span class="string">"40"</span>&gt;</span><span class="tag">&lt;/<span class="name">textarea</span>&gt;</span><span class="tag">&lt;<span class="name">br</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">"btn1"</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">value</span>=<span class="string">"过滤"</span> /&gt;</span><span class="tag">&lt;<span class="name">br</span> /&gt;</span></span><br><span class="line">转换后<span class="tag">&lt;<span class="name">textarea</span> <span class="attr">id</span>=<span class="string">"txt2"</span> <span class="attr">rows</span>=<span class="string">"10"</span> <span class="attr">cols</span>=<span class="string">"40"</span>&gt;</span><span class="tag">&lt;/<span class="name">textarea</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>welkin. 2018/11/7 21:11:02</p>
+<h3 id="4-字符类"><a href="#4-字符类" class="headerlink" title="4. 字符类"></a>4. 字符类</h3><ul>
+<li><p>任意字符<br>例子： 1[abc]2 —- 1a2|1b2|1c2</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str=<span class="string">'1b2 abc 1c2 ee'</span>;</span><br><span class="line"><span class="keyword">var</span> re=<span class="regexp">/1[abc]2/g</span>;</span><br><span class="line">alert(str.match(re));  <span class="comment">//1b2,1c2</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>范围<br>[a-z]、[0-9]</p>
+</li>
+<li>排除 [^a]  ：表示排除a<br>[^0-9] ： 表示 出数字外的字符</li>
+<li><p>组合<br>[a-z0-9A-Z] ：表示字符为数字的英文字符<br>下面是一个扒网站小说的例子：用排除来过滤掉html标签</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onload=<span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">var</span> oTxt1=<span class="built_in">document</span>.getElementById(<span class="string">'txt1'</span>);</span><br><span class="line">	<span class="keyword">var</span> oTxt2=<span class="built_in">document</span>.getElementById(<span class="string">'txt2'</span>);</span><br><span class="line">	<span class="keyword">var</span> oBtn=<span class="built_in">document</span>.getElementById(<span class="string">'btn1'</span>);</span><br><span class="line">	</span><br><span class="line">	oBtn.onclick=<span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">var</span> re=<span class="regexp">/&lt;[^&lt;&gt;]+&gt;/g</span>;</span><br><span class="line">		</span><br><span class="line">		oTxt2.value=oTxt1.value.replace(re, <span class="string">''</span>);</span><br><span class="line">	&#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>转义字符<br>. （点）—-任意字符<br>\d —–digital 表示数字<br>\w —– word 表示单词<br>\s —–space 表示空格<br>\D—– 表示非数字 ==[^0-9]<br>\W—- ==[^a-z0-9_]</p>
+<h2 id="S—–-表示非空格"><a href="#S—–-表示非空格" class="headerlink" title="\S—– 表示非空格[^ ]"></a>\S—– 表示非空格[^ ]</h2><p>例：使用转义字符去掉所有空格</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str=<span class="string">'  fd rr  erre fff  '</span>;</span><br><span class="line"></span><br><span class="line">alert(<span class="string">'('</span>+str.replace(<span class="regexp">/\s+/g</span>, <span class="string">''</span>)+<span class="string">')'</span>);<span class="comment">//(fdrrerrefff)</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>例：去掉首位空格<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str=<span class="string">'  ffe ww ee fewf   '</span>;</span><br><span class="line"><span class="keyword">var</span> re=<span class="regexp">/^\s+|\s+$/g</span>;</span><br><span class="line"></span><br><span class="line">alert(<span class="string">'('</span>+str.replace(re, <span class="string">''</span>)+<span class="string">')'</span>);  <span class="comment">//(ffe ww ee fewf)</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="5-量词"><a href="#5-量词" class="headerlink" title="5. 量词"></a>5. 量词</h3><ul>
+<li>{ n, } ——- 至少n次</li>
+<li>（*）     ——-  （星号） 表示任意次，即{ 0, } 0到任意次，不建议使用</li>
+<li>？ ——- 零次或一次 {0,1}</li>
+<li>{+} —— （加号）表示一次或者任意次{1，}，即最少出现一次</li>
+<li>{n}——- 正好n次</li>
+</ul>
+<hr>
+<p> 例：校验邮箱<br> <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript"><span class="built_in">window</span>.onload=<span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span></span></span><br><span class="line"><span class="undefined">&#123;</span></span><br><span class="line"><span class="javascript">	<span class="keyword">var</span> oTxt=<span class="built_in">document</span>.getElementById(<span class="string">'txt1'</span>);</span></span><br><span class="line"><span class="javascript">	<span class="keyword">var</span> oBtn=<span class="built_in">document</span>.getElementById(<span class="string">'btn1'</span>);</span></span><br><span class="line"><span class="undefined">	</span></span><br><span class="line"><span class="javascript">	oBtn.onclick=<span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span></span></span><br><span class="line"><span class="undefined">	&#123;</span></span><br><span class="line"><span class="javascript">		<span class="keyword">var</span> re=<span class="regexp">/^\w+@[a-z0-9]+\.[a-z]&#123;2,4&#125;$/</span>;</span></span><br><span class="line"><span class="undefined">		</span></span><br><span class="line"><span class="javascript">		<span class="keyword">if</span>(re.test(oTxt.value))</span></span><br><span class="line"><span class="undefined">		&#123;</span></span><br><span class="line"><span class="javascript">			alert(<span class="string">'对了'</span>);</span></span><br><span class="line"><span class="undefined">		&#125;</span></span><br><span class="line"><span class="javascript">		<span class="keyword">else</span></span></span><br><span class="line"><span class="undefined">		&#123;</span></span><br><span class="line"><span class="javascript">			alert(<span class="string">'你写错了'</span>);</span></span><br><span class="line"><span class="undefined">		&#125;</span></span><br><span class="line"><span class="undefined">	&#125;;</span></span><br><span class="line"><span class="undefined">&#125;;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">"txt1"</span> <span class="attr">type</span>=<span class="string">"text"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">"btn1"</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">value</span>=<span class="string">"校验"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>例：检测中文<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str=<span class="string">'asdfb 34 +_=45 '</span>;</span><br><span class="line"><span class="keyword">var</span> re=<span class="regexp">/[\u4e00-\u9fa5]/</span>;</span><br><span class="line"></span><br><span class="line">alert(re.test(str));  <span class="comment">//false</span></span><br></pre></td></tr></table></figure></p>
+<p>例：封装getByClass（利用单词边界转义字符\b）<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getByClass</span>(<span class="params">oParent, sClass</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">var</span> aEle=oParent.getElementsByTagName(<span class="string">'*'</span>);</span><br><span class="line">	<span class="keyword">var</span> aResult=[];</span><br><span class="line">	<span class="keyword">var</span> re=<span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">'\\b'</span>+sClass+<span class="string">'\\b'</span>, <span class="string">'i'</span>);</span><br><span class="line">	<span class="keyword">var</span> i=<span class="number">0</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;aEle.length;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(re.test(aEle[i].className))</span><br><span class="line">		&#123;</span><br><span class="line">			aResult.push(aEle[i]);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> aResult;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2018/11/07/JS正则表达式.html" data-title="JS正则表达式 | Welkin" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2018/10/27/如何在Node中使用Promise.html"  title="如何在Node中使用Promise">
+ <strong>NEXT:</strong><br/> 
+ <span>如何在Node中使用Promise
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、正则表达式的基础"><span class="toc-number">1.</span> <span class="toc-text">一、正则表达式的基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-复习字符串操作"><span class="toc-number">1.0.1.</span> <span class="toc-text">1. 复习字符串操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-正则表达式的优势"><span class="toc-number">1.0.2.</span> <span class="toc-text">2. 正则表达式的优势</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、正则表达式基本操作"><span class="toc-number">2.</span> <span class="toc-text">二、正则表达式基本操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-什么是正则表达式？"><span class="toc-number">2.0.1.</span> <span class="toc-text">1. 什么是正则表达式？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-RegExp对象"><span class="toc-number">2.0.2.</span> <span class="toc-text">2. RegExp对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-字符串与正则配合"><span class="toc-number">2.0.3.</span> <span class="toc-text">3. 字符串与正则配合</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#a-search"><span class="toc-number">2.0.3.0.1.</span> <span class="toc-text">a. search</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#b-match"><span class="toc-number">2.0.3.0.2.</span> <span class="toc-text">b. match</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#c-replace"><span class="toc-number">2.0.3.0.3.</span> <span class="toc-text">c. replace</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-字符类"><span class="toc-number">2.0.4.</span> <span class="toc-text">4. 字符类</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#S—–-表示非空格"><span class="toc-number">2.1.</span> <span class="toc-text">\S—– 表示非空格[^ ]</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-量词"><span class="toc-number">2.1.1.</span> <span class="toc-text">5. 量词</span></a></li></ol></li></ol></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2018 
+		
+		<a href="http://yoursite.com" target="_blank" title="welkin">welkin</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>
