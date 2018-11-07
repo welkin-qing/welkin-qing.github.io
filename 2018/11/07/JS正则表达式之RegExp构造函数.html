@@ -1,0 +1,417 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>JS正则表达式之RegExp构造函数 | Welkin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="welkin">
+    
+    <meta name="description" content="一、 RegExp 类型ECMAScript通过RegExp类型来支持正则表达式Perl 语法：var expression = / pattern / flags;
+
+pattern（模式） 部分可以是任何简单或复杂的正则表达式，可以包含字符类，限定符，分组，向前查找以及反向引用。
+flags（标">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="Welkin" title="Welkin"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Welkin">Welkin</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/11/07/JS正则表达式之RegExp构造函数.html" title="JS正则表达式之RegExp构造函数" itemprop="url">JS正则表达式之RegExp构造函数</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="welkin">welkin</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2018-11-07T05:12:32.000Z" itemprop="datePublished">2018-11-07</time>
+    Updated:<time datetime="2018-11-07T05:13:28.212Z" itemprop="dateModified">2018-11-07</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、-RegExp-类型"><span class="toc-number">1.</span> <span class="toc-text">一、 RegExp 类型</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#正则表达式的匹配模式支持下列三个标志"><span class="toc-number">1.0.0.0.1.</span> <span class="toc-text">正则表达式的匹配模式支持下列三个标志</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#正则表达式中的元字符包括："><span class="toc-number">1.0.0.0.2.</span> <span class="toc-text">正则表达式中的元字符包括：</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、-使用RegExp构造函数创建正则表达式"><span class="toc-number">2.</span> <span class="toc-text">二、 使用RegExp构造函数创建正则表达式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#三、-RegExp实例属性"><span class="toc-number">3.</span> <span class="toc-text">三、 RegExp实例属性</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#四、-RegExp实例方法"><span class="toc-number">4.</span> <span class="toc-text">四、 RegExp实例方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-exec-与捕获组"><span class="toc-number">4.0.1.</span> <span class="toc-text">1. exec( )与捕获组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-exec-与全局标志"><span class="toc-number">4.0.2.</span> <span class="toc-text">2. exec( )与全局标志</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#五、-RegExp构造函数属性"><span class="toc-number">5.</span> <span class="toc-text">五、 RegExp构造函数属性</span></a></li></ol>
+		</div>
+		
+		<h1 id="一、-RegExp-类型"><a href="#一、-RegExp-类型" class="headerlink" title="一、 RegExp 类型"></a>一、 RegExp 类型</h1><p><strong>ECMAScript通过RegExp类型来支持正则表达式</strong><br>Perl 语法：<br>var expression = / pattern / flags;</p>
+<ul>
+<li>pattern（模式） 部分可以是任何简单或复杂的正则表达式，可以包含字符类，限定符，分组，向前查找以及反向引用。</li>
+<li>flags（标志）部分用以标明正则表达式的行为。<h5 id="正则表达式的匹配模式支持下列三个标志"><a href="#正则表达式的匹配模式支持下列三个标志" class="headerlink" title="正则表达式的匹配模式支持下列三个标志"></a>正则表达式的匹配模式支持下列三个标志</h5></li>
+</ul>
+<ol>
+<li>g： 表示全局模式（global），即模式将被应用所哟字符串，而非在发现第一个匹配项时立即停止；</li>
+<li>i：表示不区分大小写，即在确定匹配项时忽略模式与字符串的大小写</li>
+<li>m: 表示多行模式，即在到达一行文本末尾时还会继续查找下一行中是否存在与模式匹配的项。</li>
+</ol>
+<hr>
+<p>例：匹配所有以 .at 结尾的3个字符的组合，不区分大小写</p>
+<blockquote>
+<p>var pattern = /.at/gi;</p>
+</blockquote>
+<p><strong>注意</strong>：模式中使用的所有的元字符都必须转义</p>
+<h5 id="正则表达式中的元字符包括："><a href="#正则表达式中的元字符包括：" class="headerlink" title="正则表达式中的元字符包括："></a>正则表达式中的元字符包括：</h5><blockquote>
+<p>( [ { \ ^ $ | ) ? * + . ] }</p>
+</blockquote>
+<p>例：匹配第一个“bat” 或 “cat” ，不区分大小写<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> pattern = <span class="regexp">/[bc]at/i</span>;</span><br></pre></td></tr></table></figure></p>
+<p>例： 匹配第一个“[bc]at”， 不区分大小写<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> pattern = <span class="regexp">/\[bc\]at/i</span></span><br></pre></td></tr></table></figure></p>
+<p>可以看出，对[]进行转义。<br>例：匹配所有已“at”结尾的3个字符的组合，不区分大小写<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> pattern = <span class="regexp">/.at/gi</span>;</span><br></pre></td></tr></table></figure></p>
+<p>例：匹配所有“.at”，不区分大小写<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> pattren = <span class="regexp">/\.at/gi</span>;</span><br></pre></td></tr></table></figure></p>
+<p>可以看出，对.进行了转义</p>
+<h1 id="二、-使用RegExp构造函数创建正则表达式"><a href="#二、-使用RegExp构造函数创建正则表达式" class="headerlink" title="二、 使用RegExp构造函数创建正则表达式"></a>二、 使用RegExp构造函数创建正则表达式</h1><p>RegExp构造函数接收两个参数</p>
+<ul>
+<li>参一：要匹配的字符串模式</li>
+<li>参二：可选的标志字符串<br>例：匹配第一个“bat” 或 “cat” ，不区分大小写<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> pattern1 = <span class="regexp">/[bc]at/i</span></span><br><span class="line"><span class="keyword">var</span> pattren2  = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">"[bc]at"</span>, <span class="string">"i"</span>);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>两个相同，只不过是使用构造函数创建的。</p>
+<hr>
+<p><strong>注意</strong>： </p>
+<ul>
+<li>传递给RegExp构造函数的两个参数都是字符串</li>
+<li>不能把正则表达式字面量传递给RegExp构造函数</li>
+<li>由于RegExp构造函数的模式参数是字符串，所以要对字符进行双重转义，所有元字符都必须进行双重转义，那些经过转义的字符也是如此。（例如：<code>\n</code>，字符<code>\</code>在字符串中被转义为<code>\\</code>，而在正则表达式字符串中就会变成 <code>\\\\</code>）</li>
+</ul>
+<hr>
+<table>
+<thead>
+<tr>
+<th>字面量模式</th>
+<th>等价的字符串</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/\\bc\]at/</code></td>
+<td><code>&quot;\\[bc\\]at&quot;</code></td>
+</tr>
+<tr>
+<td><code>/\.at/</code></td>
+<td><code>&quot;\\.at&quot;</code></td>
+</tr>
+<tr>
+<td><code>/name\age/</code></td>
+<td><code>&quot;name\\age&quot;</code></td>
+</tr>
+<tr>
+<td><code>/\d.\d{1,2}/</code></td>
+<td><code>&quot;\\d.\\d{1,2}&quot;</code></td>
+</tr>
+<tr>
+<td><code>/\w\\hello\\123/</code></td>
+<td><code>&quot;\\w\\\\hello\\\\123&quot;</code></td>
+</tr>
+</tbody>
+</table>
+<p>注意：ES5中明确规定，使用正则表达式字面量必须像直接调用RegExp构造函数一样，每次地创建新的RegExp实例。</p>
+<h1 id="三、-RegExp实例属性"><a href="#三、-RegExp实例属性" class="headerlink" title="三、 RegExp实例属性"></a>三、 RegExp实例属性</h1><ul>
+<li>global：布尔值，表示是否设置了g标志</li>
+<li>ignoreCase： 布尔值，表示是否设置了g标志</li>
+<li>lastIndex：整数，表示开始搜索下一个匹配项的字符位置，从0算起</li>
+<li>multiline：布尔值，表示是否设置了m标志</li>
+<li>soure：正则表达式的字符串表示，按照字面量形式而非传入构造函数中的字符串模式返回<br>例：可以获知一个正则表达式的各方面信息<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> pattern  = <span class="regexp">/\[bc\]at/i</span><span class="regexp">/;</span></span><br><span class="line"><span class="regexp">alert(pattern.global); /</span><span class="regexp">/false;</span></span><br><span class="line"><span class="regexp">alert(pattern. ignoreCase); /</span><span class="regexp">/true;</span></span><br><span class="line"><span class="regexp">alert(pattern. multiline); /</span><span class="regexp">/false;</span></span><br><span class="line"><span class="regexp">alert(pattern. lastIndex); /</span><span class="regexp">/0;</span></span><br><span class="line"><span class="regexp">alert(pattern. soure); /</span><span class="regexp">/"\[bc\]at";</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="四、-RegExp实例方法"><a href="#四、-RegExp实例方法" class="headerlink" title="四、 RegExp实例方法"></a>四、 RegExp实例方法</h1><h3 id="1-exec-与捕获组"><a href="#1-exec-与捕获组" class="headerlink" title="1. exec( )与捕获组"></a>1. exec( )与捕获组</h3><p>这里我们主要介绍 RegExp对象的主要方法exec( )，需要了解的是这个方法是专门为捕获组设计的。</p>
+<ul>
+<li>exec( )接受一个参数时（即要应用模式的字符串），返回包含第一个匹配项信息的数组</li>
+<li>包含两个额外的属性<ul>
+<li>index：表示匹配文本的第一个字符的位置</li>
+<li>input：表示存放的为被检索 的字符串string、</li>
+</ul>
+</li>
+</ul>
+<p>例：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> text  = <span class="string">"mom and dad and baby"</span>;</span><br><span class="line"><span class="keyword">var</span> pattern = <span class="regexp">/mom( and dad (and baby)?)?/gi</span>;</span><br><span class="line"><span class="keyword">var</span> matches  = pattern.exec(text);</span><br><span class="line">alert(matches.index);  <span class="comment">//0</span></span><br><span class="line">alert(matches.input); <span class="comment">//mom and dad and baby</span></span><br><span class="line">alert(matches[<span class="number">0</span>]);    <span class="comment">//mom and dad and baby</span></span><br><span class="line">alert(matches[<span class="number">1</span>]);    <span class="comment">//and dad and baby</span></span><br><span class="line">alert(matches[<span class="number">2</span>]);    <span class="comment">//and baby</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>分析</strong>：</p>
+<ul>
+<li><p>可以看到正则表达式有用到括号，这里的括号分割了三个捕获组，从外到内（外面表示有一个无形的括号）分别是：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mom and dad and baby</span><br><span class="line">and dad and baby</span><br><span class="line">and baby</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>?</code>表示{0,1}次（这个在上一篇博客里有说到）</p>
+</li>
+<li><p>matches.index 表示要匹配文本的第一个字符的位置，所以返回0</p>
+</li>
+<li>matches.input 输出被检索的字符串</li>
+<li>matches[0] 表示输出和第一个捕获组相匹配的字符串 ，即 mom and dad and baby</li>
+<li>matches[1] 表示输出和第二个捕获组相匹配的字符串，即 and dad and baby</li>
+<li>matches[2] 表示输出和第三个捕获组相匹配的字符串，即 and baby<h3 id="2-exec-与全局标志"><a href="#2-exec-与全局标志" class="headerlink" title="2. exec( )与全局标志"></a>2. exec( )与全局标志</h3></li>
+<li>在模式中设置全局标志 g，每次只会返回一个匹配项</li>
+<li>不设置全局标志的情况下，多次调用exec( )始终返回第一个匹配项的信息</li>
+<li>设置全局标志，每次调用exec( )则会在字符串中继续查找新匹配项</li>
+</ul>
+<p>看一个小例子：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span>  text = <span class="string">'cat, bat, sat, fat'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> pattern = <span class="regexp">/.at/</span>;</span><br><span class="line"><span class="keyword">var</span> matches = pattern.exec(text);</span><br><span class="line">alert(matches.index);  <span class="comment">//0</span></span><br><span class="line">alert(matches[<span class="number">0</span>]);  <span class="comment">//cat</span></span><br><span class="line">alert(pattern.lastIndex);  <span class="comment">//0</span></span><br><span class="line"></span><br><span class="line">matches = pattern.exec(text);</span><br><span class="line">alert(matches.index);  <span class="comment">//0</span></span><br><span class="line">alert(matches[<span class="number">0</span>]);  <span class="comment">//cat</span></span><br><span class="line">alert(pattern.lastIndex);  <span class="comment">//0</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>分析</strong>：<br>在模式中没有设置全局标志，所以matches是否为全局，都只会返回一个匹配项<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span>  text = <span class="string">'cat, bat, sat, fat'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> pattern = <span class="regexp">/.at/g</span>;</span><br><span class="line"><span class="keyword">var</span> matches = pattern.exec(text);</span><br><span class="line">alert(matches.index);  <span class="comment">//0</span></span><br><span class="line">alert(matches[<span class="number">0</span>]);  <span class="comment">//cat</span></span><br><span class="line">alert(pattern.lastIndex);  <span class="comment">//3</span></span><br><span class="line"></span><br><span class="line">matches = pattern.exec(text);</span><br><span class="line">alert(matches.index);  <span class="comment">//5 bat中at所出现的位置+1 （从前往后）</span></span><br><span class="line">alert(matches[<span class="number">0</span>]);  <span class="comment">//bat</span></span><br><span class="line">alert(pattern.lastIndex);  <span class="comment">//8 bat中at所出现的位置+1（从后往前）</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>分析</strong>：</p>
+<ul>
+<li>在模式中设置了全局标志，当matches不是全局时，多次调用exec( )始终返回第一个匹配项的信息</li>
+<li>当matches是全局时，每次调用exec( )则会在字符串中继续查找新匹配项</li>
+</ul>
+<h1 id="五、-RegExp构造函数属性"><a href="#五、-RegExp构造函数属性" class="headerlink" title="五、 RegExp构造函数属性"></a>五、 RegExp构造函数属性</h1><p>RegExp构造函数包含一些属性，这些属性在其他语言中被看成是静态属性，这些属性适应于作用域中的所有正则表达式，并且基于所执行的最近一次正则表达式操作而变化。<br>可以通过两种方式来进行访问<br><strong>RegExp构造函数属性列表</strong><br>| 长属性名 | 段属性名  | 说明 |<br>|–|–|–|<br>| input | $_ | 最近一次要匹配的字符串，Opera未实现此属性|<br>| lastMatch | $&amp; | 最近一次的匹配项，Opera未实现此属性|<br>| lastParen | $+ | 最近一次匹配的捕获组，Opera未实现此属性|<br>| leftContext| $` | input字符串中lastMatch之前的文本，Opera未实现此属性|<br>| rightContext | $’ | input字符串中lastMatch之后的文本，Opera未实现此属性|<br>| multiline | $* | 布尔值，表示是否所有表达式都使用多行模式，Opera未实现此属性|</p>
+<p>例：匹配任何一个字符后边跟hort<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> text = <span class="string">'this has bean a short summer'</span>;</span><br><span class="line"><span class="keyword">var</span> regx = <span class="regexp">/(.)hort/g</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(regx.test(text))&#123;</span><br><span class="line">	alert(<span class="built_in">RegExp</span>.input);<span class="comment">//this has bean a short summer</span></span><br><span class="line">	alert(<span class="built_in">RegExp</span>.lastMatch);<span class="regexp">/ort</span></span><br><span class="line"><span class="regexp">	alert(RegExp.lastParen);/</span><span class="regexp">/s</span></span><br><span class="line"><span class="regexp">	alert(RegExp.leftContext);/</span><span class="regexp">/this has bean a </span></span><br><span class="line"><span class="regexp">	alert(RegExp.rightContext);/</span><span class="regexp">/ summer</span></span><br><span class="line"><span class="regexp">	alert(RegExp.multiline);/</span><span class="regexp">/undefined</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>分析</strong>：</p>
+<ul>
+<li>()代表一个捕获组，.表示任意一个字符，即将第一个字符放在了一个捕获组中</li>
+<li>input 返回了原始字符串</li>
+<li>leftContext 返回summer之前的字符串</li>
+<li>rightContext 返回summer之后的字符串</li>
+<li>lastMatch 返回最近一次与整个正则表达式匹配的字符串，即summer</li>
+<li>lastParen 返回最近一次的捕获组，即s</li>
+<li>multiline 是RegExp对象的实例所有的属性，并不是RegExp对象所有的，RegExp上没有multiline这个属性，所以返回undefined</li>
+</ul>
+<p>当然上面的例子也可以使用短属性名来表示</p>
+<hr>
+<p>除了上面介绍的属性，还有多达9个用于存储捕获组的构造函数属性，访问这些属性的语法是：<br>（RegExp.$1,RegExp.$2,RegExp.$3,RegExp.$4,RegExp.$5,RegExp.$6,RegExp.$7,RegExp.$8,RegExp.$9）,一共有9个。官方的解释是，这些可以捕获组的字符串的自动填充。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> text =<span class="string">"this has bean a short summer"</span>;</span><br><span class="line"><span class="keyword">var</span> pattern =<span class="regexp">/(..)or(.)/g</span>;</span><br><span class="line"><span class="keyword">if</span>(pattern.test(text))&#123;</span><br><span class="line">   <span class="built_in">console</span>.log(<span class="built_in">RegExp</span>.$<span class="number">1</span>);<span class="regexp">/</span></span><br><span class="line"><span class="regexp">  console.log(RegExp.$2);/</span><span class="regexp">/t</span></span><br><span class="line"><span class="regexp"> &#125;</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>分析</strong>：</p>
+<ul>
+<li>. 表示任意一个字符</li>
+<li>（）括号表示捕获组</li>
+<li>第一个括号表示第一个捕获组，即or前面的两个字符</li>
+<li>第二个括号表示第二个捕获组，即or后面的一个字符</li>
+</ul>
+<hr>
+<p>如果还是不明白，可以试着分析下面一个例子：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> text =<span class="string">"you are in haorooms"</span>;</span><br><span class="line"><span class="keyword">var</span> pattern =<span class="regexp">/(.)ao(..)om(.)/g</span>;</span><br><span class="line"><span class="keyword">if</span>(pattern.test(text))&#123;</span><br><span class="line">   <span class="built_in">console</span>.log(<span class="built_in">RegExp</span>.$<span class="number">1</span>);<span class="comment">//h</span></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="built_in">RegExp</span>.$<span class="number">2</span>);<span class="comment">//ro</span></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="built_in">RegExp</span>.$<span class="number">3</span>);<span class="comment">//s</span></span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2018/11/07/JS正则表达式之RegExp构造函数.html" data-title="JS正则表达式之RegExp构造函数 | Welkin" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2018/11/07/JS正则表达式.html"  title="JS正则表达式">
+ <strong>NEXT:</strong><br/> 
+ <span>JS正则表达式
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、-RegExp-类型"><span class="toc-number">1.</span> <span class="toc-text">一、 RegExp 类型</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#正则表达式的匹配模式支持下列三个标志"><span class="toc-number">1.0.0.0.1.</span> <span class="toc-text">正则表达式的匹配模式支持下列三个标志</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#正则表达式中的元字符包括："><span class="toc-number">1.0.0.0.2.</span> <span class="toc-text">正则表达式中的元字符包括：</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、-使用RegExp构造函数创建正则表达式"><span class="toc-number">2.</span> <span class="toc-text">二、 使用RegExp构造函数创建正则表达式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#三、-RegExp实例属性"><span class="toc-number">3.</span> <span class="toc-text">三、 RegExp实例属性</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#四、-RegExp实例方法"><span class="toc-number">4.</span> <span class="toc-text">四、 RegExp实例方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-exec-与捕获组"><span class="toc-number">4.0.1.</span> <span class="toc-text">1. exec( )与捕获组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-exec-与全局标志"><span class="toc-number">4.0.2.</span> <span class="toc-text">2. exec( )与全局标志</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#五、-RegExp构造函数属性"><span class="toc-number">5.</span> <span class="toc-text">五、 RegExp构造函数属性</span></a></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2018 
+		
+		<a href="http://yoursite.com" target="_blank" title="welkin">welkin</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>
