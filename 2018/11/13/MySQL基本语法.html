@@ -1,0 +1,417 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>MySQL基本语法 | Welkin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="welkin">
+    
+    <meta name="description" content="一、连接我用的可视化软件是navicat，打开navicat双击自己的local-mysql就连接上了本地的数据库了或者利用语句，如下所示：
+1. 启动mysql服务器
+net start mysql
+
+2. 关闭
+net stop mysql
+
+3. 进入
+mysql -h 主机地址 -u 用户名">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="Welkin" title="Welkin"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Welkin">Welkin</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/11/13/MySQL基本语法.html" title="MySQL基本语法" itemprop="url">MySQL基本语法</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="welkin">welkin</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2018-11-13T14:31:29.000Z" itemprop="datePublished">2018-11-13</time>
+    Updated:<time datetime="2018-11-13T14:32:32.700Z" itemprop="dateModified">2018-11-13</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、连接"><span class="toc-number">1.</span> <span class="toc-text">一、连接</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-启动mysql服务器"><span class="toc-number">1.0.1.</span> <span class="toc-text">1. 启动mysql服务器</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-关闭"><span class="toc-number">1.0.2.</span> <span class="toc-text">2. 关闭</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-进入"><span class="toc-number">1.0.3.</span> <span class="toc-text">3. 进入</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-退出"><span class="toc-number">1.0.4.</span> <span class="toc-text">4. 退出</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-显示当前mysql的version的各种信息"><span class="toc-number">1.0.5.</span> <span class="toc-text">5. 显示当前mysql的version的各种信息</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、-基本操作"><span class="toc-number">2.</span> <span class="toc-text">二、 基本操作</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-显示上数据库"><span class="toc-number">2.0.1.</span> <span class="toc-text">1.显示上数据库</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-删除数据库"><span class="toc-number">2.0.2.</span> <span class="toc-text">2.删除数据库</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-创建数据库"><span class="toc-number">2.0.3.</span> <span class="toc-text">3. 创建数据库</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-使用数据库"><span class="toc-number">2.0.4.</span> <span class="toc-text">4. 使用数据库</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-显示数据库中的表"><span class="toc-number">2.0.5.</span> <span class="toc-text">5. 显示数据库中的表</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#6-删除表"><span class="toc-number">2.0.6.</span> <span class="toc-text">6. 删除表</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#7-创建表"><span class="toc-number">2.0.7.</span> <span class="toc-text">7.  创建表</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#8-查看表结构"><span class="toc-number">2.0.8.</span> <span class="toc-text">8. 查看表结构</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#9-插入数据"><span class="toc-number">2.0.9.</span> <span class="toc-text">9. 插入数据</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#10-修改某一条数据"><span class="toc-number">2.0.10.</span> <span class="toc-text">10.  修改某一条数据</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#11-in-查询制定集合内的数据"><span class="toc-number">2.0.11.</span> <span class="toc-text">11.  in 查询制定集合内的数据</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#12-排序-asc-升序-desc-降序"><span class="toc-number">2.0.12.</span> <span class="toc-text">12. 排序 asc 升序  desc 降序</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#13-and-or-between"><span class="toc-number">2.0.12.1.</span> <span class="toc-text">13.  and  or  between</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#14-聚集函数"><span class="toc-number">2.0.13.</span> <span class="toc-text">14. 聚集函数</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#15-统计"><span class="toc-number">2.0.14.</span> <span class="toc-text">15.  统计</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、巩固操作"><span class="toc-number">3.</span> <span class="toc-text">三、巩固操作</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#修改表的名字"><span class="toc-number">3.0.1.</span> <span class="toc-text">修改表的名字</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#表position-增加列test"><span class="toc-number">3.0.2.</span> <span class="toc-text">表position 增加列test</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#表position-修改列test"><span class="toc-number">3.0.3.</span> <span class="toc-text">表position 修改列test</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#表position-修改列test-默认值"><span class="toc-number">3.0.4.</span> <span class="toc-text">表position 修改列test 默认值</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#表position-去掉test-默认值"><span class="toc-number">3.0.5.</span> <span class="toc-text">表position 去掉test 默认值</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#表position-去掉列test"><span class="toc-number">3.0.6.</span> <span class="toc-text">表position 去掉列test</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#表depart-pos-删除主键"><span class="toc-number">3.0.7.</span> <span class="toc-text">表depart_pos 删除主键</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#表depart-pos-增加主键"><span class="toc-number">3.0.8.</span> <span class="toc-text">表depart_pos 增加主键</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#查询常用语句"><span class="toc-number">3.0.9.</span> <span class="toc-text">查询常用语句</span></a></li></ol></li></ol></li></ol>
+		</div>
+		
+		<h3 id="一、连接"><a href="#一、连接" class="headerlink" title="一、连接"></a>一、连接</h3><p>我用的可视化软件是navicat，打开navicat双击自己的local-mysql就连接上了本地的数据库了<br>或者利用语句，如下所示：</p>
+<h5 id="1-启动mysql服务器"><a href="#1-启动mysql服务器" class="headerlink" title="1. 启动mysql服务器"></a>1. 启动mysql服务器</h5><blockquote>
+<p>net start mysql</p>
+</blockquote>
+<h5 id="2-关闭"><a href="#2-关闭" class="headerlink" title="2. 关闭"></a>2. 关闭</h5><blockquote>
+<p>net stop mysql</p>
+</blockquote>
+<h5 id="3-进入"><a href="#3-进入" class="headerlink" title="3. 进入"></a>3. 进入</h5><blockquote>
+<p>mysql -h 主机地址 -u 用户名 －p 用户密码</p>
+</blockquote>
+<h5 id="4-退出"><a href="#4-退出" class="headerlink" title="4. 退出"></a>4. 退出</h5><blockquote>
+<p>exit</p>
+</blockquote>
+<h5 id="5-显示当前mysql的version的各种信息"><a href="#5-显示当前mysql的version的各种信息" class="headerlink" title="5. 显示当前mysql的version的各种信息"></a>5. 显示当前mysql的version的各种信息</h5><blockquote>
+<p>status</p>
+</blockquote>
+<h3 id="二、-基本操作"><a href="#二、-基本操作" class="headerlink" title="二、 基本操作"></a>二、 基本操作</h3><h5 id="1-显示上数据库"><a href="#1-显示上数据库" class="headerlink" title="1.显示上数据库"></a>1.显示上数据库</h5><p>我在mysql-localhost的基础上显示我本机的数据库</p>
+<blockquote>
+<p>show databases;</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/2018111314083436.png" alt="显示数据库"></p>
+<h5 id="2-删除数据库"><a href="#2-删除数据库" class="headerlink" title="2.删除数据库"></a>2.删除数据库</h5><ul>
+<li><p>直接删除</p>
+<blockquote>
+<p>drop database 数据库名字;</p>
+</blockquote>
+</li>
+<li><p>首先会进行判断，有的话删除</p>
+<blockquote>
+<p>drop database if exists 数据库名字;</p>
+</blockquote>
+</li>
+</ul>
+<h5 id="3-创建数据库"><a href="#3-创建数据库" class="headerlink" title="3. 创建数据库"></a>3. 创建数据库</h5><blockquote>
+<p>create database 数据库名字;</p>
+</blockquote>
+<h5 id="4-使用数据库"><a href="#4-使用数据库" class="headerlink" title="4. 使用数据库"></a>4. 使用数据库</h5><p>如果是navicat，可以直接点击要进入的数据库，右键运行命令行界面就可以直接使用，而不需要语句；</p>
+<blockquote>
+<p>use 数据库名字;</p>
+</blockquote>
+<h5 id="5-显示数据库中的表"><a href="#5-显示数据库中的表" class="headerlink" title="5. 显示数据库中的表"></a>5. 显示数据库中的表</h5><blockquote>
+<p>show tables;</p>
+</blockquote>
+<p>下图是我做实验时自己建立的表：<br><img src="https://img-blog.csdnimg.cn/20181113141510927.png" alt="建立的表"></p>
+<h5 id="6-删除表"><a href="#6-删除表" class="headerlink" title="6. 删除表"></a>6. 删除表</h5><ul>
+<li>直接删除<br>例如我这里删除student表</li>
+</ul>
+<blockquote>
+<p>drop student;</p>
+</blockquote>
+<ul>
+<li>先判断表是否存在,存在先删除<blockquote>
+<p>drop table if exists student;</p>
+</blockquote>
+</li>
+</ul>
+<h5 id="7-创建表"><a href="#7-创建表" class="headerlink" title="7.  创建表"></a>7.  创建表</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> student(</span><br><span class="line"><span class="keyword">id</span> <span class="built_in">int</span> auto_increment primary <span class="keyword">key</span>,  //设为主键</span><br><span class="line"><span class="keyword">name</span> <span class="built_in">varchar</span>(<span class="number">50</span>),</span><br><span class="line">sex <span class="built_in">varchar</span>(<span class="number">20</span>),</span><br><span class="line"><span class="built_in">date</span> <span class="built_in">varchar</span>(<span class="number">50</span>),</span><br><span class="line"><span class="keyword">content</span> <span class="built_in">varchar</span>(<span class="number">100</span>)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>如下图所示，是我创建的表：<br>是在语句后边定义的CustomerID为主键<br>并且对CName设置的是否为NULL，<br>对Tel 设置为特殊值<br><img src="https://img-blog.csdnimg.cn/20181113141915103.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="创建表"></p>
+<h5 id="8-查看表结构"><a href="#8-查看表结构" class="headerlink" title="8. 查看表结构"></a>8. 查看表结构</h5><blockquote>
+<p>desc student;</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20181113150316722.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="表结构"></p>
+<h5 id="9-插入数据"><a href="#9-插入数据" class="headerlink" title="9. 插入数据"></a>9. 插入数据</h5><p>只需用将数据按照顺序输入就是，字符串用单引号括起来即可；</p>
+<blockquote>
+<p> insert into student values(02151043, ‘刘备’, ‘男’, 20, ‘15963789546’, ‘软件工程’);</p>
+</blockquote>
+<h5 id="10-修改某一条数据"><a href="#10-修改某一条数据" class="headerlink" title="10.  修改某一条数据"></a>10.  修改某一条数据</h5><p>例如，我要把小乔的city改为浙江<br><img src="https://img-blog.csdnimg.cn/20181113143240192.png" alt="修改1"></p>
+<blockquote>
+<p>update customers set City=’浙江’ where CustomerD=123;</p>
+</blockquote>
+<p>修改结果如下图所示<br><img src="https://img-blog.csdnimg.cn/20181113143508458.png" alt="修改结果"></p>
+<h5 id="11-in-查询制定集合内的数据"><a href="#11-in-查询制定集合内的数据" class="headerlink" title="11.  in 查询制定集合内的数据"></a>11.  in 查询制定集合内的数据</h5><blockquote>
+<p>select * from student where id in (1,3,5);</p>
+</blockquote>
+<h5 id="12-排序-asc-升序-desc-降序"><a href="#12-排序-asc-升序-desc-降序" class="headerlink" title="12. 排序 asc 升序  desc 降序"></a>12. 排序 asc 升序  desc 降序</h5><blockquote>
+<p>select * from student order by id asc;</p>
+</blockquote>
+<h6 id="13-and-or-between"><a href="#13-and-or-between" class="headerlink" title="13.  and  or  between"></a>13.  and  or  between</h6><p><strong>and</strong></p>
+<blockquote>
+<p>select * from student where date&gt;’1988-1-2’ and date&lt;’1988-12-1’;</p>
+</blockquote>
+<p><strong>or 或</strong></p>
+<blockquote>
+<p>select * from student where date&lt;’1988-11-2’ or date&gt;’1988-12-1’;</p>
+</blockquote>
+<p><strong>between</strong></p>
+<blockquote>
+<p>select * from student where date between ‘1988-1-2’ and ‘1988-12-1’;</p>
+</blockquote>
+<h5 id="14-聚集函数"><a href="#14-聚集函数" class="headerlink" title="14. 聚集函数"></a>14. 聚集函数</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">max</span>(<span class="keyword">id</span>),<span class="keyword">name</span>,sex <span class="keyword">from</span> student <span class="keyword">group</span> <span class="keyword">by</span> sex;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">select</span> <span class="keyword">min</span>(<span class="built_in">date</span>) <span class="keyword">from</span> student;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">select</span> <span class="keyword">avg</span>(<span class="keyword">id</span>) <span class="keyword">as</span> <span class="string">'求平均'</span> <span class="keyword">from</span> student;</span><br></pre></td></tr></table></figure>
+<h5 id="15-统计"><a href="#15-统计" class="headerlink" title="15.  统计"></a>15.  统计</h5><p><strong>统计表中总数</strong></p>
+<blockquote>
+<p>select count(*) from student;  </p>
+</blockquote>
+<p><strong>统计表中性别总数  若有一条数据中sex为空的话,就不予以统计~</strong></p>
+<blockquote>
+<p>select count(sex) from student;  </p>
+</blockquote>
+<p><strong>查询第i条以后到第j条的数据(不包括第i条)</strong></p>
+<blockquote>
+<p>select sum(id) from student;</p>
+</blockquote>
+<p><strong>显示3-5条数据</strong></p>
+<blockquote>
+<p>select * from student limit 2,5; </p>
+</blockquote>
+<h3 id="三、巩固操作"><a href="#三、巩固操作" class="headerlink" title="三、巩固操作"></a>三、巩固操作</h3><h5 id="修改表的名字"><a href="#修改表的名字" class="headerlink" title="修改表的名字"></a>修改表的名字</h5><p><strong>格式:</strong></p>
+<blockquote>
+<p>alter table tbl_name rename to new_name<br>alter table c rename to a;</p>
+</blockquote>
+<h5 id="表position-增加列test"><a href="#表position-增加列test" class="headerlink" title="表position 增加列test"></a>表position 增加列test</h5><blockquote>
+<p>alter table position add(test char(10));</p>
+</blockquote>
+<h5 id="表position-修改列test"><a href="#表position-修改列test" class="headerlink" title="表position 修改列test"></a>表position 修改列test</h5><blockquote>
+<p>alter table position modify test char(20) not null;</p>
+</blockquote>
+<h5 id="表position-修改列test-默认值"><a href="#表position-修改列test-默认值" class="headerlink" title="表position 修改列test 默认值"></a>表position 修改列test 默认值</h5><blockquote>
+<p>alter table position alter test set default ‘system’;</p>
+</blockquote>
+<h5 id="表position-去掉test-默认值"><a href="#表position-去掉test-默认值" class="headerlink" title="表position 去掉test 默认值"></a>表position 去掉test 默认值</h5><blockquote>
+<p>alter table position alter test drop default;</p>
+</blockquote>
+<h5 id="表position-去掉列test"><a href="#表position-去掉列test" class="headerlink" title="表position 去掉列test"></a>表position 去掉列test</h5><blockquote>
+<p>alter table position drop column test;</p>
+</blockquote>
+<h5 id="表depart-pos-删除主键"><a href="#表depart-pos-删除主键" class="headerlink" title="表depart_pos 删除主键"></a>表depart_pos 删除主键</h5><blockquote>
+<p>alter table depart_pos drop primary key;</p>
+</blockquote>
+<h5 id="表depart-pos-增加主键"><a href="#表depart-pos-增加主键" class="headerlink" title="表depart_pos 增加主键"></a>表depart_pos 增加主键</h5><blockquote>
+<p>alter table depart_pos add primary key PK_depart_pos<br>(department_id,position_id);</p>
+</blockquote>
+<h5 id="查询常用语句"><a href="#查询常用语句" class="headerlink" title="查询常用语句"></a>查询常用语句</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">name</span>,age ,<span class="keyword">id</span> <span class="keyword">from</span> c</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> c <span class="keyword">where</span> age&gt;<span class="number">40</span> <span class="keyword">and</span> age&lt;<span class="number">60</span>;  //and</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> c <span class="keyword">where</span> age&lt;<span class="number">40</span> <span class="keyword">or</span> age&lt;<span class="number">60</span>;  //or</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> c <span class="keyword">where</span> age <span class="keyword">between</span> <span class="number">40</span> <span class="keyword">and</span> <span class="number">60</span> //<span class="keyword">between</span></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> c <span class="keyword">where</span> age <span class="keyword">in</span> (<span class="number">30</span>,<span class="number">48</span>,<span class="number">68</span>,<span class="number">99</span>);     //in 查询指定集合内的数据</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> c <span class="keyword">order</span> <span class="keyword">by</span> age <span class="keyword">desc</span>;      //order by （asc升序 des降序）</span><br></pre></td></tr></table></figure>  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2018/11/13/MySQL基本语法.html" data-title="MySQL基本语法 | Welkin" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2018/11/11/在Express中配置使用express-session插件.html"  title="在Express中配置使用express-session插件">
+ <strong>NEXT:</strong><br/> 
+ <span>在Express中配置使用express-session插件
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、连接"><span class="toc-number">1.</span> <span class="toc-text">一、连接</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-启动mysql服务器"><span class="toc-number">1.0.1.</span> <span class="toc-text">1. 启动mysql服务器</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-关闭"><span class="toc-number">1.0.2.</span> <span class="toc-text">2. 关闭</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-进入"><span class="toc-number">1.0.3.</span> <span class="toc-text">3. 进入</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-退出"><span class="toc-number">1.0.4.</span> <span class="toc-text">4. 退出</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-显示当前mysql的version的各种信息"><span class="toc-number">1.0.5.</span> <span class="toc-text">5. 显示当前mysql的version的各种信息</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、-基本操作"><span class="toc-number">2.</span> <span class="toc-text">二、 基本操作</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-显示上数据库"><span class="toc-number">2.0.1.</span> <span class="toc-text">1.显示上数据库</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-删除数据库"><span class="toc-number">2.0.2.</span> <span class="toc-text">2.删除数据库</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-创建数据库"><span class="toc-number">2.0.3.</span> <span class="toc-text">3. 创建数据库</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-使用数据库"><span class="toc-number">2.0.4.</span> <span class="toc-text">4. 使用数据库</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-显示数据库中的表"><span class="toc-number">2.0.5.</span> <span class="toc-text">5. 显示数据库中的表</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#6-删除表"><span class="toc-number">2.0.6.</span> <span class="toc-text">6. 删除表</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#7-创建表"><span class="toc-number">2.0.7.</span> <span class="toc-text">7.  创建表</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#8-查看表结构"><span class="toc-number">2.0.8.</span> <span class="toc-text">8. 查看表结构</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#9-插入数据"><span class="toc-number">2.0.9.</span> <span class="toc-text">9. 插入数据</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#10-修改某一条数据"><span class="toc-number">2.0.10.</span> <span class="toc-text">10.  修改某一条数据</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#11-in-查询制定集合内的数据"><span class="toc-number">2.0.11.</span> <span class="toc-text">11.  in 查询制定集合内的数据</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#12-排序-asc-升序-desc-降序"><span class="toc-number">2.0.12.</span> <span class="toc-text">12. 排序 asc 升序  desc 降序</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#13-and-or-between"><span class="toc-number">2.0.12.1.</span> <span class="toc-text">13.  and  or  between</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#14-聚集函数"><span class="toc-number">2.0.13.</span> <span class="toc-text">14. 聚集函数</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#15-统计"><span class="toc-number">2.0.14.</span> <span class="toc-text">15.  统计</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、巩固操作"><span class="toc-number">3.</span> <span class="toc-text">三、巩固操作</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#修改表的名字"><span class="toc-number">3.0.1.</span> <span class="toc-text">修改表的名字</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#表position-增加列test"><span class="toc-number">3.0.2.</span> <span class="toc-text">表position 增加列test</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#表position-修改列test"><span class="toc-number">3.0.3.</span> <span class="toc-text">表position 修改列test</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#表position-修改列test-默认值"><span class="toc-number">3.0.4.</span> <span class="toc-text">表position 修改列test 默认值</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#表position-去掉test-默认值"><span class="toc-number">3.0.5.</span> <span class="toc-text">表position 去掉test 默认值</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#表position-去掉列test"><span class="toc-number">3.0.6.</span> <span class="toc-text">表position 去掉列test</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#表depart-pos-删除主键"><span class="toc-number">3.0.7.</span> <span class="toc-text">表depart_pos 删除主键</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#表depart-pos-增加主键"><span class="toc-number">3.0.8.</span> <span class="toc-text">表depart_pos 增加主键</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#查询常用语句"><span class="toc-number">3.0.9.</span> <span class="toc-text">查询常用语句</span></a></li></ol></li></ol></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2018 
+		
+		<a href="http://yoursite.com" target="_blank" title="welkin">welkin</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>
