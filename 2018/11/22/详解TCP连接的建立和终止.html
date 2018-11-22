@@ -1,0 +1,346 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>详解TCP连接的建立和终止 | Welkin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="welkin">
+    
+    <meta name="description" content="一、 网络基础TCP/IP通常使用的网络（包括互联网）是在TCP/IP协议族的基础上运作的。（HTTP协议也属于它内部的一个子集）
+1. TCP/IP协议族计算机网络设备需要相互通信，双方就必须基于相同的方法。比如，如何探测到通信目标，由哪一边先发起通信、使用哪种语言进行通信，怎样结束通信等规则都需">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="Welkin" title="Welkin"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Welkin">Welkin</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/11/22/详解TCP连接的建立和终止.html" title="详解TCP连接的建立和终止" itemprop="url">详解TCP连接的建立和终止</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="welkin">welkin</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2018-11-22T09:39:45.000Z" itemprop="datePublished">2018-11-22</time>
+    Updated:<time datetime="2018-11-22T09:41:18.026Z" itemprop="dateModified">2018-11-22</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、-网络基础TCP-IP"><span class="toc-number">1.</span> <span class="toc-text">一、 网络基础TCP/IP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-TCP-IP协议族"><span class="toc-number">1.0.1.</span> <span class="toc-text">1. TCP/IP协议族</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-TCP-IP的分层管理"><span class="toc-number">1.0.2.</span> <span class="toc-text">2. TCP/IP的分层管理</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#分层的优点："><span class="toc-number">1.0.2.0.1.</span> <span class="toc-text">分层的优点：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-TCP-IP传输流"><span class="toc-number">1.0.3.</span> <span class="toc-text">3. TCP/IP传输流</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、TCP-IP连接的建立与终止"><span class="toc-number">2.</span> <span class="toc-text">二、TCP/IP连接的建立与终止</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#详解："><span class="toc-number">2.0.0.0.1.</span> <span class="toc-text">详解：</span></a></li></ol></li></ol></li></ol></li></ol></li></ol>
+		</div>
+		
+		<h1 id="一、-网络基础TCP-IP"><a href="#一、-网络基础TCP-IP" class="headerlink" title="一、 网络基础TCP/IP"></a>一、 网络基础TCP/IP</h1><p>通常使用的网络（包括互联网）是在TCP/IP协议族的基础上运作的。（HTTP协议也属于它内部的一个子集）</p>
+<h3 id="1-TCP-IP协议族"><a href="#1-TCP-IP协议族" class="headerlink" title="1. TCP/IP协议族"></a>1. TCP/IP协议族</h3><p>计算机网络设备需要相互通信，双方就必须基于相同的方法。比如，如何探测到通信目标，由哪一边先发起通信、使用哪种语言进行通信，怎样结束通信等规则都需要事先确定。不同的硬件、操作系统之间的通信，所有的这一切都需要一种规则。而我们把这种规则称为<strong>协议</strong>。</p>
+<p><strong>TCP/IP 是互联网相关的各类协议族的总称</strong></p>
+<h3 id="2-TCP-IP的分层管理"><a href="#2-TCP-IP的分层管理" class="headerlink" title="2. TCP/IP的分层管理"></a>2. TCP/IP的分层管理</h3><p>TCP/IP 协议族层次分别分为以下4层：应用层、传输层、网络层和数据链路层</p>
+<h5 id="分层的优点："><a href="#分层的优点：" class="headerlink" title="分层的优点："></a>分层的优点：</h5><ul>
+<li>如果互联网值由一个协议统筹，某个地方需要改变设计时，就必须把所有部分整体替换掉。而分层之后只需用把变动的层替换掉即可。</li>
+<li><p>层次化之后，设计也变得相对简单了，处于应用层上的应用可以只考虑分配给自己的任务，而不需要弄清对方在地球上哪个地方，对方的传输线路是怎样的、能否确保传输送达等其他问题。</p>
+<h3 id="3-TCP-IP传输流"><a href="#3-TCP-IP传输流" class="headerlink" title="3. TCP/IP传输流"></a>3. TCP/IP传输流</h3><p>利用TCP/IP协议族进行网络通信时，会通过分层顺序与对方进行通信，发送端从应用层往下走，接收端则从应用层往上走。<br><img src="https://img-blog.csdnimg.cn/20181121181628549.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="TCP/IP传输流"></p>
+</li>
+<li><p>首先作为发送端的客户端在应用层（HTPP协议）发出一个想看某个Web页面的HTTP请求</p>
+</li>
+<li>为了传输方便，在传输层（TCP协议）把应用层处收到的数据（HTTP请求报文）进行分割，并在各个报文上打上标记序号及端口号转发给网络层。</li>
+<li>在网络层（IP协议），增加作为通信目的的MAC地址后转发给链路层。这样一来，发往网络的通信请求就准备齐全了。</li>
+<li>接收端的服务器在链路层接收到数据，按序往上层发送，一直到应用层，才能算真正接收到客户端发送来的HTTP请求。</li>
+<li>发送端在层与层之间传输数据时，每经过一层必定会被打上一个该层所属的首部信息，反之，接收端在层与层传输数据时，每经过一层时会把对应的首部消去。</li>
+</ul>
+<p><strong>这种把数据信息包装起来的做法称为封装</strong><br>以下是封装的流程图：<br><img src="https://img-blog.csdnimg.cn/20181121204132185.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h1 id="二、TCP-IP连接的建立与终止"><a href="#二、TCP-IP连接的建立与终止" class="headerlink" title="二、TCP/IP连接的建立与终止"></a>二、TCP/IP连接的建立与终止</h1><p>下面这张图详细的介绍了TCP/IP的建立与终止</p>
+<p><img src="https://img-blog.csdnimg.cn/20181121211203858.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h5 id="详解："><a href="#详解：" class="headerlink" title="详解："></a>详解：</h5><p><strong>初始化状态</strong>：</p>
+<ul>
+<li>服务器端和客户端初始的状态都是closed，服务器端经过socket、bind、listen进入LISTEN监听状态</li>
+<li>同理，客户端经过socket进入connect连接状态</li>
+</ul>
+<hr>
+
+<p><strong>三次握手</strong>：</p>
+<p>为了将数据准确无误的送达目标，TCP采用三次握手。</p>
+<ol>
+<li>客户端首先发送一个SYN（synchronize）给服务器端，表明发送一个标有SYN的数据包</li>
+<li>服务器端接收到SYN 并进入到 SYN_RCVD状态，同时向客户端发送标有SYN/ACK 的数据包</li>
+<li>客户端接收到SYN/ACK 后进入ESTABLISHED状态，并向服务器端发送标有ACK 的数据包</li>
+</ol>
+<p><strong>注意</strong>：</p>
+<ul>
+<li>为什么需要三次握手？<br>  因为第一次只表示客户端到服务器端建立了连接，第二次表示服务器端到客户端建立了连接，每次的连接是独立的；当确认双方连接都建立成功了之后才进行数据的传输。</li>
+</ul>
+<hr>
+
+<p><strong>数据的传输</strong>:</p>
+<ul>
+<li>read</li>
+<li>send</li>
+<li>write</li>
+<li>recv</li>
+</ul>
+<hr>
+
+
+<p><strong>四次挥手</strong>:</p>
+<ol>
+<li>客户端向服务器端发送一个 FIN 请求关闭的请求，并进入FIN_WAIT1</li>
+<li>服务器端接收到之后，进入CLOSE_WAIT，并同时向客户端发送ACK</li>
+<li>客户端接收到ACK 后进入FIN_WAIT2， 服务器再向客户端发送FIN 请求关闭，同时服务器进入CLOSE状态</li>
+<li>客户端接收到FIN 后 进入TIME_WAIT， 并向服务器端发送ACK，服务器接收ACK后进行关闭</li>
+</ol>
+<p><strong>注意</strong>:</p>
+<ul>
+<li><p>在第二步和第三步时，为什么ACK和FIN不同时发送，而是分步？<br>当客户端向服务器端发送FIN时，如果服务器端不作出回应，客户端会一直向服务器端发送FIN，所以一定要先做出ACK回应，再做响应的处理<br>然后再向服务器端再向客户端发送请求关闭的FIN，同理，客户端结接收到之后再向服务器端做出ACK响应，服务器端收到ACK响应后就进行关闭。</p>
+</li>
+<li><p>在服务器端关闭后，为什么客户端要等待2MSL后再关闭？</p>
+<ol>
+<li>服务器端向客户端发送FIN这步需要1MSL</li>
+<li>客户端向服务器端发送ACK需要1MSL</li>
+</ol>
+</li>
+</ul>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2018/11/22/详解TCP连接的建立和终止.html" data-title="详解TCP连接的建立和终止 | Welkin" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2018/11/18/中间件.html"  title="中间件">
+ <strong>NEXT:</strong><br/> 
+ <span>中间件
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、-网络基础TCP-IP"><span class="toc-number">1.</span> <span class="toc-text">一、 网络基础TCP/IP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-TCP-IP协议族"><span class="toc-number">1.0.1.</span> <span class="toc-text">1. TCP/IP协议族</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-TCP-IP的分层管理"><span class="toc-number">1.0.2.</span> <span class="toc-text">2. TCP/IP的分层管理</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#分层的优点："><span class="toc-number">1.0.2.0.1.</span> <span class="toc-text">分层的优点：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-TCP-IP传输流"><span class="toc-number">1.0.3.</span> <span class="toc-text">3. TCP/IP传输流</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、TCP-IP连接的建立与终止"><span class="toc-number">2.</span> <span class="toc-text">二、TCP/IP连接的建立与终止</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#详解："><span class="toc-number">2.0.0.0.1.</span> <span class="toc-text">详解：</span></a></li></ol></li></ol></li></ol></li></ol></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2018 
+		
+		<a href="http://yoursite.com" target="_blank" title="welkin">welkin</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>
