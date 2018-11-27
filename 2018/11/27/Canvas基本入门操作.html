@@ -1,0 +1,419 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Canvas基本入门操作 | Welkin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="welkin">
+    
+    <meta name="description" content="一、基本体验Canvas绘图1. 基本操作a. 准备画布使用canvas标签注意：
+
+画布是白色的 而且默认300*150，所以我们可以在style样式里给canvas加上边框
+设置画布的大小，需要使用内敛式设置，不建议在style样式进行设置123456789&amp;lt;style&amp;gt;      ">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="Welkin" title="Welkin"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Welkin">Welkin</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/11/27/Canvas基本入门操作.html" title="Canvas基本入门操作" itemprop="url">Canvas基本入门操作</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="welkin">welkin</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2018-11-27T08:36:08.000Z" itemprop="datePublished">2018-11-27</time>
+    Updated:<time datetime="2018-11-27T08:36:57.032Z" itemprop="dateModified">2018-11-27</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、基本体验Canvas绘图"><span class="toc-number">1.</span> <span class="toc-text">一、基本体验Canvas绘图</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-基本操作"><span class="toc-number">1.0.1.</span> <span class="toc-text">1. 基本操作</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#a-准备画布"><span class="toc-number">1.0.1.0.1.</span> <span class="toc-text">a. 准备画布</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#b-准备工具"><span class="toc-number">1.0.1.0.2.</span> <span class="toc-text">b . 准备工具</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#c-利用工具绘画"><span class="toc-number">1.0.1.0.3.</span> <span class="toc-text">c.  利用工具绘画</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-绘制三条颜色和宽度不同的平行线"><span class="toc-number">1.0.2.</span> <span class="toc-text">2.  绘制三条颜色和宽度不同的平行线</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-绘制填充的三角形"><span class="toc-number">1.0.3.</span> <span class="toc-text">3. 绘制填充的三角形</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#a-第一种方法"><span class="toc-number">1.0.3.0.1.</span> <span class="toc-text">a. 第一种方法</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#b-使用ctx-closePath"><span class="toc-number">1.0.3.0.2.</span> <span class="toc-text">b. 使用ctx.closePath()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#c-填充"><span class="toc-number">1.0.3.0.3.</span> <span class="toc-text">c. 填充</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-非零形环绕填充规则"><span class="toc-number">1.0.4.</span> <span class="toc-text">4. 非零形环绕填充规则</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、线和虚线"><span class="toc-number">2.</span> <span class="toc-text">二、线和虚线</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-线的样式"><span class="toc-number">2.0.1.</span> <span class="toc-text">1. 线的样式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-虚线"><span class="toc-number">2.0.2.</span> <span class="toc-text">2. 虚线</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#a-设置虚线"><span class="toc-number">2.0.2.1.</span> <span class="toc-text">a. 设置虚线</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#当传入一个值时"><span class="toc-number">2.0.2.1.1.</span> <span class="toc-text">当传入一个值时</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#当传入一个数组时："><span class="toc-number">2.0.2.1.2.</span> <span class="toc-text">当传入一个数组时：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#当传入的数组为三位数时："><span class="toc-number">2.0.2.1.3.</span> <span class="toc-text">当传入的数组为三位数时：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#b-获取虚线的宽度集合"><span class="toc-number">2.0.2.2.</span> <span class="toc-text">b . 获取虚线的宽度集合</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#c-设置虚线偏移量"><span class="toc-number">2.0.2.3.</span> <span class="toc-text">c . 设置虚线偏移量</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#三、渐变矩形绘制"><span class="toc-number">3.</span> <span class="toc-text">三、渐变矩形绘制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-绘制矩形"><span class="toc-number">3.0.1.</span> <span class="toc-text">1. 绘制矩形</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#strokeRect和rect的区别"><span class="toc-number">3.0.1.0.1.</span> <span class="toc-text">strokeRect和rect的区别</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-对线进行填充"><span class="toc-number">3.0.2.</span> <span class="toc-text">2.  对线进行填充</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-通过方案设置渐变"><span class="toc-number">3.0.3.</span> <span class="toc-text">2. 通过方案设置渐变</span></a></li></ol></li></ol></li></ol>
+		</div>
+		
+		<h1 id="一、基本体验Canvas绘图"><a href="#一、基本体验Canvas绘图" class="headerlink" title="一、基本体验Canvas绘图"></a>一、基本体验Canvas绘图</h1><h3 id="1-基本操作"><a href="#1-基本操作" class="headerlink" title="1. 基本操作"></a>1. 基本操作</h3><h5 id="a-准备画布"><a href="#a-准备画布" class="headerlink" title="a. 准备画布"></a>a. 准备画布</h5><p>使用canvas标签<br><img src="https://img-blog.csdnimg.cn/20181126221841792.png" alt="canvas标签"><br><strong>注意</strong>：</p>
+<ul>
+<li>画布是白色的 而且默认300*150，所以我们可以在style样式里给canvas加上边框</li>
+<li>设置画布的大小，需要使用内敛式设置，不建议在style样式进行设置<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">        canvas&#123;</span></span><br><span class="line"><span class="undefined">            border: 1px solid #ccc;</span></span><br><span class="line"><span class="undefined">            /*不建议在 样式设置尺寸*/</span></span><br><span class="line"><span class="undefined">            /*width: 600px;</span></span><br><span class="line"><span class="undefined">            height: 400px;*/</span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">canvas</span> <span class="attr">width</span>=<span class="string">"600"</span> <span class="attr">height</span>=<span class="string">"400"</span> &gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>解释</strong>：</p>
+<ul>
+<li>如果在style里设置样式会导致画布变大，是百分比的放大，包括画布上的任何操作也会随之变大，所以需要在标签内注明画布的大小。</li>
+</ul>
+<h5 id="b-准备工具"><a href="#b-准备工具" class="headerlink" title="b . 准备工具"></a>b . 准备工具</h5><p>这里的ctx就是指的工具箱<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*1.获取元素*/</span></span><br><span class="line"><span class="keyword">var</span> myCanvas = <span class="built_in">document</span>.querySelector(<span class="string">'canvas'</span>);</span><br><span class="line"><span class="comment">/*2.获取上下文 绘制工具箱 */</span></span><br><span class="line"><span class="keyword">var</span> ctx = myCanvas.getContext(<span class="string">'2d'</span>);</span><br></pre></td></tr></table></figure></p>
+<h5 id="c-利用工具绘画"><a href="#c-利用工具绘画" class="headerlink" title="c.  利用工具绘画"></a>c.  利用工具绘画</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*3.移动画笔*/</span></span><br><span class="line">    ctx.moveTo(<span class="number">100</span>,<span class="number">100</span>);</span><br><span class="line">    <span class="comment">/*4.绘制直线 (轨迹，绘制路径)*/</span></span><br><span class="line">    ctx.lineTo(<span class="number">200</span>,<span class="number">100</span>);</span><br><span class="line">    <span class="comment">/*5.描边*/</span></span><br><span class="line">    ctx.stroke();</span><br></pre></td></tr></table></figure>
+<p>如下图所示，可以看出在画布上出现了一条直线<br><img src="https://img-blog.csdnimg.cn/2018112622272485.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="直线"></p>
+<p><strong>关于线条的一些小问题</strong>：</p>
+<ul>
+<li>线条的默认宽度为 1px 颜色为黑色</li>
+<li>我们默认将画布边框的宽度设为1px，但是从上图可以看出，线条的宽度为2px，且颜色不是黑色<ul>
+<li>原因是线条的出现在刻度的中间，就是在1px的中间，上下各占0.5px，但是当屏幕显示的时候会增加宽度，使其变模糊，所以直线就变得不饱和，</li>
+<li>解决方案：可以将直线的高度移动0.5px</li>
+</ul>
+</li>
+</ul>
+<p>如下所示：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ctx.moveTo(<span class="number">100</span>,<span class="number">100.5</span>);</span><br><span class="line">ctx.lineTo(<span class="number">200</span>,<span class="number">100.5</span>);</span><br></pre></td></tr></table></figure></p>
+<p>可以明显的看到直线变细了，而且黑色也更加明显了<br><img src="https://img-blog.csdnimg.cn/20181126223426912.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="线条2"></p>
+<h3 id="2-绘制三条颜色和宽度不同的平行线"><a href="#2-绘制三条颜色和宽度不同的平行线" class="headerlink" title="2.  绘制三条颜色和宽度不同的平行线"></a>2.  绘制三条颜色和宽度不同的平行线</h3><p>在进行绘制的时候，我们会发现，我们使用描边函数时，会将前面对平行线设置的颜色进行覆盖，所以，这时需要用到beginPath() 这个函数，用来开启新路径，解决样式覆盖问题。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myCanvas = <span class="built_in">document</span>.querySelector(<span class="string">'canvas'</span>);</span><br><span class="line">  <span class="keyword">var</span> ctx = myCanvas.getContext(<span class="string">'2d'</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">/*画平行线*/</span></span><br><span class="line">  ctx.beginPath();<span class="comment">/*Kai*/</span></span><br><span class="line">  <span class="comment">/*蓝色  10px*/</span></span><br><span class="line">  ctx.moveTo(<span class="number">100</span>,<span class="number">100</span>);</span><br><span class="line">  ctx.lineTo(<span class="number">300</span>,<span class="number">100</span>);</span><br><span class="line">  ctx.strokeStyle = <span class="string">'blue'</span>;</span><br><span class="line">  ctx.lineWidth = <span class="number">10</span>;</span><br><span class="line">  <span class="comment">/*描边*/</span></span><br><span class="line">  ctx.stroke();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="comment">/*红色 20px*/</span></span><br><span class="line">  ctx.beginPath();</span><br><span class="line">  ctx.moveTo(<span class="number">100</span>,<span class="number">200</span>);</span><br><span class="line">  ctx.lineTo(<span class="number">300</span>,<span class="number">200</span>);</span><br><span class="line">  ctx.strokeStyle = <span class="string">'red'</span>;</span><br><span class="line">  ctx.lineWidth = <span class="number">20</span>;</span><br><span class="line">  <span class="comment">/*描边*/</span></span><br><span class="line">  ctx.stroke();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="comment">/*绿色 30px*/</span></span><br><span class="line">  ctx.beginPath();</span><br><span class="line">  ctx.moveTo(<span class="number">100</span>,<span class="number">300</span>);</span><br><span class="line">  ctx.lineTo(<span class="number">300</span>,<span class="number">300</span>);</span><br><span class="line">  ctx.strokeStyle = <span class="string">'green'</span>;</span><br><span class="line">  ctx.lineWidth = <span class="number">30</span>;</span><br><span class="line">  <span class="comment">/*描边*/</span></span><br><span class="line">  ctx.stroke();</span><br></pre></td></tr></table></figure></p>
+<p>结果如图所示：<br><img src="https://img-blog.csdnimg.cn/20181126224031835.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="绘制平行线"></p>
+<h3 id="3-绘制填充的三角形"><a href="#3-绘制填充的三角形" class="headerlink" title="3. 绘制填充的三角形"></a>3. 绘制填充的三角形</h3><h5 id="a-第一种方法"><a href="#a-第一种方法" class="headerlink" title="a. 第一种方法"></a>a. 第一种方法</h5><p>我们可以使用线的坐标进行连接<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myCanvas = <span class="built_in">document</span>.querySelector(<span class="string">'canvas'</span>);</span><br><span class="line">   <span class="keyword">var</span> ctx = myCanvas.getContext(<span class="string">'2d'</span>);</span><br><span class="line">   ctx.moveTo(<span class="number">100</span>,<span class="number">100</span>);</span><br><span class="line">   ctx.lineTo(<span class="number">200</span>,<span class="number">100</span>);</span><br><span class="line">   ctx.lineTo(<span class="number">200</span>,<span class="number">200</span>);</span><br><span class="line">   ctx.lineTo(<span class="number">100</span>,<span class="number">100</span>);</span><br><span class="line">   ctx.lineWidth = <span class="number">1</span>;</span><br><span class="line">   ctx.stroke();</span><br></pre></td></tr></table></figure></p>
+<p>但是如果我们将线的宽度扩大时，就会发现，三角形的起始点和结束点无法完全闭合缺角<br>我们将ctx.lineWidth 改为10，就会出现如下图所出现的情况<br><img src="https://img-blog.csdnimg.cn/20181126224537457.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="三角形无法闭合"></p>
+<h5 id="b-使用ctx-closePath"><a href="#b-使用ctx-closePath" class="headerlink" title="b. 使用ctx.closePath()"></a>b. 使用ctx.closePath()</h5><p>我们可以使用ctx.closePath()来关闭路径，使结束点和起始点进行闭合<br><strong>注意：</strong><br>这里的ctx.closePath()和ctx.beginPath() 没有关系<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ctx.moveTo(<span class="number">100</span>,<span class="number">100</span>);</span><br><span class="line">   ctx.lineTo(<span class="number">200</span>,<span class="number">100</span>);</span><br><span class="line">   ctx.lineTo(<span class="number">200</span>,<span class="number">200</span>);</span><br><span class="line">   ctx.closePath();</span><br><span class="line">   ctx.lineWidth = <span class="number">10</span>;</span><br><span class="line">   ctx.stroke();</span><br></pre></td></tr></table></figure></p>
+<p>结果如图所示：<br><img src="https://img-blog.csdnimg.cn/20181126224816824.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="闭合的三角形"></p>
+<h5 id="c-填充"><a href="#c-填充" class="headerlink" title="c. 填充"></a>c. 填充</h5><blockquote>
+<p>ctx.fill();</p>
+</blockquote>
+<p><strong>注意：</strong></p>
+<ul>
+<li>ctx.fill(); 默认填充的是黑色</li>
+<li>如果要使用有颜色的填充，如下进行设置<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ctx.fillStyle = <span class="string">'red'</span>;</span><br><span class="line">ctx.fill();</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="4-非零形环绕填充规则"><a href="#4-非零形环绕填充规则" class="headerlink" title="4. 非零形环绕填充规则"></a>4. 非零形环绕填充规则</h3><p>举个例子，如果我们要绘制一个镂空的正方形，就是画两个正方形，然后进行填充即可<br>但是画正方形时，需要注意，如果外面的正方形是按照顺时针进行首位相连的，则内部的正方形需要按逆时针进行首位相连，这就是非零形环绕填充规则，如下图所示<br><img src="https://img-blog.csdnimg.cn/20181126225647779.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="非零形环绕规则"><br><strong>解释：</strong><br>我们设逆时针边与箭头相交为1，顺时针为-1</p>
+<ul>
+<li>先看1所在的区域，一直为逆时针，所以为1大于0，所以填充</li>
+<li>2所在的区域，都为逆时针，为2大于0，所以填充</li>
+<li>3所在的区域，有逆时针也有顺时针，所以不填充<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myCanvas = <span class="built_in">document</span>.querySelector(<span class="string">'canvas'</span>);</span><br><span class="line">   <span class="keyword">var</span> ctx = myCanvas.getContext(<span class="string">'2d'</span>);</span><br><span class="line"></span><br><span class="line">   <span class="comment">/*1.绘制两个正方形 一大200一小100 套在一起*/</span></span><br><span class="line">   ctx.moveTo(<span class="number">100</span>,<span class="number">100</span>);</span><br><span class="line">   ctx.lineTo(<span class="number">300</span>,<span class="number">100</span>);</span><br><span class="line">   ctx.lineTo(<span class="number">300</span>,<span class="number">300</span>);</span><br><span class="line">   ctx.lineTo(<span class="number">100</span>,<span class="number">300</span>);</span><br><span class="line">   ctx.closePath();</span><br><span class="line"></span><br><span class="line">   ctx.moveTo(<span class="number">150</span>,<span class="number">150</span>);</span><br><span class="line">   ctx.lineTo(<span class="number">150</span>,<span class="number">250</span>);</span><br><span class="line">   ctx.lineTo(<span class="number">250</span>,<span class="number">250</span>);</span><br><span class="line">   ctx.lineTo(<span class="number">250</span>,<span class="number">150</span>);</span><br><span class="line">   ctx.closePath();</span><br><span class="line"></span><br><span class="line">   <span class="comment">/*填充*/</span></span><br><span class="line">   ctx.fillStyle = <span class="string">'red'</span>;</span><br><span class="line">   ctx.fill();</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>结果如图所示：<br><img src="https://img-blog.csdnimg.cn/20181126230154521.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="镂空正方形"></p>
+<h1 id="二、线和虚线"><a href="#二、线和虚线" class="headerlink" title="二、线和虚线"></a>二、线和虚线</h1><h3 id="1-线的样式"><a href="#1-线的样式" class="headerlink" title="1. 线的样式"></a>1. 线的样式</h3><ul>
+<li>ctx.strokeStyle 对线条设置颜色</li>
+<li>ctx.lineCap 线末端的样式<ul>
+<li>butt 默认</li>
+<li>round 圆形</li>
+<li>squre 方形</li>
+</ul>
+</li>
+<li>ctx.lineJoin 相交线的拐点样式<ul>
+<li>miter 默认样式</li>
+<li>round 圆形</li>
+<li>bevel 斜状拐点<br>如下图所示：<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">ctx.beginPath();</span><br><span class="line">    ctx.moveTo(<span class="number">100</span>,<span class="number">100</span>);</span><br><span class="line">    ctx.lineTo(<span class="number">200</span>,<span class="number">20</span>);</span><br><span class="line">    ctx.lineTo(<span class="number">300</span>,<span class="number">100</span>);</span><br><span class="line">    ctx.strokeStyle = <span class="string">'blue'</span>;</span><br><span class="line">    ctx.lineWidth = <span class="number">10</span>;</span><br><span class="line">    ctx.lineCap = <span class="string">'butt'</span>;</span><br><span class="line">    ctx.lineJoin = <span class="string">'miter'</span>;</span><br><span class="line">    ctx.stroke();</span><br><span class="line"></span><br><span class="line">    ctx.beginPath();</span><br><span class="line">    ctx.moveTo(<span class="number">100</span>,<span class="number">200</span>);</span><br><span class="line">    ctx.lineTo(<span class="number">200</span>,<span class="number">120</span>);</span><br><span class="line">    ctx.lineTo(<span class="number">300</span>,<span class="number">200</span>);</span><br><span class="line">    ctx.strokeStyle = <span class="string">'red'</span>;</span><br><span class="line">    ctx.lineWidth = <span class="number">20</span>;</span><br><span class="line">    ctx.lineCap = <span class="string">'square'</span>;</span><br><span class="line">    ctx.lineJoin = <span class="string">'bevel'</span>;</span><br><span class="line">    ctx.stroke();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    ctx.beginPath();</span><br><span class="line">    ctx.moveTo(<span class="number">100</span>,<span class="number">300</span>);</span><br><span class="line">    ctx.lineTo(<span class="number">200</span>,<span class="number">220</span>);</span><br><span class="line">    ctx.lineTo(<span class="number">300</span>,<span class="number">300</span>);</span><br><span class="line">    ctx.strokeStyle = <span class="string">'green'</span>;</span><br><span class="line">    ctx.lineWidth = <span class="number">30</span>;</span><br><span class="line">    ctx.lineCap = <span class="string">'round'</span>;</span><br><span class="line">    ctx.lineJoin = <span class="string">'round'</span>;</span><br><span class="line">    ctx.stroke();</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/20181127144849498.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="线的样式"></p>
+<h3 id="2-虚线"><a href="#2-虚线" class="headerlink" title="2. 虚线"></a>2. 虚线</h3><h4 id="a-设置虚线"><a href="#a-设置虚线" class="headerlink" title="a. 设置虚线"></a>a. 设置虚线</h4><ul>
+<li>ctx.setLineDash(); 括号里需要传数组，数组用来描述虚线的排列方式<h5 id="当传入一个值时"><a href="#当传入一个值时" class="headerlink" title="当传入一个值时"></a>当传入一个值时</h5>例：<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ctx.setLineDash([<span class="number">20</span>]);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/20181127145148803.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="虚线1"><br>可以看见虚线和空白之间都是相隔20px</p>
+<hr>
+
+<h5 id="当传入一个数组时："><a href="#当传入一个数组时：" class="headerlink" title="当传入一个数组时："></a>当传入一个数组时：</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ctx.setLineDash([<span class="number">5</span>,<span class="number">10</span>]);</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/20181127145355144.png" alt="虚线2"><br>可以看见虚线和空白的排列方式为5 10 循环</p>
+<hr>
+
+<h5 id="当传入的数组为三位数时："><a href="#当传入的数组为三位数时：" class="headerlink" title="当传入的数组为三位数时："></a>当传入的数组为三位数时：</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ctx.setLineDash([<span class="number">5</span>,<span class="number">10</span>,<span class="number">30</span>]);</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/20181127145619711.png" alt="虚线3"><br>可以看见虚线和空白按照5,10,30,5,10,30的顺序依次循环</p>
+<h4 id="b-获取虚线的宽度集合"><a href="#b-获取虚线的宽度集合" class="headerlink" title="b . 获取虚线的宽度集合"></a>b . 获取虚线的宽度集合</h4><p>ctx.getLineDash()<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ctx.setLineDash([<span class="number">5</span>,<span class="number">10</span>,<span class="number">30</span>]);</span><br><span class="line"><span class="built_in">console</span>.log(ctx.getLineDash());</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://img-blog.csdnimg.cn/2018112714594481.png" alt="获取虚线集合"><br><strong>注意</strong>：<br>获取虚线的排列方式 获取的是不重复的那一段的排列方式</p>
+<h4 id="c-设置虚线偏移量"><a href="#c-设置虚线偏移量" class="headerlink" title="c . 设置虚线偏移量"></a>c . 设置虚线偏移量</h4><p>ctx.lineDashOffset</p>
+<ul>
+<li>如果给的数为正数，向左偏移</li>
+<li>负数向右偏移</li>
+</ul>
+<h1 id="三、渐变矩形绘制"><a href="#三、渐变矩形绘制" class="headerlink" title="三、渐变矩形绘制"></a>三、渐变矩形绘制</h1><h3 id="1-绘制矩形"><a href="#1-绘制矩形" class="headerlink" title="1. 绘制矩形"></a>1. 绘制矩形</h3><ul>
+<li>rect(x, y, w, h ); 没有独立路径</li>
+<li>strokeRect(x, y, w, h ) ； 有自己独立的路径（描边路径）</li>
+<li>fillRect(x, y, w, h ) ； 有自己独立的路径 （填充矩形）；画出一个有填充颜色的矩形框（默认是黑色的）</li>
+<li>ctx.clearRect(x, y, w, h ) ；擦除矩形区域<h5 id="strokeRect和rect的区别"><a href="#strokeRect和rect的区别" class="headerlink" title="strokeRect和rect的区别"></a>strokeRect和rect的区别</h5></li>
+<li><p>rect<br>在进行绘制矩形的时候需要调用stroke() 进行描边处理或 fill()填充后才会真正作用于画布</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ctx.rect(<span class="number">100</span>,<span class="number">100</span>,<span class="number">200</span>,<span class="number">100</span>);</span><br><span class="line">ctx.stroke();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>strokeRect<br>直接绘制出一个矩形</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ctx.strokeRect(<span class="number">100</span>,<span class="number">100</span>,<span class="number">200</span>,<span class="number">100</span>);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>擦除矩形示例：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="keyword">var</span> myCanvas = <span class="built_in">document</span>.querySelector(<span class="string">'canvas'</span>);</span><br><span class="line">    <span class="keyword">var</span> ctx = myCanvas.getContext(<span class="string">'2d'</span>);</span><br><span class="line"></span><br><span class="line">    ctx.rect(<span class="number">100.5</span>,<span class="number">100.5</span>,<span class="number">200</span>,<span class="number">100</span>);</span><br><span class="line">    ctx.fillStyle = <span class="string">'green'</span>;</span><br><span class="line">    ctx.stroke();</span><br><span class="line">    ctx.fill();</span><br><span class="line">    <span class="comment">//ctx.clearRect(0,0,ctx.canvas.width,ctx.canvas.height);  //擦除整个画布</span></span><br><span class="line">    ctx.clearRect(<span class="number">100</span>,<span class="number">100</span>,<span class="number">50</span>,<span class="number">50</span>);</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="2-对线进行填充"><a href="#2-对线进行填充" class="headerlink" title="2.  对线进行填充"></a>2.  对线进行填充</h3><p>线是由点构成的<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">ctx.lineWidth = <span class="number">30</span>;</span><br><span class="line">   <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">255</span>; i++) &#123;</span><br><span class="line">       ctx.beginPath();</span><br><span class="line">       ctx.moveTo(<span class="number">100</span>+i<span class="number">-1</span>,<span class="number">100</span>);</span><br><span class="line">       ctx.lineTo(<span class="number">100</span>+i,<span class="number">100</span>);</span><br><span class="line">       ctx.strokeStyle = <span class="string">'rgb('</span>+i+<span class="string">',0,0)'</span>;</span><br><span class="line">       ctx.stroke();</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></p>
+<p>结果如图所示：<br><img src="https://img-blog.csdnimg.cn/20181127150623960.png" alt="渐变矩形"></p>
+<h3 id="2-通过方案设置渐变"><a href="#2-通过方案设置渐变" class="headerlink" title="2. 通过方案设置渐变"></a>2. 通过方案设置渐变</h3><ul>
+<li>createLinearGradient() 方法创建线性的渐变对象。<br>语法：<blockquote>
+<p>context.createLinearGradient(x0,y0,x1,y1);</p>
+</blockquote>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x0</td>
+<td>渐变开始点的x坐标</td>
+</tr>
+<tr>
+<td>y0</td>
+<td>渐变开始点的y坐标</td>
+</tr>
+<tr>
+<td>x1</td>
+<td>渐变结束点的x坐标</td>
+</tr>
+<tr>
+<td>y1</td>
+<td>渐变结束点的y坐标</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="keyword">var</span> myCanvas = <span class="built_in">document</span>.querySelector(<span class="string">'canvas'</span>);</span><br><span class="line">    <span class="keyword">var</span> ctx = myCanvas.getContext(<span class="string">'2d'</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> linearGradient = ctx.createLinearGradient(<span class="number">100</span>,<span class="number">100</span>,<span class="number">400</span>,<span class="number">100</span>);</span><br><span class="line">    linearGradient.addColorStop(<span class="number">0</span>,<span class="string">'pink'</span>);</span><br><span class="line">    linearGradient.addColorStop(<span class="number">1</span>,<span class="string">'blue'</span>);</span><br><span class="line"></span><br><span class="line">    ctx.fillStyle = linearGradient;</span><br><span class="line"></span><br><span class="line">    ctx.fillRect(<span class="number">100</span>,<span class="number">100</span>,<span class="number">400</span>,<span class="number">100</span>);</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+<p>上边代码设置的是从左到右依次渐变，如图<br><img src="https://img-blog.csdnimg.cn/20181127161311937.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="渐变1"></p>
+<p>如果将x1的值改变，则会出现倾斜渐变</p>
+<blockquote>
+<p>var linearGradient = ctx.createLinearGradient(100,100,500,400);</p>
+</blockquote>
+<p>结果如图<br><img src="https://img-blog.csdnimg.cn/20181127161502244.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="渐变2"></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2018/11/27/Canvas基本入门操作.html" data-title="Canvas基本入门操作 | Welkin" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2018/11/22/详解TCP连接的建立和终止.html"  title="详解TCP连接的建立和终止">
+ <strong>NEXT:</strong><br/> 
+ <span>详解TCP连接的建立和终止
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、基本体验Canvas绘图"><span class="toc-number">1.</span> <span class="toc-text">一、基本体验Canvas绘图</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-基本操作"><span class="toc-number">1.0.1.</span> <span class="toc-text">1. 基本操作</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#a-准备画布"><span class="toc-number">1.0.1.0.1.</span> <span class="toc-text">a. 准备画布</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#b-准备工具"><span class="toc-number">1.0.1.0.2.</span> <span class="toc-text">b . 准备工具</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#c-利用工具绘画"><span class="toc-number">1.0.1.0.3.</span> <span class="toc-text">c.  利用工具绘画</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-绘制三条颜色和宽度不同的平行线"><span class="toc-number">1.0.2.</span> <span class="toc-text">2.  绘制三条颜色和宽度不同的平行线</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-绘制填充的三角形"><span class="toc-number">1.0.3.</span> <span class="toc-text">3. 绘制填充的三角形</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#a-第一种方法"><span class="toc-number">1.0.3.0.1.</span> <span class="toc-text">a. 第一种方法</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#b-使用ctx-closePath"><span class="toc-number">1.0.3.0.2.</span> <span class="toc-text">b. 使用ctx.closePath()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#c-填充"><span class="toc-number">1.0.3.0.3.</span> <span class="toc-text">c. 填充</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-非零形环绕填充规则"><span class="toc-number">1.0.4.</span> <span class="toc-text">4. 非零形环绕填充规则</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、线和虚线"><span class="toc-number">2.</span> <span class="toc-text">二、线和虚线</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-线的样式"><span class="toc-number">2.0.1.</span> <span class="toc-text">1. 线的样式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-虚线"><span class="toc-number">2.0.2.</span> <span class="toc-text">2. 虚线</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#a-设置虚线"><span class="toc-number">2.0.2.1.</span> <span class="toc-text">a. 设置虚线</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#当传入一个值时"><span class="toc-number">2.0.2.1.1.</span> <span class="toc-text">当传入一个值时</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#当传入一个数组时："><span class="toc-number">2.0.2.1.2.</span> <span class="toc-text">当传入一个数组时：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#当传入的数组为三位数时："><span class="toc-number">2.0.2.1.3.</span> <span class="toc-text">当传入的数组为三位数时：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#b-获取虚线的宽度集合"><span class="toc-number">2.0.2.2.</span> <span class="toc-text">b . 获取虚线的宽度集合</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#c-设置虚线偏移量"><span class="toc-number">2.0.2.3.</span> <span class="toc-text">c . 设置虚线偏移量</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#三、渐变矩形绘制"><span class="toc-number">3.</span> <span class="toc-text">三、渐变矩形绘制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-绘制矩形"><span class="toc-number">3.0.1.</span> <span class="toc-text">1. 绘制矩形</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#strokeRect和rect的区别"><span class="toc-number">3.0.1.0.1.</span> <span class="toc-text">strokeRect和rect的区别</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-对线进行填充"><span class="toc-number">3.0.2.</span> <span class="toc-text">2.  对线进行填充</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-通过方案设置渐变"><span class="toc-number">3.0.3.</span> <span class="toc-text">2. 通过方案设置渐变</span></a></li></ol></li></ol></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2018 
+		
+		<a href="http://yoursite.com" target="_blank" title="welkin">welkin</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>
