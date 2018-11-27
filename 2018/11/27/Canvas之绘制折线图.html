@@ -1,0 +1,318 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Canvas之绘制折线图 | Welkin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="welkin">
+    
+    <meta name="description" content="一、 绘制网格
+绘制网格
+网格的大小
+网格的条数，横线条数，竖线条数，画布高度
+
+网格的条数我们根据画布的大小来对网格大小进行相除，取整1234567891011121314151617181920212223242526272829&amp;lt;script&amp;gt;    var myCanvas = ">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="Welkin" title="Welkin"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Welkin">Welkin</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/11/27/Canvas之绘制折线图.html" title="Canvas之绘制折线图" itemprop="url">Canvas之绘制折线图</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="welkin">welkin</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2018-11-27T08:39:42.000Z" itemprop="datePublished">2018-11-27</time>
+    Updated:<time datetime="2018-11-27T08:40:04.671Z" itemprop="dateModified">2018-11-27</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、-绘制网格"><span class="toc-number">1.</span> <span class="toc-text">一、 绘制网格</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、绘制坐标系"><span class="toc-number">2.</span> <span class="toc-text">二、绘制坐标系</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#三、绘制点"><span class="toc-number">3.</span> <span class="toc-text">三、绘制点</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#四、绘制折线图"><span class="toc-number">4.</span> <span class="toc-text">四、绘制折线图</span></a></li></ol>
+		</div>
+		
+		<h1 id="一、-绘制网格"><a href="#一、-绘制网格" class="headerlink" title="一、 绘制网格"></a>一、 绘制网格</h1><ol>
+<li>绘制网格</li>
+<li>网格的大小</li>
+<li>网格的条数，横线条数，竖线条数，画布高度</li>
+</ol>
+<p><strong>网格的条数我们根据画布的大小来对网格大小进行相除，取整</strong><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="keyword">var</span> myCanvas = <span class="built_in">document</span>.querySelector(<span class="string">'canvas'</span>);</span><br><span class="line">    <span class="keyword">var</span> ctx = myCanvas.getContext(<span class="string">'2d'</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*1.绘制网格*/</span></span><br><span class="line">    <span class="comment">/*2.网格的大小*/</span></span><br><span class="line">    <span class="keyword">var</span> gridSize = <span class="number">10</span>;</span><br><span class="line">    <span class="keyword">var</span> canvasHeight = ctx.canvas.height;</span><br><span class="line">    <span class="keyword">var</span> canvasWidth = ctx.canvas.width;</span><br><span class="line">    <span class="comment">/*3.画多少条X轴方向的线 横线的条数  画布高度*/</span></span><br><span class="line">    <span class="keyword">var</span> xLineTotal = <span class="built_in">Math</span>.floor(canvasHeight / gridSize);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt;= xLineTotal; i++) &#123;</span><br><span class="line">        ctx.beginPath();</span><br><span class="line">        ctx.moveTo(<span class="number">0</span>, i * gridSize - <span class="number">0.5</span> );</span><br><span class="line">        ctx.lineTo(canvasWidth, i * gridSize - <span class="number">0.5</span>);</span><br><span class="line">        ctx.strokeStyle = <span class="string">'#eee'</span>;</span><br><span class="line">        ctx.stroke();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/*4.画多少条Y轴方向的线*/</span></span><br><span class="line">    <span class="keyword">var</span> yLineTotal = <span class="built_in">Math</span>.floor(canvasWidth / gridSize);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt;= yLineTotal; i++) &#123;</span><br><span class="line">        ctx.beginPath();</span><br><span class="line">        ctx.moveTo(i*gridSize - <span class="number">0.5</span> ,<span class="number">0</span>);</span><br><span class="line">        ctx.lineTo(i*gridSize - <span class="number">0.5</span> ,canvasHeight);</span><br><span class="line">        ctx.strokeStyle = <span class="string">'#eee'</span>;</span><br><span class="line">        ctx.stroke();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/*5.遍历的形式去画*/</span></span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>结果如图所示：<br><img src="https://img-blog.csdnimg.cn/20181127162237861.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="网格图"></p>
+<h1 id="二、绘制坐标系"><a href="#二、绘制坐标系" class="headerlink" title="二、绘制坐标系"></a>二、绘制坐标系</h1><ol>
+<li>确定坐标系</li>
+<li>确定原点</li>
+<li>确定距离画布旁边的距离</li>
+<li>确定坐标系轴的长度</li>
+<li>确定箭头的大小-等腰三角形</li>
+<li>绘制箭头填充 </li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> myCanvas = <span class="built_in">document</span>.querySelector(<span class="string">'canvas'</span>);</span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> ctx = myCanvas.getContext(<span class="string">'2d'</span>);</span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> space = <span class="number">20</span>;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> arrowSize = <span class="number">10</span>;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">    <span class="comment">/*计算原点*/</span></span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> canvasWidth = ctx.canvas.width;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> canvasHeight = ctx.canvas.height;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> x0 = space;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> y0 = canvasHeight - space;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">    <span class="comment">/*绘制x轴*/</span></span></span><br><span class="line"><span class="undefined">    ctx.beginPath();</span></span><br><span class="line"><span class="undefined">    ctx.moveTo(x0, y0);</span></span><br><span class="line"><span class="undefined">    ctx.lineTo(canvasWidth - space, y0);</span></span><br><span class="line"><span class="javascript">    <span class="comment">/*箭头*/</span></span></span><br><span class="line"><span class="undefined">    ctx.lineTo(canvasWidth - space - arrowSize, y0 + arrowSize / 2);</span></span><br><span class="line"><span class="undefined">    ctx.lineTo(canvasWidth - space - arrowSize, y0 - arrowSize / 2);</span></span><br><span class="line"><span class="undefined">    ctx.lineTo(canvasWidth - space, y0);</span></span><br><span class="line"><span class="undefined">    ctx.fill();</span></span><br><span class="line"><span class="undefined">    ctx.stroke();</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">    <span class="comment">/*绘制y轴*/</span></span></span><br><span class="line"><span class="undefined">    ctx.beginPath();</span></span><br><span class="line"><span class="undefined">    ctx.moveTo(x0, y0);</span></span><br><span class="line"><span class="undefined">    ctx.lineTo(space, space);</span></span><br><span class="line"><span class="javascript">    <span class="comment">/*箭头*/</span></span></span><br><span class="line"><span class="undefined">    ctx.lineTo(space + arrowSize / 2, space + arrowSize);</span></span><br><span class="line"><span class="undefined">    ctx.lineTo(space - arrowSize / 2, space + arrowSize);</span></span><br><span class="line"><span class="undefined">    ctx.lineTo(space, space);</span></span><br><span class="line"><span class="undefined">    ctx.fill();</span></span><br><span class="line"><span class="undefined">    ctx.stroke();</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>结果如图所示：<br><img src="https://img-blog.csdnimg.cn/20181127162628192.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="坐标系"></p>
+<h1 id="三、绘制点"><a href="#三、绘制点" class="headerlink" title="三、绘制点"></a>三、绘制点</h1><ol>
+<li>绘制点</li>
+<li>设计点的尺寸</li>
+<li>以坐标中心绘制点</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="keyword">var</span> myCanvas = <span class="built_in">document</span>.querySelector(<span class="string">'canvas'</span>);</span><br><span class="line">    <span class="keyword">var</span> ctx = myCanvas.getContext(<span class="string">'2d'</span>);</span><br><span class="line">    <span class="comment">/*点坐标*/</span></span><br><span class="line">    <span class="keyword">var</span> coordinate = &#123;</span><br><span class="line">        x:<span class="number">100</span>,</span><br><span class="line">        y:<span class="number">100</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/*点尺寸*/</span></span><br><span class="line">    <span class="keyword">var</span> dottedSize = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line">    ctx.moveTo(coordinate.x - dottedSize / <span class="number">2</span>,coordinate.y - dottedSize / <span class="number">2</span>);</span><br><span class="line">    ctx.lineTo(coordinate.x + dottedSize / <span class="number">2</span>,coordinate.y - dottedSize / <span class="number">2</span>);</span><br><span class="line">    ctx.lineTo(coordinate.x + dottedSize / <span class="number">2</span>,coordinate.y + dottedSize / <span class="number">2</span>);</span><br><span class="line">    ctx.lineTo(coordinate.x - dottedSize / <span class="number">2</span>,coordinate.y + dottedSize / <span class="number">2</span>);</span><br><span class="line">    ctx.closePath();</span><br><span class="line">    ctx.fill();</span><br><span class="line"></span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+<p>结果如图所示：<br><img src="https://img-blog.csdnimg.cn/20181127162812203.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="绘制点"></p>
+<h1 id="四、绘制折线图"><a href="#四、绘制折线图" class="headerlink" title="四、绘制折线图"></a>四、绘制折线图</h1><p><strong>注意</strong>：</p>
+<ul>
+<li>绘制的点的位置是根据坐标系的，但是实际上是根据画布来进行定位的，所以就需要进行转换点的位置</li>
+<li>在进行连接点的时候，需要进行判定<ul>
+<li>如果是第一个点，则起点是x0，y0</li>
+<li>如果不是第一个点，则起点是上一个点，需要记录</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br></pre></td><td class="code"><pre><span class="line">&lt;canvas width=<span class="string">"600"</span> height=<span class="string">"400"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span></span><br><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="comment">/*1.构造函数*/</span></span><br><span class="line">    <span class="keyword">var</span> LineChart = <span class="function"><span class="keyword">function</span> (<span class="params">ctx</span>) </span>&#123;</span><br><span class="line">        <span class="comment">/*获取绘图工具*/</span></span><br><span class="line">        <span class="keyword">this</span>.ctx = ctx || <span class="built_in">document</span>.querySelector(<span class="string">'canvas'</span>).getContext(<span class="string">'2d'</span>);</span><br><span class="line">        <span class="comment">/*画布的大小*/</span></span><br><span class="line">        <span class="keyword">this</span>.canvasWidth = <span class="keyword">this</span>.ctx.canvas.width;</span><br><span class="line">        <span class="keyword">this</span>.canvasHeight = <span class="keyword">this</span>.ctx.canvas.height;</span><br><span class="line">        <span class="comment">/*网格的大小*/</span></span><br><span class="line">        <span class="keyword">this</span>.gridSize = <span class="number">10</span>;</span><br><span class="line">        <span class="comment">/*坐标系的间距*/</span></span><br><span class="line">        <span class="keyword">this</span>.space = <span class="number">20</span>;</span><br><span class="line">        <span class="comment">/*坐标原点*/</span></span><br><span class="line">        <span class="keyword">this</span>.x0 = <span class="keyword">this</span>.space;</span><br><span class="line">        <span class="keyword">this</span>.y0 = <span class="keyword">this</span>.canvasHeight - <span class="keyword">this</span>.space;</span><br><span class="line">        <span class="comment">/*箭头的大小*/</span></span><br><span class="line">        <span class="keyword">this</span>.arrowSize = <span class="number">10</span>;</span><br><span class="line">        <span class="comment">/*绘制点*/</span></span><br><span class="line">        <span class="keyword">this</span>.dottedSize = <span class="number">6</span>;</span><br><span class="line">        <span class="comment">/*点的坐标 和数据有关系  数据可视化*/</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/*2.行为方法*/</span></span><br><span class="line">    LineChart.prototype.init = <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.drawGrid();</span><br><span class="line">        <span class="keyword">this</span>.drawAxis();</span><br><span class="line">        <span class="keyword">this</span>.drawDotted(data);</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="comment">/*绘制网格*/</span></span><br><span class="line">    LineChart.prototype.drawGrid = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="comment">/*x方向的线*/</span></span><br><span class="line">        <span class="keyword">var</span> xLineTotal = <span class="built_in">Math</span>.floor(<span class="keyword">this</span>.canvasHeight / <span class="keyword">this</span>.gridSize);</span><br><span class="line">        <span class="keyword">this</span>.ctx.strokeStyle = <span class="string">'#eee'</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt;= xLineTotal; i++) &#123;</span><br><span class="line">            <span class="keyword">this</span>.ctx.beginPath();</span><br><span class="line">            <span class="keyword">this</span>.ctx.moveTo(<span class="number">0</span>, i * <span class="keyword">this</span>.gridSize - <span class="number">0.5</span>);</span><br><span class="line">            <span class="keyword">this</span>.ctx.lineTo(<span class="keyword">this</span>.canvasWidth, i * <span class="keyword">this</span>.gridSize - <span class="number">0.5</span>);</span><br><span class="line">            <span class="keyword">this</span>.ctx.stroke();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">/*y方向的线*/</span></span><br><span class="line">        <span class="keyword">var</span> yLineTotal = <span class="built_in">Math</span>.floor(<span class="keyword">this</span>.canvasWidth / <span class="keyword">this</span>.gridSize);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt;= yLineTotal; i++) &#123;</span><br><span class="line">            <span class="keyword">this</span>.ctx.beginPath();</span><br><span class="line">            <span class="keyword">this</span>.ctx.moveTo(i * <span class="keyword">this</span>.gridSize - <span class="number">0.5</span>, <span class="number">0</span>);</span><br><span class="line">            <span class="keyword">this</span>.ctx.lineTo(i * <span class="keyword">this</span>.gridSize - <span class="number">0.5</span>, <span class="keyword">this</span>.canvasHeight);</span><br><span class="line">            <span class="keyword">this</span>.ctx.stroke();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="comment">/*绘制坐标系*/</span></span><br><span class="line">    LineChart.prototype.drawAxis = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="comment">/*X轴*/</span></span><br><span class="line">        <span class="keyword">this</span>.ctx.beginPath();</span><br><span class="line">        <span class="keyword">this</span>.ctx.strokeStyle = <span class="string">'#000'</span>;</span><br><span class="line">        <span class="keyword">this</span>.ctx.moveTo(<span class="keyword">this</span>.x0, <span class="keyword">this</span>.y0);</span><br><span class="line">        <span class="keyword">this</span>.ctx.lineTo(<span class="keyword">this</span>.canvasWidth - <span class="keyword">this</span>.space, <span class="keyword">this</span>.y0);</span><br><span class="line">        <span class="keyword">this</span>.ctx.lineTo(<span class="keyword">this</span>.canvasWidth - <span class="keyword">this</span>.space - <span class="keyword">this</span>.arrowSize, <span class="keyword">this</span>.y0 + <span class="keyword">this</span>.arrowSize / <span class="number">2</span>);</span><br><span class="line">        <span class="keyword">this</span>.ctx.lineTo(<span class="keyword">this</span>.canvasWidth - <span class="keyword">this</span>.space - <span class="keyword">this</span>.arrowSize, <span class="keyword">this</span>.y0 - <span class="keyword">this</span>.arrowSize / <span class="number">2</span>);</span><br><span class="line">        <span class="keyword">this</span>.ctx.lineTo(<span class="keyword">this</span>.canvasWidth - <span class="keyword">this</span>.space, <span class="keyword">this</span>.y0);</span><br><span class="line">        <span class="keyword">this</span>.ctx.stroke();</span><br><span class="line">        <span class="keyword">this</span>.ctx.fill();</span><br><span class="line">        <span class="comment">/*Y轴*/</span></span><br><span class="line">        <span class="keyword">this</span>.ctx.beginPath();</span><br><span class="line">        <span class="keyword">this</span>.ctx.strokeStyle = <span class="string">'#000'</span>;</span><br><span class="line">        <span class="keyword">this</span>.ctx.moveTo(<span class="keyword">this</span>.x0, <span class="keyword">this</span>.y0);</span><br><span class="line">        <span class="keyword">this</span>.ctx.lineTo(<span class="keyword">this</span>.space, <span class="keyword">this</span>.space);</span><br><span class="line">        <span class="keyword">this</span>.ctx.lineTo(<span class="keyword">this</span>.space + <span class="keyword">this</span>.arrowSize / <span class="number">2</span>, <span class="keyword">this</span>.space + <span class="keyword">this</span>.arrowSize);</span><br><span class="line">        <span class="keyword">this</span>.ctx.lineTo(<span class="keyword">this</span>.space - <span class="keyword">this</span>.arrowSize / <span class="number">2</span>, <span class="keyword">this</span>.space + <span class="keyword">this</span>.arrowSize);</span><br><span class="line">        <span class="keyword">this</span>.ctx.lineTo(<span class="keyword">this</span>.space, <span class="keyword">this</span>.space);</span><br><span class="line">        <span class="keyword">this</span>.ctx.stroke();</span><br><span class="line">        <span class="keyword">this</span>.ctx.fill();</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="comment">/*绘制所有点*/</span></span><br><span class="line">    LineChart.prototype.drawDotted = <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</span><br><span class="line">        <span class="comment">/*1.数据的坐标 需要转换 canvas坐标*/</span></span><br><span class="line">        <span class="comment">/*2.再进行点的绘制*/</span></span><br><span class="line">        <span class="comment">/*3.把线连起来*/</span></span><br><span class="line">        <span class="keyword">var</span> that = <span class="keyword">this</span>;</span><br><span class="line">        <span class="comment">/*记录当前坐标*/</span></span><br><span class="line">        <span class="keyword">var</span> prevCanvasX = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">var</span> prevCanvasY = <span class="number">0</span>;</span><br><span class="line">        data.forEach(<span class="function"><span class="keyword">function</span> (<span class="params">item, i</span>) </span>&#123;</span><br><span class="line">            <span class="comment">/* x = 原点的坐标 + 数据的坐标 */</span></span><br><span class="line">            <span class="comment">/* y = 原点的坐标 - 数据的坐标 */</span></span><br><span class="line">            <span class="keyword">var</span> canvasX = that.x0 + item.x;</span><br><span class="line">            <span class="keyword">var</span> canvasY = that.y0 - item.y;</span><br><span class="line">            <span class="comment">/*绘制点*/</span></span><br><span class="line">            that.ctx.beginPath();</span><br><span class="line">            that.ctx.moveTo(canvasX - that.dottedSize / <span class="number">2</span>, canvasY - that.dottedSize / <span class="number">2</span>);</span><br><span class="line">            that.ctx.lineTo(canvasX + that.dottedSize / <span class="number">2</span>, canvasY - that.dottedSize / <span class="number">2</span>);</span><br><span class="line">            that.ctx.lineTo(canvasX + that.dottedSize / <span class="number">2</span>, canvasY + that.dottedSize / <span class="number">2</span>);</span><br><span class="line">            that.ctx.lineTo(canvasX - that.dottedSize / <span class="number">2</span>, canvasY + that.dottedSize / <span class="number">2</span>);</span><br><span class="line">            that.ctx.closePath();</span><br><span class="line">            that.ctx.fill();</span><br><span class="line">            <span class="comment">/*点的连线*/</span></span><br><span class="line">            <span class="comment">/*当时第一个点的时候 起点是 x0 y0*/</span></span><br><span class="line">            <span class="comment">/*当时不是第一个点的时候 起点是 上一个点*/</span></span><br><span class="line">            <span class="keyword">if</span>(i == <span class="number">0</span>)&#123;</span><br><span class="line">                that.ctx.beginPath();</span><br><span class="line">                that.ctx.moveTo(that.x0,that.y0);</span><br><span class="line">                that.ctx.lineTo(canvasX,canvasY);</span><br><span class="line">                that.ctx.stroke();</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="comment">/*上一个点*/</span></span><br><span class="line">                that.ctx.beginPath();</span><br><span class="line">                that.ctx.moveTo(prevCanvasX,prevCanvasY);</span><br><span class="line">                that.ctx.lineTo(canvasX,canvasY);</span><br><span class="line">                that.ctx.stroke();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">/*记录当前的坐标，下一次要用*/</span></span><br><span class="line">            prevCanvasX = canvasX;</span><br><span class="line">            prevCanvasY = canvasY;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="comment">/*3.初始化*/</span></span><br><span class="line">    <span class="keyword">var</span> data = [</span><br><span class="line">        &#123;</span><br><span class="line">            x: <span class="number">100</span>,</span><br><span class="line">            y: <span class="number">120</span></span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            x: <span class="number">200</span>,</span><br><span class="line">            y: <span class="number">160</span></span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            x: <span class="number">300</span>,</span><br><span class="line">            y: <span class="number">240</span></span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            x: <span class="number">400</span>,</span><br><span class="line">            y: <span class="number">120</span></span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            x: <span class="number">500</span>,</span><br><span class="line">            y: <span class="number">80</span></span><br><span class="line">        &#125;</span><br><span class="line">    ];</span><br><span class="line">    <span class="keyword">var</span> lineChart = <span class="keyword">new</span> LineChart();</span><br><span class="line">    lineChart.init(data);</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+<p>结果如图所示：<br><img src="https://img-blog.csdnimg.cn/20181127163303103.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="折线图"></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2018/11/27/Canvas之绘制折线图.html" data-title="Canvas之绘制折线图 | Welkin" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2018/11/27/Canvas基本入门操作.html"  title="Canvas基本入门操作">
+ <strong>NEXT:</strong><br/> 
+ <span>Canvas基本入门操作
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、-绘制网格"><span class="toc-number">1.</span> <span class="toc-text">一、 绘制网格</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、绘制坐标系"><span class="toc-number">2.</span> <span class="toc-text">二、绘制坐标系</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#三、绘制点"><span class="toc-number">3.</span> <span class="toc-text">三、绘制点</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#四、绘制折线图"><span class="toc-number">4.</span> <span class="toc-text">四、绘制折线图</span></a></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2018 
+		
+		<a href="http://yoursite.com" target="_blank" title="welkin">welkin</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>
