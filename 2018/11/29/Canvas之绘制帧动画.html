@@ -1,0 +1,325 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Canvas之绘制帧动画 | Welkin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="welkin">
+    
+    <meta name="description" content="一、 帧动画绘制图片 —–使用drawImage（）
+
+三个参数drawImage（img, x,y）
+img 图片对象，Canvas对象，video对象
+x，y 图片绘制的左上角
+
+
+五个参数 drawImage（img, x, y, w, h）
+img 图片对象，Canvas对象，video对象">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="Welkin" title="Welkin"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Welkin">Welkin</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/11/29/Canvas之绘制帧动画.html" title="Canvas之绘制帧动画" itemprop="url">Canvas之绘制帧动画</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="welkin">welkin</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2018-11-29T13:52:01.000Z" itemprop="datePublished">2018-11-29</time>
+    Updated:<time datetime="2018-11-29T13:52:22.634Z" itemprop="dateModified">2018-11-29</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、-帧动画"><span class="toc-number">1.</span> <span class="toc-text">一、 帧动画</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、-方向键控制行走的小人"><span class="toc-number">2.</span> <span class="toc-text">二、 方向键控制行走的小人</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#三、坐标变换"><span class="toc-number">3.</span> <span class="toc-text">三、坐标变换</span></a></li></ol>
+		</div>
+		
+		<h1 id="一、-帧动画"><a href="#一、-帧动画" class="headerlink" title="一、 帧动画"></a>一、 帧动画</h1><p><strong>绘制图片</strong> —–使用drawImage（）</p>
+<ul>
+<li>三个参数drawImage（img, x,y）<ul>
+<li>img 图片对象，Canvas对象，video对象</li>
+<li>x，y 图片绘制的左上角</li>
+</ul>
+</li>
+<li>五个参数 drawImage（img, x, y, w, h）<ul>
+<li>img 图片对象，Canvas对象，video对象</li>
+<li>x，y 图片绘制的左上角</li>
+<li>w，h图片绘制尺寸设置（图片缩放，不是截取）</li>
+</ul>
+</li>
+<li>九个参数 drawImage（img, x, y, w, h，x1，y1，w1，h1）<ul>
+<li>img 图片对象，Canvas对象，video对象</li>
+<li>x，y ，w，h图片中的区域</li>
+<li>x1，y1，w1，h1画布中的一个区域</li>
+</ul>
+</li>
+</ul>
+<p>首先确定画布中心，然后根据定时器定时切换图片<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myCanvas = <span class="built_in">document</span>.querySelector(<span class="string">'canvas'</span>);</span><br><span class="line">    <span class="keyword">var</span> ctx = myCanvas.getContext(<span class="string">'2d'</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> image = <span class="keyword">new</span> Image();</span><br><span class="line">    image.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="comment">/*图片加载完成*/</span></span><br><span class="line">        <span class="comment">/*动态的去获取当前图片的尺寸*/</span></span><br><span class="line">        <span class="keyword">var</span> imageWidth = image.width;</span><br><span class="line">        <span class="keyword">var</span> imageHeight = image.height;</span><br><span class="line">        <span class="comment">/*计算出每一个小人物的尺寸*/</span></span><br><span class="line">        <span class="keyword">var</span> personWidth = imageWidth/<span class="number">4</span>;</span><br><span class="line">        <span class="keyword">var</span> personHeight = imageHeight/<span class="number">4</span>;</span><br><span class="line">        <span class="comment">/*位截取图片*/</span></span><br><span class="line">        <span class="comment">/*帧动画  在固定的时间间隔更换显示的图片  根据图片的索引*/</span></span><br><span class="line">        <span class="keyword">var</span> index = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/*绘制在画布的中心*/</span></span><br><span class="line">        <span class="comment">/*图片绘制的起始点*/</span></span><br><span class="line">        <span class="keyword">var</span> x0 = ctx.canvas.width /<span class="number">2</span> - personWidth / <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">var</span> y0 = ctx.canvas.height /<span class="number">2</span> - personHeight / <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">        ctx.drawImage(image,<span class="number">0</span>,<span class="number">0</span>,personWidth,personHeight,x0,y0,personWidth,personHeight);</span><br><span class="line">        setInterval(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            index ++;</span><br><span class="line">            ctx.clearRect(<span class="number">0</span>,<span class="number">0</span>,ctx.canvas.width,ctx.canvas.height);</span><br><span class="line">            ctx.drawImage(image,index * personWidth,<span class="number">0</span>,personWidth,personHeight,x0,y0,personWidth,personHeight);</span><br><span class="line">            <span class="keyword">if</span>(index &gt;= <span class="number">3</span>)&#123;</span><br><span class="line">                index = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,<span class="number">1000</span>);</span><br><span class="line"></span><br><span class="line">    &#125;;</span><br><span class="line">    image.src = <span class="string">'image/04.png'</span>;</span><br></pre></td></tr></table></figure></p>
+<p>结果就可以看见在画布中央有一个走动的小人了，可以根据改变定时器的时间，改变走的的频率</p>
+<h1 id="二、-方向键控制行走的小人"><a href="#二、-方向键控制行走的小人" class="headerlink" title="二、 方向键控制行走的小人"></a>二、 方向键控制行走的小人</h1><p>如果是通过方向键控制行走的小人，则需要获得键值，通过键值判断方向，当键值切换时，改变图片在画布中心的定位而来改变图片行走<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Person = <span class="function"><span class="keyword">function</span> (<span class="params">ctx</span>) </span>&#123;</span><br><span class="line">        <span class="comment">/*绘制工具*/</span></span><br><span class="line">        <span class="keyword">this</span>.ctx = ctx || <span class="built_in">document</span>.querySelector(<span class="string">'canvas'</span>).getContext(<span class="string">'2d'</span>);</span><br><span class="line">        <span class="comment">/*图片路径*/</span></span><br><span class="line">        <span class="keyword">this</span>.src = <span class="string">'image/04.png'</span>;</span><br><span class="line">        <span class="comment">/*画布的大小*/</span></span><br><span class="line">        <span class="keyword">this</span>.canvasWidth = <span class="keyword">this</span>.ctx.canvas.width;</span><br><span class="line">        <span class="keyword">this</span>.canvasHeight = <span class="keyword">this</span>.ctx.canvas.height;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/*行走相关参数*/</span></span><br><span class="line">        <span class="keyword">this</span>.stepSzie = <span class="number">10</span>;</span><br><span class="line">        <span class="comment">/* 0 前  1 左  2 右  3 后  和图片的行数包含的图片对应上*/</span></span><br><span class="line">        <span class="keyword">this</span>.direction = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">/*x轴方向的偏移步数*/</span></span><br><span class="line">        <span class="keyword">this</span>.stepX = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">/*y轴方向的偏移步数*/</span></span><br><span class="line">        <span class="keyword">this</span>.stepY = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/*初始化方法*/</span></span><br><span class="line">        <span class="keyword">this</span>.init();</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    Person.prototype.init = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> that = <span class="keyword">this</span>;</span><br><span class="line">        <span class="comment">/*1.加载图片*/</span></span><br><span class="line">        <span class="keyword">this</span>.loadImage(<span class="function"><span class="keyword">function</span> (<span class="params">image</span>) </span>&#123;</span><br><span class="line">            <span class="comment">/*图片的大小*/</span></span><br><span class="line">            that.imageWidth = image.width;</span><br><span class="line">            that.imageHeight = image.height;</span><br><span class="line">            <span class="comment">/*人物的大小*/</span></span><br><span class="line">            that.personWidth = that.imageWidth / <span class="number">4</span>;</span><br><span class="line">            that.personHeight = that.imageHeight / <span class="number">4</span>;</span><br><span class="line">            <span class="comment">/*绘制图片的起点*/</span></span><br><span class="line">            that.x0 = that.canvasWidth / <span class="number">2</span> - that.personWidth / <span class="number">2</span>;</span><br><span class="line">            that.y0 = that.canvasHeight / <span class="number">2</span> - that.personHeight / <span class="number">2</span>;</span><br><span class="line">            <span class="comment">/*2.默认绘制在中心位置正面朝外*/</span></span><br><span class="line">            that.ctx.drawImage(image,</span><br><span class="line">                <span class="number">0</span>,<span class="number">0</span>,</span><br><span class="line">                that.personWidth,that.personHeight,</span><br><span class="line">                that.x0,that.y0,</span><br><span class="line">                that.personWidth,that.personHeight);</span><br><span class="line"></span><br><span class="line">            <span class="comment">/*3.能通过方向键去控制人物行走*/</span></span><br><span class="line">            that.index = <span class="number">0</span>;</span><br><span class="line">            <span class="built_in">document</span>.onkeydown = <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</span><br><span class="line">                <span class="keyword">if</span>(e.keyCode == <span class="number">40</span>)&#123;</span><br><span class="line">                    that.direction = <span class="number">0</span>;</span><br><span class="line">                    that.stepY ++;</span><br><span class="line">                    that.drawImage(image);</span><br><span class="line">                    <span class="comment">/*前*/</span></span><br><span class="line">                &#125;<span class="keyword">else</span> <span class="keyword">if</span>(e.keyCode == <span class="number">37</span>)&#123;</span><br><span class="line">                    that.direction = <span class="number">1</span>;</span><br><span class="line">                    that.stepX --;</span><br><span class="line">                    that.drawImage(image);</span><br><span class="line">                    <span class="comment">/*左*/</span></span><br><span class="line">                &#125;<span class="keyword">else</span> <span class="keyword">if</span>(e.keyCode == <span class="number">39</span>)&#123;</span><br><span class="line">                    that.direction = <span class="number">2</span>;</span><br><span class="line">                    that.stepX ++;</span><br><span class="line">                    that.drawImage(image);</span><br><span class="line">                    <span class="comment">/*右*/</span></span><br><span class="line">                &#125;<span class="keyword">else</span> <span class="keyword">if</span>(e.keyCode == <span class="number">38</span>)&#123;</span><br><span class="line">                    that.direction = <span class="number">3</span>;</span><br><span class="line">                    that.stepY --;</span><br><span class="line">                    that.drawImage(image);</span><br><span class="line">                    <span class="comment">/*后*/</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/*加载图片*/</span></span><br><span class="line">    Person.prototype.loadImage = <span class="function"><span class="keyword">function</span> (<span class="params">callback</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> image = <span class="keyword">new</span> Image();</span><br><span class="line">        image.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            callback &amp;&amp; callback(image);</span><br><span class="line">        &#125;;</span><br><span class="line">        image.src = <span class="keyword">this</span>.src;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="comment">/*绘制图片*/</span></span><br><span class="line">    Person.prototype.drawImage = <span class="function"><span class="keyword">function</span> (<span class="params">image</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.index ++;</span><br><span class="line">        <span class="comment">/*清除画布*/</span></span><br><span class="line">        <span class="keyword">this</span>.ctx.clearRect(<span class="number">0</span>,<span class="number">0</span>,<span class="keyword">this</span>.canvasWidth,<span class="keyword">this</span>.canvasHeight);</span><br><span class="line">        <span class="comment">/*绘图*/</span></span><br><span class="line">        <span class="comment">/*在精灵图上的定位 x  索引*/</span></span><br><span class="line">        <span class="comment">/*在精灵图上的定位 y  方向*/</span></span><br><span class="line">        <span class="keyword">this</span>.ctx.drawImage(image,</span><br><span class="line">            <span class="keyword">this</span>.index * <span class="keyword">this</span>.personWidth,<span class="keyword">this</span>.direction * <span class="keyword">this</span>.personHeight,</span><br><span class="line">            <span class="keyword">this</span>.personWidth,<span class="keyword">this</span>.personHeight,</span><br><span class="line">            <span class="keyword">this</span>.x0 + <span class="keyword">this</span>.stepX * <span class="keyword">this</span>.stepSzie ,<span class="keyword">this</span>.y0 + <span class="keyword">this</span>.stepY * <span class="keyword">this</span>.stepSzie,</span><br><span class="line">            <span class="keyword">this</span>.personWidth,<span class="keyword">this</span>.personHeight);</span><br><span class="line">        <span class="comment">/*如果索引超出了 变成0*/</span></span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">this</span>.index &gt;= <span class="number">3</span>)&#123;</span><br><span class="line">            <span class="keyword">this</span>.index = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">new</span> Person();</span><br></pre></td></tr></table></figure></p>
+<h1 id="三、坐标变换"><a href="#三、坐标变换" class="headerlink" title="三、坐标变换"></a>三、坐标变换</h1><ul>
+<li>平移，移动画布的原点<ul>
+<li>translate(x, y) 参数代表移动目标点的坐标</li>
+</ul>
+</li>
+<li>缩放<ul>
+<li>scale(x, y) 参数表示宽高的缩放比</li>
+</ul>
+</li>
+<li>旋转<ul>
+<li>rotate(angle) 参数表示旋转角度</li>
+</ul>
+</li>
+</ul>
+<p>示例：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> startAngle = <span class="number">0</span>;</span><br><span class="line">    ctx.translate(<span class="number">150</span>,<span class="number">150</span>);</span><br><span class="line">    setInterval(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        startAngle += <span class="built_in">Math</span>.PI/<span class="number">180</span>;</span><br><span class="line">        ctx.rotate(startAngle);</span><br><span class="line">        ctx.strokeRect(<span class="number">-50</span>,<span class="number">-50</span>,<span class="number">100</span>,<span class="number">100</span>);</span><br><span class="line">    &#125;,<span class="number">500</span>);</span><br></pre></td></tr></table></figure></p>
+<p>结果生成一个旋转的矩形</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2018/11/29/Canvas之绘制帧动画.html" data-title="Canvas之绘制帧动画 | Welkin" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2018/11/29/Canvas之使用弧度绘制扇形图.html"  title="Canvas之使用弧度绘制扇形图">
+ <strong>NEXT:</strong><br/> 
+ <span>Canvas之使用弧度绘制扇形图
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、-帧动画"><span class="toc-number">1.</span> <span class="toc-text">一、 帧动画</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、-方向键控制行走的小人"><span class="toc-number">2.</span> <span class="toc-text">二、 方向键控制行走的小人</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#三、坐标变换"><span class="toc-number">3.</span> <span class="toc-text">三、坐标变换</span></a></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2018 
+		
+		<a href="http://yoursite.com" target="_blank" title="welkin">welkin</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>
