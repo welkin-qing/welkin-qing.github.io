@@ -1,0 +1,350 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Canvas之使用弧度绘制扇形图 | Welkin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="welkin">
+    
+    <meta name="description" content="一、体现曲线的绘制首先需要明白角度和弧度的关系：一个角度等于π/180个弧度
+1. 根据点动成线的概念绘制圆弧（利用函数）比如：123y = x/2 y = (x + 2) ^2 y = sin(x)
+在这里我们使用三角函数做示例123456or(var i = 1 ; i &amp;lt; 600 ; i">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="Welkin" title="Welkin"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Welkin">Welkin</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/11/29/Canvas之使用弧度绘制扇形图.html" title="Canvas之使用弧度绘制扇形图" itemprop="url">Canvas之使用弧度绘制扇形图</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="welkin">welkin</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2018-11-29T13:49:07.000Z" itemprop="datePublished">2018-11-29</time>
+    Updated:<time datetime="2018-11-29T13:50:10.568Z" itemprop="dateModified">2018-11-29</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、体现曲线的绘制"><span class="toc-number">1.</span> <span class="toc-text">一、体现曲线的绘制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-根据点动成线的概念绘制圆弧（利用函数）"><span class="toc-number">1.0.1.</span> <span class="toc-text">1. 根据点动成线的概念绘制圆弧（利用函数）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-利用ctx-arc"><span class="toc-number">1.0.2.</span> <span class="toc-text">2. 利用ctx.arc()</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、有关扇形操作"><span class="toc-number">2.</span> <span class="toc-text">二、有关扇形操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-绘制一个右上角四分之一的扇形并填充"><span class="toc-number">2.0.1.</span> <span class="toc-text">1. 绘制一个右上角四分之一的扇形并填充</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-绘制一个分成六等分的园且颜色随机"><span class="toc-number">2.0.2.</span> <span class="toc-text">2. 绘制一个分成六等分的园且颜色随机</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#a-首先获取随机颜色。利用rgb来取随机值"><span class="toc-number">2.0.2.0.0.1.</span> <span class="toc-text">a.首先获取随机颜色。利用rgb来取随机值</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#b-上一次绘制结束的弧度等于当前的起始弧度"><span class="toc-number">2.0.2.0.0.2.</span> <span class="toc-text">b. 上一次绘制结束的弧度等于当前的起始弧度</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-绘制文字"><span class="toc-number">2.0.3.</span> <span class="toc-text">3.  绘制文字</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#三、绘制饼状图"><span class="toc-number">3.</span> <span class="toc-text">三、绘制饼状图</span></a></li></ol>
+		</div>
+		
+		<h1 id="一、体现曲线的绘制"><a href="#一、体现曲线的绘制" class="headerlink" title="一、体现曲线的绘制"></a>一、体现曲线的绘制</h1><p>首先需要明白角度和弧度的关系：<br><strong>一个角度等于π/180个弧度</strong></p>
+<h3 id="1-根据点动成线的概念绘制圆弧（利用函数）"><a href="#1-根据点动成线的概念绘制圆弧（利用函数）" class="headerlink" title="1. 根据点动成线的概念绘制圆弧（利用函数）"></a>1. 根据点动成线的概念绘制圆弧（利用函数）</h3><p>比如：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">y = x/<span class="number">2</span> </span><br><span class="line">y = (x + <span class="number">2</span>) ^<span class="number">2</span> </span><br><span class="line">y = sin(x)</span><br></pre></td></tr></table></figure></p>
+<p>在这里我们使用三角函数做示例<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">or(<span class="keyword">var</span> i = <span class="number">1</span> ; i &lt; <span class="number">600</span> ; i ++)&#123;</span><br><span class="line">        <span class="keyword">var</span> x = i;</span><br><span class="line">        <span class="keyword">var</span> y = <span class="number">50</span>*<span class="built_in">Math</span>.sin(x/<span class="number">10</span>) + <span class="number">100</span>;</span><br><span class="line">        ctx.lineTo(x,y);</span><br><span class="line">    &#125;</span><br><span class="line">    ctx.stroke();</span><br></pre></td></tr></table></figure></p>
+<p>结果如图所示：<br><img src="https://img-blog.csdnimg.cn/20181128205431716.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="sin函数"></p>
+<h3 id="2-利用ctx-arc"><a href="#2-利用ctx-arc" class="headerlink" title="2. 利用ctx.arc()"></a>2. 利用ctx.arc()</h3><ul>
+<li>参一，参二是圆形坐标</li>
+<li>参三 圆的半径</li>
+<li>参四 ，参五 绘制的其实位置和结束位置</li>
+<li>参六 ，方向 默认为false<ul>
+<li>顺时针 false</li>
+<li>逆时针 true</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> w = ctx.canvas.width;</span><br><span class="line"><span class="keyword">var</span> h = ctx.canvas.height;</span><br><span class="line">ctx.arc(w/<span class="number">2</span>,h/<span class="number">2</span>,<span class="number">150</span>,<span class="built_in">Math</span>.PI/<span class="number">2</span>,<span class="built_in">Math</span>.PI,<span class="literal">true</span>);</span><br><span class="line">ctx.stroke();</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/20181128205806750.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="圆弧"><br>因为是逆时针，且圆形在画布中心，y轴向下，为PI/2开始一直到x轴方向（向右）<br><strong>注意</strong>： y轴向下，x向左，坐标轴是到过来的</p>
+<h1 id="二、有关扇形操作"><a href="#二、有关扇形操作" class="headerlink" title="二、有关扇形操作"></a>二、有关扇形操作</h1><h3 id="1-绘制一个右上角四分之一的扇形并填充"><a href="#1-绘制一个右上角四分之一的扇形并填充" class="headerlink" title="1. 绘制一个右上角四分之一的扇形并填充"></a>1. 绘制一个右上角四分之一的扇形并填充</h3><p>绘制扇形我们可以先利用自动闭合ctx.closePath()，但是这就需要把起点放到圆心位置<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> w = ctx.canvas.width;</span><br><span class="line">   <span class="keyword">var</span> h = ctx.canvas.height;</span><br><span class="line">   </span><br><span class="line">   <span class="comment">/*把起点放到圆心位置*/</span></span><br><span class="line">   ctx.moveTo(w/<span class="number">2</span>,h/<span class="number">2</span>);</span><br><span class="line">   ctx.arc(w/<span class="number">2</span>,h/<span class="number">2</span>,<span class="number">150</span>,<span class="number">0</span>,-<span class="built_in">Math</span>.PI/<span class="number">2</span>,<span class="literal">true</span>);</span><br><span class="line">   ctx.closePath();</span><br><span class="line">   ctx.fill();</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://img-blog.csdnimg.cn/20181128210600535.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="扇形"></p>
+<h3 id="2-绘制一个分成六等分的园且颜色随机"><a href="#2-绘制一个分成六等分的园且颜色随机" class="headerlink" title="2. 绘制一个分成六等分的园且颜色随机"></a>2. 绘制一个分成六等分的园且颜色随机</h3><h6 id="a-首先获取随机颜色。利用rgb来取随机值"><a href="#a-首先获取随机颜色。利用rgb来取随机值" class="headerlink" title="a.首先获取随机颜色。利用rgb来取随机值"></a>a.首先获取随机颜色。利用rgb来取随机值</h6><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> getRandomColor = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> r = <span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random() * <span class="number">256</span>);</span><br><span class="line">        <span class="keyword">var</span> g = <span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random() * <span class="number">256</span>);</span><br><span class="line">        <span class="keyword">var</span> b = <span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random() * <span class="number">256</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'rgb('</span> + r + <span class="string">','</span> + g + <span class="string">','</span> + b + <span class="string">')'</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h6 id="b-上一次绘制结束的弧度等于当前的起始弧度"><a href="#b-上一次绘制结束的弧度等于当前的起始弧度" class="headerlink" title="b. 上一次绘制结束的弧度等于当前的起始弧度"></a>b. 上一次绘制结束的弧度等于当前的起始弧度</h6><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; num; i++) &#123;</span><br><span class="line">        <span class="keyword">var</span> startAngle = i * angle;</span><br><span class="line">        <span class="keyword">var</span> endAngle = (i + <span class="number">1</span>) * angle;</span><br><span class="line">        ctx.beginPath();</span><br><span class="line">        ctx.moveTo(x0, y0);</span><br><span class="line">        ctx.arc(x0, y0, <span class="number">150</span>, startAngle, endAngle);</span><br><span class="line">        <span class="comment">/*随机颜色*/</span></span><br><span class="line">        ctx.fillStyle = getRandomColor();</span><br><span class="line">        ctx.fill();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>整体代码如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myCanvas = <span class="built_in">document</span>.querySelector(<span class="string">'canvas'</span>);</span><br><span class="line">    <span class="keyword">var</span> ctx = myCanvas.getContext(<span class="string">'2d'</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> w = ctx.canvas.width;</span><br><span class="line">    <span class="keyword">var</span> h = ctx.canvas.height;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*分成几等分*/</span></span><br><span class="line">    <span class="keyword">var</span> num = <span class="number">6</span>;</span><br><span class="line">    <span class="comment">/*一份多少弧度*/</span></span><br><span class="line">    <span class="keyword">var</span> angle = <span class="built_in">Math</span>.PI * <span class="number">2</span> / num;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*原点坐标*/</span></span><br><span class="line">    <span class="keyword">var</span> x0 = w / <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">var</span> y0 = h / <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*获取随机颜色*/</span></span><br><span class="line">    <span class="keyword">var</span> getRandomColor = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> r = <span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random() * <span class="number">256</span>);</span><br><span class="line">        <span class="keyword">var</span> g = <span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random() * <span class="number">256</span>);</span><br><span class="line">        <span class="keyword">var</span> b = <span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random() * <span class="number">256</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'rgb('</span> + r + <span class="string">','</span> + g + <span class="string">','</span> + b + <span class="string">')'</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*上一次绘制的结束弧度等于当前次的起始弧度*/</span></span><br><span class="line">    <span class="comment">//var startAngle = 0;</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; num; i++) &#123;</span><br><span class="line">        <span class="keyword">var</span> startAngle = i * angle;</span><br><span class="line">        <span class="keyword">var</span> endAngle = (i + <span class="number">1</span>) * angle;</span><br><span class="line">        ctx.beginPath();</span><br><span class="line">        ctx.moveTo(x0, y0);</span><br><span class="line">        ctx.arc(x0, y0, <span class="number">150</span>, startAngle, endAngle);</span><br><span class="line">        <span class="comment">/*随机颜色*/</span></span><br><span class="line">        ctx.fillStyle = getRandomColor();</span><br><span class="line">        ctx.fill();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>结果如图所示：<br><img src="https://img-blog.csdnimg.cn/20181128211121867.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="随机扇形"><br>可知：扇形上的颜色随着每次刷新发生变化</p>
+<h3 id="3-绘制文字"><a href="#3-绘制文字" class="headerlink" title="3.  绘制文字"></a>3.  绘制文字</h3><p>我们将要在画布中心绘制文字，且加有下划线<br><strong>注意</strong>： 绘制文本起点位置在的左下角，绘制矩形的起点在左上角</p>
+<ul>
+<li>ctx.strokeText (text, x, y, maxwidth )描边字体</li>
+<li>ctx.fillText (text, x, y, maxwidth )填充字体<ul>
+<li>text 要绘制的文本</li>
+<li>x, y 文本绘制的坐标（文本左下角）</li>
+<li>maxwidth 设置的文本的最大宽度（可选参数）</li>
+</ul>
+</li>
+<li>ctx.textAlign 文本对齐方式，相对于绘制坐标来说<ul>
+<li>center 中心</li>
+<li>left 左</li>
+<li>right 右</li>
+<li>start  相对方向来说</li>
+<li>end  相对方向来说</li>
+</ul>
+</li>
+<li>ctx.direction<ul>
+<li>rtl  — right to left  如果设置了此属性，start就是右边</li>
+<li>ltr — left to right 如果设置了此属性，start就是左边</li>
+</ul>
+</li>
+<li>ctx.textBaseline 设置文字基线<ul>
+<li>top</li>
+<li>middle</li>
+<li>bottom</li>
+</ul>
+</li>
+<li>measureText()  确定文本宽度 obj.width</li>
+</ul>
+<hr>
+
+<p>具体操作：</p>
+<ul>
+<li>确定文字在画布中心</li>
+<li>确定下划线长度</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myCanvas = <span class="built_in">document</span>.querySelector(<span class="string">'canvas'</span>);</span><br><span class="line">    <span class="keyword">var</span> ctx = myCanvas.getContext(<span class="string">'2d'</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*1.在画布的中心绘制一段文字*/</span></span><br><span class="line">    <span class="comment">/*2.申明一段文字*/</span></span><br><span class="line">    <span class="keyword">var</span> str = <span class="string">'hello world'</span>;</span><br><span class="line">    <span class="comment">/*3.确定画布的中心*/</span></span><br><span class="line">    <span class="keyword">var</span> w = ctx.canvas.width;</span><br><span class="line">    <span class="keyword">var</span> h = ctx.canvas.height;</span><br><span class="line">    <span class="comment">/*4.画一个十字架在画布的中心*/</span></span><br><span class="line">    ctx.beginPath();</span><br><span class="line">    ctx.moveTo(<span class="number">0</span>, h / <span class="number">2</span> - <span class="number">0.5</span>);</span><br><span class="line">    ctx.lineTo(w, h / <span class="number">2</span> - <span class="number">0.5</span>);</span><br><span class="line">    ctx.moveTo(w / <span class="number">2</span> - <span class="number">0.5</span>, <span class="number">0</span>);</span><br><span class="line">    ctx.lineTo(w / <span class="number">2</span> - <span class="number">0.5</span>, h);</span><br><span class="line">    ctx.strokeStyle = <span class="string">'#eee'</span>;</span><br><span class="line">    ctx.stroke();</span><br><span class="line">    <span class="comment">/*5.绘制文本*/</span></span><br><span class="line">    ctx.beginPath();</span><br><span class="line">    ctx.strokeStyle = <span class="string">'#000'</span>;</span><br><span class="line">    <span class="keyword">var</span> x0 = w/<span class="number">2</span>;</span><br><span class="line">    <span class="keyword">var</span> y0 = h/<span class="number">2</span>;</span><br><span class="line">    ctx.font = <span class="string">'40px Microsoft YaHei'</span>;</span><br><span class="line">    ctx.textAlign = <span class="string">'center'</span>;</span><br><span class="line">    ctx.textBaseline = <span class="string">'middle'</span>;</span><br><span class="line">    ctx.fillText(str,x0,y0);</span><br><span class="line">    <span class="comment">/*6.画一个下划线和文字一样长*/</span></span><br><span class="line">    ctx.beginPath();</span><br><span class="line">    <span class="comment">/*获取文本的宽度*/</span></span><br><span class="line">    <span class="built_in">console</span>.log(ctx.measureText(str));</span><br><span class="line">    <span class="keyword">var</span> width = ctx.measureText(str).width;</span><br><span class="line">    ctx.moveTo(x0-width/<span class="number">2</span>,y0 + <span class="number">20</span>);</span><br><span class="line">    ctx.lineTo(x0+width/<span class="number">2</span>,y0 + <span class="number">20</span>);</span><br><span class="line">    ctx.stroke();</span><br></pre></td></tr></table></figure>
+<p>结果如图所示：<br><img src="https://img-blog.csdnimg.cn/20181128213333337.png" alt="绘制文字"></p>
+<h1 id="三、绘制饼状图"><a href="#三、绘制饼状图" class="headerlink" title="三、绘制饼状图"></a>三、绘制饼状图</h1><p>饼状图的要求：</p>
+<ol>
+<li>根据数据绘制一个饼图<pre><code>按照上边的示例可以知道，当前的结束弧度要等于下一次的起始弧度，下一次要使用当前的这一次的结束角度
+</code></pre></li>
+<li>绘制标题，从扇形的弧中心伸出一条线在画一条横线在横线的上面写上文字标题<br> 首先确定伸出去的线，线从圆心伸出，且通过扇形中间，确定伸出去的长度，计算点的坐标<br> 画文字和下划线：判断横线的伸出方向，结束点的坐标和文字的大小</li>
+<li>在画布的左上角，绘制说明 一个和扇形一样颜色的矩形，旁边就是文字说明<br> 矩形的大小<br> 矩形之间的间距<br> 距离左边的上边的间距</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br></pre></td><td class="code"><pre><span class="line">&lt;canvas width=<span class="string">"600"</span> height=<span class="string">"400"</span>&gt;&lt;/canvas&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="comment">/*1.绘制饼状态图*/</span></span><br><span class="line">    <span class="comment">/*1.1 根据数据绘制一个饼图*/</span></span><br><span class="line">    <span class="comment">/*1.2 绘制标题 从扇形的弧中心伸出一条线在画一条横线在横线的上面写上文字标题*/</span></span><br><span class="line">    <span class="comment">/*1.3 在画布的左上角 绘制说明 一个和扇形一样颜色的矩形 旁边就是文字说明*/</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> PieChart = <span class="function"><span class="keyword">function</span> (<span class="params">ctx</span>) </span>&#123;</span><br><span class="line">        <span class="comment">/*绘制工具*/</span></span><br><span class="line">        <span class="keyword">this</span>.ctx = ctx || <span class="built_in">document</span>.querySelector(<span class="string">'canvas'</span>).getContext(<span class="string">'2d'</span>);</span><br><span class="line">        <span class="comment">/*绘制饼图的中心*/</span></span><br><span class="line">        <span class="keyword">this</span>.w = <span class="keyword">this</span>.ctx.canvas.width;</span><br><span class="line">        <span class="keyword">this</span>.h = <span class="keyword">this</span>.ctx.canvas.height;</span><br><span class="line">        <span class="comment">/*圆心*/</span></span><br><span class="line">        <span class="keyword">this</span>.x0 = <span class="keyword">this</span>.w / <span class="number">2</span> + <span class="number">60</span>;</span><br><span class="line">        <span class="keyword">this</span>.y0 = <span class="keyword">this</span>.h / <span class="number">2</span>;</span><br><span class="line">        <span class="comment">/*半径*/</span></span><br><span class="line">        <span class="keyword">this</span>.radius = <span class="number">150</span>;</span><br><span class="line">        <span class="comment">/*伸出去的线的长度*/</span></span><br><span class="line">        <span class="keyword">this</span>.outLine = <span class="number">20</span>;</span><br><span class="line">        <span class="comment">/*说明的矩形大小*/</span></span><br><span class="line">        <span class="keyword">this</span>.rectW = <span class="number">30</span>;</span><br><span class="line">        <span class="keyword">this</span>.rectH = <span class="number">16</span>;</span><br><span class="line">        <span class="keyword">this</span>.space = <span class="number">20</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    PieChart.prototype.init = <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</span><br><span class="line">        <span class="comment">/*1.准备数据*/</span></span><br><span class="line">        <span class="keyword">this</span>.drawPie(data);</span><br><span class="line">    &#125;;</span><br><span class="line">    PieChart.prototype.drawPie = <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> that = <span class="keyword">this</span>;</span><br><span class="line">        <span class="comment">/*1.转化弧度*/</span></span><br><span class="line">        <span class="keyword">var</span> angleList = <span class="keyword">this</span>.transformAngle(data);</span><br><span class="line">        <span class="comment">/*2.绘制饼图*/</span></span><br><span class="line">        <span class="keyword">var</span> startAngle = <span class="number">0</span>;</span><br><span class="line">        angleList.forEach(<span class="function"><span class="keyword">function</span> (<span class="params">item, i</span>) </span>&#123;</span><br><span class="line">            <span class="comment">/*当前的结束弧度要等于下一次的起始弧度*/</span></span><br><span class="line">            <span class="keyword">var</span> endAngle = startAngle + item.angle;</span><br><span class="line">            that.ctx.beginPath();</span><br><span class="line">            that.ctx.moveTo(that.x0, that.y0);</span><br><span class="line">            that.ctx.arc(that.x0, that.y0, that.radius, startAngle, endAngle);</span><br><span class="line">            <span class="keyword">var</span> color = that.ctx.fillStyle = that.getRandomColor();</span><br><span class="line">            that.ctx.fill();</span><br><span class="line">            <span class="comment">/*下一次要使用当前的这一次的结束角度*/</span></span><br><span class="line">            <span class="comment">/*绘制标题*/</span></span><br><span class="line">            that.drawTitle(startAngle, item.angle, color , item.title);</span><br><span class="line">            <span class="comment">/*绘制说明*/</span></span><br><span class="line">            that.drawDesc(i,item.title);</span><br><span class="line">            startAngle = endAngle;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;;</span><br><span class="line">    PieChart.prototype.drawTitle = <span class="function"><span class="keyword">function</span> (<span class="params">startAngle, angle ,color , title</span>) </span>&#123;</span><br><span class="line">        <span class="comment">/*1.确定伸出去的线 通过圆心点 通过伸出去的点  确定这个线*/</span></span><br><span class="line">        <span class="comment">/*2.确定伸出去的点 需要确定伸出去的线的长度*/</span></span><br><span class="line">        <span class="comment">/*3.固定伸出去的线的长度*/</span></span><br><span class="line">        <span class="comment">/*4.计算这个点的坐标*/</span></span><br><span class="line">        <span class="comment">/*5.需要根据角度和斜边的长度*/</span></span><br><span class="line">        <span class="comment">/*5.1 使用弧度  当前扇形的起始弧度 + 对应的弧度的一半 */</span></span><br><span class="line">        <span class="comment">/*5.2 半径+伸出去的长度 */</span></span><br><span class="line">        <span class="comment">/*5.3 outX = x0 + cos(angle) * ( r + outLine)*/</span></span><br><span class="line">        <span class="comment">/*5.3 outY = y0 + sin(angle) * ( r + outLine)*/</span></span><br><span class="line">        <span class="comment">/*斜边*/</span></span><br><span class="line">        <span class="keyword">var</span> edge = <span class="keyword">this</span>.radius + <span class="keyword">this</span>.outLine;</span><br><span class="line">        <span class="comment">/*x轴方向的直角边*/</span></span><br><span class="line">        <span class="keyword">var</span> edgeX = <span class="built_in">Math</span>.cos(startAngle + angle / <span class="number">2</span>) * edge;</span><br><span class="line">        <span class="comment">/*y轴方向的直角边*/</span></span><br><span class="line">        <span class="keyword">var</span> edgeY = <span class="built_in">Math</span>.sin(startAngle + angle / <span class="number">2</span>) * edge;</span><br><span class="line">        <span class="comment">/*计算出去的点坐标*/</span></span><br><span class="line">        <span class="keyword">var</span> outX = <span class="keyword">this</span>.x0 + edgeX;</span><br><span class="line">        <span class="keyword">var</span> outY = <span class="keyword">this</span>.y0 + edgeY;</span><br><span class="line">        <span class="keyword">this</span>.ctx.beginPath();</span><br><span class="line">        <span class="keyword">this</span>.ctx.moveTo(<span class="keyword">this</span>.x0, <span class="keyword">this</span>.y0);</span><br><span class="line">        <span class="keyword">this</span>.ctx.lineTo(outX, outY);</span><br><span class="line">        <span class="keyword">this</span>.ctx.strokeStyle = color;</span><br><span class="line">        <span class="comment">/*画文字和下划线*/</span></span><br><span class="line">        <span class="comment">/*线的方向怎么判断 伸出去的点在X0的左边 线的方向就是左边*/</span></span><br><span class="line">        <span class="comment">/*线的方向怎么判断 伸出去的点在X0的右边 线的方向就是右边*/</span></span><br><span class="line">        <span class="comment">/*结束的点坐标  和文字大小*/</span></span><br><span class="line">        <span class="keyword">this</span>.ctx.font = <span class="string">'14px Microsoft YaHei'</span>;</span><br><span class="line">        <span class="keyword">var</span> textWidth = <span class="keyword">this</span>.ctx.measureText(title).width ;</span><br><span class="line">        <span class="keyword">if</span>(outX &gt; <span class="keyword">this</span>.x0)&#123;</span><br><span class="line">            <span class="comment">/*右*/</span></span><br><span class="line">            <span class="keyword">this</span>.ctx.lineTo(outX + textWidth,outY);</span><br><span class="line">            <span class="keyword">this</span>.ctx.textAlign = <span class="string">'left'</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="comment">/*左*/</span></span><br><span class="line">            <span class="keyword">this</span>.ctx.lineTo(outX - textWidth,outY);</span><br><span class="line">            <span class="keyword">this</span>.ctx.textAlign = <span class="string">'right'</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">this</span>.ctx.stroke();</span><br><span class="line">        <span class="keyword">this</span>.ctx.textBaseline = <span class="string">'bottom'</span>;</span><br><span class="line">        <span class="keyword">this</span>.ctx.fillText(title,outX,outY);</span><br><span class="line"></span><br><span class="line">    &#125;;</span><br><span class="line">    PieChart.prototype.drawDesc = <span class="function"><span class="keyword">function</span> (<span class="params">index,title</span>) </span>&#123;</span><br><span class="line">        <span class="comment">/*绘制说明*/</span></span><br><span class="line">        <span class="comment">/*矩形的大小*/</span></span><br><span class="line">        <span class="comment">/*距离上和左边的间距*/</span></span><br><span class="line">        <span class="comment">/*矩形之间的间距*/</span></span><br><span class="line">        <span class="keyword">this</span>.ctx.fillRect(<span class="keyword">this</span>.space,<span class="keyword">this</span>.space + index * (<span class="keyword">this</span>.rectH + <span class="number">10</span>),<span class="keyword">this</span>.rectW,<span class="keyword">this</span>.rectH);</span><br><span class="line">        <span class="comment">/*绘制文字*/</span></span><br><span class="line">        <span class="keyword">this</span>.ctx.beginPath();</span><br><span class="line">        <span class="keyword">this</span>.ctx.textAlign = <span class="string">'left'</span>;</span><br><span class="line">        <span class="keyword">this</span>.ctx.textBaseline = <span class="string">'top'</span>;</span><br><span class="line">        <span class="keyword">this</span>.ctx.font = <span class="string">'12px Microsoft YaHei'</span>;</span><br><span class="line">        <span class="keyword">this</span>.ctx.fillText(title,<span class="keyword">this</span>.space + <span class="keyword">this</span>.rectW + <span class="number">10</span> , <span class="keyword">this</span>.space + index * (<span class="keyword">this</span>.rectH + <span class="number">10</span>));</span><br><span class="line">    &#125;;</span><br><span class="line">    PieChart.prototype.transformAngle = <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</span><br><span class="line">        <span class="comment">/*返回的数据内容包含弧度的*/</span></span><br><span class="line">        <span class="keyword">var</span> total = <span class="number">0</span>;</span><br><span class="line">        data.forEach(<span class="function"><span class="keyword">function</span> (<span class="params">item, i</span>) </span>&#123;</span><br><span class="line">            total += item.num;</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="comment">/*计算弧度 并且追加到当前的对象内容*/</span></span><br><span class="line">        data.forEach(<span class="function"><span class="keyword">function</span> (<span class="params">item, i</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">var</span> angle = item.num / total * <span class="built_in">Math</span>.PI * <span class="number">2</span>;</span><br><span class="line">            item.angle = angle;</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="keyword">return</span> data;</span><br><span class="line">    &#125;;</span><br><span class="line">    PieChart.prototype.getRandomColor = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> r = <span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random() * <span class="number">256</span>);</span><br><span class="line">        <span class="keyword">var</span> g = <span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random() * <span class="number">256</span>);</span><br><span class="line">        <span class="keyword">var</span> b = <span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random() * <span class="number">256</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'rgb('</span> + r + <span class="string">','</span> + g + <span class="string">','</span> + b + <span class="string">')'</span>;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> data = [</span><br><span class="line">        &#123;</span><br><span class="line">            title: <span class="string">'15-20岁'</span>,</span><br><span class="line">            num: <span class="number">6</span></span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            title: <span class="string">'20-25岁'</span>,</span><br><span class="line">            num: <span class="number">30</span></span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            title: <span class="string">'25-30岁'</span>,</span><br><span class="line">            num: <span class="number">10</span></span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            title: <span class="string">'30以上'</span>,</span><br><span class="line">            num: <span class="number">8</span></span><br><span class="line">        &#125;</span><br><span class="line">    ];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> pieChart = <span class="keyword">new</span> PieChart();</span><br><span class="line">    pieChart.init(data);</span><br><span class="line"></span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+<p>结果如图所示：<br><img src="https://img-blog.csdnimg.cn/20181129200512502.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="饼状图"></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2018/11/29/Canvas之使用弧度绘制扇形图.html" data-title="Canvas之使用弧度绘制扇形图 | Welkin" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2018/11/27/Canvas之绘制折线图.html"  title="Canvas之绘制折线图">
+ <strong>NEXT:</strong><br/> 
+ <span>Canvas之绘制折线图
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、体现曲线的绘制"><span class="toc-number">1.</span> <span class="toc-text">一、体现曲线的绘制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-根据点动成线的概念绘制圆弧（利用函数）"><span class="toc-number">1.0.1.</span> <span class="toc-text">1. 根据点动成线的概念绘制圆弧（利用函数）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-利用ctx-arc"><span class="toc-number">1.0.2.</span> <span class="toc-text">2. 利用ctx.arc()</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、有关扇形操作"><span class="toc-number">2.</span> <span class="toc-text">二、有关扇形操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-绘制一个右上角四分之一的扇形并填充"><span class="toc-number">2.0.1.</span> <span class="toc-text">1. 绘制一个右上角四分之一的扇形并填充</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-绘制一个分成六等分的园且颜色随机"><span class="toc-number">2.0.2.</span> <span class="toc-text">2. 绘制一个分成六等分的园且颜色随机</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#a-首先获取随机颜色。利用rgb来取随机值"><span class="toc-number">2.0.2.0.0.1.</span> <span class="toc-text">a.首先获取随机颜色。利用rgb来取随机值</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#b-上一次绘制结束的弧度等于当前的起始弧度"><span class="toc-number">2.0.2.0.0.2.</span> <span class="toc-text">b. 上一次绘制结束的弧度等于当前的起始弧度</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-绘制文字"><span class="toc-number">2.0.3.</span> <span class="toc-text">3.  绘制文字</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#三、绘制饼状图"><span class="toc-number">3.</span> <span class="toc-text">三、绘制饼状图</span></a></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2018 
+		
+		<a href="http://yoursite.com" target="_blank" title="welkin">welkin</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>
