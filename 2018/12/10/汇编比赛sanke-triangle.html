@@ -1,0 +1,371 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>汇编比赛sanke-triangle | Welkin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="welkin">
+    
+    <meta name="description" content="sanke-triangle一个可以学习的小demo
+一、题目设计双任务系统设计
+二、设计内容采用8086汇编语言，设计并实现双任务系统设计，对两个任务（两个窗口）进行管理和调度，能够实现任务之间的切换，保存上下文信息。任务调度程序使用循环程序来完成。在左边显示窗口，能够运行简单的贪吃蛇游戏，在右边">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="Welkin" title="Welkin"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Welkin">Welkin</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/12/10/汇编比赛sanke-triangle.html" title="汇编比赛sanke-triangle" itemprop="url">汇编比赛sanke-triangle</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="welkin">welkin</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2018-12-10T14:26:59.000Z" itemprop="datePublished">2018-12-10</time>
+    Updated:<time datetime="2018-12-10T14:27:54.276Z" itemprop="dateModified">2018-12-10</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#sanke-triangle"><span class="toc-number">1.</span> <span class="toc-text">sanke-triangle</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#一、题目设计"><span class="toc-number">2.</span> <span class="toc-text">一、题目设计</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、设计内容"><span class="toc-number">3.</span> <span class="toc-text">二、设计内容</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#三、-需求分析"><span class="toc-number">4.</span> <span class="toc-text">三、 需求分析</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#四、-概要设计"><span class="toc-number">5.</span> <span class="toc-text">四、 概要设计</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-方案设计"><span class="toc-number">5.0.1.</span> <span class="toc-text">1. 方案设计</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-模块功能说明"><span class="toc-number">5.0.2.</span> <span class="toc-text">2. 模块功能说明</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2-1-I-O模块说明"><span class="toc-number">5.0.2.0.1.</span> <span class="toc-text">2.1 I/O模块说明</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-2-控制模块说明"><span class="toc-number">5.0.2.0.2.</span> <span class="toc-text">2.2 控制模块说明</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#五、详细设计及运行结果"><span class="toc-number">6.</span> <span class="toc-text">五、详细设计及运行结果</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-流程图"><span class="toc-number">6.0.1.</span> <span class="toc-text">5.1 流程图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-函数之间相互调用的图示"><span class="toc-number">6.0.2.</span> <span class="toc-text">5.2 函数之间相互调用的图示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-3-程序设计主要代码"><span class="toc-number">6.0.3.</span> <span class="toc-text">5.3 程序设计主要代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-4-运行结果"><span class="toc-number">6.0.4.</span> <span class="toc-text">5.4 运行结果</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#六、-调试情况，设计技巧及体会"><span class="toc-number">7.</span> <span class="toc-text">六、 调试情况，设计技巧及体会</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-对自己设计进行评价，指出合理和不足之处，提出改进的方案。"><span class="toc-number">7.0.1.</span> <span class="toc-text">1. 对自己设计进行评价，指出合理和不足之处，提出改进的方案。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-在设计过程中的感受。"><span class="toc-number">7.0.2.</span> <span class="toc-text">2. 在设计过程中的感受。</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#七、参考资料"><span class="toc-number">8.</span> <span class="toc-text">七、参考资料</span></a></li></ol>
+		</div>
+		
+		<h1 id="sanke-triangle"><a href="#sanke-triangle" class="headerlink" title="sanke-triangle"></a>sanke-triangle</h1><p>一个可以学习的小demo</p>
+<h1 id="一、题目设计"><a href="#一、题目设计" class="headerlink" title="一、题目设计"></a>一、题目设计</h1><p>双任务系统设计</p>
+<h1 id="二、设计内容"><a href="#二、设计内容" class="headerlink" title="二、设计内容"></a>二、设计内容</h1><p>采用8086汇编语言，设计并实现双任务系统设计，对两个任务（两个窗口）进行管理和调度，能够实现任务之间的切换，保存上下文信息。任务调度程序使用循环程序来完成。在左边显示窗口，能够运行简单的贪吃蛇游戏，在右边显示窗口，能够画出等边三角形。</p>
+<h1 id="三、-需求分析"><a href="#三、-需求分析" class="headerlink" title="三、 需求分析"></a>三、 需求分析</h1><ol>
+<li>贪吃蛇游戏采用键盘按键控制贪吃蛇前进方向，如“W、S、A、D”键分别为上下左右方向控制按键。</li>
+<li>游戏终止条件为贪吃蛇碰触窗口边框、蛇头碰触身体、身体长度达到上限，以“R”键为游戏重新开始。若游戏进行当中无键按下，则贪吃蛇保持当前方向不变直至撞墙。</li>
+<li>等边三角形位置在该显示区域的中部，参数边长由键盘输入确定。</li>
+<li>三角形每次根据输入的参数，在该窗口将三角形重新绘制出来。</li>
+<li>初始工作窗口为右边显示窗口，以后每按一次Tab键切换至旁边显示窗口。</li>
+<li>当某个显示窗口被选中时，则焦点停留在该窗口，键盘输入对当前窗口有效。</li>
+<li>整个系统按ESC键退出，返回DOS操作系统界面。</li>
+</ol>
+<h1 id="四、-概要设计"><a href="#四、-概要设计" class="headerlink" title="四、 概要设计"></a>四、 概要设计</h1><h3 id="1-方案设计"><a href="#1-方案设计" class="headerlink" title="1. 方案设计"></a>1. 方案设计</h3><p>功能肢解：<br>    <img src="https://img-blog.csdnimg.cn/20181208203138914.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h3 id="2-模块功能说明"><a href="#2-模块功能说明" class="headerlink" title="2. 模块功能说明"></a>2. 模块功能说明</h3><h5 id="2-1-I-O模块说明"><a href="#2-1-I-O模块说明" class="headerlink" title="2.1 I/O模块说明"></a>2.1 I/O模块说明</h5><p>（1）getInt() 读入整数函数：键盘输入一串字符，检测该字符是否为数字字符。若不是数字字符，则做无效处理。直至输入完整的数值字符保存在AX中并将ZF置1（调用者可用JZ判断是否发生特殊情况）。并做如下处理：①若键盘输入Esc键，返回AX=0，并将ZF置0。②若键盘输入Tab键，返回AX=1，并将ZF置0。</p>
+<p>（2）getchar() 函数：输入一个字符，回显</p>
+<p>（3）puts() 函数：输出字符串<br>（4）getch() 函数：输入一个字符，不回显<br>（5）putInt() 函数：将AX寄存器中的数字以十进制的形式输出</p>
+<h5 id="2-2-控制模块说明"><a href="#2-2-控制模块说明" class="headerlink" title="2.2 控制模块说明"></a>2.2 控制模块说明</h5><p>（1）movCursor() 移动光标模块：将光标移动至y行x列<br>（2）sDelay() 延时函数模块：控制贪吃蛇移动速度<br>（3）kbhit() 模块：检测键盘有无输入<br>（4）rand() 随机数发生模块：生成一定范围内的随机数</p>
+<h1 id="五、详细设计及运行结果"><a href="#五、详细设计及运行结果" class="headerlink" title="五、详细设计及运行结果"></a>五、详细设计及运行结果</h1><h3 id="5-1-流程图"><a href="#5-1-流程图" class="headerlink" title="5.1 流程图"></a>5.1 流程图</h3><p>（1）    三角形模块流程图</p>
+<p> <img src="https://img-blog.csdnimg.cn/20181208203238605.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="三角形"></p>
+<p>（2）贪吃蛇模块流程图</p>
+<p> <img src="https://img-blog.csdnimg.cn/20181208203310715.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="贪吃蛇"></p>
+<h3 id="5-2-函数之间相互调用的图示"><a href="#5-2-函数之间相互调用的图示" class="headerlink" title="5.2 函数之间相互调用的图示"></a>5.2 函数之间相互调用的图示</h3><ul>
+<li><p>函数内部调用图：<br><img src="https://img-blog.csdnimg.cn/20181208203430889.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="内部调用"></p>
+</li>
+<li><p>顶层调用图示：</p>
+</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/20181208203457119.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="顶层调用"></p>
+<h3 id="5-3-程序设计主要代码"><a href="#5-3-程序设计主要代码" class="headerlink" title="5.3 程序设计主要代码"></a>5.3 程序设计主要代码</h3><ul>
+<li>任务切换：</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/20181208203540303.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<ul>
+<li><p>贪吃蛇移动：</p>
+<p><img src="https://img-blog.csdnimg.cn/20181208203607720.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/20181208203629250.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<ul>
+<li>画三角形主要流程：<br><img src="https://img-blog.csdnimg.cn/20181208203704506.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="画三角形主要流程"></li>
+</ul>
+<h3 id="5-4-运行结果"><a href="#5-4-运行结果" class="headerlink" title="5.4 运行结果"></a>5.4 运行结果</h3><ol>
+<li><p>开始界面<br><img src="https://img-blog.csdnimg.cn/20181208203733801.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="开始界面"></p>
+</li>
+<li><p>输入等边三角形边长</p>
+</li>
+</ol>
+<ul>
+<li>2.1 若输入超出范围，清除输入数据并等待重新输入（此处为500）</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/20181208203808652.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="输入边长"></p>
+<ul>
+<li>2.2输入符合规范（此处为200）</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/20181208203924768.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<ol>
+<li>按Enter画等边三角形并重新打印提示信息</li>
+</ol>
+<p><img src="https://img-blog.csdnimg.cn/20181208203941453.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<ol>
+<li>可循环读入等边三角形边长（此处为80）<br><img src="https://img-blog.csdnimg.cn/20181208204020273.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
+</ol>
+<p>5、按Enter清除右半部分屏幕并重新打印</p>
+<p><img src="https://img-blog.csdnimg.cn/2018120820410187.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>6、按Tab键画等边三角形程序停止，贪吃蛇程序开始运行</p>
+<p> <img src="https://img-blog.csdnimg.cn/20181208204125513.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<ol>
+<li><p>食物出现在随机位置，用W A S D键控制贪吃蛇运动。</p>
+<p><img src="https://img-blog.csdnimg.cn/20181208204227658.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+</li>
+<li><p>若撞墙或碰到自己游戏结束并暂停</p>
+<p><img src="https://img-blog.csdnimg.cn/20181208204245929.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+</li>
+<li><p>游戏过关</p>
+<p><img src="https://img-blog.csdnimg.cn/20181208204317809.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+</li>
+<li><p>按R键重新开始游戏</p>
+</li>
+</ol>
+<p><img src="https://img-blog.csdnimg.cn/20181208204336475.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<ol>
+<li>按Tab键贪吃蛇程序暂停，画等边三角形程序等待输入</li>
+</ol>
+<p><img src="https://img-blog.csdnimg.cn/20181208204352492.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h1 id="六、-调试情况，设计技巧及体会"><a href="#六、-调试情况，设计技巧及体会" class="headerlink" title="六、 调试情况，设计技巧及体会"></a>六、 调试情况，设计技巧及体会</h1><h3 id="1-对自己设计进行评价，指出合理和不足之处，提出改进的方案。"><a href="#1-对自己设计进行评价，指出合理和不足之处，提出改进的方案。" class="headerlink" title="1. 对自己设计进行评价，指出合理和不足之处，提出改进的方案。"></a>1. 对自己设计进行评价，指出合理和不足之处，提出改进的方案。</h3><ul>
+<li>不足：<br>（1）贪吃蛇游戏制作的精细度和画面质量有待提高。<br>（2）贪吃蛇的移动速度无法改变。<br>（3）三角形使用整数近似计算。</li>
+<li>改进：<br>（1）可以通过改变蛇身的样子和食物的颜色来提高画面质量。<br>（2）可以在界面中设置游戏的速度：慢速 中速 高速。<br>（3）三角形可使用浮点数寄存器进行划线。<h3 id="2-在设计过程中的感受。"><a href="#2-在设计过程中的感受。" class="headerlink" title="2. 在设计过程中的感受。"></a>2. 在设计过程中的感受。</h3>在本次竞赛学习过程中，项目经过功能划分、肢解分为一层一层的模块调用。将计算机基本指令和中断调用整合起来形成底层模块，再由底层模块整合起来形成较大的功能模块，再由功能模块进行逻辑组合形成snake和tri模块，使用yield任务切换模块作为桥梁将整个程序整合在一起。</li>
+</ul>
+<p>在实际操作中我们认识到熟练掌握汇编语言中的指令的基本用法和组织结构的重要性。只有熟练掌握指令的基本用法，我们才能在实际的编程中像运用高级语言一样灵活的变通，认清计算机组织结构才能灵活设计程序整体架构。汇编语言作为一种低级设计语言，它是最底层的、与计算机内部的结构联系密切，我们在这次竞赛过程中深刻地了解到了这一点。</p>
+<p>在贪吃蛇程序和画等边三角形的程序设计中，加深了对计算机体系结构的理解，深刻理解汇编语言和其他语言的不同。在代码设计中也遇到很多的困难，比如一些寄存器使用冲突的问题，还有一些宏的使用问题和两个程序切换的问题等，以及如何对程序调用时对参数和返回值做一系列约定。在这个方面，我们深刻理解了团队协作能力的重要性。</p>
+<h1 id="七、参考资料"><a href="#七、参考资料" class="headerlink" title="七、参考资料"></a>七、参考资料</h1><p>·腾讯libco协程库coctx_cwap.S上下文切换模块:<br><a href="https://github.com/Tencent/libco/blob/master/coctx_swap.S" target="_blank" rel="noopener">https://github.com/Tencent/libco/blob/master/coctx_swap.S</a><br>·CSDN博客<br>·百度文库<br>·《汇编语言》王爽</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2018/12/10/汇编比赛sanke-triangle.html" data-title="汇编比赛sanke-triangle | Welkin" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2018/11/29/Canvas之绘制帧动画.html"  title="Canvas之绘制帧动画">
+ <strong>NEXT:</strong><br/> 
+ <span>Canvas之绘制帧动画
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#sanke-triangle"><span class="toc-number">1.</span> <span class="toc-text">sanke-triangle</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#一、题目设计"><span class="toc-number">2.</span> <span class="toc-text">一、题目设计</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、设计内容"><span class="toc-number">3.</span> <span class="toc-text">二、设计内容</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#三、-需求分析"><span class="toc-number">4.</span> <span class="toc-text">三、 需求分析</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#四、-概要设计"><span class="toc-number">5.</span> <span class="toc-text">四、 概要设计</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-方案设计"><span class="toc-number">5.0.1.</span> <span class="toc-text">1. 方案设计</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-模块功能说明"><span class="toc-number">5.0.2.</span> <span class="toc-text">2. 模块功能说明</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2-1-I-O模块说明"><span class="toc-number">5.0.2.0.1.</span> <span class="toc-text">2.1 I/O模块说明</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-2-控制模块说明"><span class="toc-number">5.0.2.0.2.</span> <span class="toc-text">2.2 控制模块说明</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#五、详细设计及运行结果"><span class="toc-number">6.</span> <span class="toc-text">五、详细设计及运行结果</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-流程图"><span class="toc-number">6.0.1.</span> <span class="toc-text">5.1 流程图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-函数之间相互调用的图示"><span class="toc-number">6.0.2.</span> <span class="toc-text">5.2 函数之间相互调用的图示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-3-程序设计主要代码"><span class="toc-number">6.0.3.</span> <span class="toc-text">5.3 程序设计主要代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-4-运行结果"><span class="toc-number">6.0.4.</span> <span class="toc-text">5.4 运行结果</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#六、-调试情况，设计技巧及体会"><span class="toc-number">7.</span> <span class="toc-text">六、 调试情况，设计技巧及体会</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-对自己设计进行评价，指出合理和不足之处，提出改进的方案。"><span class="toc-number">7.0.1.</span> <span class="toc-text">1. 对自己设计进行评价，指出合理和不足之处，提出改进的方案。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-在设计过程中的感受。"><span class="toc-number">7.0.2.</span> <span class="toc-text">2. 在设计过程中的感受。</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#七、参考资料"><span class="toc-number">8.</span> <span class="toc-text">七、参考资料</span></a></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2018 
+		
+		<a href="http://yoursite.com" target="_blank" title="welkin">welkin</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>
