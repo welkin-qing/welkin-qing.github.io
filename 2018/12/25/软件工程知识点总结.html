@@ -1,0 +1,431 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>软件工程知识点总结 | Welkin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="welkin">
+    
+    <meta name="description" content="一、常见问题1. 常见软件失败原因
+不断增长的需求
+期望值太低
+
+2.软件是什么?计算机程序和相关文档。软件产品可以为特定的客户开发，也可以为一般的市场开发。
+3.好的软件的特性是什么?好的软件应该向用户交付所需的功能和性能,应维护(可维护性),可靠的(可靠的)和可用性(可用的)。
+4.什么是软件工">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="Welkin" title="Welkin"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Welkin">Welkin</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/12/25/软件工程知识点总结.html" title="软件工程知识点总结" itemprop="url">软件工程知识点总结</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="welkin">welkin</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2018-12-25T05:01:30.000Z" itemprop="datePublished">2018-12-25</time>
+    Updated:<time datetime="2018-12-25T05:02:56.401Z" itemprop="dateModified">2018-12-25</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、常见问题"><span class="toc-number">1.</span> <span class="toc-text">一、常见问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-常见软件失败原因"><span class="toc-number">1.0.1.</span> <span class="toc-text">1. 常见软件失败原因</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-软件是什么"><span class="toc-number">1.0.2.</span> <span class="toc-text">2.软件是什么?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-好的软件的特性是什么"><span class="toc-number">1.0.3.</span> <span class="toc-text">3.好的软件的特性是什么?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-什么是软件工程"><span class="toc-number">1.0.4.</span> <span class="toc-text">4.什么是软件工程?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-什么是基本的软件工程活动"><span class="toc-number">1.0.5.</span> <span class="toc-text">5.什么是基本的软件工程活动?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-软件工程和计算机科学有什么区别"><span class="toc-number">1.0.6.</span> <span class="toc-text">6. 软件工程和计算机科学有什么区别?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-软件工程和系统工程的区别是什么"><span class="toc-number">1.0.7.</span> <span class="toc-text">7. 软件工程和系统工程的区别是什么?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-软件工程面临的主要挑战是什么"><span class="toc-number">1.0.8.</span> <span class="toc-text">8. 软件工程面临的主要挑战是什么?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-软件工程的成本是什么"><span class="toc-number">1.0.9.</span> <span class="toc-text">9. 软件工程的成本是什么?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-什么是最好的软件工程技术和方法"><span class="toc-number">1.0.10.</span> <span class="toc-text">10. 什么是最好的软件工程技术和方法?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-web对软件工程有什么不同"><span class="toc-number">1.0.11.</span> <span class="toc-text">11. web对软件工程有什么不同?</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、概念总结"><span class="toc-number">1.1.</span> <span class="toc-text">二、概念总结</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-好的软件的重要属性"><span class="toc-number">1.1.1.</span> <span class="toc-text">1. 好的软件的重要属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-两种软件产品"><span class="toc-number">1.1.2.</span> <span class="toc-text">2. 两种软件产品</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-软件过程的四项基本活动"><span class="toc-number">1.1.3.</span> <span class="toc-text">3. 软件过程的四项基本活动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-软件过程的三种过程模型，以及如何使用它们"><span class="toc-number">1.1.4.</span> <span class="toc-text">4. 软件过程的三种过程模型，以及如何使用它们</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-瀑布模型中的主要阶段及映射的基本开发活动"><span class="toc-number">1.1.5.</span> <span class="toc-text">5. 瀑布模型中的主要阶段及映射的基本开发活动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-增量开发中，面向复用过程的中间阶段是？"><span class="toc-number">1.1.6.</span> <span class="toc-text">6. 增量开发中，面向复用过程的中间阶段是？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-需求工程过程的四个主要阶段"><span class="toc-number">1.1.7.</span> <span class="toc-text">7. 需求工程过程的四个主要阶段</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-信息系统设计过程中的四个活动"><span class="toc-number">1.1.8.</span> <span class="toc-text">8. 信息系统设计过程中的四个活动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-测试阶段"><span class="toc-number">1.1.9.</span> <span class="toc-text">9. 测试阶段</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-增量式开发过程的好处"><span class="toc-number">1.1.10.</span> <span class="toc-text">10. 增量式开发过程的好处</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-统一软件开发过程"><span class="toc-number">1.1.11.</span> <span class="toc-text">11. 统一软件开发过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-描述Rational统一过程中的四个阶段"><span class="toc-number">1.1.12.</span> <span class="toc-text">12. 描述Rational统一过程中的四个阶段</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#13-什么是需求"><span class="toc-number">1.1.13.</span> <span class="toc-text">13. 什么是需求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#14-功能需求和非功能需求"><span class="toc-number">1.1.14.</span> <span class="toc-text">14. 功能需求和非功能需求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#15-需求文档结构"><span class="toc-number">1.1.15.</span> <span class="toc-text">15. 需求文档结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#16-UML的5种类型"><span class="toc-number">1.1.16.</span> <span class="toc-text">16. UML的5种类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#17-模型驱动体系结构"><span class="toc-number">1.1.17.</span> <span class="toc-text">17. 模型驱动体系结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#18-测试过程的目标"><span class="toc-number">1.1.18.</span> <span class="toc-text">18. 测试过程的目标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#19-软件系统的三个测试阶段"><span class="toc-number">1.1.19.</span> <span class="toc-text">19. 软件系统的三个测试阶段</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#20-开发过程中测试的三个粒度级别"><span class="toc-number">1.1.20.</span> <span class="toc-text">20. 开发过程中测试的三个粒度级别</span></a></li></ol></li></ol></li></ol>
+		</div>
+		
+		<h1 id="一、常见问题"><a href="#一、常见问题" class="headerlink" title="一、常见问题"></a>一、常见问题</h1><h3 id="1-常见软件失败原因"><a href="#1-常见软件失败原因" class="headerlink" title="1. 常见软件失败原因"></a>1. 常见软件失败原因</h3><ul>
+<li>不断增长的需求</li>
+<li>期望值太低</li>
+</ul>
+<h3 id="2-软件是什么"><a href="#2-软件是什么" class="headerlink" title="2.软件是什么?"></a>2.软件是什么?</h3><p>计算机程序和相关文档。软件产品可以为特定的客户开发，也可以为一般的市场开发。</p>
+<h3 id="3-好的软件的特性是什么"><a href="#3-好的软件的特性是什么" class="headerlink" title="3.好的软件的特性是什么?"></a>3.好的软件的特性是什么?</h3><p>好的软件应该向用户交付所需的功能和性能,应维护(可维护性),可靠的(可靠的)和可用性(可用的)。</p>
+<h3 id="4-什么是软件工程"><a href="#4-什么是软件工程" class="headerlink" title="4.什么是软件工程?"></a>4.什么是软件工程?</h3><p>软件工程是一个工程学科(训练学科),关心的是软件生产的各个方面。</p>
+<h3 id="5-什么是基本的软件工程活动"><a href="#5-什么是基本的软件工程活动" class="headerlink" title="5.什么是基本的软件工程活动?"></a>5.什么是基本的软件工程活动?</h3><p>软件规范(软件描述),软件开发(软件设计和实现),软件验证(软件有效性验证)和软件进化(软件进化)。</p>
+<h3 id="6-软件工程和计算机科学有什么区别"><a href="#6-软件工程和计算机科学有什么区别" class="headerlink" title="6. 软件工程和计算机科学有什么区别?"></a>6. 软件工程和计算机科学有什么区别?</h3><p>计算机科学侧重于理论和基础;软件工程关注开发和交付有用软件的实用性。</p>
+<h3 id="7-软件工程和系统工程的区别是什么"><a href="#7-软件工程和系统工程的区别是什么" class="headerlink" title="7. 软件工程和系统工程的区别是什么?"></a>7. 软件工程和系统工程的区别是什么?</h3><p>系统工程涉及计算机系统开发的各个方面，包括硬件、软件和过程工程。软件工程是更一般的一部分(一般的)过程。</p>
+<h3 id="8-软件工程面临的主要挑战是什么"><a href="#8-软件工程面临的主要挑战是什么" class="headerlink" title="8. 软件工程面临的主要挑战是什么?"></a>8. 软件工程面临的主要挑战是什么?</h3><p>应对日益多样性(多样性),要求减少交货时间和发展中值得信赖的软件。</p>
+<h3 id="9-软件工程的成本是什么"><a href="#9-软件工程的成本是什么" class="headerlink" title="9. 软件工程的成本是什么?"></a>9. 软件工程的成本是什么?</h3><p>大约60%的软件成本是开发成本，40%是测试成本。自定义(定做)软件,进化成本往往超过(超过)开发成本。</p>
+<h3 id="10-什么是最好的软件工程技术和方法"><a href="#10-什么是最好的软件工程技术和方法" class="headerlink" title="10. 什么是最好的软件工程技术和方法?"></a>10. 什么是最好的软件工程技术和方法?</h3><p>而所有软件项目必须专业(专业地)管理和开发,不同的技术适合不同类型的系统。例如,游戏应该总是使用一系列的开发(原型)原型而(然而)安全关键控制系统需要一个完整的和可分析的规范发展。因此，你不能说一种方法比另一种好。</p>
+<h3 id="11-web对软件工程有什么不同"><a href="#11-web对软件工程有什么不同" class="headerlink" title="11. web对软件工程有什么不同?"></a>11. web对软件工程有什么不同?</h3><p>网络导致了软件服务的可用性和开发高度分布式的可能性(分布式的)服务的系统。基于web的系统开发在编程语言和软件重用方面取得了重要进展。</p>
+<hr>
+
+<h2 id="二、概念总结"><a href="#二、概念总结" class="headerlink" title="二、概念总结"></a>二、概念总结</h2><h3 id="1-好的软件的重要属性"><a href="#1-好的软件的重要属性" class="headerlink" title="1. 好的软件的重要属性"></a>1. 好的软件的重要属性</h3><ul>
+<li>可维护性</li>
+<li>可靠性和安全性</li>
+<li>高效性</li>
+<li>可接受性</li>
+</ul>
+<h3 id="2-两种软件产品"><a href="#2-两种软件产品" class="headerlink" title="2. 两种软件产品"></a>2. 两种软件产品</h3><ul>
+<li>通用产品</li>
+<li>定制化产品</li>
+</ul>
+<h3 id="3-软件过程的四项基本活动"><a href="#3-软件过程的四项基本活动" class="headerlink" title="3. 软件过程的四项基本活动"></a>3. 软件过程的四项基本活动</h3><ol>
+<li>软件描述</li>
+<li>软件开发</li>
+<li>软件有效性验证</li>
+<li>软件进化</li>
+</ol>
+<h3 id="4-软件过程的三种过程模型，以及如何使用它们"><a href="#4-软件过程的三种过程模型，以及如何使用它们" class="headerlink" title="4. 软件过程的三种过程模型，以及如何使用它们"></a>4. 软件过程的三种过程模型，以及如何使用它们</h3><ul>
+<li>瀑布模型<br>  计划驱动的模型。规范和开发的不同阶段。</li>
+<li>增量开发式模型<br>  规范、开发和验证是交错的。可以是计划驱动的，也可以是敏捷的。</li>
+<li>面向复用的软件工程<br>  这个系统收集现有的组件，灵活的计划驱动<h3 id="5-瀑布模型中的主要阶段及映射的基本开发活动"><a href="#5-瀑布模型中的主要阶段及映射的基本开发活动" class="headerlink" title="5. 瀑布模型中的主要阶段及映射的基本开发活动"></a>5. 瀑布模型中的主要阶段及映射的基本开发活动</h3></li>
+<li>需求分析和定义</li>
+<li>系统和软件测试</li>
+<li>实现和单元测试</li>
+<li>集成和系统测试</li>
+<li><p>运行和可维护</p>
+<p><img src="https://img-blog.csdnimg.cn/20181225170407414.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="瀑布模型"></p>
+</li>
+</ul>
+<h3 id="6-增量开发中，面向复用过程的中间阶段是？"><a href="#6-增量开发中，面向复用过程的中间阶段是？" class="headerlink" title="6. 增量开发中，面向复用过程的中间阶段是？"></a>6. 增量开发中，面向复用过程的中间阶段是？</h3><ul>
+<li>组件分析</li>
+<li>需求修改</li>
+<li>系统设计和重用</li>
+<li>开发与整合</li>
+</ul>
+<h3 id="7-需求工程过程的四个主要阶段"><a href="#7-需求工程过程的四个主要阶段" class="headerlink" title="7. 需求工程过程的四个主要阶段"></a>7. 需求工程过程的四个主要阶段</h3><ol>
+<li>可行性研究</li>
+<li>需求导出和分析</li>
+<li>需求描述</li>
+<li>需求有效性验证</li>
+</ol>
+<h3 id="8-信息系统设计过程中的四个活动"><a href="#8-信息系统设计过程中的四个活动" class="headerlink" title="8. 信息系统设计过程中的四个活动"></a>8. 信息系统设计过程中的四个活动</h3><ul>
+<li>架构设计</li>
+<li>接口设计</li>
+<li>组件设计</li>
+<li>数据库设计</li>
+</ul>
+<h3 id="9-测试阶段"><a href="#9-测试阶段" class="headerlink" title="9. 测试阶段"></a>9. 测试阶段</h3><ul>
+<li>开发和组件测试<ul>
+<li>个人独立组件测试</li>
+<li>组件可能是功能或这些实体的对象或连贯的分组</li>
+</ul>
+</li>
+<li>系统测试<ul>
+<li>测试系统作为一个整体。紧急特性的测试尤其重要。</li>
+</ul>
+</li>
+<li>验收测试<ul>
+<li>测试与客户数据检查以满足顾客的需求</li>
+</ul>
+</li>
+</ul>
+<h3 id="10-增量式开发过程的好处"><a href="#10-增量式开发过程的好处" class="headerlink" title="10. 增量式开发过程的好处"></a>10. 增量式开发过程的好处</h3><ul>
+<li>顾客价值可以与每个增量交付系统功能是可用的。</li>
+<li>早期增量作为原型帮助引出后期增量</li>
+<li>降低整体项目的风险</li>
+<li>优先级最高的系统服务倾向接收最高测试</li>
+</ul>
+<h3 id="11-统一软件开发过程"><a href="#11-统一软件开发过程" class="headerlink" title="11. 统一软件开发过程"></a>11. 统一软件开发过程</h3><ul>
+<li>从动态视角而言，展现了产品开发的各个阶段</li>
+<li>从静态视角而言，展现了过程活动</li>
+<li>从实践视角而言，给予了更好的实践</li>
+</ul>
+<h3 id="12-描述Rational统一过程中的四个阶段"><a href="#12-描述Rational统一过程中的四个阶段" class="headerlink" title="12. 描述Rational统一过程中的四个阶段"></a>12. 描述Rational统一过程中的四个阶段</h3><ol>
+<li>开始<br> 创建系统的商业案列</li>
+<li>计划<br> 开发可理解的问题域和系统结构</li>
+<li>建造<br> 系统设计，编程和测试</li>
+<li>转变<br> 在操作环境下使用系统</li>
+</ol>
+<h3 id="13-什么是需求"><a href="#13-什么是需求" class="headerlink" title="13. 什么是需求"></a>13. 什么是需求</h3><ul>
+<li>用户需求<ul>
+<li>为客户撰写自然语言语句加上系统提供的服务及其操作约束的图表</li>
+</ul>
+</li>
+<li>系统需求<ul>
+<li>列出系统功能、服务和操作约束的详细描述的结构化文档。定义应该执行的内容，因此可以是客户和承包商之间合同的一部分。 </li>
+</ul>
+</li>
+</ul>
+<h3 id="14-功能需求和非功能需求"><a href="#14-功能需求和非功能需求" class="headerlink" title="14. 功能需求和非功能需求"></a>14. 功能需求和非功能需求</h3><p><strong>软件系统需求常常分为功能需求和非功能需求</strong></p>
+<ul>
+<li>功能需求  包括对系统应该提供的服务、如何对特殊输入做出反应，以及系统在特定条件下行为的描述。在某些情况下，功能需求可能还需明确声明系统不应该做什么。</li>
+<li>非功能需求  对系统提供的服务或功能给出的约束。包括时间约束、开发过程的约束和所受到的标准的约束。非功能需求经常适用于整个系统而不是个别的系统功能或服务。</li>
+</ul>
+<h3 id="15-需求文档结构"><a href="#15-需求文档结构" class="headerlink" title="15. 需求文档结构"></a>15. 需求文档结构</h3><p>Preface(绪言),<br>Introduction（引言），<br>Glossary(术语)，<br>User requirements definition(用户需求定义)，<br>System architecture (系统体系结构)，<br>System requirements specification(系统需求描述)，<br>System models(系统模型)，<br>System evolution (系统进化)，<br>Appendices(附录)，<br>Index(索引)。</p>
+<h3 id="16-UML的5种类型"><a href="#16-UML的5种类型" class="headerlink" title="16. UML的5种类型"></a>16. UML的5种类型</h3><ul>
+<li>活动图：它显示流程或数据处理中所涉及的活动。 </li>
+<li>用例图：它显示了系统与其环境之间的相互作用。 </li>
+<li>时序图：它显示了参与者和系统之间以及系统组件之间的交互</li>
+<li>类图：它显示了系统中的对象类以及这些类之间的关联。 </li>
+<li><p>状态图：起于圆圈，终于包裹圆圈，内外部响应</p>
+<p>UML是一种支持软件设计和记录软件设计的语言，而不是编程语言，UML的设计者关心的不是语言的语义细节，而是她的表达能力。为了建立一个UML可执行的子集，模型类型的数量已经被剧减为３个主要的模型类型。<br>１．    Domain  models 领域模型<br>２．    Class models  类模型<br>３．    State models  状态模型</p>
+</li>
+</ul>
+<h3 id="17-模型驱动体系结构"><a href="#17-模型驱动体系结构" class="headerlink" title="17. 模型驱动体系结构"></a>17. 模型驱动体系结构</h3><p><strong>模型驱动体系结构是一种以模型为中心进行软件设计和实现的方法，它使用UML模型的子集来描述系统。MDA方法认为应该产生3种类型的抽象系统模型：</strong></p>
+<ol>
+<li>A computation independent model 计算机独立模型（CIM）</li>
+<li>A platform independent model平台独立模型（PIM）</li>
+<li>Platform specific models平台特定模型（PSM）</li>
+</ol>
+<h3 id="18-测试过程的目标"><a href="#18-测试过程的目标" class="headerlink" title="18. 测试过程的目标"></a>18. 测试过程的目标</h3><ul>
+<li>有效性测试<ul>
+<li>向开发人员和系统客户演示软件满足其要求            </li>
+<li>成功的测试表明系统按预期运行。 </li>
+</ul>
+</li>
+<li>缺陷测试<ul>
+<li>发现软件中的错误或缺陷，发现其行为不正确或不符合其规范            </li>
+<li>成功的测试是使系统执行不正确从而暴露系统中的缺陷的测试。</li>
+</ul>
+</li>
+</ul>
+<h3 id="19-软件系统的三个测试阶段"><a href="#19-软件系统的三个测试阶段" class="headerlink" title="19. 软件系统的三个测试阶段"></a>19. 软件系统的三个测试阶段</h3><ul>
+<li>开发测试：在开发过程中对系统进行测试以发现bug和缺陷。         </li>
+<li>发布测试：  在系统发布给用户之前，单独的测试团队测试系统的完整版本。           </li>
+<li>用户测试 ： 其中系统的用户或潜在用户在自己的环境中测试系统。 </li>
+</ul>
+<h3 id="20-开发过程中测试的三个粒度级别"><a href="#20-开发过程中测试的三个粒度级别" class="headerlink" title="20. 开发过程中测试的三个粒度级别"></a>20. 开发过程中测试的三个粒度级别</h3><ul>
+<li>单元测试：其中测试单个程序单元或对象类。单元测试应该集中于测试对象或方法的功能。 </li>
+<li>组件测试：其中集成几个单独的单元以创建复合组件。组件测试应该关注于测试组件接口。 </li>
+<li>系统测试：其中将系统中的一些或全部组件集成，并将系统作为一个整体进行测试。系统测试应该关注于测试组件交互。 </li>
+</ul>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2018/12/25/软件工程知识点总结.html" data-title="软件工程知识点总结 | Welkin" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2018/12/10/node工具-nodemon的下载和使用.html"  title="node工具-nodemon的下载和使用">
+ <strong>NEXT:</strong><br/> 
+ <span>node工具-nodemon的下载和使用
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、常见问题"><span class="toc-number">1.</span> <span class="toc-text">一、常见问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-常见软件失败原因"><span class="toc-number">1.0.1.</span> <span class="toc-text">1. 常见软件失败原因</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-软件是什么"><span class="toc-number">1.0.2.</span> <span class="toc-text">2.软件是什么?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-好的软件的特性是什么"><span class="toc-number">1.0.3.</span> <span class="toc-text">3.好的软件的特性是什么?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-什么是软件工程"><span class="toc-number">1.0.4.</span> <span class="toc-text">4.什么是软件工程?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-什么是基本的软件工程活动"><span class="toc-number">1.0.5.</span> <span class="toc-text">5.什么是基本的软件工程活动?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-软件工程和计算机科学有什么区别"><span class="toc-number">1.0.6.</span> <span class="toc-text">6. 软件工程和计算机科学有什么区别?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-软件工程和系统工程的区别是什么"><span class="toc-number">1.0.7.</span> <span class="toc-text">7. 软件工程和系统工程的区别是什么?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-软件工程面临的主要挑战是什么"><span class="toc-number">1.0.8.</span> <span class="toc-text">8. 软件工程面临的主要挑战是什么?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-软件工程的成本是什么"><span class="toc-number">1.0.9.</span> <span class="toc-text">9. 软件工程的成本是什么?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-什么是最好的软件工程技术和方法"><span class="toc-number">1.0.10.</span> <span class="toc-text">10. 什么是最好的软件工程技术和方法?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-web对软件工程有什么不同"><span class="toc-number">1.0.11.</span> <span class="toc-text">11. web对软件工程有什么不同?</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、概念总结"><span class="toc-number">1.1.</span> <span class="toc-text">二、概念总结</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-好的软件的重要属性"><span class="toc-number">1.1.1.</span> <span class="toc-text">1. 好的软件的重要属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-两种软件产品"><span class="toc-number">1.1.2.</span> <span class="toc-text">2. 两种软件产品</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-软件过程的四项基本活动"><span class="toc-number">1.1.3.</span> <span class="toc-text">3. 软件过程的四项基本活动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-软件过程的三种过程模型，以及如何使用它们"><span class="toc-number">1.1.4.</span> <span class="toc-text">4. 软件过程的三种过程模型，以及如何使用它们</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-瀑布模型中的主要阶段及映射的基本开发活动"><span class="toc-number">1.1.5.</span> <span class="toc-text">5. 瀑布模型中的主要阶段及映射的基本开发活动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-增量开发中，面向复用过程的中间阶段是？"><span class="toc-number">1.1.6.</span> <span class="toc-text">6. 增量开发中，面向复用过程的中间阶段是？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-需求工程过程的四个主要阶段"><span class="toc-number">1.1.7.</span> <span class="toc-text">7. 需求工程过程的四个主要阶段</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-信息系统设计过程中的四个活动"><span class="toc-number">1.1.8.</span> <span class="toc-text">8. 信息系统设计过程中的四个活动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-测试阶段"><span class="toc-number">1.1.9.</span> <span class="toc-text">9. 测试阶段</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-增量式开发过程的好处"><span class="toc-number">1.1.10.</span> <span class="toc-text">10. 增量式开发过程的好处</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-统一软件开发过程"><span class="toc-number">1.1.11.</span> <span class="toc-text">11. 统一软件开发过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-描述Rational统一过程中的四个阶段"><span class="toc-number">1.1.12.</span> <span class="toc-text">12. 描述Rational统一过程中的四个阶段</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#13-什么是需求"><span class="toc-number">1.1.13.</span> <span class="toc-text">13. 什么是需求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#14-功能需求和非功能需求"><span class="toc-number">1.1.14.</span> <span class="toc-text">14. 功能需求和非功能需求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#15-需求文档结构"><span class="toc-number">1.1.15.</span> <span class="toc-text">15. 需求文档结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#16-UML的5种类型"><span class="toc-number">1.1.16.</span> <span class="toc-text">16. UML的5种类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#17-模型驱动体系结构"><span class="toc-number">1.1.17.</span> <span class="toc-text">17. 模型驱动体系结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#18-测试过程的目标"><span class="toc-number">1.1.18.</span> <span class="toc-text">18. 测试过程的目标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#19-软件系统的三个测试阶段"><span class="toc-number">1.1.19.</span> <span class="toc-text">19. 软件系统的三个测试阶段</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#20-开发过程中测试的三个粒度级别"><span class="toc-number">1.1.20.</span> <span class="toc-text">20. 开发过程中测试的三个粒度级别</span></a></li></ol></li></ol></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2018 
+		
+		<a href="http://yoursite.com" target="_blank" title="welkin">welkin</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>
