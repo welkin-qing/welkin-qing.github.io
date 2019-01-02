@@ -1,0 +1,484 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>软件工程考点总结（二） | Welkin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="welkin">
+    
+    <meta name="description" content="一、 软件设计
+总体设计（概要设计，结构设计）确定软件系统由哪些模块构成，以及模块间相互之间的关系
+详细设计（过程设计）  确定每个模块中的具体处理过程
+
+1. 模块化
+2. 模块的独立性基本概念：开发具有独立功能且和其它模块之间没有过多的相互作用的模块，可以做到模块的独立特点：具有特定的子功能，接">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="Welkin" title="Welkin"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Welkin">Welkin</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2019/01/02/软件工程考点总结（二）.html" title="软件工程考点总结（二）" itemprop="url">软件工程考点总结（二）</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="welkin">welkin</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2019-01-02T02:24:51.000Z" itemprop="datePublished">2019-01-02</time>
+    Updated:<time datetime="2019-01-02T02:25:39.498Z" itemprop="dateModified">2019-01-02</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、-软件设计"><span class="toc-number">1.</span> <span class="toc-text">一、 软件设计</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-模块化"><span class="toc-number">1.0.1.</span> <span class="toc-text">1. 模块化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-模块的独立性"><span class="toc-number">1.0.2.</span> <span class="toc-text">2. 模块的独立性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-耦合的分类"><span class="toc-number">1.0.3.</span> <span class="toc-text">3. 耦合的分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-去除模块间控制耦合的方法"><span class="toc-number">1.0.4.</span> <span class="toc-text">4. 去除模块间控制耦合的方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-如何降低模块间的耦合度"><span class="toc-number">1.0.5.</span> <span class="toc-text">5. 如何降低模块间的耦合度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-HIPO图"><span class="toc-number">1.0.6.</span> <span class="toc-text">6. HIPO图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-结构图（SC）"><span class="toc-number">1.0.7.</span> <span class="toc-text">7. 结构图（SC）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-改进的IPO图"><span class="toc-number">1.0.8.</span> <span class="toc-text">8. 改进的IPO图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-SC图举例"><span class="toc-number">1.0.9.</span> <span class="toc-text">9. SC图举例</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、概要设计"><span class="toc-number">2.</span> <span class="toc-text">二、概要设计</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-数据流图类型"><span class="toc-number">2.0.1.</span> <span class="toc-text">1. 数据流图类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-变换分析设计方法"><span class="toc-number">2.0.2.</span> <span class="toc-text">2. 变换分析设计方法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#三、测试"><span class="toc-number">3.</span> <span class="toc-text">三、测试</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#基本概念"><span class="toc-number">3.0.0.1.</span> <span class="toc-text">基本概念</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-软件测试的对象"><span class="toc-number">3.0.1.</span> <span class="toc-text">1. 软件测试的对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-测试的基本原则"><span class="toc-number">3.0.2.</span> <span class="toc-text">2. 测试的基本原则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-测试的方法和技术"><span class="toc-number">3.0.3.</span> <span class="toc-text">3. 测试的方法和技术</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#两种典型的测试："><span class="toc-number">3.0.4.</span> <span class="toc-text">两种典型的测试：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-逻辑覆盖准则"><span class="toc-number">3.0.5.</span> <span class="toc-text">4. 逻辑覆盖准则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-黑盒法的测试用例设计"><span class="toc-number">3.0.6.</span> <span class="toc-text">5. 黑盒法的测试用例设计</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-实用策略"><span class="toc-number">3.0.7.</span> <span class="toc-text">6. 实用策略</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-集成测试方法"><span class="toc-number">3.0.8.</span> <span class="toc-text">7. 集成测试方法</span></a></li></ol></li></ol></li></ol>
+		</div>
+		
+		<h1 id="一、-软件设计"><a href="#一、-软件设计" class="headerlink" title="一、 软件设计"></a>一、 软件设计</h1><ul>
+<li>总体设计（概要设计，结构设计）<br>确定软件系统由哪些模块构成，以及模块间相互之间的关系</li>
+<li>详细设计（过程设计）<br>  确定每个模块中的具体处理过程<br><img src="https://img-blog.csdnimg.cn/20181231214851483.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="基本概念"></li>
+</ul>
+<h3 id="1-模块化"><a href="#1-模块化" class="headerlink" title="1. 模块化"></a>1. 模块化</h3><p><img src="https://img-blog.csdnimg.cn/20181231215134343.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h3 id="2-模块的独立性"><a href="#2-模块的独立性" class="headerlink" title="2. 模块的独立性"></a>2. 模块的独立性</h3><p><strong>基本概念：</strong><br>开发具有独立功能且和其它模块之间没有过多的相互作用的模块，可以做到模块的独立<br><strong>特点：</strong><br>具有特定的子功能，接口简单<br><strong>衡量标准：</strong><br>衡量模块的独立性：<strong>高内聚，低耦合</strong></p>
+<ul>
+<li>耦合：（块间联系）衡量不同模块间相互依赖的紧密程度，为独立性的直接衡量</li>
+<li>内聚：（块内联系）模块内各部分（语句或段落）之间结合的紧密程度</li>
+</ul>
+<h3 id="3-耦合的分类"><a href="#3-耦合的分类" class="headerlink" title="3. 耦合的分类"></a>3. 耦合的分类</h3><ol>
+<li>非直接耦合<br>两个模块之间没有直接联系，模块独立性最强<br><img src="https://img-blog.csdnimg.cn/20181231215732813.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="非直接耦合"></li>
+<li>数据耦合（松散耦合）<br>一个模块调用另一个模块时，被调用模块的输入，输出都是简单的数据</li>
+<li>标记耦合（特征耦合）<br>例如：两个模块通过传递数据结构（不是简单数据，而是记录，数组等）加以联系，或者都与一个数据结构有关系，则称这两个模块间存在标记耦合</li>
+<li>控制耦合<br>一个模块通过开关量，标志，名字等控制信息，明显的控制一模块的功能<br>增加了理解和编程的复杂性，调用模块必须知道被调用模块的内部逻辑，增加了相互依赖</li>
+<li>公共耦合<br>一组模块引用同一个公用数据区</li>
+</ol>
+<p><strong>公共数据区（全局数据区或公共数据环境）</strong></p>
+<ul>
+<li>全局数据结构</li>
+<li>共享通讯区</li>
+<li>内存公共覆盖区</li>
+</ul>
+<ol>
+<li>内容耦合<br>一个模块直接访问另一个模块的内部信息（程序代码或者数据）<h3 id="4-去除模块间控制耦合的方法"><a href="#4-去除模块间控制耦合的方法" class="headerlink" title="4. 去除模块间控制耦合的方法"></a>4. 去除模块间控制耦合的方法</h3></li>
+<li>将被调用模块内部的判定上移到调用模块中进行</li>
+<li>被调用模块分解成若干单一功能模块</li>
+</ol>
+<h3 id="5-如何降低模块间的耦合度"><a href="#5-如何降低模块间的耦合度" class="headerlink" title="5. 如何降低模块间的耦合度"></a>5. 如何降低模块间的耦合度</h3><ol>
+<li>如果模块必须存在耦合，选择适当的耦合类型</li>
+</ol>
+<p><strong>原则：</strong></p>
+<ul>
+<li>尽量使用数据耦合</li>
+<li>少用控制耦合</li>
+<li>限制公共耦合的范围</li>
+<li>坚决避免使用内容耦合</li>
+</ul>
+<ol>
+<li>降低模块间接口的复杂性</li>
+</ol>
+<h3 id="6-HIPO图"><a href="#6-HIPO图" class="headerlink" title="6. HIPO图"></a>6. HIPO图</h3><p>H图（层次图）中的每一个模块都有一张IPO图对应<br><img src="https://img-blog.csdnimg.cn/20181231221339755.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="HIPO"></p>
+<h3 id="7-结构图（SC）"><a href="#7-结构图（SC）" class="headerlink" title="7. 结构图（SC）"></a>7. 结构图（SC）</h3><p>SC图是SD方法在概要设计中使用的主要表达工具，用来显示软件的模块组成以及其调用关系</p>
+<ul>
+<li>方框代表模块，框内注明模块的名字或主要功能</li>
+<li>方框之间的箭头或直线表示调用关系</li>
+<li>带注释的箭头表示模块调用过程中来回传递的信息<ul>
+<li>空心：数据</li>
+<li>实心：控制信息<br><strong>SC中的四种模块：</strong><br><img src="https://img-blog.csdnimg.cn/20181231222222667.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="四种模块"></li>
+</ul>
+</li>
+</ul>
+<h3 id="8-改进的IPO图"><a href="#8-改进的IPO图" class="headerlink" title="8. 改进的IPO图"></a>8. 改进的IPO图</h3><p><img src="https://img-blog.csdnimg.cn/20190101145010906.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/20190101145022996.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h3 id="9-SC图举例"><a href="#9-SC图举例" class="headerlink" title="9. SC图举例"></a>9. SC图举例</h3><p><img src="https://img-blog.csdnimg.cn/2019010114522159.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h1 id="二、概要设计"><a href="#二、概要设计" class="headerlink" title="二、概要设计"></a>二、概要设计</h1><p>概要设计的方法：SD（结构化设计方法）<br>以数据流图为基础，定义了把数据流图变换成软件结构的不同映射方法，所以这种方法也称为<strong>面向数据流的设计方法</strong><br>面向数据流设计方法的任务：<br><img src="https://img-blog.csdnimg.cn/20190101145728346.png" alt="在这里插入图片描述"></p>
+<h3 id="1-数据流图类型"><a href="#1-数据流图类型" class="headerlink" title="1. 数据流图类型"></a>1. 数据流图类型</h3><ol>
+<li>变换型<br>特点：<br>具有较明显的输入，变换（主加工），和输出界面的数据流图<br>该类数据流图分为输入，朱加工，输出三部分</li>
+<li>事务型<br>特点：<br>某个加工将它的输入分离成一串发散的数据流，形成许多的活动路径，并根据输入的值选择其中的一条路径。<br><img src="https://img-blog.csdnimg.cn/20190101154243464.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
+</ol>
+<p><strong>大型系统DFD中，变换型和事务型往往共存</strong></p>
+<h3 id="2-变换分析设计方法"><a href="#2-变换分析设计方法" class="headerlink" title="2. 变换分析设计方法"></a>2. 变换分析设计方法</h3><ol>
+<li>区分输入，变换中心，输出部分，在DFD上标明分界线</li>
+</ol>
+<ul>
+<li>输入边界：从物理输入端开始，一步步向系统内部移动，直到某个数据不能被看做是系统的输入为止，则这个数据流的前一个数据流就是系统的逻辑输入</li>
+<li>输出边界：从物理输出端开始，一步步的向系统内移动，同样找到逻辑输出</li>
+<li>主加工：逻辑输入与逻辑输出之前的部分<br><img src="https://img-blog.csdnimg.cn/20190101154837957.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
+</ul>
+<ol>
+<li><p>第一级分解（建立初识SC框架）<br>设计顶层和第一层模块<br><img src="https://img-blog.csdnimg.cn/20190101160144935.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>or<br><img src="https://img-blog.csdnimg.cn/20190101160203313.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+</li>
+<li><p>第二级分解（分解SC各分支）<br>自顶向下分解，设计出每个分支的中，下层模块<br><img src="https://img-blog.csdnimg.cn/20190101160345400.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+</li>
+</ol>
+<p><img src="https://img-blog.csdnimg.cn/20190101160400743.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/20190101160428422.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>中心加工分支的分解<br><img src="https://img-blog.csdnimg.cn/20190101160511917.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>例题：<br><img src="https://img-blog.csdnimg.cn/20190101160634816.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<ol>
+<li>流程图<br><img src="https://img-blog.csdnimg.cn/20190101165516541.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><h1 id="三、测试"><a href="#三、测试" class="headerlink" title="三、测试"></a>三、测试</h1>软件测试是软件开发工作的最后一个环节，是保证软件质量，提高软件可靠性的关键。<br>软件产品最大的成本是检测软件错误，修改软件错误的成本。<br><img src="https://img-blog.csdnimg.cn/20190101171120433.png" alt="在这里插入图片描述"><h4 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h4></li>
+<li>预防错误：几乎不可能实现</li>
+<li>发现错误：软件测试目的<br>测试的目的是为了证明程序有错，而不是证明程序无错<br>把证明程序无错当做测试目的不仅是不正确的也是完全做不到的，而且对做好测试没有任何益处，甚至是十分有害的。<h3 id="1-软件测试的对象"><a href="#1-软件测试的对象" class="headerlink" title="1. 软件测试的对象"></a>1. 软件测试的对象</h3>软件测试不等于程序测试，软件测试应贯穿于软件定义与开发的整个期间<h3 id="2-测试的基本原则"><a href="#2-测试的基本原则" class="headerlink" title="2. 测试的基本原则"></a>2. 测试的基本原则</h3></li>
+<li>开发和测试队伍分别建立</li>
+<li>测试用例（测试用的一组数据，环境平台和运行条件）应由输入数据和预期的输出结果两部分组成</li>
+<li>兼顾合理的输入和不合理的输入数据</li>
+<li>应检查程序是否做了不该做的事</li>
+<li>程序修改后要回归测试</li>
+<li>应长期保留测试用例，直至系统废弃</li>
+</ol>
+<p><strong>例题：</strong><br><img src="https://img-blog.csdnimg.cn/20190101183903693.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/20190101183915774.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h3 id="3-测试的方法和技术"><a href="#3-测试的方法和技术" class="headerlink" title="3. 测试的方法和技术"></a>3. 测试的方法和技术</h3><p><img src="https://img-blog.csdnimg.cn/20190101184007733.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<ul>
+<li>静态测试：<br>基本特征是在对软件进行分析、检查和测试，不实际运行被测试的软件<br>静态测试可以找出30%~70%的逻辑设计错误<br>对需求规格说明书，软件设计说明书，源程序做结构分析、流程图分析、符号执行来找错</li>
+<li>动态测试<br>通过运行软件来检验软件的动态行为和运行结果的正确性</li>
+</ul>
+<p><strong>动态测试的两个基本要素</strong>：</p>
+<ol>
+<li>被测试程序</li>
+<li>测试数据（测试用例）</li>
+</ol>
+<p><strong>动态测试的方法：</strong></p>
+<pre><code>1. 选取定义域有效值，或者定义域外无效值
+2. 对已选取值决定预期的结果对已选取值决定预期的结果
+3. 用选取值执行程序
+4. 执行结果与2步骤进行比较，不吻合则程序有错
+</code></pre><h3 id="两种典型的测试："><a href="#两种典型的测试：" class="headerlink" title="两种典型的测试："></a>两种典型的测试：</h3><ol>
+<li><p>黑盒测试（功能测试，数据驱动测试，基于规格说明书测试）<br>黑盒测试是从用户观点，按规格说明书要求的输入数据与输出数据的对应关系设计测试用例，是根据程序外部特征进行测试<br><img src="https://img-blog.csdnimg.cn/20190101201203463.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+</li>
+<li><p>白盒测试（结构测试，玻璃盒测试，基于覆盖的测试）<br>根据被测试程序的逻辑结构设计测试用例，力求提高测试覆盖率<br>白盒测试是根据程序内部逻辑结构进行测试<br><img src="https://img-blog.csdnimg.cn/20190101201938794.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20190101202053536.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+</li>
+</ol>
+<hr>
+
+<ol>
+<li>穷举测试<br>不论黑盒还是白盒测试都不能进行穷举测试，所以软件测试不可能发现程序中存在的所有错误，因此需要精心设计测试方案，用尽可能少的次数，测出尽可能多的错误</li>
+</ol>
+<h3 id="4-逻辑覆盖准则"><a href="#4-逻辑覆盖准则" class="headerlink" title="4. 逻辑覆盖准则"></a>4. 逻辑覆盖准则</h3><ol>
+<li>语句覆盖<br>语句覆盖是最弱的逻辑覆盖<br><img src="https://img-blog.csdnimg.cn/2019010120245718.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20190101202534375.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
+<li>判定覆盖<br>判定覆盖仍然是最弱的逻辑覆盖<br><img src="https://img-blog.csdnimg.cn/20190101202608687.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20190101202650113.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
+<li>条件覆盖<br>使每个判定的每个条件可能取值至少执行一次<br><strong>条件覆盖不一定包含判定覆盖</strong><br><strong>判定覆盖不一定包含条件覆盖</strong><br><img src="https://img-blog.csdnimg.cn/20190101202805113.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20190101202751843.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20190101202825625.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
+<li>判定/条件覆盖<br>选取足够多的测试用例，使判断中的每个条件的所有可能取值至少执行一次，同时每个判断本身神的所有可能判断结果至少执行一次<br><img src="https://img-blog.csdnimg.cn/20190101203053147.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20190101203103869.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20190101203115428.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
+<li>条件组合覆盖<br>所有可能的条件取值组合至少执行一次<br><img src="https://img-blog.csdnimg.cn/20190101203153199.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20190101203205840.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
+<li>路径覆盖<br>覆盖每一个可能的路径<br>（测试用例越少越好，所以下面的不如上面的）<br><img src="https://img-blog.csdnimg.cn/20190101203232882.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong>路径测试法：</strong><br>借助程序控制流图设计测试用例的白盒测试法</li>
+</ol>
+<ul>
+<li>点覆盖<br>测试路径至少经过程序控制流图<br><img src="https://img-blog.csdnimg.cn/2019010120343833.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
+<li>边覆盖<br>测试路径至少经过程序控制流图<br><img src="https://img-blog.csdnimg.cn/2019010120350830.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
+</ul>
+<h3 id="5-黑盒法的测试用例设计"><a href="#5-黑盒法的测试用例设计" class="headerlink" title="5. 黑盒法的测试用例设计"></a>5. 黑盒法的测试用例设计</h3><p>无论是黑盒测试还是白盒测试都不可能使用所有有效和无效的输入数据进行测试，所以我们只能选择<strong>少量且具有代表性的输入数据</strong>，以最小代价暴露出程序较多的错误</p>
+<ol>
+<li>等价类划分方法<br>把所有可能的输入数据（有效的和无效的）划分成若干个等价的子集（称为等价类），使得每个子集中的一个典型值在测试中的作用与这一子集中的所有其他值的作用相同<br>可以从每个子集中选取一组数据来测试程序即可。<br><strong>等价类的分类：</strong></li>
+</ol>
+<ul>
+<li>有效等价类（合理等价类）</li>
+<li>无效等价类（不合理等价类）<br><strong>划分等价类的规则：</strong><ol>
+<li>如果规定了输入值的范围时，可定义一个有效等价类和两个无效等价类<br><img src="https://img-blog.csdnimg.cn/20190101215141523.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
+<li>当规定了输入的规则时，可以划分出一个有效的等价类（符合规则）和若干无效的等价类（从不同角度违反规则）<br><img src="https://img-blog.csdnimg.cn/20190101215449520.png" alt="在这里插入图片描述"></li>
+<li>如规定了输入数据的一组值，且程序对不同输入值做不同处理，则每个允许的输入值是一个有效等价类，并有一个无效等价类（所有不允许的输入值的集合）<br><img src="https://img-blog.csdnimg.cn/20190101215620942.png" alt="在这里插入图片描述"></li>
+<li>如规定了输入数据是整型，则可划分出正整数，零，负整数三个有效等价类</li>
+<li>当处理表格时：有效类可分为空表、含一项的表、含多项的表<br><strong>设计测试用例步骤</strong>：<br>(1)形成等价类表,每一等价类规定一个唯一的编号;<br>(2)设计–测试用例，使其尽可能多地覆盖尚未覆盖的有效等价类,重复这-步骤， 直到所有有效等价类均被测试用例所覆盖;<br>(3)设计–新测试用例，使其只覆盖-个无效等价类,重复这-步骤直到所有无效等价类均被覆盖 (通常程序执行一个错误后不继续检测其它错误,故每次只测一个无效类)<br><img src="https://img-blog.csdnimg.cn/20190101220741508.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20190101220759171.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20190101220819929.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/201901012208455.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>例2<br><img src="https://img-blog.csdnimg.cn/2019010122090361.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20190101220913635.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20190101220924388.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
+</ol>
+</li>
+</ul>
+<ol>
+<li>边界值分析法<br><strong>边界值分析法与等价类分析法的区别</strong><br><img src="https://img-blog.csdnimg.cn/20190101221002634.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>边界值分析法原则：<ol>
+<li>如果输入条件代表以a和b为边界的范围，测试用例应包含a，b，略大于a和略小于b的值<br><img src="https://img-blog.csdnimg.cn/20190101221352413.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
+<li>如果输入条件代表一组值，测试用例应当执行其中的最大和最小值，还应当测试略大于和略小于最小值的值<br><img src="https://img-blog.csdnimg.cn/20190101221506261.png" alt="在这里插入图片描述"></li>
+<li>如规格说明中提出输入输出的有序集（顺序文件，有序表），取有序集的第一个和最后一个元素做测试用例</li>
+<li>如程序数据结构有预定的边界，应测试其边界的数据项<br><img src="https://img-blog.csdnimg.cn/20190101221638150.png" alt="在这里插入图片描述"></li>
+<li>如输出条件规定了取值范围，取边界上下浮动值做测试用例<br><img src="https://img-blog.csdnimg.cn/2019010122194073.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
+</ol>
+</li>
+<li>错误推测法<br><strong>思路</strong>：（以此为基础设计测试方案）</li>
+<li>列出可能有的错误</li>
+<li>列出容易发生错误的特殊情况<br><strong>根据：</strong> 直觉，经验<br><strong>工具</strong>： 常见错误清单，判定表<h3 id="6-实用策略"><a href="#6-实用策略" class="headerlink" title="6. 实用策略"></a>6. 实用策略</h3>黑盒设计+白盒补充</li>
+<li>在任何情况下都应该使用边界值分析的方法</li>
+<li>必要时用等价划分法补充</li>
+<li>必要时用错误推测法补充</li>
+<li>对照程序逻辑，检查测试方案，根据对程序可靠性的要求采用不同的逻辑覆盖标准，必要时补充一些测试方案<br><strong>即使使用以上综合策略设计的测试方案，仍然不能保证发现一切错误</strong></li>
+</ol>
+<p><strong>软件测试的步骤：</strong><br><img src="https://img-blog.csdnimg.cn/20190101222833964.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h3 id="7-集成测试方法"><a href="#7-集成测试方法" class="headerlink" title="7. 集成测试方法"></a>7. 集成测试方法</h3><p>通常采用黑盒测试技术</p>
+<ul>
+<li>非渐增式测试<br>一次就把所有通过了单元测试的模块组合在一起进行全程序的测试</li>
+<li>建增式测试<br>从一个模块开始，测一个添加一个模块，边组装边测试，以发现与接口联系的问题</li>
+</ul>
+<p><strong>渐增式和非渐增式比较：</strong></p>
+<ul>
+<li>渐增式可以较早发现模块间的接口错误<br>非渐增式最后才组装，因此错误发现的晚</li>
+<li>渐增式中，出现的错误往往跟最新加入的模块有关<br>非渐增式中发现错误后难以诊断定位</li>
+<li>渐增式在不断集成的过程中使模块不断在新的条件下受到新的检测，测试更彻底</li>
+<li>渐增式较非渐增式费时。非渐增式可以同时并行检测所有模块，能充分利用人力<br><strong>总的来说，渐增式测试方法较好</strong></li>
+</ul>
+<p><strong>渐增式的几种策略</strong>：</p>
+<ul>
+<li>自顶向下结合：</li>
+</ul>
+<ol>
+<li>主控模块为驱动模块，所有直属主模块的下属模块全用桩模块代替，测试主模块</li>
+<li>根据所选用结合方法（先深度或先广度），每次用一实际模块替换相应桩模块</li>
+<li>模块结合一个，测试一个</li>
+<li>完成一组测试后，用实际模块替换另一个桩模块</li>
+<li>为保证不引入新错误，进行回归测试<br><img src="https://img-blog.csdnimg.cn/20190101225707122.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20190101230159590.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
+</ol>
+<ul>
+<li>自底向上结合：</li>
+</ul>
+<ol>
+<li>对叶模块配以驱动模块对其测试，  也可把最底层模块组合成实现某一特定软件功能的簇,  由驱动模块对它测试。</li>
+<li>用实际模块代替驱动模块，与它已测试的<br>直属模块组装成子系统。</li>
+<li>为子系统配备驱动模块，进行新的测试。</li>
+<li>判断是否已组装到达主模块是则结束，否则执行2<br><img src="https://img-blog.csdnimg.cn/2019010123011894.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
+</ol>
+<p><strong>混合集成测试方法：</strong> </p>
+<ul>
+<li>一般对软件的上层使用自顶向下的结合方法</li>
+<li>对下层使用自底向上的结合的方法</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/20190101230342465.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2019/01/02/软件工程考点总结（二）.html" data-title="软件工程考点总结（二） | Welkin" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2019/01/02/软件工程考点（一）.html"  title="软件工程考点（一）">
+ <strong>NEXT:</strong><br/> 
+ <span>软件工程考点（一）
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、-软件设计"><span class="toc-number">1.</span> <span class="toc-text">一、 软件设计</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-模块化"><span class="toc-number">1.0.1.</span> <span class="toc-text">1. 模块化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-模块的独立性"><span class="toc-number">1.0.2.</span> <span class="toc-text">2. 模块的独立性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-耦合的分类"><span class="toc-number">1.0.3.</span> <span class="toc-text">3. 耦合的分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-去除模块间控制耦合的方法"><span class="toc-number">1.0.4.</span> <span class="toc-text">4. 去除模块间控制耦合的方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-如何降低模块间的耦合度"><span class="toc-number">1.0.5.</span> <span class="toc-text">5. 如何降低模块间的耦合度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-HIPO图"><span class="toc-number">1.0.6.</span> <span class="toc-text">6. HIPO图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-结构图（SC）"><span class="toc-number">1.0.7.</span> <span class="toc-text">7. 结构图（SC）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-改进的IPO图"><span class="toc-number">1.0.8.</span> <span class="toc-text">8. 改进的IPO图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-SC图举例"><span class="toc-number">1.0.9.</span> <span class="toc-text">9. SC图举例</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、概要设计"><span class="toc-number">2.</span> <span class="toc-text">二、概要设计</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-数据流图类型"><span class="toc-number">2.0.1.</span> <span class="toc-text">1. 数据流图类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-变换分析设计方法"><span class="toc-number">2.0.2.</span> <span class="toc-text">2. 变换分析设计方法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#三、测试"><span class="toc-number">3.</span> <span class="toc-text">三、测试</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#基本概念"><span class="toc-number">3.0.0.1.</span> <span class="toc-text">基本概念</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-软件测试的对象"><span class="toc-number">3.0.1.</span> <span class="toc-text">1. 软件测试的对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-测试的基本原则"><span class="toc-number">3.0.2.</span> <span class="toc-text">2. 测试的基本原则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-测试的方法和技术"><span class="toc-number">3.0.3.</span> <span class="toc-text">3. 测试的方法和技术</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#两种典型的测试："><span class="toc-number">3.0.4.</span> <span class="toc-text">两种典型的测试：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-逻辑覆盖准则"><span class="toc-number">3.0.5.</span> <span class="toc-text">4. 逻辑覆盖准则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-黑盒法的测试用例设计"><span class="toc-number">3.0.6.</span> <span class="toc-text">5. 黑盒法的测试用例设计</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-实用策略"><span class="toc-number">3.0.7.</span> <span class="toc-text">6. 实用策略</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-集成测试方法"><span class="toc-number">3.0.8.</span> <span class="toc-text">7. 集成测试方法</span></a></li></ol></li></ol></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2019 
+		
+		<a href="http://yoursite.com" target="_blank" title="welkin">welkin</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>
