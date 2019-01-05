@@ -1,0 +1,380 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>数据库基本知识点总结 | Welkin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="welkin">
+    
+    <meta name="description" content="这是一张思维脑图，希望能有帮助
+基本概念总结
+数据库管理系统能实现对数据库中数据的查询、插入、修改和删除，这类功能称为（ 数据操纵功能 ）。
+什么是数据的语义?为什么数据与其语义是不可分的。数据的含义称为数据的语义，所以数据和语义是不可分的
+什么是数据库?什么是数据库管理系统? 说明两者的区别和联系">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="Welkin" title="Welkin"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Welkin">Welkin</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2019/01/05/数据库基本知识点总结.html" title="数据库基本知识点总结" itemprop="url">数据库基本知识点总结</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="welkin">welkin</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2019-01-05T13:43:26.000Z" itemprop="datePublished">2019-01-05</time>
+    Updated:<time datetime="2019-01-05T13:44:05.663Z" itemprop="dateModified">2019-01-05</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#基本概念总结"><span class="toc-number">1.</span> <span class="toc-text">基本概念总结</span></a></li></ol>
+		</div>
+		
+		<p>这是一张思维脑图，希望能有帮助<br><img src="https://img-blog.csdnimg.cn/20190105211333982.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h1 id="基本概念总结"><a href="#基本概念总结" class="headerlink" title="基本概念总结"></a>基本概念总结</h1><ol>
+<li>数据库管理系统能实现对数据库中数据的查询、插入、修改和删除，这类功能称为（ 数据操纵功能 ）。</li>
+<li>什么是数据的语义?为什么数据与其语义是不可分的。<br>数据的含义称为数据的语义，所以数据和语义是不可分的</li>
+<li>什么是数据库?什么是数据库管理系统? 说明两者的区别和联系。</li>
+</ol>
+<ul>
+<li>数据库（DataBase，DB）是长期存储的、有组织的、可共享的相关数据的集合。</li>
+<li>数据库管理系统（Database Management System，DBMS）是建立、运用、管理、控制和维护数据库，并对数据进行统一管理和控制的系统软件。</li>
+<li>数据库系统是指在计算机系统中引入数据库后的系统，即具有数据处理功能的系统。</li>
+<li>联系：数据库系统一般由数据库、数据库管理系统、应用系统、用户构成。</li>
+</ul>
+<ol>
+<li>下面列出的数据管理技术发展的三个阶段中，没有专门的软件对数据进行管理的是（ 人工管理阶段 ）</li>
+<li>关系数据模型是目前最重要的一种数据模型，它的三个要素分别是（数据结构、关系操作、完整性约束 ）</li>
+<li>举例说明以下基本概念: 实体，实体型，实体集，实体之间的联系</li>
+</ol>
+<ul>
+<li>实体：客观存在并可以相互区分的事物叫实体。 </li>
+<li>实体型：具有相同属性的实体具有由相同的特征和性质，用实体名及其属性名集合来抽象和刻画同类实体，称为实体型。 </li>
+<li>实体集：同型实体的集合称为实体集， 实体之间的联系：通常是指不同实体型的实体集之间的联系，实体之间的联系有一对一，一对多，多对多等多种类型</li>
+<li>举例如下 实体:课程； 实体型:课程(课程号，课程名称)； 实体集:大三所有课程； 联系:一对一，一对多，多对多。</li>
+</ul>
+<ol>
+<li>在（  网状模型 ）中一个结点可以有多个双亲，结点之间可以有多种联系。</li>
+<li>关系数据模型的基本数据结构是（关系 ）。</li>
+<li>数据的逻辑独立性是指（ 模式改变，外模式和应用程序不变  ）。</li>
+<li>什么叫数据与程序的物理独立性？什么叫数据与程序的逻辑独立性？ 为什么数据库系统具有数据与程序的独立性？ </li>
+</ol>
+<ul>
+<li>物理独立性：用户应用程序与存储在磁盘上的DB中的数据是独立的。</li>
+<li>逻辑独立性：在三级模式中，改变一级不影响后面几级。 </li>
+<li>原因：数据与程序相互分离，可以把重心放在数据上。简化了应用程序编写和维护</li>
+</ul>
+<ol>
+<li>数据库系统由数据库、数据库管理系统、应用系统和（  数据库管理员 ）组成</li>
+<li>给定三个域，D1为导师集合{张清玫，刘逸}，D2为专业集合{计算机专业，信息专业}，D3为研究生集合{李勇，刘晨，王敏}，则域D1，D2，D3的笛卡尔积的基数为：（12）</li>
+<li>关系数据库中的“关系”与日常生活中常见的“表格”有什么不同？<br>关系中不能有重复的元组，表格中可以出现相同的行</li>
+<li>一个关系是否元组越多，所描述的信息就越丰富？（不一定）</li>
+<li>关系模型中必须满足的完整性约束包括（实体完整性，参照完整性）</li>
+<li>如果数据库只有一个关系，是否就不存在参照完整性了？（不是）</li>
+<li>关系代数的运算对象和运算结果为<strong>关系<strong>__</strong></strong>。</li>
+<li>有两张学生成绩表，表1（学号，姓名，数学成绩），表2（学号，姓名，物理成绩），请问这两张表是否可以做“集合并”操作？为什么？（不可以，域不相同。）</li>
+<li>假设关系R(A,B,C)中A是码，R1（A,B）和R2(A,C)是分别从R中投影得到的两个关系，请问R1（A,B) Join R2(A,C)=R(A,B,C) （注：Join是自然连接）（错误）</li>
+<li><p>给出两种或以上不同的表达，其结果是一样的：选修数据库的学生名单（学号，姓名）</p>
+<blockquote>
+<p>ΠSname(σCname=’数据库 ‘(Course)SCΠSno,Sname(Student))<br>ΠSname(ΠSno(σCname=’数据库’(Course)⋈SC)⋈ΠSno,Sname(Student))</p>
+</blockquote>
+</li>
+<li><p>如何理解SQL是非过程的语言<br>SQL是一个非过程化的语言，它一次处理一个记录，对数据提供自动导航。SQL不要求用户指定对数据的存放方法</p>
+</li>
+<li>为什么不需要一个alter view的语句？<br>视图是虚表，只能重建不能修改而视图是一张虚表，数据库中只存放关于该视图的定义，而不存放视图对应的数据。所以无法进行修改操作</li>
+<li>如何让查询结果的列显示顺序与数据库中的列顺序不一样<br>SELECT语句后边的属性名可以自己设置顺序， order by子句可以使同一列上的数据升序和降序排列<ol>
+<li>Having和where的作用何不同？什么时候having的条件可以用where条件来取代而结果不变？<br>作用对象不同where子句作用于基本表或视图，从中选择满足条件的元组 而having短语作用作用，以及从中选择满足条件的组。</li>
+</ol>
+</li>
+<li>怎么理解“自然连接”，它与等值连接有什么不同<br>自然连接是特殊的等值连接。等值连接是从行角度考虑的，而自然连接还会去掉属性相同的列。 自然连接是除去相同属性的等值连接。联系在于自然连接一定是等值连接，但等值连接不一定是自然连接<ol>
+<li>什么是“不相关子查询”？，如何转换成连接查询？<br>不相关子查询，内查询不依赖于外层，执行过程，首先执行内查询内查询得到，结果不被显示出来，而是传递给外层查询作为外层查询的条件来使用，然后执行外层查询，并显示查询结果。 转为连接查询就是把子查询内表和外部表连接</li>
+</ol>
+</li>
+<li>如何理解EXIST子查询的返回结果？<br>EXISTS的子查询根据子查询是否有记录返回确定条件是否成立。如果子查询有记录返回则EXISTS函数返回真，否则为假。</li>
+<li>两个查询在什么情况下可以自行UNION操作？<br>列数需要相同，对应项的数据类型也必须相同<ol>
+<li>请问是否可以用插入和删除操作来实现更新操作，怎么做？<br>先删除，再插入，不能违背完整性约束</li>
+</ol>
+</li>
+<li>对于一个数值类型字段，空值和0值相同吗？<br>不相同，0代表数值，空值代表没有值</li>
+<li>请解释with CHECK option 子句的作用<br>通过视图进行的修改，必须也能通过该视图看到修改后的结果。比如你insert，那么加的这条记录在刷新视图后必须可以看到；如果修改，修改完的结果也必须能通过该视图看到；如果删除，当然只能删除视图里有显示的记录</li>
+<li>为什么说视图机制可以提供数据的逻辑独立性？<br>视图是从一个或几个基本表（或视图）导出的表，是一个“虚表”，数据库中只存放视图的定义，而不存放视图对应的数据。</li>
+<li>分析一下数据库都有哪些不安全因素，给出实例。</li>
+</ol>
+<ul>
+<li>非授权用户对数据库的恶意存取和破坏</li>
+<li>数据库中重要或敏感的数据被泄露</li>
+<li>安全环境的脆弱性</li>
+</ul>
+<ol>
+<li>数据库安全性控制的常用方法有哪些，自主存取控制是如何保证数据库安全性的？<br>用户标识与鉴别，存取控制，自主存取控制方法，强制存取控制方法，视图机制，审计，数据加密。</li>
+<li>什么是强制存取控制，它与自主存取控制的区别是什么？为什么强制存取控制可以更好地保证数据库安全性？<br>强制存取控制方法：每一个数据对象被强制的标语，一定的秘密，每一个用户也被强制的授予某一个级别的许可证。系统规定只有具有某因许可证以及别的用户才能团聚某一个密集的数据对象，自助存取控制的数据捧起权限，由用户控制，系统无法控制；强制程序控制安全等级由系统控制，不是用户能直接感知或进行控制的。</li>
+<li>什么是数据库审计？它是如何保障数据库安全性的？<br>数据库安全审计系统有效监控数据库访问活动，准确掌握数据库系统的安全状态，及时发现违反数据库安全策略的操作，并实时报警、记录，实现对安全事件的定位分析、事后追查取证，全面保障数据库的安全。</li>
+<li>DBMS完整性控制机制的功能是什么？它由哪些部分组成？这几部分是如何配合工作的？<br>定义功能、检查功能、违约处理。 定义功能提供定义完整性约束条件的机制，检查功能检查用户发出的操作请求是否违背了完整性约束条件，违约处理，当发现用户的操作请求使数据违背于完整性约束条件时采取一定的动作来保证数据的完整</li>
+<li>说明参照完整性的定义方式，检查时机以及各类违约处理方式<br>关系模型的参照完整性在create table 中用foreign key 短语定义哪些列为外码，用references短语指名这些外码参照哪些表的主码 2.当参照表中插入元组可能破坏被参照完整性，采用拒绝执行。当参照表修改外码值，也可能破坏被参照表参照完整性，采用拒绝执行。当被参照表中删除元组或修改主码值时，则可能破坏参照表参照完整性，采用拒绝/级联删除/设置为空值进行违约处理</li>
+<li>说明用户定义完整性的方法，检查时机以及各类违约处理方式<br>1.提供定义完整性约束条件的机制。<br>2.提供完整性的检查方法。<br>3.进行违约处理。<br>用户定义的完整性主要包括非空约束、唯一约束、检查约束、主键约束、外键约束</li>
+<li><p>断言的用途是什么？在学生-课程-选课数据库中，如何定义断言“每学期每个学生最多可以选修7门课”？<br>断言是一种命名约束，它表达了数据库状态必须满足的逻辑条件 </p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> SC <span class="keyword">ADD</span> TERM <span class="built_in">DATE</span>； </span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">ASSERTION</span> CNUM </span><br><span class="line"></span><br><span class="line"><span class="keyword">CHECK</span> （<span class="number">7</span>＞＝ALL（<span class="keyword">SELECT</span> <span class="keyword">count</span>（*） <span class="keyword">FROM</span> SC，Student GEOUP <span class="keyword">BY</span> Cno，TERM，Sno））</span><br></pre></td></tr></table></figure>
+<ol>
+<li>是否可以在一个表上定义多个触发器？如果可以，那么这些触发器的执行顺序是怎样的？<br>可以定义多个触发器，执行的顺序与建立的顺序相反。</li>
+</ol>
+</li>
+<li>RDBMS定义完整性约束的方法有哪些？</li>
+</ol>
+<ul>
+<li><p>（1）提供定义完整性约束条件的机制：完整性约束条件也称完整性规则，是数据库中的数据必须满足的语义约束条件；</p>
+</li>
+<li><p>（2）提供完整性检查的方法：检查数据库操作执行后数据库中的诗句是否违背了完整性约束条件；</p>
+</li>
+<li><p>（3）提供违约处理方法：DBMS若发现用户的操作违背了完整性约束条件，就采取一定动作进行违约处理以保证数据的完整性</p>
+</li>
+</ul>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2019/01/05/数据库基本知识点总结.html" data-title="数据库基本知识点总结 | Welkin" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2019/01/02/软件工程考点总结（二）.html"  title="软件工程考点总结（二）">
+ <strong>NEXT:</strong><br/> 
+ <span>软件工程考点总结（二）
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#基本概念总结"><span class="toc-number">1.</span> <span class="toc-text">基本概念总结</span></a></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2019 
+		
+		<a href="http://yoursite.com" target="_blank" title="welkin">welkin</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>
