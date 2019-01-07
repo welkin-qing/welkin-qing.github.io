@@ -1,0 +1,368 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>数据库考点总结 | Welkin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="welkin">
+    
+    <meta name="description" content="数据库基本概念1. 数据库系统包括（数据库和数据库管理系统）2. 数据库系统特点：
+数据结构化
+数据的共享性高，冗余度低且易扩展
+数据独立性高
+物理独立性：用户的应用程序与数据库中数据的物理储存是相互独立的
+逻辑独立性：用户的应用程序与数据库的逻辑结构是相互独立的
+
+
+数据有数据库管理系统统一管理和">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="Welkin" title="Welkin"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Welkin">Welkin</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2019/01/07/数据库考点总结.html" title="数据库考点总结" itemprop="url">数据库考点总结</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="welkin">welkin</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2019-01-07T14:34:06.000Z" itemprop="datePublished">2019-01-07</time>
+    Updated:<time datetime="2019-01-07T14:35:22.317Z" itemprop="dateModified">2019-01-07</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#数据库基本概念"><span class="toc-number">1.</span> <span class="toc-text">数据库基本概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-数据库系统包括（数据库和数据库管理系统）"><span class="toc-number">1.0.1.</span> <span class="toc-text">1. 数据库系统包括（数据库和数据库管理系统）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-数据库系统特点："><span class="toc-number">1.0.2.</span> <span class="toc-text">2. 数据库系统特点：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-数据库系统的三级模式结构"><span class="toc-number">1.0.3.</span> <span class="toc-text">3.数据库系统的三级模式结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-数据库的二级映像功能"><span class="toc-number">1.0.4.</span> <span class="toc-text">4. 数据库的二级映像功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-数据独立性"><span class="toc-number">1.0.5.</span> <span class="toc-text">5. 数据独立性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-数据库主要的逻辑数据模型"><span class="toc-number">1.0.6.</span> <span class="toc-text">6. 数据库主要的逻辑数据模型</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#关系数据库"><span class="toc-number">2.</span> <span class="toc-text">关系数据库</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-基本关系操作"><span class="toc-number">2.0.1.</span> <span class="toc-text">1. 基本关系操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-关系的完整性"><span class="toc-number">2.0.2.</span> <span class="toc-text">2. 关系的完整性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-完整性约束"><span class="toc-number">2.0.3.</span> <span class="toc-text">3. 完整性约束</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#常见问题"><span class="toc-number">3.</span> <span class="toc-text">常见问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-什么是基本表？什么是视图？两者的区别和联系是什么？"><span class="toc-number">3.0.1.</span> <span class="toc-text">1. 什么是基本表？什么是视图？两者的区别和联系是什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-实现数据库安全性控制的常用方法和技术。"><span class="toc-number">3.0.2.</span> <span class="toc-text">2. 实现数据库安全性控制的常用方法和技术。</span></a></li></ol></li></ol></li></ol>
+		</div>
+		
+		<h1 id="数据库基本概念"><a href="#数据库基本概念" class="headerlink" title="数据库基本概念"></a>数据库基本概念</h1><h3 id="1-数据库系统包括（数据库和数据库管理系统）"><a href="#1-数据库系统包括（数据库和数据库管理系统）" class="headerlink" title="1. 数据库系统包括（数据库和数据库管理系统）"></a>1. 数据库系统包括（数据库和数据库管理系统）</h3><h3 id="2-数据库系统特点："><a href="#2-数据库系统特点：" class="headerlink" title="2. 数据库系统特点："></a>2. 数据库系统特点：</h3><ul>
+<li>数据结构化</li>
+<li>数据的共享性高，冗余度低且易扩展</li>
+<li>数据独立性高<ul>
+<li>物理独立性：用户的应用程序与数据库中数据的物理储存是相互独立的</li>
+<li>逻辑独立性：用户的应用程序与数据库的逻辑结构是相互独立的</li>
+</ul>
+</li>
+<li>数据有数据库管理系统统一管理和控制<ol>
+<li>数据的安全性保护</li>
+<li>数据完整性检查</li>
+<li>并发控制</li>
+<li>数据库恢复<h3 id="3-数据库系统的三级模式结构"><a href="#3-数据库系统的三级模式结构" class="headerlink" title="3.数据库系统的三级模式结构"></a>3.数据库系统的三级模式结构</h3><strong>三级模式结构</strong>：数据库内部的系统结构。是数据的三个抽象级别，他把数据的具体组织留给数据库管理系统管理，是用户能逻辑的抽象的处理数据，不必关心数据在计算机中的具体表示方式和存储方式。</li>
+</ol>
+</li>
+</ul>
+<ol>
+<li>模式（逻辑模式）<br> 是数据库中全体数据的逻辑结构和特征的描述，所有用户的公共数据视图。是模式结构的中间层，是数据库中全体数据的逻 辑结构和特征的描述，是所有用户的公共数据视图。 </li>
+<li>外模式（用户模式/子模式）<br>是数据库用户能够看见和使用的局部数据的逻辑结构和特征的描述，是数据库用户的数据视图，是与某一应用有关的数据的逻辑表示。</li>
+<li>内模式（存储模式）<br>一个数据库只有一个内模式，它是数据物理结构和存储方式的描述，是数据在数据库内部的表示方式。</li>
+</ol>
+<p><strong>优点</strong>：三级模式是对数据的三个抽象级别，它把数据的具体组织 留给DBMS管理，使用户能逻辑地、抽象地处理数据，而不必关心数 据在计算机中的具体表示方式与存储方式。</p>
+<h3 id="4-数据库的二级映像功能"><a href="#4-数据库的二级映像功能" class="headerlink" title="4. 数据库的二级映像功能"></a>4. 数据库的二级映像功能</h3><p><strong>二级映像</strong>：为了在系统内部实现这三个抽象层次的联系和转换，数据库管理系统在三级模式之间提供了两层映像。这两层映像保证了数据库系统中的数据能够具有较高的<strong>逻辑独立性</strong>和<strong>物理独立性</strong>。</p>
+<ol>
+<li>外模式/模式映像：当模式改变时，由数据库管理员对各个外模式/模式的映像作相应改变，可以保证外模式保持不变。应用程序是依据数据的外模式编写的，从而应用程序不必改变，保证了数据与程序的逻辑独立性，简称数据的逻辑独立性。</li>
+<li>模式/内模式映像：当数据库的存储结构改变时，由数据库管理员对模式/内模式映像做相应改变，可以使模式保持不变，从而应用程序也不必改变，保证了数据与程序的物理独立性，简称数据的物理独立性。</li>
+<li>最终用户角度：单用户，主从式，分布式，客户-服务器，浏览器-应用服务器，数据库服务器多层结构。这是数据库外部体系结构。<h3 id="5-数据独立性"><a href="#5-数据独立性" class="headerlink" title="5. 数据独立性"></a>5. 数据独立性</h3></li>
+</ol>
+<ul>
+<li>数据与程序之间的独立性使得数据的定义和描述可以从应用程序中分离出去</li>
+<li>由于数据的存取由数据库管理系统管理，从而简化了应用程序的编制，大大减少了应用程序的维护和修改。<h3 id="6-数据库主要的逻辑数据模型"><a href="#6-数据库主要的逻辑数据模型" class="headerlink" title="6. 数据库主要的逻辑数据模型"></a>6. 数据库主要的逻辑数据模型</h3>详细请看上篇博客中的脑图</li>
+<li>层次模型</li>
+<li>网状模型</li>
+<li>关系模型<br>三个要素<ol>
+<li>数据结构</li>
+<li>关系操作</li>
+<li>完整性约束</li>
+</ol>
+</li>
+<li>面向对象数据模型</li>
+<li>对象关系数据模型</li>
+<li>半结构化数据模型<hr>
+
+</li>
+</ul>
+<h1 id="关系数据库"><a href="#关系数据库" class="headerlink" title="关系数据库"></a>关系数据库</h1><h3 id="1-基本关系操作"><a href="#1-基本关系操作" class="headerlink" title="1. 基本关系操作"></a>1. 基本关系操作</h3><ol>
+<li>查询 query<ol>
+<li>选择select</li>
+<li>投影project</li>
+<li>连接join</li>
+<li>除devide</li>
+<li>并union</li>
+<li>差except</li>
+<li>交intersection</li>
+</ol>
+</li>
+<li>插入 insert</li>
+<li>删除delete</li>
+<li>修改update<h3 id="2-关系的完整性"><a href="#2-关系的完整性" class="headerlink" title="2. 关系的完整性"></a>2. 关系的完整性</h3></li>
+<li>实体完整性</li>
+<li>参照完整性</li>
+<li>用户自定义完整性<h3 id="3-完整性约束"><a href="#3-完整性约束" class="headerlink" title="3. 完整性约束"></a>3. 完整性约束</h3></li>
+<li>主键约束primary key</li>
+<li>外键约束foreign key</li>
+<li>唯一约束unique</li>
+<li>检查约束check</li>
+<li>非空约束not null</li>
+</ol>
+<hr>
+
+<h1 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h1><h3 id="1-什么是基本表？什么是视图？两者的区别和联系是什么？"><a href="#1-什么是基本表？什么是视图？两者的区别和联系是什么？" class="headerlink" title="1. 什么是基本表？什么是视图？两者的区别和联系是什么？"></a>1. 什么是基本表？什么是视图？两者的区别和联系是什么？</h3><ul>
+<li>基本表是本身独立存在的表，在SQL中一个关系就对应一个基本表。一个（或多个）<br>基本表对应一个存储文件。</li>
+<li>视图是从一个或几个基本表导出的表。它本身不独立存储在数据库中，即数据库中只存<br>放视图的定义而不存放视图对应的数据。这些数据仍存放在导出视图的基本表中，因此视图<br>是一个虚表。</li>
+</ul>
+<p>联系：视图中的数据来源于基本表，都可以进行查询<br>区别：基本表中存储实际的数据，而视图只存储定义，不存放实际数据；<br>对基本表可以进行任意的更新操作，而对视图的更新时受限的</p>
+<h3 id="2-实现数据库安全性控制的常用方法和技术。"><a href="#2-实现数据库安全性控制的常用方法和技术。" class="headerlink" title="2. 实现数据库安全性控制的常用方法和技术。"></a>2. 实现数据库安全性控制的常用方法和技术。</h3><ol>
+<li>用户标识和鉴别<br>该方法由系统提供一定的方式让用户标识自己的名字或身份。每次用户要求进入系统时，由系统进行核对，通过鉴定后才能提供系统的使用权</li>
+<li>存取控制<br>通过用户权限定义和合法权检查确保只有合法权限的用户访问数据库，所有未授权的人员无法存取数据</li>
+<li>视图机制<br>为不同的用户定义视图，通过视图机制把要保密的数据对无权存取的用户隐藏起来，从而自动地对数据提供一定程度的安全保护。</li>
+<li>审计<br> 建立审计日志，把用户对数据库的所有操作自动记录下来放入审计日志中，DBA可以利用审计跟踪的信息，重现导致数据库现有状况的一系列事件，找出非法存取数据的人，时间和内容等。</li>
+<li>数据加密<br> 对存储和传输的数据进行加密处理，从而使得不知道解密算法的人无法获知数据的内容。</li>
+</ol>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2019/01/07/数据库考点总结.html" data-title="数据库考点总结 | Welkin" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2019/01/05/数据库基本知识点总结.html"  title="数据库基本知识点总结">
+ <strong>NEXT:</strong><br/> 
+ <span>数据库基本知识点总结
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#数据库基本概念"><span class="toc-number">1.</span> <span class="toc-text">数据库基本概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-数据库系统包括（数据库和数据库管理系统）"><span class="toc-number">1.0.1.</span> <span class="toc-text">1. 数据库系统包括（数据库和数据库管理系统）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-数据库系统特点："><span class="toc-number">1.0.2.</span> <span class="toc-text">2. 数据库系统特点：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-数据库系统的三级模式结构"><span class="toc-number">1.0.3.</span> <span class="toc-text">3.数据库系统的三级模式结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-数据库的二级映像功能"><span class="toc-number">1.0.4.</span> <span class="toc-text">4. 数据库的二级映像功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-数据独立性"><span class="toc-number">1.0.5.</span> <span class="toc-text">5. 数据独立性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-数据库主要的逻辑数据模型"><span class="toc-number">1.0.6.</span> <span class="toc-text">6. 数据库主要的逻辑数据模型</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#关系数据库"><span class="toc-number">2.</span> <span class="toc-text">关系数据库</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-基本关系操作"><span class="toc-number">2.0.1.</span> <span class="toc-text">1. 基本关系操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-关系的完整性"><span class="toc-number">2.0.2.</span> <span class="toc-text">2. 关系的完整性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-完整性约束"><span class="toc-number">2.0.3.</span> <span class="toc-text">3. 完整性约束</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#常见问题"><span class="toc-number">3.</span> <span class="toc-text">常见问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-什么是基本表？什么是视图？两者的区别和联系是什么？"><span class="toc-number">3.0.1.</span> <span class="toc-text">1. 什么是基本表？什么是视图？两者的区别和联系是什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-实现数据库安全性控制的常用方法和技术。"><span class="toc-number">3.0.2.</span> <span class="toc-text">2. 实现数据库安全性控制的常用方法和技术。</span></a></li></ol></li></ol></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2019 
+		
+		<a href="http://yoursite.com" target="_blank" title="welkin">welkin</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>
