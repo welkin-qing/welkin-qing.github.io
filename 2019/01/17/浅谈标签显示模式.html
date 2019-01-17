@@ -1,0 +1,321 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>浅谈标签显示模式 | Welkin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="welkin">
+    
+    <meta name="description" content="displayHTML标签一般分为块标签和行内标签两种类型，它们也称块元素和行内元素。具体如下：
+1. 块级元素(block-level)每个块元素通常都会独自占据一整行或多整行，可以对其设置宽度、高度、对齐等属性，常用于网页布局和网页结构的搭建。 霸道
+常见的块元素有1&amp;lt;h1&amp;gt;~&amp;lt">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="Welkin" title="Welkin"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Welkin">Welkin</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2019/01/17/浅谈标签显示模式.html" title="浅谈标签显示模式" itemprop="url">浅谈标签显示模式</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="welkin">welkin</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2019-01-17T14:20:25.000Z" itemprop="datePublished">2019-01-17</time>
+    Updated:<time datetime="2019-01-17T14:21:00.200Z" itemprop="dateModified">2019-01-17</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#display"><span class="toc-number">1.</span> <span class="toc-text">display</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-块级元素-block-level"><span class="toc-number">1.1.</span> <span class="toc-text">1. 块级元素(block-level)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-行内元素-inline-level"><span class="toc-number">1.2.</span> <span class="toc-text">2. 行内元素(inline-level)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-行内块元素（inline-block）"><span class="toc-number">1.3.</span> <span class="toc-text">3. 行内块元素（inline-block）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#块级元素和行内元素区别"><span class="toc-number">1.4.</span> <span class="toc-text">块级元素和行内元素区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#标签显示模式转换-display"><span class="toc-number">1.5.</span> <span class="toc-text">标签显示模式转换 display</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#注意："><span class="toc-number">1.6.</span> <span class="toc-text">注意：</span></a></li></ol></li></ol>
+		</div>
+		
+		<h1 id="display"><a href="#display" class="headerlink" title="display"></a>display</h1><p>HTML标签一般分为块标签和行内标签两种类型，它们也称块元素和行内元素。具体如下：</p>
+<h2 id="1-块级元素-block-level"><a href="#1-块级元素-block-level" class="headerlink" title="1. 块级元素(block-level)"></a>1. 块级元素(block-level)</h2><p>每个块元素通常都会独自占据一整行或多整行，可以对其设置宽度、高度、对齐等属性，常用于网页布局和网页结构的搭建。 霸道</p>
+<p>常见的块元素有<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>~<span class="tag">&lt;<span class="name">h6</span>&gt;</span>、<span class="tag">&lt;<span class="name">p</span>&gt;</span>、<span class="tag">&lt;<span class="name">div</span>&gt;</span>、<span class="tag">&lt;<span class="name">ul</span>&gt;</span>、<span class="tag">&lt;<span class="name">ol</span>&gt;</span>、<span class="tag">&lt;<span class="name">li</span>&gt;</span>等，其中<span class="tag">&lt;<span class="name">div</span>&gt;</span>标签是最典型的块元素。</span><br></pre></td></tr></table></figure></p>
+<p><strong>块级元素的特点：</strong></p>
+<p>（1）总是从新行开始</p>
+<p>（2）高度，行高、外边距以及内边距都可以控制。</p>
+<p>（3）宽度默认是容器的100%</p>
+<p>（4）可以容纳内联元素和其他块元素。</p>
+<h2 id="2-行内元素-inline-level"><a href="#2-行内元素-inline-level" class="headerlink" title="2. 行内元素(inline-level)"></a>2. 行内元素(inline-level)</h2><p>行内元素（内联元素）不占有独立的区域，仅仅靠自身的字体大小和图像尺寸来支撑结构，一般不可以设置宽度、高度、对齐等属性，常用于控制页面中文本的样式。</p>
+<p>常见的行内元素有<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span>&gt;</span>、<span class="tag">&lt;<span class="name">strong</span>&gt;</span>、<span class="tag">&lt;<span class="name">b</span>&gt;</span>、<span class="tag">&lt;<span class="name">em</span>&gt;</span>、<span class="tag">&lt;<span class="name">i</span>&gt;</span>、<span class="tag">&lt;<span class="name">del</span>&gt;</span>、<span class="tag">&lt;<span class="name">s</span>&gt;</span>、<span class="tag">&lt;<span class="name">ins</span>&gt;</span>、<span class="tag">&lt;<span class="name">u</span>&gt;</span>、<span class="tag">&lt;<span class="name">span</span>&gt;</span>等，其中<span class="tag">&lt;<span class="name">span</span>&gt;</span>标签最典型的行内元素。</span><br></pre></td></tr></table></figure></p>
+<p><strong>行内元素的特点：</strong></p>
+<p>（1）和相邻行内元素在一行上。</p>
+<p>（2）高、宽无效，但水平方向的padding和margin可以设置，垂直方向的无效。</p>
+<p>（3）默认宽度就是它本身内容的宽度。</p>
+<p>（4）行内元素只能容纳文本或则其他行内元素。（a特殊）</p>
+<hr>
+
+<p><strong>注意：</strong></p>
+<ol>
+<li>只有 文字才 能组成段落  因此 p  里面不能放块级元素，同理还有这些标签h1,h2,h3,h4,h5,h6,dt，他们都是文字类块级标签，里面不能放其他块级元素。</li>
+<li>链接里面不能再放链接。</li>
+</ol>
+<h2 id="3-行内块元素（inline-block）"><a href="#3-行内块元素（inline-block）" class="headerlink" title="3. 行内块元素（inline-block）"></a>3. 行内块元素（inline-block）</h2><p>在行内元素中有几个特殊的标签<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> /&gt;</span>、<span class="tag">&lt;<span class="name">input</span> /&gt;</span>、<span class="tag">&lt;<span class="name">td</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>可以对它们设置宽高和对齐属性，有些资料可能会称它们为行内块元素。</p>
+<p>行内块元素的特点：<br>（1）和相邻行内元素（行内块）在一行上,但是之间会有空白缝隙。<br>（2）默认宽度就是它本身内容的宽度。<br>（3）高度，行高、外边距以及内边距都可以控制。</p>
+<hr>
+
+<h2 id="块级元素和行内元素区别"><a href="#块级元素和行内元素区别" class="headerlink" title="块级元素和行内元素区别"></a>块级元素和行内元素区别</h2><ul>
+<li>块级元素的特点：<br>（1）总是从新行开始<br>（2）高度，行高、外边距以及内边距都可以控制。<br>（3）宽度默认是容器的100%<br>（4）可以容纳内联元素和其他块元素。</li>
+</ul>
+<ul>
+<li>行内元素的特点：<br>（1）和相邻行内元素在一行上。<br>（2）高、宽无效，但水平方向的padding和margin可以设置，垂直方向的无效。<br>（3）默认宽度就是它本身内容的宽度。<br>（4）行内元素只能容纳文本或则其他行内元素。</li>
+</ul>
+<h2 id="标签显示模式转换-display"><a href="#标签显示模式转换-display" class="headerlink" title="标签显示模式转换 display"></a>标签显示模式转换 display</h2><p>块转行内：display:inline;</p>
+<p>行内转块：display:block;</p>
+<p>块、行内元素转换为行内块： display: inline-block;</p>
+<h2 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h2><ol>
+<li>行内元素，行内块元素可看做文本</li>
+<li>行高=盒子高度，可以使单行文本垂直居中</li>
+</ol>
+<p>附上一张思维脑图<br><img src="https://img-blog.csdnimg.cn/20190117221739739.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="显示模式"></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2019/01/17/浅谈标签显示模式.html" data-title="浅谈标签显示模式 | Welkin" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2019/01/13/汇编总结.html"  title="汇编总结">
+ <strong>NEXT:</strong><br/> 
+ <span>汇编总结
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#display"><span class="toc-number">1.</span> <span class="toc-text">display</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-块级元素-block-level"><span class="toc-number">1.1.</span> <span class="toc-text">1. 块级元素(block-level)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-行内元素-inline-level"><span class="toc-number">1.2.</span> <span class="toc-text">2. 行内元素(inline-level)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-行内块元素（inline-block）"><span class="toc-number">1.3.</span> <span class="toc-text">3. 行内块元素（inline-block）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#块级元素和行内元素区别"><span class="toc-number">1.4.</span> <span class="toc-text">块级元素和行内元素区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#标签显示模式转换-display"><span class="toc-number">1.5.</span> <span class="toc-text">标签显示模式转换 display</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#注意："><span class="toc-number">1.6.</span> <span class="toc-text">注意：</span></a></li></ol></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2019 
+		
+		<a href="http://yoursite.com" target="_blank" title="welkin">welkin</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>
