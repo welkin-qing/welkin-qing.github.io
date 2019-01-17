@@ -1,0 +1,550 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>浅谈css样式及选择器 | Welkin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="welkin">
+    
+    <meta name="description" content="一、css 样式CSS(Cascading Style Sheets)    美化样式
+CSS通常称为CSS样式表或层叠样式表（级联样式表），主要用于设置HTML页面中的文本内容（字体、大小、对齐方式等）、图片的外形（宽高、边框样式、边距等）以及版面的布局等外观显示样式。
+CSS以HTML为基础，提">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="Welkin" title="Welkin"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Welkin">Welkin</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2019/01/17/浅谈css样式及选择器.html" title="浅谈css样式及选择器" itemprop="url">浅谈css样式及选择器</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="welkin">welkin</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2019-01-17T14:53:38.000Z" itemprop="datePublished">2019-01-17</time>
+    Updated:<time datetime="2019-01-17T14:53:51.982Z" itemprop="dateModified">2019-01-17</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、css-样式"><span class="toc-number">1.</span> <span class="toc-text">一、css 样式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-如何引入css样式表"><span class="toc-number">1.1.</span> <span class="toc-text">1. 如何引入css样式表</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#a-内部样式表"><span class="toc-number">1.1.0.1.</span> <span class="toc-text">a. 内部样式表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#b-行内式（内联式）"><span class="toc-number">1.1.0.2.</span> <span class="toc-text">b. 行内式（内联式）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#c-外部样式表（外链式）"><span class="toc-number">1.1.0.3.</span> <span class="toc-text">c. 外部样式表（外链式）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#总结"><span class="toc-number">1.1.0.4.</span> <span class="toc-text">总结</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-css字体样式"><span class="toc-number">1.2.</span> <span class="toc-text">2. css字体样式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#a-font-size-字号大小"><span class="toc-number">1.2.0.1.</span> <span class="toc-text">a. font-size:字号大小</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#b-font-family-字体"><span class="toc-number">1.2.0.2.</span> <span class="toc-text">b. font-family:字体</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CSS-Unicode字体"><span class="toc-number">1.2.0.3.</span> <span class="toc-text">CSS Unicode字体</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#c-font-weight-字体粗细"><span class="toc-number">1.2.0.4.</span> <span class="toc-text">c. font-weight:字体粗细</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#d-font-style-字体风格"><span class="toc-number">1.2.0.5.</span> <span class="toc-text">d.  font-style:字体风格</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#e-font-综合设置字体样式-重点"><span class="toc-number">1.2.0.6.</span> <span class="toc-text">e . font:综合设置字体样式 (重点)</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-css外观属性"><span class="toc-number">1.3.</span> <span class="toc-text">3. css外观属性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#a-color-文本颜色"><span class="toc-number">1.3.0.1.</span> <span class="toc-text">a. color:文本颜色</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#b-line-height-行间距"><span class="toc-number">1.3.0.2.</span> <span class="toc-text">b . line-height:行间距</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#c-text-align-水平对齐方式"><span class="toc-number">1.3.0.3.</span> <span class="toc-text">c. text-align:水平对齐方式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#d-text-indent-首行缩进"><span class="toc-number">1.3.0.4.</span> <span class="toc-text">d. text-indent:首行缩进</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#e-text-decoration-文本的装饰"><span class="toc-number">1.3.0.5.</span> <span class="toc-text">e. text-decoration 文本的装饰</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、-选择器"><span class="toc-number">2.</span> <span class="toc-text">二、 选择器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#基础选择器"><span class="toc-number">2.1.</span> <span class="toc-text">基础选择器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-标签选择器（元素选择器）"><span class="toc-number">2.1.0.1.</span> <span class="toc-text">1.  标签选择器（元素选择器）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-类选择器"><span class="toc-number">2.1.0.2.</span> <span class="toc-text">2. 类选择器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-多类名选择器"><span class="toc-number">2.1.0.3.</span> <span class="toc-text">3. 多类名选择器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-id选择器"><span class="toc-number">2.1.0.4.</span> <span class="toc-text">4. id选择器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-通配符选择器"><span class="toc-number">2.1.0.5.</span> <span class="toc-text">5. 通配符选择器</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#css-复合选择器"><span class="toc-number">2.2.</span> <span class="toc-text">css 复合选择器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-后代选择器"><span class="toc-number">2.2.0.1.</span> <span class="toc-text">1. 后代选择器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-子元素选择器"><span class="toc-number">2.2.0.2.</span> <span class="toc-text">2. 子元素选择器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-交集选择器"><span class="toc-number">2.2.0.3.</span> <span class="toc-text">3. 交集选择器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-并集选择器"><span class="toc-number">2.2.0.4.</span> <span class="toc-text">4. 并集选择器</span></a></li></ol></li></ol></li></ol></li></ol>
+		</div>
+		
+		<h1 id="一、css-样式"><a href="#一、css-样式" class="headerlink" title="一、css 样式"></a>一、css 样式</h1><p>CSS(Cascading Style Sheets)    美化样式</p>
+<p>CSS通常称为CSS样式表或层叠样式表（级联样式表），主要用于设置HTML页面中的文本内容（字体、大小、对齐方式等）、图片的外形（宽高、边框样式、边距等）以及版面的布局等外观显示样式。</p>
+<p>CSS以HTML为基础，提供了丰富的功能，如字体、颜色、背景的控制及整体排版等，而且还可以针对不同的浏览器设置不同的样式。</p>
+<h2 id="1-如何引入css样式表"><a href="#1-如何引入css样式表" class="headerlink" title="1. 如何引入css样式表"></a>1. 如何引入css样式表</h2><h4 id="a-内部样式表"><a href="#a-内部样式表" class="headerlink" title="a. 内部样式表"></a>a. 内部样式表</h4><p>内嵌式是将CSS代码集中写在HTML文档的head头部标签中，并且用style标签定义，其基本语法格式如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/CSS"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">    选择器 &#123;属性1:属性值1; 属性2:属性值2; 属性3:属性值3;&#125;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>语法中，style标签一般位于head标签中title标签之后，也可以把他放在HTML文档的任何地方。</p>
+<p>type=”text/CSS”  在html5中可以省略， 写上也比较符合规范， 所以这个地方可以写也可以省略。</p>
+<h4 id="b-行内式（内联式）"><a href="#b-行内式（内联式）" class="headerlink" title="b. 行内式（内联式）"></a>b. 行内式（内联式）</h4><p>内联样式，又有人称行内样式、行间样式、内嵌样式。是通过标签的style属性来设置元素的样式，其基本语法格式如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">标签名</span> <span class="attr">style</span>=<span class="string">"属性1:属性值1; 属性2:属性值2; 属性3:属性值3;"</span>&gt;</span> 内容 <span class="tag">&lt;/<span class="name">标签名</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>语法中style是标签的属性，实际上任何HTML标签都拥有style属性，用来设置行内式。其中属性和值的书写规范与CSS样式规则相同，行内式只对其所在的标签及嵌套在其中的子标签起作用。</p>
+<h4 id="c-外部样式表（外链式）"><a href="#c-外部样式表（外链式）" class="headerlink" title="c. 外部样式表（外链式）"></a>c. 外部样式表（外链式）</h4><p>链入式是将所有的样式放在一个或多个以.CSS为扩展名的外部样式表文件中，通过link标签将外部样式表文件链接到HTML文档中，其基本语法格式如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">"CSS文件的路径"</span>  <span class="attr">rel</span>=<span class="string">"stylesheet"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>注意：  link 是个单标签哦!!!</p>
+<p>该语法中，link标签需要放在head头部标签中，并且必须指定link标签的三个属性，具体如下：</p>
+<ul>
+<li>href：定义所链接外部样式表文件的URL，可以是相对路径，也可以是绝对路径。</li>
+<li>type：定义所链接文档的类型，在这里需要指定为“text/CSS”，表示链接的外部文件为CSS样式表。</li>
+<li>rel：定义当前文档与被链接文档之间的关系，在这里需要指定为“stylesheet”，表示被链接的文档是一个样式表文件。<hr>
+
+
+</li>
+</ul>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><table>
+<thead>
+<tr>
+<th>样式表</th>
+<th>优点</th>
+<th>缺点</th>
+<th>使用情况</th>
+<th>控制范围</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>行内样式表</td>
+<td>书写方便，权重高</td>
+<td>没有实现样式和结构相分离</td>
+<td>较少</td>
+<td>控制一个标签（少）</td>
+</tr>
+<tr>
+<td>内部样式表</td>
+<td>部分结构和样式相分离</td>
+<td>没有彻底分离</td>
+<td>较多</td>
+<td>控制一个页面（中）</td>
+</tr>
+<tr>
+<td>外部样式表</td>
+<td>完全实现结构和样式相分离</td>
+<td>需要引入</td>
+<td>最多，强烈推荐</td>
+<td>控制整个站点（多）</td>
+</tr>
+</tbody>
+</table>
+<h2 id="2-css字体样式"><a href="#2-css字体样式" class="headerlink" title="2. css字体样式"></a>2. css字体样式</h2><h4 id="a-font-size-字号大小"><a href="#a-font-size-字号大小" class="headerlink" title="a. font-size:字号大小"></a>a. font-size:字号大小</h4><p>font-size属性用于设置字号，该属性的值可以使用相对长度单位，也可以使用绝对长度单位。其中，相对长度单位比较常用，推荐使用像素单位px，绝对长度单位使用较少。</p>
+<h4 id="b-font-family-字体"><a href="#b-font-family-字体" class="headerlink" title="b. font-family:字体"></a>b. font-family:字体</h4><p>font-family属性用于设置字体。网页中常用的字体有宋体、微软雅黑、黑体等，例如将网页中所有段落文本的字体设置为微软雅黑，可以使用如下CSS样式代码：</p>
+<p>p{ font-family:”微软雅黑”;}</p>
+<p>可以同时指定多个字体，中间以逗号隔开，表示如果浏览器不支持第一个字体，则会尝试下一个，直到找到合适的字体。<br><strong>注意：</strong></p>
+<ol>
+<li>现在网页中普遍使用14px+。</li>
+<li>尽量使用偶数的数字字号。ie6等老式浏览器支持奇数会有bug。</li>
+<li>各种字体之间必须使用英文状态下的逗号隔开。</li>
+<li>中文字体需要加英文状态下的引号，英文字体一般不需要加引号。当需要设置英文字体时，英文字体名必须位于中文字体名之前。</li>
+<li>如果字体名中包含空格、#、$等符号，则该字体必须加英文状态下的单引号或双引号，例如font-family: “Times New Roman”;。</li>
+<li>尽量使用系统默认字体，保证在任何用户的浏览器中都能正确显示。<hr>
+
+</li>
+</ol>
+<h4 id="CSS-Unicode字体"><a href="#CSS-Unicode字体" class="headerlink" title="CSS Unicode字体"></a>CSS Unicode字体</h4><p>在 CSS 中设置字体名称，直接写中文是可以的。但是在文件编码（GB2312、UTF-8 等）不匹配时会产生乱码的错误。xp 系统不支持 类似微软雅黑的中文。</p>
+<ul>
+<li><p>方案一： 你可以使用英文来替代。 比如 font-family:”Microsoft Yahei”。</p>
+</li>
+<li><p>方案二： 在 CSS 直接使用 Unicode 编码来写字体名称可以避免这些错误。使用 Unicode 写中文字体名称，浏览器是可以正确的解析的。<br>font-family: “\5FAE\8F6F\96C5\9ED1”，表示设置字体为“微软雅黑”。</p>
+</li>
+</ul>
+<p>可以通过escape()  来测试属于什么字体。</p>
+<table>
+<thead>
+<tr>
+<th>字体名称</th>
+<th>英文名称</th>
+<th>Unicode 编码</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>宋体</td>
+<td>SimSun</td>
+<td>\5B8B\4F53</td>
+</tr>
+<tr>
+<td>新宋体</td>
+<td>NSimSun</td>
+<td>\65B0\5B8B\4F53</td>
+</tr>
+<tr>
+<td>黑体</td>
+<td>SimHei</td>
+<td>\9ED1\4F53</td>
+</tr>
+<tr>
+<td>微软雅黑</td>
+<td>Microsoft YaHei</td>
+<td>\5FAE\8F6F\96C5\9ED1</td>
+</tr>
+<tr>
+<td>楷体_GB2312</td>
+<td>KaiTi_GB2312</td>
+<td>\6977\4F53_GB2312</td>
+</tr>
+<tr>
+<td>隶书</td>
+<td>LiSu</td>
+<td>\96B6\4E66</td>
+</tr>
+<tr>
+<td>幼园</td>
+<td>YouYuan</td>
+<td>\5E7C\5706</td>
+</tr>
+<tr>
+<td>华文细黑</td>
+<td>STXihei</td>
+<td>\534E\6587\7EC6\9ED1</td>
+</tr>
+<tr>
+<td>细明体</td>
+<td>MingLiU</td>
+<td>\7EC6\660E\4F53</td>
+</tr>
+<tr>
+<td>新细明体</td>
+<td>PMingLiU</td>
+<td>\65B0\7EC6\660E\4F53</td>
+</tr>
+</tbody>
+</table>
+<p>为了照顾不同电脑的字体安装问题，我们尽量只使用宋体和微软雅黑中文字体</p>
+<h4 id="c-font-weight-字体粗细"><a href="#c-font-weight-字体粗细" class="headerlink" title="c. font-weight:字体粗细"></a>c. font-weight:字体粗细</h4><p>字体加粗除了用 b  和 strong 标签之外，可以使用CSS 来实现，但是CSS 是没有语义的。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">font-weight属性用于定义字体的粗细，其可用属性值：normal、bold、bolder、lighter、100~900（100的整数倍）。</span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">数字 400 等价于 <span class="selector-tag">normal</span>，而 700 等价于 <span class="selector-tag">bold</span>。  但是我们更喜欢用数字来表示。</span><br></pre></td></tr></table></figure>
+<h4 id="d-font-style-字体风格"><a href="#d-font-style-字体风格" class="headerlink" title="d.  font-style:字体风格"></a>d.  font-style:字体风格</h4><p>字体倾斜除了用 i  和 em 标签之外，可以使用CSS 来实现，但是CSS 是没有语义的。</p>
+<ul>
+<li><p>font-style属性用于定义字体风格，如设置斜体、倾斜或正常字体，其可用属性值如下：</p>
+</li>
+<li><p>normal：默认值，浏览器会显示标准的字体样式。</p>
+</li>
+<li><p>italic：浏览器会显示斜体的字体样式。</p>
+</li>
+<li><p>oblique：浏览器会显示倾斜的字体样式。</p>
+</li>
+</ul>
+<p><strong>注意：</strong><br>平时我们很少给文字加斜体，反而喜欢给斜体标签（em，i）改为普通模式。</p>
+<hr>
+
+<h4 id="e-font-综合设置字体样式-重点"><a href="#e-font-综合设置字体样式-重点" class="headerlink" title="e . font:综合设置字体样式 (重点)"></a>e . font:综合设置字体样式 (重点)</h4><p>font属性用于对字体样式进行综合设置，其基本语法格式如下：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">选择器&#123;<span class="attribute">font</span>: font-style  font-weight  font-size/line-height  font-family;&#125;</span><br></pre></td></tr></table></figure>
+<p>注意：</p>
+<ul>
+<li>其中不需要设置的属性可以省略（取默认值），但必须保留font-size和font-family属性，否则font属性将不起作用。</li>
+<li>使用font属性时，必须按上面语法格式中的顺序书写，不能更换顺序，各个属性以空格隔开。</li>
+</ul>
+<h2 id="3-css外观属性"><a href="#3-css外观属性" class="headerlink" title="3. css外观属性"></a>3. css外观属性</h2><h4 id="a-color-文本颜色"><a href="#a-color-文本颜色" class="headerlink" title="a. color:文本颜色"></a>a. color:文本颜色</h4><p>color属性用于定义文本的颜色，其取值方式有如下3种：</p>
+<ol>
+<li><p>预定义的颜色值，如red，green，blue等。</p>
+</li>
+<li><p>十六进制，如#FF0000，#FF6600，#29D794等。实际工作中，十六进制是最常用的定义颜色的方式。</p>
+</li>
+<li><p>RGB代码，如红色可以表示为rgb(255,0,0)或rgb(100%,0%,0%)。</p>
+</li>
+</ol>
+<p>需要注意的是，如果使用RGB代码的百分比颜色值，取值为0时也不能省略百分号，必须写为0%。</p>
+<h4 id="b-line-height-行间距"><a href="#b-line-height-行间距" class="headerlink" title="b . line-height:行间距"></a>b . line-height:行间距</h4><p>ine-height属性用于设置行间距，就是行与行之间的距离，即字符的垂直间距，一般称为行高。line-height常用的属性值单位有三种，分别为像素px，相对值em和百分比%，实际工作中使用最多的是像素px</p>
+<p>一般情况下，行距比字号大7.8像素左右就可以了。</p>
+<h4 id="c-text-align-水平对齐方式"><a href="#c-text-align-水平对齐方式" class="headerlink" title="c. text-align:水平对齐方式"></a>c. text-align:水平对齐方式</h4><p>text-align属性用于设置文本内容的水平对齐，相当于html中的align对齐属性。其可用属性值如下：</p>
+<ul>
+<li><p>left：左对齐（默认值）</p>
+</li>
+<li><p>right：右对齐</p>
+</li>
+<li><p>center：居中对齐</p>
+</li>
+</ul>
+<p>是让盒子里面的内容水平居中， 而不是让盒子居中对齐</p>
+<h4 id="d-text-indent-首行缩进"><a href="#d-text-indent-首行缩进" class="headerlink" title="d. text-indent:首行缩进"></a>d. text-indent:首行缩进</h4><p>text-indent属性用于设置首行文本的缩进，其属性值可为不同单位的数值、em字符宽度的倍数、或相对于浏览器窗口宽度的百分比%，允许使用负值, 建议使用em作为设置单位。</p>
+<p>1em 就是一个字的宽度   如果是汉字的段落， 1em 就是一个汉字的宽度</p>
+<h4 id="e-text-decoration-文本的装饰"><a href="#e-text-decoration-文本的装饰" class="headerlink" title="e. text-decoration 文本的装饰"></a>e. text-decoration 文本的装饰</h4><p>text-decoration   通常我们用于给链接修改装饰效果</p>
+<table>
+<thead>
+<tr>
+<th>值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>none</td>
+<td>默认。定义标准的文本。</td>
+</tr>
+<tr>
+<td>underline</td>
+<td>定义文本下的一条线。下划线 也是我们链接自带的</td>
+</tr>
+<tr>
+<td>overline</td>
+<td>定义文本上的一条线。</td>
+</tr>
+<tr>
+<td>line-through</td>
+<td>定义穿过文本下的一条线。</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h1 id="二、-选择器"><a href="#二、-选择器" class="headerlink" title="二、 选择器"></a>二、 选择器</h1><p>要想将CSS样式应用于特定的HTML元素，首先需要找到该目标元素。在CSS中，执行这一任务的样式规则部分被称为选择器（选择符）。</p>
+<h2 id="基础选择器"><a href="#基础选择器" class="headerlink" title="基础选择器"></a>基础选择器</h2><h4 id="1-标签选择器（元素选择器）"><a href="#1-标签选择器（元素选择器）" class="headerlink" title="1.  标签选择器（元素选择器）"></a>1.  标签选择器（元素选择器）</h4><p>标签选择器是指用HTML标签名称作为选择器，按标签名称分类，为页面中某一类标签指定统一的CSS样式。其基本语法格式如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">标签名&#123;属性1:属性值1; 属性2:属性值2; 属性3:属性值3; &#125;  或者</span><br><span class="line">元素名&#123;属性1:属性值1; 属性2:属性值2; 属性3:属性值3; &#125;</span><br></pre></td></tr></table></figure>
+<p>标签选择器最大的优点是能快速为页面中同类型的标签统一样式，同时这也是他的缺点，不能设计差异化样式。</p>
+<p>标签选择器 可以把某一类标签全部选择出来  div  span </p>
+<h4 id="2-类选择器"><a href="#2-类选择器" class="headerlink" title="2. 类选择器"></a>2. 类选择器</h4><p>类选择器使用“.”（英文点号）进行标识，后面紧跟类名，即，class 其基本语法格式如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.类名&#123;属性1:属性值1; 属性2:属性值2; 属性3:属性值3; &#125;</span><br><span class="line"></span><br><span class="line"> 标签调用的时候用 class=“类名”  即可。</span><br></pre></td></tr></table></figure>
+<p>类选择器最大的优势是可以为元素对象定义单独或相同的样式。 可以选择一个或者多个标签<br><strong>注意：</strong></p>
+<ol>
+<li>长名称或词组可以使用中横线来为选择器命名。</li>
+<li>不建议使用“_”下划线来命名CSS选择器。<pre><code>输入的时候少按一个shift键;
+</code></pre>　浏览器兼容问题 (比如使用<em>tips的选择器命名，在IE6是无效的)<br>　能良好区分JavaScript变量命名(JS变量命名是用“</em>”)</li>
+<li>不要纯数字、中文等命名， 尽量使用英文字母来表示。</li>
+</ol>
+<h4 id="3-多类名选择器"><a href="#3-多类名选择器" class="headerlink" title="3. 多类名选择器"></a>3. 多类名选择器</h4><p>我们可以给标签指定多个类名，从而达到更多的选择目的。即，多个class<br><strong>注意：</strong></p>
+<ol>
+<li>样式显示效果跟HTML元素中的类名先后顺序没有关系,受CSS样式书写的上下顺序有关。</li>
+<li>各个类名中间用空格隔开。</li>
+</ol>
+<h4 id="4-id选择器"><a href="#4-id选择器" class="headerlink" title="4. id选择器"></a>4. id选择器</h4><p>id选择器使用“#”进行标识，后面紧跟id名，其基本语法格式如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#id名&#123;属性1:属性值1; 属性2:属性值2; 属性3:属性值3; &#125;</span><br></pre></td></tr></table></figure>
+<p>该语法中，id名即为HTML元素的id属性值，大多数HTML元素都可以定义id属性，元素的id值是唯一的，只能对应于文档中某一个具体的元素。</p>
+<p>用法基本和类选择器相同。</p>
+<hr>
+
+<p><strong>注意： id选择器和类选择器区别</strong></p>
+<p>W3C标准规定，在同一个页面内，不允许有相同名字的id对象出现，但是允许相同名字的class。</p>
+<p>类选择器（class） 好比人的名字，  是可以多次重复使用的， 比如  张伟  王伟  李伟  李娜</p>
+<p>id选择器     好比人的身份证号码，  全中国是唯一的， 不得重复。 只能使用一次。</p>
+<p><strong><em>id选择器和类选择器最大的不同在于 使用次数上。</em></strong></p>
+<h4 id="5-通配符选择器"><a href="#5-通配符选择器" class="headerlink" title="5. 通配符选择器"></a>5. 通配符选择器</h4><p>通配符   选择器用“*”号表示，他是所有选择器中作用范围最广的，能匹配页面中所有的元素。其基本语法格式如下：<br>在实际中不经常用<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">* &#123; 属性1:属性值1; 属性2:属性值2; 属性3:属性值3; &#125;</span><br></pre></td></tr></table></figure></p>
+<p>例如下面的代码，使用通配符选择器定义CSS样式，清除所有HTML标记的默认边距。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">* &#123;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">0</span>;                    <span class="comment">/* 定义外边距*/</span></span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">0</span>;                   <span class="comment">/* 定义内边距*/</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+
+<h2 id="css-复合选择器"><a href="#css-复合选择器" class="headerlink" title="css 复合选择器"></a>css 复合选择器</h2><p>复合选择器是由两个或多个基础选择器，通过不同的方式组合而成的,目的是为了可以选择更准确更精细的目标元素标签。</p>
+<h4 id="1-后代选择器"><a href="#1-后代选择器" class="headerlink" title="1. 后代选择器"></a>1. 后代选择器</h4><p>后代选择器又称为包含选择器，用来选择元素或元素组的后代，其写法就是把外层标签写在前面，内层标签写在后面，中间用空格分隔。当标签发生嵌套时，内层标签就成为外层标签的后代。<br>子孙后代都可以这么选择。 或者说，它能选择任何包含在内 的标签。 </p>
+<h4 id="2-子元素选择器"><a href="#2-子元素选择器" class="headerlink" title="2. 子元素选择器"></a>2. 子元素选择器</h4><p>子元素选择器只能选择作为某元素子元素的元素。其写法就是把父级标签写在前面，子级标签写在后面，中间跟一个 &gt; 进行连接，注意，符号左右两侧各保留一个空格。<br>这里的子 指的是 亲儿子  不包含孙子 重孙子之类。</p>
+<h4 id="3-交集选择器"><a href="#3-交集选择器" class="headerlink" title="3. 交集选择器"></a>3. 交集选择器</h4><p>交集选择器由两个选择器构成，其中第一个为标签选择器，第二个为class选择器，两个选择器之间不能有空格，如h3.special。<br><strong>记忆技巧：</strong></p>
+<p>交集选择器 是 并且的意思。  即…又…的意思</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">比如：   p.one   选择的是： 类名为 .one  的 段落标签。</span><br></pre></td></tr></table></figure>
+<h4 id="4-并集选择器"><a href="#4-并集选择器" class="headerlink" title="4. 并集选择器"></a>4. 并集选择器</h4><p>并集选择器（CSS选择器分组）是各个选择器通过<strong style="color:#f00">逗号</strong>连接而成的，任何形式的选择器（包括标签选择器、class类选择器id选择器等），都可以作为并集选择器的一部分。如果某些选择器定义的样式完全相同，或部分相同，就可以利用并集选择器为它们定义相同的CSS样式。</p>
+<p>记忆技巧：</p>
+<p>并集选择器  和 的意思，  就是说，只要逗号隔开的，所有选择器都会执行后面样式。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">比如  .one, p , #test &#123;color: #F00;&#125;  表示   .one 和 p  和 #test 这三个选择器都会执行颜色为红色。  通常用于集体声明。</span><br></pre></td></tr></table></figure>
+<hr>
+
+<p>css样式思维脑图：<br><img src="https://img-blog.csdnimg.cn/20190117225025112.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="css样式"><br>css选择器思维脑图：<br><img src="https://img-blog.csdnimg.cn/20190117225127406.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="css选择器"></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2019/01/17/浅谈css样式及选择器.html" data-title="浅谈css样式及选择器 | Welkin" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2019/01/17/浅谈标签显示模式.html"  title="浅谈标签显示模式">
+ <strong>NEXT:</strong><br/> 
+ <span>浅谈标签显示模式
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、css-样式"><span class="toc-number">1.</span> <span class="toc-text">一、css 样式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-如何引入css样式表"><span class="toc-number">1.1.</span> <span class="toc-text">1. 如何引入css样式表</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#a-内部样式表"><span class="toc-number">1.1.0.1.</span> <span class="toc-text">a. 内部样式表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#b-行内式（内联式）"><span class="toc-number">1.1.0.2.</span> <span class="toc-text">b. 行内式（内联式）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#c-外部样式表（外链式）"><span class="toc-number">1.1.0.3.</span> <span class="toc-text">c. 外部样式表（外链式）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#总结"><span class="toc-number">1.1.0.4.</span> <span class="toc-text">总结</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-css字体样式"><span class="toc-number">1.2.</span> <span class="toc-text">2. css字体样式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#a-font-size-字号大小"><span class="toc-number">1.2.0.1.</span> <span class="toc-text">a. font-size:字号大小</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#b-font-family-字体"><span class="toc-number">1.2.0.2.</span> <span class="toc-text">b. font-family:字体</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CSS-Unicode字体"><span class="toc-number">1.2.0.3.</span> <span class="toc-text">CSS Unicode字体</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#c-font-weight-字体粗细"><span class="toc-number">1.2.0.4.</span> <span class="toc-text">c. font-weight:字体粗细</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#d-font-style-字体风格"><span class="toc-number">1.2.0.5.</span> <span class="toc-text">d.  font-style:字体风格</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#e-font-综合设置字体样式-重点"><span class="toc-number">1.2.0.6.</span> <span class="toc-text">e . font:综合设置字体样式 (重点)</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-css外观属性"><span class="toc-number">1.3.</span> <span class="toc-text">3. css外观属性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#a-color-文本颜色"><span class="toc-number">1.3.0.1.</span> <span class="toc-text">a. color:文本颜色</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#b-line-height-行间距"><span class="toc-number">1.3.0.2.</span> <span class="toc-text">b . line-height:行间距</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#c-text-align-水平对齐方式"><span class="toc-number">1.3.0.3.</span> <span class="toc-text">c. text-align:水平对齐方式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#d-text-indent-首行缩进"><span class="toc-number">1.3.0.4.</span> <span class="toc-text">d. text-indent:首行缩进</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#e-text-decoration-文本的装饰"><span class="toc-number">1.3.0.5.</span> <span class="toc-text">e. text-decoration 文本的装饰</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、-选择器"><span class="toc-number">2.</span> <span class="toc-text">二、 选择器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#基础选择器"><span class="toc-number">2.1.</span> <span class="toc-text">基础选择器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-标签选择器（元素选择器）"><span class="toc-number">2.1.0.1.</span> <span class="toc-text">1.  标签选择器（元素选择器）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-类选择器"><span class="toc-number">2.1.0.2.</span> <span class="toc-text">2. 类选择器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-多类名选择器"><span class="toc-number">2.1.0.3.</span> <span class="toc-text">3. 多类名选择器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-id选择器"><span class="toc-number">2.1.0.4.</span> <span class="toc-text">4. id选择器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-通配符选择器"><span class="toc-number">2.1.0.5.</span> <span class="toc-text">5. 通配符选择器</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#css-复合选择器"><span class="toc-number">2.2.</span> <span class="toc-text">css 复合选择器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-后代选择器"><span class="toc-number">2.2.0.1.</span> <span class="toc-text">1. 后代选择器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-子元素选择器"><span class="toc-number">2.2.0.2.</span> <span class="toc-text">2. 子元素选择器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-交集选择器"><span class="toc-number">2.2.0.3.</span> <span class="toc-text">3. 交集选择器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-并集选择器"><span class="toc-number">2.2.0.4.</span> <span class="toc-text">4. 并集选择器</span></a></li></ol></li></ol></li></ol></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2019 
+		
+		<a href="http://yoursite.com" target="_blank" title="welkin">welkin</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>
