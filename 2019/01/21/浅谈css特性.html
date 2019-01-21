@@ -1,0 +1,382 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>浅谈css特性 | Welkin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="welkin">
+    
+    <meta name="description" content="css一般有三大特性 层叠性，继承性，优先级，但是还是存在其他的特性，今天我便将其全部总结
+一、特殊性关于CSS权重，我们需要一套计算公式来去计算，这个就是 CSS Specificity，我们称为CSS 特性或称非凡性，它是一个衡量CSS值优先级的一个标准 具体规范入如下：
+specificity">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="Welkin" title="Welkin"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Welkin">Welkin</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2019/01/21/浅谈css特性.html" title="浅谈css特性" itemprop="url">浅谈css特性</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="welkin">welkin</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2019-01-21T11:41:09.000Z" itemprop="datePublished">2019-01-21</time>
+    Updated:<time datetime="2019-01-21T11:42:20.726Z" itemprop="dateModified">2019-01-21</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、特殊性"><span class="toc-number">1.</span> <span class="toc-text">一、特殊性</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、CSS优先级"><span class="toc-number">2.</span> <span class="toc-text">二、CSS优先级</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#三、继承"><span class="toc-number">3.</span> <span class="toc-text">三、继承</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#四、层叠"><span class="toc-number">4.</span> <span class="toc-text">四、层叠</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#五、-重要性"><span class="toc-number">5.</span> <span class="toc-text">五、 重要性</span></a></li></ol>
+		</div>
+		
+		<p>css一般有三大特性 层叠性，继承性，优先级，但是还是存在其他的特性，今天我便将其全部总结</p>
+<h1 id="一、特殊性"><a href="#一、特殊性" class="headerlink" title="一、特殊性"></a>一、特殊性</h1><p>关于CSS权重，我们需要一套计算公式来去计算，这个就是 CSS Specificity，我们称为CSS 特性或称非凡性，它是一个衡量CSS值优先级的一个标准 具体规范入如下：</p>
+<p>specificity用一个四位的数 字串(CSS2是三位)来表示，更像四个级别，值从左到右，左面的最大，一级大于一级，数位之间没有进制，级别之间不可超越。 </p>
+<table>
+<thead>
+<tr>
+<th>继承或者* 的贡献值</th>
+<th>0,0,0,0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>每个元素（标签）贡献值为</td>
+<td>0,0,0,1</td>
+</tr>
+<tr>
+<td>每个类，伪类贡献值为</td>
+<td>0,0,1,0</td>
+</tr>
+<tr>
+<td>每个ID贡献值为</td>
+<td>0,1,0,0</td>
+</tr>
+<tr>
+<td>每个行内样式贡献值</td>
+<td>1,0,0,0</td>
+</tr>
+<tr>
+<td>每个!important贡献值  重要的</td>
+<td>∞ 无穷大</td>
+</tr>
+</tbody>
+</table>
+<p><strong>稍后会说到improtant</strong></p>
+<p>特殊性是可以叠加的</p>
+<p> 比如的例子：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">div ul  li   ------&gt;      0,0,0,3</span><br><span class="line"></span><br><span class="line">.nav ul li   ------&gt;      0,0,1,2</span><br><span class="line"></span><br><span class="line">a:hover      -----—&gt;      0,0,1,1</span><br><span class="line"></span><br><span class="line">.nav a       ------&gt;      0,0,1,1   </span><br><span class="line"></span><br><span class="line">#nav p       -----&gt;       0,1,0,1</span><br></pre></td></tr></table></figure>
+<p><strong>注意</strong>：</p>
+<ol>
+<li><p>数位之间没有进制 比如说： 0,0,0,5 + 0,0,0,5 =0,0,0,10 而不是 0,0, 1, 0， 所以不会存在10个div能赶上一个类选择器的情况。</p>
+</li>
+<li><p>继承的 特殊性是 0  </p>
+</li>
+<li>通配选择器无特殊性</li>
+<li>无特殊性，甚至连0特殊性都没有，因此对特殊性没有任何影响</li>
+<li>内联样式的特殊性比其他声明的特殊性都高</li>
+</ol>
+<p>总结优先级：</p>
+<ol>
+<li>使用了 !important声明的规则。</li>
+<li>内嵌在 HTML 元素的 style属性里面的声明。</li>
+<li>使用了 ID 选择器的规则。</li>
+<li>使用了类选择器、属性选择器、伪元素和伪类选择器的规则。</li>
+<li>使用了元素选择器的规则。</li>
+<li>只包含一个通用选择器的规则。</li>
+<li>同一类选择器则遵循就近原则。</li>
+</ol>
+<p><strong>总结：</strong> 权重是优先级的算法，层叠是优先级的表现</p>
+<h1 id="二、CSS优先级"><a href="#二、CSS优先级" class="headerlink" title="二、CSS优先级"></a>二、CSS优先级</h1><p>定义CSS样式时，经常出现两个或更多规则应用在同一元素上，这时就会出现优先级的问题。</p>
+<p>在考虑权重时，初学者还需要注意一些特殊的情况，具体如下：</p>
+<p>继承样式的权重为0。即在嵌套结构中，不管父元素样式的权重多大，被子元素继承时，他的权重都为0，也就是说子元素定义的样式会覆盖继承来的样式。</p>
+<p>行内样式优先。应用style属性的元素，其行内样式的权重非常高，可以理解为远大于100。总之，他拥有比上面提高的选择器都大的优先级。</p>
+<p>权重相同时，CSS遵循就近原则。也就是说靠近元素的样式具有最大的优先级，或者说排在最后的样式优先级最大。</p>
+<p>CSS定义了一个!important命令，该命令被赋予最大的优先级。也就是说不管权重如何以及样式位置的远近，!important都具有最大优先级。</p>
+<h1 id="三、继承"><a href="#三、继承" class="headerlink" title="三、继承"></a>三、继承</h1><p>所谓继承性是指书写CSS样式表时，子标签会继承父标签的某些样式，如文本颜色和字号。想要设置一个可继承的属性，只需将它应用于父元素即可。</p>
+<p>简单的理解就是：  子承父业。<br>例如ul中的无序列表<br><strong>注意</strong>：</p>
+<ol>
+<li>在html 中，对于向上传播规则有一个例外：应用到body元素的背景样式可以传递到html元素，相应的可以定义其画布。</li>
+<li>边框不会继承</li>
+<li>通配符存在短路继承，由于能匹配任何元素</li>
+<li>恰当地使用继承可以简化代码，降低CSS样式的复杂性。子元素可以继承父元素的样式（text-，font-，line-这些元素开头的都可以继承，以及color属性）</li>
+</ol>
+<h1 id="四、层叠"><a href="#四、层叠" class="headerlink" title="四、层叠"></a>四、层叠</h1><p>所谓层叠性是指多种CSS样式的叠加。</p>
+<p>是浏览器处理冲突的一个能力,如果一个属性通过两个相同选择器设置到同一个元素上，那么这个时候一个属性就会将另一个属性层叠掉</p>
+<p>比如先给某个标签指定了内部文字颜色为红色，接着又指定了颜色为蓝色，此时出现一个标签指定了相同样式不同值的情况，这就是样式冲突。  就近原则</p>
+<p>一般情况下，如果出现样式冲突，则会按照CSS书写的顺序，以最后的样式为准。<br>特殊情况下，按照特殊性进行层叠。</p>
+<ol>
+<li>样式冲突，遵循的原则是就近原则。 那个样式离着结构近，就执行那个样式。</li>
+<li>样式不冲突，不会层叠</li>
+</ol>
+<p><strong>注意</strong>： 在css权威指南中提到一点：层叠需要考虑按来源对应到应用到给定元素的所有声明排序<br>有三种来源：</p>
+<ul>
+<li>创作人员</li>
+<li>读者</li>
+<li>用户代理<br>规则如下：</li>
+</ul>
+<ol>
+<li>正常情况下，创作人员的样式要胜过读者的样式</li>
+<li>有 !improtant标志的读者样式要强于所有其他样式，这里包括有!improtant标志的创作人员样式</li>
+<li>创作人员样式和读者样式比用户代理的默认样式要强</li>
+<li>如果一个元素与创作人员样式表中的正常权重样式匹配，另外还与读者样式表中的正常权重样式匹配，则会使用创作人员的样式。</li>
+</ol>
+<p>所以，需要考虑样式的权重和来源，来排序<br><strong>总结：在声明权重方面需要考虑5级</strong></p>
+<pre><code>1. 读者的重要声明
+2. 创作人员的重要声明
+3.  创作人员的正常声明
+4.  读者的正常声明
+5.  用户代理的声明
+</code></pre><p>创作人员通常只需要考虑前4个权重级别，因为任何声明都会胜过用户代理样式。</p>
+<h1 id="五、-重要性"><a href="#五、-重要性" class="headerlink" title="五、 重要性"></a>五、 重要性</h1><p>在声明的结束分号之前插入!important来标志<br>!important总是放在声明的最后，分号的前面，每个声明都要有自己的!important<br>例：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">p</span><span class="selector-class">.dark</span>&#123; <span class="attribute">color</span>: yellow <span class="meta">!important</span>; <span class="attribute">background</span>: white <span class="meta">!important</span>;&#125;</span><br><span class="line"><span class="selector-tag">p</span><span class="selector-class">.light</span>&#123; <span class="attribute">color</span>: pink; <span class="attribute">font</span>: smaller Times, serif <span class="meta">!important</span>;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>如果将!important放在font声明的任何位置，整个声明都将无效，相应的不会应用其任何样式。</p>
+<p><strong>注意：</strong> !important的声明并没有特殊的特殊性值，不过与非重要声明分开考虑。实际上，所有的!important声明会分组在一起，重要声明的特殊性冲突会在重要声明内部解决，而不会与非重要声明相混淆；同样，所有的非重要声明也归为一组，使用特殊性来解决冲突。如果一个重要声明和非重要声明冲突，胜出的总是重要声明。<br>注意上面那段话，来自css权威指南，说明，重要性和特殊性是不同的性质，很多其他的网站上有介绍说重要性的特殊性为无穷大，包括我上边的表格，那样说只是很容易理解，可以也那样去理解，但是其实本质上，重要性声明要大于非重要性，同时重要性也存在特殊性的比较。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2019/01/21/浅谈css特性.html" data-title="浅谈css特性 | Welkin" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2019/01/17/浅谈css样式及选择器.html"  title="浅谈css样式及选择器">
+ <strong>NEXT:</strong><br/> 
+ <span>浅谈css样式及选择器
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、特殊性"><span class="toc-number">1.</span> <span class="toc-text">一、特殊性</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、CSS优先级"><span class="toc-number">2.</span> <span class="toc-text">二、CSS优先级</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#三、继承"><span class="toc-number">3.</span> <span class="toc-text">三、继承</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#四、层叠"><span class="toc-number">4.</span> <span class="toc-text">四、层叠</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#五、-重要性"><span class="toc-number">5.</span> <span class="toc-text">五、 重要性</span></a></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2019 
+		
+		<a href="http://yoursite.com" target="_blank" title="welkin">welkin</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>
