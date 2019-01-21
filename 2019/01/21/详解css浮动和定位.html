@@ -1,0 +1,486 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>详解css浮动和定位 | Welkin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="welkin">
+    
+    <meta name="description" content="文档流在这里我们首先介绍文档流 normal flow这个单词还翻译为普通流，标准流CSS的定位机制有3种：普通流（标准流）、浮动和定位。
+文档流实际上就是一个网页内标签元素正常从上到下，从左到右排列顺序的意思，比如块级元素会独占一行，行内元素会按顺序依次前后排列；按照这种大前提的布局排列之下绝对不">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="Welkin" title="Welkin"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Welkin">Welkin</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2019/01/21/详解css浮动和定位.html" title="详解css浮动和定位" itemprop="url">详解css浮动和定位</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="welkin">welkin</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2019-01-21T11:44:04.000Z" itemprop="datePublished">2019-01-21</time>
+    Updated:<time datetime="2019-01-21T11:44:15.456Z" itemprop="dateModified">2019-01-21</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#文档流"><span class="toc-number">1.</span> <span class="toc-text">文档流</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#一、浮动"><span class="toc-number"></span> <span class="toc-text">一、浮动</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-什么是浮动？"><span class="toc-number">1.</span> <span class="toc-text">1.  什么是浮动？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-如何清除浮动？"><span class="toc-number">2.</span> <span class="toc-text">2. 如何清除浮动？</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#为什么要清除浮动？"><span class="toc-number">2.0.1.</span> <span class="toc-text">为什么要清除浮动？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#清除浮动本质："><span class="toc-number">2.0.2.</span> <span class="toc-text">清除浮动本质：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#清除浮动的方法："><span class="toc-number">2.0.3.</span> <span class="toc-text">清除浮动的方法：</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#1-额外标签法"><span class="toc-number">2.0.3.1.</span> <span class="toc-text">1. 额外标签法</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#2-父级添加overflow属性方法"><span class="toc-number">2.0.3.2.</span> <span class="toc-text">2. 父级添加overflow属性方法</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#3-使用after伪元素清除浮动"><span class="toc-number">2.0.3.3.</span> <span class="toc-text">3. 使用after伪元素清除浮动</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#4-使用before和after双伪元素清除浮动"><span class="toc-number">2.0.3.4.</span> <span class="toc-text">4.  使用before和after双伪元素清除浮动</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、定位"><span class="toc-number"></span> <span class="toc-text">二、定位</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-静态定位"><span class="toc-number">1.</span> <span class="toc-text">1. 静态定位</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-相对定位relative"><span class="toc-number">2.</span> <span class="toc-text">2. 相对定位relative</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-绝对定位absolute"><span class="toc-number">3.</span> <span class="toc-text">3.绝对定位absolute</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#绝对定位的盒子水平-垂直居中"><span class="toc-number">3.0.1.</span> <span class="toc-text">绝对定位的盒子水平/垂直居中</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-固定定位fixed"><span class="toc-number">4.</span> <span class="toc-text">4. 固定定位fixed</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#三、叠放次序"><span class="toc-number"></span> <span class="toc-text">三、叠放次序</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#五、定位模式转换"><span class="toc-number"></span> <span class="toc-text">五、定位模式转换</span></a>
+		</div>
+		
+		<h3 id="文档流"><a href="#文档流" class="headerlink" title="文档流"></a>文档流</h3><p>在这里我们首先介绍<strong>文档流</strong> normal flow<br>这个单词还翻译为普通流，标准流<br>CSS的定位机制有3种：普通流（标准流）、浮动和定位。</p>
+<p>文档流实际上就是一个网页内标签元素正常从上到下，从左到右排列顺序的意思，比如块级元素会独占一行，行内元素会按顺序依次前后排列；按照这种大前提的布局排列之下绝对不会出现例外的情况叫做文档流布局。</p>
+<hr>
+
+<h1 id="一、浮动"><a href="#一、浮动" class="headerlink" title="一、浮动"></a>一、浮动</h1><p><img src="https://img-blog.csdnimg.cn/20190120190802923.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="浮动"><br>浮动最早是用来控制图片，以便达到其他元素（特别是文字）实现“环绕”图片的效果。后来，我们发现浮动有个很有意思的事情：就是让任何盒子可以一行排列,因此我们就慢慢的偏离主题，用浮动的特性来布局了。</p>
+<h3 id="1-什么是浮动？"><a href="#1-什么是浮动？" class="headerlink" title="1.  什么是浮动？"></a>1.  什么是浮动？</h3><p>元素的浮动是指设置了浮动属性的元素会脱离标准标准流的控制，移动到其父元素中指定位置的过程。</p>
+<p>在CSS中，通过float属性来定义浮动，其基本语法格式如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">选择器&#123;float:属性值;&#125;</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>属性值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>left</td>
+<td>元素向左浮动</td>
+</tr>
+<tr>
+<td>right</td>
+<td>元素向右浮动</td>
+</tr>
+<tr>
+<td>none</td>
+<td>元素不浮动（默认值）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>浮动脱离标准流，====脱标==== 不占位置，会影响标准流。浮动只有左右浮动。</strong><br><strong>注意：</strong></p>
+<ol>
+<li>浮动首先创建包含块的概念（包裹）。就是说， 浮动的元素总是找理它最近的父级元素对齐。但是不会超出内边距的范围。 </li>
+<li>一个父盒子里面的子盒子，如果其中一个子级有浮动的，则其他子级都需要浮动。这样才能一行对齐显示。</li>
+<li>元素添加浮动后，元素会具有行内块元素的特性。元素的大小完全取决于定义的大小或者默认的内容多少浮动根据元素书写的位置来显示相应的浮动。</li>
+<li>浮动的目的就是为了让多个块级元素同一行上显示。  最核心的关键点就是   怎么排列的， 是否占有位置</li>
+</ol>
+<p><strong>小技巧</strong>：<br>float      浮 漏 特   </p>
+<p>浮：    加了浮动的元素盒子是浮起来的，漂浮在其他的标准流盒子上面。<br>漏：    加了浮动的盒子，不占位置的，它浮起来了，它原来的位置漏 给了标准流的盒子。<br>特：    特别注意，首先浮动的盒子需要和标准流的父级搭配使用， 其次 特别的注意浮动可以使元素显示模式体现为行内块特性。</p>
+<h3 id="2-如何清除浮动？"><a href="#2-如何清除浮动？" class="headerlink" title="2. 如何清除浮动？"></a>2. 如何清除浮动？</h3><h5 id="为什么要清除浮动？"><a href="#为什么要清除浮动？" class="headerlink" title="为什么要清除浮动？"></a>为什么要清除浮动？</h5><p>我们前面说过，浮动本质是用来做一些文字混排效果的，但是被我们拿来做布局用，则会有很多的问题出现， 但是，你不能说浮动不好 </p>
+<p>由于浮动元素不再占用原文档流的位置，所以它会对后面的元素排版产生影响，为了解决这些问题，此时就需要在该元素中清除浮动。</p>
+<p>准确地说，并不是清除浮动，而是<strong>清除浮动后造成的影响</strong></p>
+<p>如果浮动一开始就是一个美丽的错误，那么请用正确的方法挽救它。</p>
+<h5 id="清除浮动本质："><a href="#清除浮动本质：" class="headerlink" title="清除浮动本质："></a>清除浮动本质：</h5><p>清除浮动主要为了解决父级元素因为子级浮动引起内部高度为0 的问题。</p>
+<h5 id="清除浮动的方法："><a href="#清除浮动的方法：" class="headerlink" title="清除浮动的方法："></a>清除浮动的方法：</h5><p>其实本质叫做闭合浮动更好一些, 记住，清除浮动就是把浮动的盒子圈到里面，让父盒子闭合出口和入口不让他们出来影响其他元素。</p>
+<p>在CSS中，clear属性用于清除浮动，其基本语法格式如下：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">选择器&#123;clear:属性值;&#125;   clear 清除</span><br></pre></td></tr></table></figure></p>
+<table>
+<thead>
+<tr>
+<th>属性值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>left</td>
+<td>不允许左侧有浮动元素（清除左侧浮动的影响）</td>
+</tr>
+<tr>
+<td>right</td>
+<td>不允许右侧有浮动元素（清除右侧浮动的影响）</td>
+</tr>
+<tr>
+<td>both</td>
+<td>同时清除左右两侧浮动的影响</td>
+</tr>
+</tbody>
+</table>
+<h6 id="1-额外标签法"><a href="#1-额外标签法" class="headerlink" title="1. 额外标签法"></a>1. 额外标签法</h6><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">是W3C推荐的做法是通过在浮动元素末尾添加一个空的标签例如 <span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">”clear:both”</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span>，或则其他标签br等亦可。</span><br></pre></td></tr></table></figure>
+<p>优点： 通俗易懂，书写方便</p>
+<p>缺点： 添加许多无意义的标签，结构化较差。</p>
+<h6 id="2-父级添加overflow属性方法"><a href="#2-父级添加overflow属性方法" class="headerlink" title="2. 父级添加overflow属性方法"></a>2. 父级添加overflow属性方法</h6><p>可以通过触发BFC的方式，可以实现清除浮动效果。（BFC后面讲解）</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">可以给父级添加： overflow为 hidden|auto|scroll  都可以实现。</span><br></pre></td></tr></table></figure>
+<p>优点：  代码简洁</p>
+<p>缺点：  内容增多时候容易造成不会自动换行导致内容被隐藏掉，无法显示需要溢出的元素。</p>
+<h6 id="3-使用after伪元素清除浮动"><a href="#3-使用after伪元素清除浮动" class="headerlink" title="3. 使用after伪元素清除浮动"></a>3. 使用after伪元素清除浮动</h6><p><strong>:after 方式为空元素的升级版，好处是不用单独加标签了</strong> </p>
+<p>使用方法：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.clearfix</span><span class="selector-pseudo">:after</span> &#123;  </span><br><span class="line">	<span class="attribute">content</span>: <span class="string">""</span>; </span><br><span class="line">	<span class="attribute">display</span>: block; </span><br><span class="line">	<span class="attribute">height</span>: <span class="number">0</span>; </span><br><span class="line">	<span class="attribute">clear</span>: both; </span><br><span class="line">	<span class="attribute">visibility</span>: hidden;  </span><br><span class="line">&#125;   </span><br><span class="line"></span><br><span class="line">.clearfix &#123;*zoom: 1;&#125;   /* IE6、7 专有 */</span><br></pre></td></tr></table></figure>
+<p>优点： 符合闭合浮动思想  结构语义化正确<br>缺点： 由于IE6-7不支持:after，使用 zoom:1触发 hasLayout。<br>代表网站： 百度、淘宝网、网易等</p>
+<p>注意： content:””   尽量不带点</p>
+<h6 id="4-使用before和after双伪元素清除浮动"><a href="#4-使用before和after双伪元素清除浮动" class="headerlink" title="4.  使用before和after双伪元素清除浮动"></a>4.  使用before和after双伪元素清除浮动</h6><p>使用方法：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.clearfix</span><span class="selector-pseudo">:before</span>,<span class="selector-class">.clearfix</span><span class="selector-pseudo">:after</span> &#123; </span><br><span class="line">  <span class="attribute">content</span>:<span class="string">""</span>;</span><br><span class="line">  <span class="attribute">display</span>:table;  <span class="comment">/* 这句话可以出发BFC BFC可以清除浮动,BFC我们后面讲 */</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.clearfix</span><span class="selector-pseudo">:after</span> &#123;</span><br><span class="line"> <span class="attribute">clear</span>:both;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.clearfix</span> &#123;</span><br><span class="line">  *zoom:1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>优点：  代码更简洁<br>缺点：  由于IE6-7不支持:after，使用 zoom:1触发 hasLayout。<br>代表网站： 小米、腾讯等</p>
+<h1 id="二、定位"><a href="#二、定位" class="headerlink" title="二、定位"></a>二、定位</h1><p><img src="https://img-blog.csdnimg.cn/20190120190616511.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>元素的定位属性主要包括定位模式和边偏移两部分。</p>
+<ol>
+<li>边偏移</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>边偏移属性</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>top</td>
+<td>顶端偏移量，定义元素相对于其父元素上边线的距离</td>
+</tr>
+<tr>
+<td>bottom</td>
+<td>底部偏移量，定义元素相对于其父元素下边线的距离</td>
+</tr>
+<tr>
+<td>left</td>
+<td>左侧偏移量，定义元素相对于其父元素左边线的距离</td>
+</tr>
+<tr>
+<td>right</td>
+<td>右侧偏移量，定义元素相对于其父元素右边线的距离</td>
+</tr>
+</tbody>
+</table>
+<p>也就说，以后定位要和这边偏移搭配使用了， 比如 top: 100px;  left: 30px; 等等</p>
+<ol>
+<li>定位模式(定位的分类)</li>
+</ol>
+<p>在CSS中，position属性用于定义元素的定位模式，其基本语法格式如下：</p>
+<p>选择器{position:属性值;}</p>
+<p>position属性的常用值</p>
+<table>
+<thead>
+<tr>
+<th>值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>static</td>
+<td>自动定位（默认定位方式）</td>
+</tr>
+<tr>
+<td>relative</td>
+<td>相对定位，相对于其原文档流的位置进行定位</td>
+</tr>
+<tr>
+<td>absolute</td>
+<td>绝对定位，相对于其上一个已经定位的父元素进行定位</td>
+</tr>
+<tr>
+<td>fixed</td>
+<td>固定定位，相对于浏览器窗口进行定位</td>
+</tr>
+</tbody>
+</table>
+<hr>
+
+<h3 id="1-静态定位"><a href="#1-静态定位" class="headerlink" title="1. 静态定位"></a>1. 静态定位</h3><p>静态定位是所有元素的默认定位方式，当position属性的取值为static时，可以将元素定位于静态位置。 所谓静态位置就是各个元素在HTML文档流中默认的位置。</p>
+<p>上面的话翻译成白话：  就是网页中所有元素都默认的是静态定位哦！ 其实就是标准流的特性。</p>
+<p>在静态定位状态下，无法通过边偏移属性（top、bottom、left或right）来改变元素的位置。</p>
+<p>PS： 静态定位其实没啥可说的。</p>
+<p>静态定位唯一的用处：  就是 取消定位。 position: static;</p>
+<h3 id="2-相对定位relative"><a href="#2-相对定位relative" class="headerlink" title="2. 相对定位relative"></a>2. 相对定位relative</h3><p>相对定位是将元素相对于它在标准流中的位置进行定位，当position属性的取值为relative时，可以将元素定位于相对位置。</p>
+<p>对元素设置相对定位后，可以通过边偏移属性改变元素的位置，但是它在文档流中的位置仍然保留。如下图所示，即是一个相对定位的效果展示：<br><strong>注意：   </strong></p>
+<ol>
+<li>相对定位最重要的一点是，它可以通过边偏移移动位置，但是原来的所占的位置，继续占有。</li>
+<li>其次，每次移动的位置，是以自己的左上角为基点移动（相对于自己来移动位置）</li>
+</ol>
+<p>就是说，相对定位的盒子仍在标准流中，它后面的盒子仍以标准流方式对待它。（相对定位不脱标）</p>
+<p>如果说浮动的主要目的是 让多个块级元素一行显示，那么定位的主要价值就是 移动位置， 让盒子到我们想要的位置上去。</p>
+<h3 id="3-绝对定位absolute"><a href="#3-绝对定位absolute" class="headerlink" title="3.绝对定位absolute"></a>3.绝对定位absolute</h3><p>[注意] 如果文档可滚动，绝对定位元素会随着它滚动，因为元素最终会相对于正常流的某一部分定位。</p>
+<p>当position属性的取值为absolute时，可以将元素的定位模式设置为绝对定位。</p>
+<p><strong>注意：</strong>  绝对定位最重要的一点是，它可以通过边偏移移动位置，但是它完全脱标，完全不占位置。</p>
+<p>分以下情况：</p>
+<ul>
+<li><p>父级没有定位<br>若所有父元素都没有定位，以浏览器当前屏幕为准对齐(document文档)。</p>
+</li>
+<li><p>父级有定位<br>绝对定位是将元素依据最近的已经定位（绝对、固定或相对定位）的父元素（祖先）进行定位。 </p>
+</li>
+<li><p>子绝父相<br>这句话的意思是 子级是绝对定位的话， 父级要用相对定位。<br>首先， 我们说下， 绝对定位是将元素依据最近的已经定位绝对、固定或相对定位）的父元素（祖先）进行定位。<br>就是说， 子级是绝对定位，父亲只要是定位即可（不管父亲是绝对定位还是相对定位，甚至是固定定位都可以），就是说， 子绝父绝，子绝父相都是正确的。<br>所以，我们可以得出如下结论：<br>因为子级是绝对定位，不会占有位置， 可以放到父盒子里面的任何一个地方。<br>父盒子布局时，需要占有位置，因此父亲只能是 相对定位.<br>这就是子绝父相的由来。</p>
+<h5 id="绝对定位的盒子水平-垂直居中"><a href="#绝对定位的盒子水平-垂直居中" class="headerlink" title="绝对定位的盒子水平/垂直居中"></a>绝对定位的盒子水平/垂直居中</h5></li>
+</ul>
+<p>普通的盒子是左右margin 改为 auto就可， 但是对于绝对定位就无效了</p>
+<p>定位的盒子也可以水平或者垂直居中，有一个算法。</p>
+<ol>
+<li><p>首先left 50%   父盒子的一半大小</p>
+</li>
+<li><p>然后走自己外边距负的一半值就可以了 margin-left。</p>
+</li>
+</ol>
+<h3 id="4-固定定位fixed"><a href="#4-固定定位fixed" class="headerlink" title="4. 固定定位fixed"></a>4. 固定定位fixed</h3><p>固定定位是绝对定位的一种特殊形式，类似于 正方形是一个特殊的 矩形。它以浏览器窗口作为参照物来定义网页元素。当position属性的取值为fixed时，即可将元素的定位模式设置为固定定位。</p>
+<p>当对元素设置固定定位后，它将脱离标准文档流的控制，始终依据浏览器窗口来定义自己的显示位置。不管浏览器滚动条如何滚动也不管浏览器窗口的大小如何变化，该元素都会始终显示在浏览器窗口的固定位置。</p>
+<p>固定定位有两点：</p>
+<ol>
+<li>固定定位的元素跟父亲没有任何关系，只认浏览器。</li>
+<li>固定定位完全脱标，不占有位置，不随着滚动条滚动。</li>
+</ol>
+<p><strong>注意：</strong> ie6等低版本浏览器不支持固定定位。</p>
+<hr>
+
+<h1 id="三、叠放次序"><a href="#三、叠放次序" class="headerlink" title="三、叠放次序"></a>三、叠放次序</h1><p>当对多个元素同时设置定位时，定位元素之间有可能会发生重叠。<br>在CSS中，要想调整重叠定位元素的堆叠顺序，可以对定位元素应用z-index层叠等级属性，其取值可为正整数、负整数和0。</p>
+<p>比如：  z-index: 2;       font-weight: 700  </p>
+<p><strong>注意：</strong></p>
+<ol>
+<li><p>z-index的默认属性值是0，取值越大，定位元素在层叠元素中越居上。</p>
+</li>
+<li><p>如果取值相同，则根据书写顺序，后来居上。</p>
+</li>
+<li><p>后面数字一定不能加单位。</p>
+</li>
+<li><p>只有相对定位，绝对定位，固定定位有此属性，其余标准流，浮动，静态定位都无此属性，亦不可指定此属性。</p>
+</li>
+</ol>
+<h1 id="五、定位模式转换"><a href="#五、定位模式转换" class="headerlink" title="五、定位模式转换"></a>五、定位模式转换</h1><p>跟 浮动一样， 元素添加了 绝对定位和固定定位之后， 元素模式也会发生转换， 都转换为 行内块模式， </p>
+<p>行内块 的宽度和高度 跟内容有关系   </p>
+<p><strong>因此 比如 行内元素 如果添加了 绝对定位或者 固定定位后 浮动后，可以不用转换模式，直接给高度和宽度就可以了。</strong></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2019/01/21/详解css浮动和定位.html" data-title="详解css浮动和定位 | Welkin" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2019/01/21/浅谈css特性.html"  title="浅谈css特性">
+ <strong>NEXT:</strong><br/> 
+ <span>浅谈css特性
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#文档流"><span class="toc-number">1.</span> <span class="toc-text">文档流</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#一、浮动"><span class="toc-number"></span> <span class="toc-text">一、浮动</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-什么是浮动？"><span class="toc-number">1.</span> <span class="toc-text">1.  什么是浮动？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-如何清除浮动？"><span class="toc-number">2.</span> <span class="toc-text">2. 如何清除浮动？</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#为什么要清除浮动？"><span class="toc-number">2.0.1.</span> <span class="toc-text">为什么要清除浮动？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#清除浮动本质："><span class="toc-number">2.0.2.</span> <span class="toc-text">清除浮动本质：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#清除浮动的方法："><span class="toc-number">2.0.3.</span> <span class="toc-text">清除浮动的方法：</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#1-额外标签法"><span class="toc-number">2.0.3.1.</span> <span class="toc-text">1. 额外标签法</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#2-父级添加overflow属性方法"><span class="toc-number">2.0.3.2.</span> <span class="toc-text">2. 父级添加overflow属性方法</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#3-使用after伪元素清除浮动"><span class="toc-number">2.0.3.3.</span> <span class="toc-text">3. 使用after伪元素清除浮动</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#4-使用before和after双伪元素清除浮动"><span class="toc-number">2.0.3.4.</span> <span class="toc-text">4.  使用before和after双伪元素清除浮动</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、定位"><span class="toc-number"></span> <span class="toc-text">二、定位</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-静态定位"><span class="toc-number">1.</span> <span class="toc-text">1. 静态定位</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-相对定位relative"><span class="toc-number">2.</span> <span class="toc-text">2. 相对定位relative</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-绝对定位absolute"><span class="toc-number">3.</span> <span class="toc-text">3.绝对定位absolute</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#绝对定位的盒子水平-垂直居中"><span class="toc-number">3.0.1.</span> <span class="toc-text">绝对定位的盒子水平/垂直居中</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-固定定位fixed"><span class="toc-number">4.</span> <span class="toc-text">4. 固定定位fixed</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#三、叠放次序"><span class="toc-number"></span> <span class="toc-text">三、叠放次序</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#五、定位模式转换"><span class="toc-number"></span> <span class="toc-text">五、定位模式转换</span></a>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2019 
+		
+		<a href="http://yoursite.com" target="_blank" title="welkin">welkin</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>
