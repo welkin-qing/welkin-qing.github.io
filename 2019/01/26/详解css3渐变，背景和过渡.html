@@ -1,0 +1,421 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>详解css3渐变，背景和过渡 | Welkin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="welkin">
+    
+    <meta name="description" content="一、渐变渐变是CSS3当中比较丰富多彩的一个特性，通过渐变我们可以实现许多炫丽的效果，有效的减少图片的使用数量，并且具有很强的适应性和可扩展性。可分为线性渐变、径向渐变
+1.    linear-gradient线性渐变指沿着某条直线朝一个方向产生渐变效果a)    语法：linear-gradie">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="Welkin" title="Welkin"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Welkin">Welkin</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2019/01/26/详解css3渐变，背景和过渡.html" title="详解css3渐变，背景和过渡" itemprop="url">详解css3渐变，背景和过渡</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="welkin">welkin</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2019-01-26T14:08:31.000Z" itemprop="datePublished">2019-01-26</time>
+    Updated:<time datetime="2019-01-26T14:08:43.082Z" itemprop="dateModified">2019-01-26</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、渐变"><span class="toc-number">1.</span> <span class="toc-text">一、渐变</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-linear-gradient线性渐变指沿着某条直线朝一个方向产生渐变效果"><span class="toc-number">1.0.1.</span> <span class="toc-text">1.    linear-gradient线性渐变指沿着某条直线朝一个方向产生渐变效果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-radial-gradient径向渐变指从一个中心点开始沿着四周产生渐变效果"><span class="toc-number">1.0.2.</span> <span class="toc-text">2.    radial-gradient径向渐变指从一个中心点开始沿着四周产生渐变效果</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、背景"><span class="toc-number">2.</span> <span class="toc-text">二、背景</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-background-size属性："><span class="toc-number">2.0.1.</span> <span class="toc-text">1.background-size属性：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-background-origin"><span class="toc-number">2.0.2.</span> <span class="toc-text">2.  background-origin:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-background-clip"><span class="toc-number">2.0.3.</span> <span class="toc-text">3. background-clip:</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#三、过渡"><span class="toc-number">3.</span> <span class="toc-text">三、过渡</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#四、边框图片"><span class="toc-number">4.</span> <span class="toc-text">四、边框图片</span></a></li></ol>
+		</div>
+		
+		<h1 id="一、渐变"><a href="#一、渐变" class="headerlink" title="一、渐变"></a>一、渐变</h1><p>渐变是CSS3当中比较丰富多彩的一个特性，通过渐变我们可以实现许多炫丽的效果，有效的减少图片的使用数量，并且具有很强的适应性和可扩展性。可分为线性渐变、径向渐变</p>
+<h3 id="1-linear-gradient线性渐变指沿着某条直线朝一个方向产生渐变效果"><a href="#1-linear-gradient线性渐变指沿着某条直线朝一个方向产生渐变效果" class="headerlink" title="1.    linear-gradient线性渐变指沿着某条直线朝一个方向产生渐变效果"></a>1.    linear-gradient线性渐变指沿着某条直线朝一个方向产生渐变效果</h3><p>a)    语法：<br><code>linear-gradient( [&lt;point&gt; || &lt;angle&gt;,]? &lt;stop&gt;, &lt;stop&gt; [, &lt;stop&gt;]* )</code><br>b)    参数说明：</p>
+<ul>
+<li>第一个参数表示线性渐变的方向，</li>
+</ul>
+<ol>
+<li>to left：设置渐变为从右到左。相当于: 270deg;</li>
+<li>to right：设置渐变从左到右。相当于: 90deg;   </li>
+<li>to top：设置渐变从下到上。相当于: 0deg;</li>
+<li>to bottom：设置渐变从上到下。相当于: 180deg。这是默认值，等同于留空不写。也可以直接指定度数，如45deg</li>
+</ol>
+<ul>
+<li>第二个参数是起点颜色,可以指定颜色的位置</li>
+<li>第三个参数是终点颜色，你还可以在后面添加更多的参数，表示多种颜色的渐变<br>c)    示例：<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span>&#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">400px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">400px</span>;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">100px</span> auto;</span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">linear-gradient</span>(0deg,red,orange,yellow,green,  #00ffff,blue,purple);</span><br><span class="line">&#125;</span><br><span class="line">`</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="2-radial-gradient径向渐变指从一个中心点开始沿着四周产生渐变效果"><a href="#2-radial-gradient径向渐变指从一个中心点开始沿着四周产生渐变效果" class="headerlink" title="2.    radial-gradient径向渐变指从一个中心点开始沿着四周产生渐变效果"></a>2.    radial-gradient径向渐变指从一个中心点开始沿着四周产生渐变效果</h3><p>a)    语法：<br><code>&lt;radial-gradient&gt; = radial-gradient([ [ &lt;shape&gt; || &lt;size&gt; ] [ at &lt;position&gt; ]? , | at &lt;position&gt;, ]?&lt;color-stop&gt;[ , &lt;color-stop&gt; ]+)</code><br>b)    取值：</p>
+<ul>
+<li><position> 确定圆心的位置。如果提供2个参数，第一个表示横坐标，第二个表示纵坐标；如果只提供一个，第二值默认为50%，即center</position></li>
+<li>shape：渐变的形状，ellipse表示椭圆形，circle表示圆形。默认为ellipse，如果元素形状为正方形的元素，则ellipse和circle显示一样</li>
+<li>size：渐变的大小，即渐变到哪里停止，它有四个值。 closest-side：最近边； farthest-side：最远边； closest-corner：最近角； farthest-corner：最远角。默认是最远的角farthest-corner</li>
+<li><code>&lt;color&gt;</code>：指定颜色。Rgba  hsla</li>
+</ul>
+<p>c)    一些案例示例代码：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"> <span class="selector-class">.div1</span>&#123;</span><br><span class="line">        <span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">        <span class="attribute">height</span>: <span class="number">200px</span>;</span><br><span class="line">        <span class="attribute">margin</span>: <span class="number">10px</span> auto;</span><br><span class="line">        <span class="comment">/*设置径向渐变效果:从中心点开始，从一种颜色到另外一种颜色*/</span></span><br><span class="line">        <span class="attribute">background</span>: <span class="built_in">radial-gradient</span>(circle at center,red,blue);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-class">.div2</span>&#123;</span><br><span class="line">        <span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">        <span class="attribute">height</span>: <span class="number">200px</span>;</span><br><span class="line">        <span class="attribute">border-radius</span>: <span class="number">100px</span>;</span><br><span class="line">        <span class="attribute">margin</span>: <span class="number">10px</span> auto;</span><br><span class="line">        <span class="comment">/*设置径向渐变效果:从指定坐开始，从一种颜色到另外一种颜色*/</span></span><br><span class="line">        <span class="attribute">background</span>: <span class="built_in">radial-gradient</span>(circle at 50px 50px,#eeffff,#334455);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-class">.div3</span>&#123;</span><br><span class="line">        <span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">        <span class="attribute">height</span>: <span class="number">200px</span>;</span><br><span class="line">        <span class="attribute">border-radius</span>: <span class="number">100px</span>;</span><br><span class="line">        <span class="attribute">margin</span>: <span class="number">10px</span> auto;</span><br><span class="line">        <span class="comment">/*设置径向渐变效果:从指定坐标开始，从一种颜色到另外一种颜色，同时指定颜色的位置*/</span></span><br><span class="line">        <span class="attribute">background</span>: <span class="built_in">radial-gradient</span>(circle at 50px 50px,#eeffff 0%,#666 70%,rgba(33,33,33,0.8) <span class="number">80%</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/*指定渐变的形状*/</span></span><br><span class="line">    <span class="selector-class">.div4</span>&#123;</span><br><span class="line">        <span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">        <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">        <span class="attribute">margin</span>: <span class="number">10px</span> auto;</span><br><span class="line">        <span class="comment">/*设置径向渐变效果:从中心点开始，从一种颜色到另外一种颜色*/</span></span><br><span class="line">        <span class="attribute">background</span>: <span class="built_in">radial-gradient</span>(ellipse at center,red,green,blue);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/*指定渐变的size*/</span></span><br><span class="line">    <span class="selector-class">.div5</span>&#123;</span><br><span class="line">        <span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">        <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">        <span class="attribute">margin</span>: <span class="number">10px</span> auto;</span><br><span class="line">        <span class="comment">/*设置径向渐变效果:从中心点开始，从一种颜色到另外一种颜色,同时指定了大小为渐变到最近的边*/</span></span><br><span class="line">        <span class="attribute">background</span>: <span class="built_in">radial-gradient</span>(circle closest-side at center,red,green,blue);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/*使用系统提供的位置设置*/</span></span><br><span class="line">    <span class="selector-class">.div6</span>&#123;</span><br><span class="line">        <span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">        <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">        <span class="attribute">margin</span>: <span class="number">10px</span> auto;</span><br><span class="line">        <span class="comment">/*设置径向渐变效果:从右上角点开始，从一种颜色到另外一种颜色*/</span></span><br><span class="line">        <span class="attribute">background</span>: <span class="built_in">radial-gradient</span>(circle at top right,red,green,blue);</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure></p>
+<h1 id="二、背景"><a href="#二、背景" class="headerlink" title="二、背景"></a>二、背景</h1><h3 id="1-background-size属性："><a href="#1-background-size属性：" class="headerlink" title="1.background-size属性："></a>1.background-size属性：</h3><p>CSS里的background-size属性能够让程序员决定如何在指定的元素里展示,它通过改变背景尺寸的通过各种不同是属性值改变背景尺寸呈现的大小。往往建议不要将图放大，如果有需要，尽量让图缩小</p>
+<ol>
+<li>语法：<br><code>background-size: auto(原始图片大小) || number(数值) || percentage(百分比) || cover(放大铺满) || contain(缩小铺满)</code></li>
+<li>参数说明：</li>
+</ol>
+<ul>
+<li>auto：此值为默认值，保持背景图片的原始高度和宽度;</li>
+<li>number：此值设置具体的值，可以改变背景图片的大小;</li>
+<li>percentage：此值为百分值，可以是0%〜100%之间任何值，但此值只能应用在块元素上，所设置百分值将使用背景图片大小根据所在元素的宽度的百分比来计算。</li>
+<li>cover：此值是将图片放大，以适合铺满整个容器，这个主要运用在，当图片小于容器时，又无法使用background-repeat来实现时，我们就可以采用cover;将背景图片放大到适合容器的大小</li>
+<li>contain：此值刚好与cover相反，其主要是将背景图片缩小，以适合铺满整个容器，这个主要运用在，当背景图片大于元素容器时，而又需要将背景图片全部显示出来，此时我们就可以使用contain将图片缩小到适合容器大小为止。</li>
+<li>当background-size取值为number和percentage时可以设置两个值，也可以设置一个值，当只取一个值时，第二个值相当于auto，但这里的auto并不会使背景图片的高度保持自己原始高度，而是会参照第一个参数值进行等比例缩放。</li>
+</ul>
+<ol>
+<li>使用案例：<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">    *&#123;</span></span><br><span class="line"><span class="undefined">        padding: 0;</span></span><br><span class="line"><span class="undefined">        margin: 0;</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="css">    <span class="selector-class">.div1</span>&#123;</span></span><br><span class="line"><span class="undefined">         width: 200px;</span></span><br><span class="line"><span class="undefined">         height: 200px;</span></span><br><span class="line"><span class="css">         <span class="selector-tag">margin</span><span class="selector-pseudo">:10px</span> <span class="selector-tag">auto</span>;</span></span><br><span class="line"><span class="css">         <span class="comment">/*默认的背景设置，会让背景图片从左上角原点位置进行设置，不会自动的让背景图片适应容器的大小从而进行缩放*/</span></span></span><br><span class="line"><span class="undefined">         background: url("../images/1.jpg");</span></span><br><span class="line"><span class="undefined">     &#125;</span></span><br><span class="line"><span class="css">    <span class="selector-class">.div2</span>&#123;</span></span><br><span class="line"><span class="undefined">        width: 200px;</span></span><br><span class="line"><span class="undefined">        height: 200px;</span></span><br><span class="line"><span class="css">        <span class="selector-tag">margin</span><span class="selector-pseudo">:10px</span> <span class="selector-tag">auto</span>;</span></span><br><span class="line"><span class="undefined">        background: url("../images/1.jpg");</span></span><br><span class="line"><span class="css">        <span class="comment">/*设置背景图片的大小,指定大小，有可能会让背景图片变形*/</span></span></span><br><span class="line"><span class="undefined">        background-size: 200px 200px;</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="css">    <span class="selector-class">.div3</span>&#123;</span></span><br><span class="line"><span class="undefined">        width: 200px;</span></span><br><span class="line"><span class="undefined">        height: 200px;</span></span><br><span class="line"><span class="css">        <span class="selector-tag">margin</span><span class="selector-pseudo">:10px</span> <span class="selector-tag">auto</span>;</span></span><br><span class="line"><span class="undefined">        background: url("../images/1.jpg");</span></span><br><span class="line"><span class="css">        <span class="comment">/*设置背景图片的大小,cover:会让宽或者高适应当前容器的宽或者高，进行等比例缩放，但是超出的部分不会显示，所以有些图片的区域可能会无法显示*/</span></span></span><br><span class="line"><span class="undefined">        background-size: cover;</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="css">    <span class="selector-class">.div4</span>&#123;</span></span><br><span class="line"><span class="undefined">        width: 200px;</span></span><br><span class="line"><span class="undefined">        height: 200px;</span></span><br><span class="line"><span class="css">        <span class="selector-tag">margin</span><span class="selector-pseudo">:10px</span> <span class="selector-tag">auto</span>;</span></span><br><span class="line"><span class="undefined">        background: url("../images/1.jpg") no-repeat;</span></span><br><span class="line"><span class="css">        <span class="comment">/*设置背景图片的大小,cover:会让宽或者高适应当前容器的宽或者高，进行等比例缩放，图片完全在容器以内，但是在不重复背景图片的情况下，会造成容器的部分区域空白*/</span></span></span><br><span class="line"><span class="undefined">        background-size: contain;</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="2-background-origin"><a href="#2-background-origin" class="headerlink" title="2.  background-origin:"></a>2.  background-origin:</h3><ol>
+<li>作用：background-origin 属性规定 background-position 属性相对于什么位置来定位。默认值是left top左上角</li>
+<li>语法：background-origin: padding-box|border-box|content-box;</li>
+<li>属性值说明：</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>padding-box    |背景图像相对于内边距框来定位。<br>border-box    |背景图像相对于边框盒来定位。<br>content-box    |背景图像相对于内容框来定位。<br>|  |  |</p>
+<h3 id="3-background-clip"><a href="#3-background-clip" class="headerlink" title="3. background-clip:"></a>3. background-clip:</h3><ol>
+<li>background-clip 属性规定背景的绘制区：虽然是设置裁切，但是控制的是显示。说白了，就是设置最终显示那些区域</li>
+<li>语法：background-clip: border-box|padding-box|content-box;</li>
+<li>属性值说明：</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>border-box    |背景被裁剪到边框盒。<br>padding-box    |背景被裁剪到内边距框。<br>content-box    |背景被裁剪到内容框。</p>
+<h1 id="三、过渡"><a href="#三、过渡" class="headerlink" title="三、过渡"></a>三、过渡</h1><p>通过过渡transition,我们可以在不使用 Flash 动画或 JavaScript 的情况下，当元素从一种样式变换为另一种样式时为元素添加效果. 要实现这一点，必须规定两项内容：1.规定希望把效果添加到哪个 CSS 属性上，2.规定效果的时长</p>
+<ol>
+<li>语法：<br><code>transition: property duration timing-function delay;</code></li>
+<li>参数说明：<br>transition 属性是一个简写属性，用于设置四个过渡属性：transition-property |transition-duration |transition-timing-function |transition-delay</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>transition-property |规定设置过渡效果的 CSS 属性的名称。<br>transition-duration |规定完成过渡效果需要多少秒或毫秒。<br>transition-timing-function |规定速度效果的速度曲线。<br>transition-delay |定义过渡效果何时开始。</p>
+<ol>
+<li>补充说明tansition-timing-function: 属性规定过渡效果的速度曲线</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>linear    |规定以相同速度开始至结束的过渡效果（等于 cubic-bezier(0,0,1,1)）。<br>ease    |规定慢速开始，然后变快，然后慢速结束的过渡效果（cubic-bezier(0.25,0.1,0.25,1)）。<br>ease-in    |规定以慢速开始的过渡效果（等于 cubic-bezier(0.42,0,1,1)）。<br>ease-out    |规定以慢速结束的过渡效果（等于 cubic-bezier(0,0,0.58,1)）。<br>ease-in-out    |规定以慢速开始和结束的过渡效果（等于 cubic-bezier(0.42,0,0.58,1)）。<br>cubic-bezier(n,n,n,n)    |在 cubic-bezier 函数中定义自己的值。可能的值是 0 至 1 之间的数值。</p>
+<ol>
+<li><p>案例说明</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span>&#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">200px</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: red;</span><br><span class="line">    <span class="comment">/*添加单个过渡效果*/</span></span><br><span class="line">    <span class="comment">/*transition:background-color 2s;*/</span></span><br><span class="line">    <span class="comment">/*也可以同时设置多个过渡效果*/</span></span><br><span class="line">    <span class="comment">/*transition:background-color 2s,left 1s;*/</span></span><br><span class="line">    <span class="comment">/*可以设置某个过渡效果的延迟*/</span></span><br><span class="line">    <span class="comment">/*transition:background-color 2s,left 1s 1s;*/</span></span><br><span class="line">    <span class="comment">/*可以设置过渡效果的速率曲线*/</span></span><br><span class="line">    <span class="comment">/*transition:background-color 2s,left 1s ease-out 1s;*/</span></span><br><span class="line">    <span class="comment">/*还可以一次性的为所有属性添加过渡效果*/</span></span><br><span class="line">    <span class="attribute">transition</span>:all <span class="number">1s</span>;</span><br><span class="line">    <span class="attribute">position</span>: absolute;</span><br><span class="line">    <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">top</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用建议：<br>因为transition最早是有由webkit内核浏览器提出来的，mozilla和opera都是最近版本才支持这个属性，而我们的大众型浏览器IE全家都是不支持，另外由于各大现代浏览器Firefox,Safari,Chrome,Opera都还不支持W3C的标准写法，所以在应用transition时我们有必要加上各自的前缀，最好在放上我们W3C的标准写法，这样标准的会覆盖前面的写法，只要浏览器支持我们的transition属性，那么这种效果就会自动加上去，如</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">-moz-transition</span>: <span class="selector-tag">all</span> 5<span class="selector-tag">s</span> <span class="selector-tag">ease</span> 1<span class="selector-tag">s</span>;</span><br><span class="line"><span class="selector-tag">-webkit-transition</span>: <span class="selector-tag">all</span> 1<span class="selector-tag">s</span> <span class="selector-tag">ease</span> 1<span class="selector-tag">s</span>;</span><br><span class="line"><span class="selector-tag">-o-transition</span>: <span class="selector-tag">all</span> 1<span class="selector-tag">s</span> <span class="selector-tag">ease</span> 1<span class="selector-tag">s</span>;</span><br><span class="line"><span class="selector-tag">transition</span>: <span class="selector-tag">all</span> 1<span class="selector-tag">s</span> <span class="selector-tag">ease</span> 1<span class="selector-tag">s</span>;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="四、边框图片"><a href="#四、边框图片" class="headerlink" title="四、边框图片"></a>四、边框图片</h1><ul>
+<li>border-image-sorce：指定边框的路径，默认为四个角点</li>
+<li>border-image-slice:设置四个方向上的裁切距离.fill:做内容的内部填充  </li>
+<li>border-image-width:边框图片的宽度。如果没有设置这个属性，那么宽度默认就是元素的原始的边框宽度。<pre><code>细节：1.边框图片的本质是背景，并不会影响元素内容的放置  2.内容只会被容器的border和padding影响
+建议：一般将值设置为原始的边框的宽度
+</code></pre><ul>
+<li>border-image-outset:扩展边框</li>
+<li>border-image-repeat<ul>
+<li>repeat:直接重复平铺</li>
+<li>round:将内容缩放进行完整的重复平铺</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>缩写：</strong></p>
+<blockquote>
+<p> border-image: source slice / width/outset repeat;</p>
+</blockquote>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2019/01/26/详解css3渐变，背景和过渡.html" data-title="详解css3渐变，背景和过渡 | Welkin" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2019/01/26/vscode将项目托管到github.html"  title="vscode将项目托管到github">
+ <strong>NEXT:</strong><br/> 
+ <span>vscode将项目托管到github
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、渐变"><span class="toc-number">1.</span> <span class="toc-text">一、渐变</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-linear-gradient线性渐变指沿着某条直线朝一个方向产生渐变效果"><span class="toc-number">1.0.1.</span> <span class="toc-text">1.    linear-gradient线性渐变指沿着某条直线朝一个方向产生渐变效果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-radial-gradient径向渐变指从一个中心点开始沿着四周产生渐变效果"><span class="toc-number">1.0.2.</span> <span class="toc-text">2.    radial-gradient径向渐变指从一个中心点开始沿着四周产生渐变效果</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、背景"><span class="toc-number">2.</span> <span class="toc-text">二、背景</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-background-size属性："><span class="toc-number">2.0.1.</span> <span class="toc-text">1.background-size属性：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-background-origin"><span class="toc-number">2.0.2.</span> <span class="toc-text">2.  background-origin:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-background-clip"><span class="toc-number">2.0.3.</span> <span class="toc-text">3. background-clip:</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#三、过渡"><span class="toc-number">3.</span> <span class="toc-text">三、过渡</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#四、边框图片"><span class="toc-number">4.</span> <span class="toc-text">四、边框图片</span></a></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2019 
+		
+		<a href="http://yoursite.com" target="_blank" title="welkin">welkin</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>
