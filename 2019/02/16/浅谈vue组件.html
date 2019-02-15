@@ -1,0 +1,357 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>浅谈vue组件 | Welkin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="welkin">
+    
+    <meta name="description" content="一、组件化思想概念
+组件化类似于在node中学习的模块化，模块化是一种思想，一种构建方式，把一种很复杂的事务拆分成一个一个小模块，然后通过某种特定的方式把这些 小模块组织到一起相互协作完成这个复杂的功能。
+组件思想就是把一个很大的复杂的 Web 页面视图给拆分成一块一块的组件视图，然后利用某种特定的">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="Welkin" title="Welkin"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Welkin">Welkin</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2019/02/16/浅谈vue组件.html" title="浅谈vue组件" itemprop="url">浅谈vue组件</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="welkin">welkin</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2019-02-15T23:25:09.000Z" itemprop="datePublished">2019-02-16</time>
+    Updated:<time datetime="2019-02-15T23:25:37.567Z" itemprop="dateModified">2019-02-16</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、组件化思想概念"><span class="toc-number">1.</span> <span class="toc-text">一、组件化思想概念</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、Element"><span class="toc-number">2.</span> <span class="toc-text">二、Element</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#三、使用组件"><span class="toc-number">3.</span> <span class="toc-text">三、使用组件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#四、组件通信"><span class="toc-number">4.</span> <span class="toc-text">四、组件通信</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-全局组件和局部组件"><span class="toc-number">4.0.1.</span> <span class="toc-text">1. 全局组件和局部组件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-组件分类"><span class="toc-number">4.0.2.</span> <span class="toc-text">2. 组件分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-父—-gt-子通信-props-Down"><span class="toc-number">4.0.3.</span> <span class="toc-text">3. 父—-&gt;子通信  [props Down]</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-子—-gt-父传值-Events-Up"><span class="toc-number">4.0.4.</span> <span class="toc-text">4. 子—-&gt; 父传值 [Events Up]</span></a></li></ol></li></ol></li></ol>
+		</div>
+		
+		<h1 id="一、组件化思想概念"><a href="#一、组件化思想概念" class="headerlink" title="一、组件化思想概念"></a>一、组件化思想概念</h1><ul>
+<li>组件化类似于在node中学习的模块化，模块化是一种思想，一种构建方式，把一种很复杂的事务拆分成一个一个小模块，然后通过某种特定的方式把这些 小模块组织到一起相互协作完成这个复杂的功能。</li>
+<li>组件思想就是把一个很大的复杂的 Web 页面视图给拆分成一块一块的组件视图，然后利用某种特定的方式把它们组织到一起完成完整的 Web 应用构建。</li>
+</ul>
+<p>在 Vue 中，组件就是用来封装视图的，说白了就是封装 HTML</p>
+<ul>
+<li>为什么把视图给组件化拆成一块一块的呢？<ul>
+<li>开发效率</li>
+<li>可维护性</li>
+<li>其次才是可重用</li>
+</ul>
+</li>
+</ul>
+<h1 id="二、Element"><a href="#二、Element" class="headerlink" title="二、Element"></a>二、Element</h1><p><a href="http://element-cn.eleme.io/#/zh-CN" target="_blank" rel="noopener">http://element-cn.eleme.io/#/zh-CN</a></p>
+<ol>
+<li>npm install element-ui –save</li>
+<li>引入组件库css样式（lib/theme-chalk/index.css），再引入vue，其次是组件库js脚本</li>
+</ol>
+<h1 id="三、使用组件"><a href="#三、使用组件" class="headerlink" title="三、使用组件"></a>三、使用组件</h1><ol>
+<li>先定义（注册）组件</li>
+<li>使用</li>
+<li><p>组件的模板 template<br><strong>注意：只能有一个根元素，否则警告报错</strong><br>   3.1 template 可以是字面量字符串，缺点是没有高亮，内置在 JavaScript 中，写起来麻烦<br>   3.2 template 可以写在 script 标签中，虽然解决了高亮的问题，但是也麻烦<br>   3.3 以上方式都不好，我们最终的解决方案是使用 Vue 的 .vue 单文件组件来写。（webpack）</p>
+<pre><code>但是要想使用这种方式必须结合一些构建工具
+</code></pre></li>
+<li><p>组件是独立的作用域，就像我们 Node 中的 JavaScript 模块一样，独立的</p>
+<ol>
+<li>组件其实就是一个特殊的 Vue 实例，可以有自己的 data、methods、computed、watch 等等选项</li>
+</ol>
+</li>
+<li>组件的 data 必须是函数<br>   函数中返回一个对象作为组件的 data</li>
+</ol>
+<p>例：感知基本组件：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">Vue.component(<span class="string">'my-component'</span>, &#123;</span><br><span class="line">      template: <span class="string">`</span></span><br><span class="line"><span class="string">        &lt;div&gt;</span></span><br><span class="line"><span class="string">          &lt;div&gt;My Component&lt;/div&gt;</span></span><br><span class="line"><span class="string">          &lt;h2&gt;&#123;&#123; message &#125;&#125;&lt;/h2&gt;</span></span><br><span class="line"><span class="string">          &lt;input type="text" v-model="message" /&gt;</span></span><br><span class="line"><span class="string">          &lt;button @click="handleClick"&gt;点击弹出自己的 message&lt;/button&gt;</span></span><br><span class="line"><span class="string">          &lt;input type="checkbox" v-model="checked" /&gt;</span></span><br><span class="line"><span class="string">          &lt;div class="box" v-if="checked"&gt;&lt;/div&gt;</span></span><br><span class="line"><span class="string">        &lt;/div&gt;</span></span><br><span class="line"><span class="string">      `</span>,</span><br><span class="line">      data () &#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">          message: <span class="string">'Component Data'</span>,</span><br><span class="line">          checked: <span class="literal">true</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      methods: &#123;</span><br><span class="line">        handleClick () &#123;</span><br><span class="line">          <span class="built_in">window</span>.alert(<span class="keyword">this</span>.message)</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> app = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">      data: &#123;</span><br><span class="line">        message: <span class="string">'Hello Vue.js!'</span></span><br><span class="line">      &#125;,</span><br><span class="line">      methods: &#123;&#125;</span><br><span class="line">    &#125;).$mount(<span class="string">'#app'</span>)</span><br></pre></td></tr></table></figure></p>
+<p>例：单文件组件（.vue文件）<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- </span></span><br><span class="line"><span class="comment">  但是这种方式浏览器不能直接识别，需要结合 webpack 构建工具才能玩儿。</span></span><br><span class="line"><span class="comment"> --&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 组件的模板，写到 template 中 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 组件的 JavaScript 脚本写到 script 标签中 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span><br><span class="line"><span class="undefined">  data () &#123;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">return</span> &#123;&#125;</span></span><br><span class="line"><span class="undefined">  &#125;</span></span><br><span class="line"><span class="undefined">&#125;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 组件的 CSS 写到 style 标签中 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="四、组件通信"><a href="#四、组件通信" class="headerlink" title="四、组件通信"></a>四、组件通信</h1><h3 id="1-全局组件和局部组件"><a href="#1-全局组件和局部组件" class="headerlink" title="1. 全局组件和局部组件"></a>1. 全局组件和局部组件</h3><ul>
+<li>Vue.component生成的组件是全局的组件</li>
+<li>在上面这个vue实例中使用components配置的组件是局部的组件<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>&#123;&#123; message &#125;&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">hello</span>&gt;</span><span class="tag">&lt;/<span class="name">hello</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">global-component</span>&gt;</span><span class="tag">&lt;/<span class="name">global-component</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"node_modules/vue/dist/vue.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">    Vue.component(<span class="string">'global-component'</span>, &#123;</span></span><br><span class="line"><span class="xml">      template: `<span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">h2</span>&gt;</span>global component<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">global2-component</span>&gt;</span><span class="tag">&lt;/<span class="name">global2-component</span>&gt;</span></span></span><br><span class="line"><span class="javascript">        &lt;hello&gt;<span class="xml"><span class="tag">&lt;/<span class="name">hello</span>&gt;</span></span></span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span>`,</span></span><br><span class="line"><span class="javascript">      <span class="comment">// 组件实例选项 components 也是用来定义组件，但是这种方式定义的组件只能在当前组件中使用</span></span></span><br><span class="line"><span class="undefined">      components: &#123;</span></span><br><span class="line"><span class="javascript">        <span class="comment">// 键名就是组件名称，值是一个对象，对象中配置组件的选项</span></span></span><br><span class="line"><span class="undefined">        hello: &#123;</span></span><br><span class="line"><span class="xml">          template: '<span class="tag">&lt;<span class="name">div</span>&gt;</span>hello component<span class="tag">&lt;/<span class="name">div</span>&gt;</span>'</span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="undefined">      &#125;</span></span><br><span class="line"><span class="undefined">    &#125;)</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">    Vue.component(<span class="string">'global2-component'</span>, &#123;</span></span><br><span class="line"><span class="xml">      template: '<span class="tag">&lt;<span class="name">div</span>&gt;</span>global2 component<span class="tag">&lt;/<span class="name">div</span>&gt;</span>'</span></span><br><span class="line"><span class="undefined">    &#125;)</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">    Vue.component(<span class="string">'global2-component'</span>, &#123;</span></span><br><span class="line"><span class="xml">      template: '<span class="tag">&lt;<span class="name">div</span>&gt;</span>global3 component<span class="tag">&lt;/<span class="name">div</span>&gt;</span>'</span></span><br><span class="line"><span class="undefined">    &#125;)</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">    <span class="keyword">const</span> app = <span class="keyword">new</span> Vue(&#123;</span></span><br><span class="line"><span class="undefined">      data: &#123;</span></span><br><span class="line"><span class="javascript">        message: <span class="string">'Hello Vue.js!'</span></span></span><br><span class="line"><span class="undefined">      &#125;,</span></span><br><span class="line"><span class="undefined">      methods: &#123;&#125;</span></span><br><span class="line"><span class="javascript">    &#125;).$mount(<span class="string">'#app'</span>)</span></span><br><span class="line"><span class="undefined">  </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>结果如下图所示<br><img src="https://img-blog.csdnimg.cn/20190216143913759.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="结果"><br>可以看出在app中hello报错，因为hello不是全局组件</p>
+<h3 id="2-组件分类"><a href="#2-组件分类" class="headerlink" title="2. 组件分类"></a>2. 组件分类</h3><ol>
+<li>通用的组件，例如轮播图、评分</li>
+<li>设计具体业务的组件，不通用</li>
+</ol>
+<p><strong>所以设计具体业务的尽量定义成局部，不要污染全局</strong></p>
+<h3 id="3-父—-gt-子通信-props-Down"><a href="#3-父—-gt-子通信-props-Down" class="headerlink" title="3. 父—-&gt;子通信  [props Down]"></a>3. 父—-&gt;子通信  [props Down]</h3><ol>
+<li>在父组件中通过子组件标签声明属性的方式传递数据<pre><code>**注意：只有 v-bind 才可以传递动态数据**
+</code></pre></li>
+<li>在子组件中声明 props 接收父组件传递给自己的数据</li>
+<li>然后你就可以在子组件中对数据进行 “为所欲为”<pre><code>只能使用，不要修改
+</code></pre><hr>
+
+</li>
+</ol>
+<p>例：</p>
+<ol>
+<li>在父组件中将数据绑定传给子组件</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">todo-list</span></span></span><br><span class="line"><span class="tag">		<span class="attr">:todos</span>=<span class="string">"todos"</span></span></span><br><span class="line"><span class="tag">		<span class="attr">:filterText</span>=<span class="string">"filterText"</span>&gt;</span><span class="tag">&lt;/<span class="name">todo-list</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li>在子组件中利用props接收<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">template,</span><br><span class="line">		<span class="comment">// 子组件就会把父组件在标签中声明的 foo 给拿过来</span></span><br><span class="line">		props: [<span class="string">'todos'</span>, <span class="string">'filterText'</span>],</span><br><span class="line">		data () &#123;</span><br><span class="line">			<span class="keyword">return</span> &#123;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;,</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><strong>注意：在父组件传给子组件的数据中</strong></p>
+<ul>
+<li>引用类型的数据可以修改，但不能重新赋值（不建议，会违背通信原则即单向数据流原则）</li>
+<li>普通类型不允许修改（子组件无修改父组件的能力）<h3 id="4-子—-gt-父传值-Events-Up"><a href="#4-子—-gt-父传值-Events-Up" class="headerlink" title="4. 子—-&gt; 父传值 [Events Up]"></a>4. 子—-&gt; 父传值 [Events Up]</h3></li>
+</ul>
+<ol>
+<li>在父组件中定义一个方法（纯业务方法）</li>
+<li>在子组件内部调用父组件的方法<br>在子组件中发布一个自定义事件，通知父亲我可以去添加任务了<ol>
+<li>在父组件使用子组件的标签上订阅子组件内部发布的自定义事件</li>
+</ol>
+</li>
+</ol>
+<p>例：<br>在父组件上定义好方法：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">methods: &#123;</span><br><span class="line">			addTodo (titleText) &#123;</span><br><span class="line">				<span class="built_in">console</span>.log(<span class="string">'父组件的 addTodo 方法被调用了'</span>)</span><br><span class="line">				titleText = titleText.trim()</span><br><span class="line">				<span class="keyword">if</span> (!titleText.length) &#123;</span><br><span class="line">					<span class="keyword">return</span></span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">const</span> todos = <span class="keyword">this</span>.todos</span><br><span class="line">				todos.push(&#123;</span><br><span class="line">					id: todos[todos.length - <span class="number">1</span>].id + <span class="number">1</span>,</span><br><span class="line">					title: titleText,</span><br><span class="line">					completed: <span class="literal">false</span></span><br><span class="line">				&#125;)</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure></p>
+<p> 在子组件内部调用其方法<br> <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">methods: &#123;</span><br><span class="line">		handleKeydown (e) &#123;</span><br><span class="line">			<span class="comment">// 0. 获取文本框的值</span></span><br><span class="line">			<span class="comment">// 1. 非空校验</span></span><br><span class="line">			<span class="comment">// 2. 添加任务到 todos 中</span></span><br><span class="line">			<span class="keyword">const</span> target = e.target</span><br><span class="line">			<span class="keyword">const</span> value = target.value.trim()</span><br><span class="line">			<span class="keyword">if</span> (!value.length) &#123;</span><br><span class="line">				<span class="keyword">return</span></span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			<span class="comment">// 在子组件中数据已经准备就绪，可以交给父组件使用了</span></span><br><span class="line">			<span class="comment">// 子组件通知父组件你去 addTodo 去吧。</span></span><br><span class="line">			<span class="comment">// 子组件不关心父组员的业务</span></span><br><span class="line">			<span class="comment">// 父组件到底拿到这个数据干嘛？</span></span><br><span class="line">			<span class="comment">// 对于子组件来讲，根本不关心，你爱干嘛干嘛</span></span><br><span class="line">			<span class="comment">// 由于不关心业务，所以该组件重用的几率将会大大的增加</span></span><br><span class="line">			<span class="comment">// 谁来用我，我就就把数据给谁</span></span><br><span class="line">			<span class="keyword">this</span>.$emit(<span class="string">'addTodo'</span>, value)</span><br><span class="line"></span><br><span class="line">			target.value = <span class="string">''</span></span><br><span class="line"></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在父组件使用子组件的标签上订阅子组件内部发布的自定义事件<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">todo-header</span></span></span><br><span class="line"><span class="tag">		<span class="attr">:todos</span>=<span class="string">"todos"</span></span></span><br><span class="line"><span class="tag">		<span class="attr">:foo</span>=<span class="string">"foo"</span></span></span><br><span class="line"><span class="tag">		@<span class="attr">addTodo</span>=<span class="string">"addTodo"</span>&gt;</span><span class="tag">&lt;/<span class="name">todo-header</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2019/02/16/浅谈vue组件.html" data-title="浅谈vue组件 | Welkin" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2019/02/14/浅谈vue钩子函数自定义指令.html"  title="浅谈vue钩子函数自定义指令">
+ <strong>NEXT:</strong><br/> 
+ <span>浅谈vue钩子函数自定义指令
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、组件化思想概念"><span class="toc-number">1.</span> <span class="toc-text">一、组件化思想概念</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、Element"><span class="toc-number">2.</span> <span class="toc-text">二、Element</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#三、使用组件"><span class="toc-number">3.</span> <span class="toc-text">三、使用组件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#四、组件通信"><span class="toc-number">4.</span> <span class="toc-text">四、组件通信</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-全局组件和局部组件"><span class="toc-number">4.0.1.</span> <span class="toc-text">1. 全局组件和局部组件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-组件分类"><span class="toc-number">4.0.2.</span> <span class="toc-text">2. 组件分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-父—-gt-子通信-props-Down"><span class="toc-number">4.0.3.</span> <span class="toc-text">3. 父—-&gt;子通信  [props Down]</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-子—-gt-父传值-Events-Up"><span class="toc-number">4.0.4.</span> <span class="toc-text">4. 子—-&gt; 父传值 [Events Up]</span></a></li></ol></li></ol></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2019 
+		
+		<a href="http://yoursite.com" target="_blank" title="welkin">welkin</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>
