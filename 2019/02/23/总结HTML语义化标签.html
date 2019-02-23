@@ -1,0 +1,332 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>总结HTML语义化标签 | Welkin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="welkin">
+    
+    <meta name="description" content="最近在看winter的重学前端，讲到语义化标签（我看的太慢了，捂脸）于是总结一下。
+一、语义化标签1. 语义化标签是什么，使用的好处是什么？语义类标签也是大家工作中经常会用到的一类标签，它们的特点是视觉表达上都互相差不多，主要的区别在于它们表示了不同的语义，比如大家会经常见到的 section、na">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="Welkin" title="Welkin"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Welkin">Welkin</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2019/02/23/总结HTML语义化标签.html" title="总结HTML语义化标签" itemprop="url">总结HTML语义化标签</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="welkin">welkin</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2019-02-23T06:23:17.000Z" itemprop="datePublished">2019-02-23</time>
+    Updated:<time datetime="2019-02-23T06:23:25.595Z" itemprop="dateModified">2019-02-23</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、语义化标签"><span class="toc-number">1.</span> <span class="toc-text">一、语义化标签</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-语义化标签是什么，使用的好处是什么？"><span class="toc-number">1.0.1.</span> <span class="toc-text">1. 语义化标签是什么，使用的好处是什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-作为整体结构的语义类标签"><span class="toc-number">1.0.2.</span> <span class="toc-text">2. 作为整体结构的语义类标签</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-是否要语义化"><span class="toc-number">1.0.3.</span> <span class="toc-text">3. 是否要语义化</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、运用语义化标签来呈现页面"><span class="toc-number">2.</span> <span class="toc-text">二、运用语义化标签来呈现页面</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-aside"><span class="toc-number">2.0.1.</span> <span class="toc-text">1. aside</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-article"><span class="toc-number">2.0.2.</span> <span class="toc-text">2. article</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-hgroup、h1、h2"><span class="toc-number">2.0.3.</span> <span class="toc-text">3. hgroup、h1、h2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-abbr"><span class="toc-number">2.0.4.</span> <span class="toc-text">4. abbr</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-hr"><span class="toc-number">2.0.5.</span> <span class="toc-text">5. hr</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-p"><span class="toc-number">2.0.6.</span> <span class="toc-text">6. p</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-strong"><span class="toc-number">2.0.7.</span> <span class="toc-text">7. strong</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-blockquote、q、cite"><span class="toc-number">2.0.8.</span> <span class="toc-text">8. blockquote、q、cite</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-time"><span class="toc-number">2.0.9.</span> <span class="toc-text">9. time</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-figure、figcaption"><span class="toc-number">2.0.10.</span> <span class="toc-text">10. figure、figcaption</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-dfn"><span class="toc-number">2.0.11.</span> <span class="toc-text">11. dfn</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-nav、ol、ul"><span class="toc-number">2.0.12.</span> <span class="toc-text">12. nav、ol、ul</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#13-pre、samp、code"><span class="toc-number">2.0.13.</span> <span class="toc-text">13. pre、samp、code</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#三、其他标签补充说明"><span class="toc-number">3.</span> <span class="toc-text">三、其他标签补充说明</span></a></li></ol>
+		</div>
+		
+		<p>最近在看winter的重学前端，讲到语义化标签（我看的太慢了，捂脸）于是总结一下。</p>
+<h1 id="一、语义化标签"><a href="#一、语义化标签" class="headerlink" title="一、语义化标签"></a>一、语义化标签</h1><h3 id="1-语义化标签是什么，使用的好处是什么？"><a href="#1-语义化标签是什么，使用的好处是什么？" class="headerlink" title="1. 语义化标签是什么，使用的好处是什么？"></a>1. 语义化标签是什么，使用的好处是什么？</h3><p>语义类标签也是大家工作中经常会用到的一类标签，它们的特点是视觉表达上都互相差不多，主要的区别在于它们表示了不同的语义，比如大家会经常见到的 section、nav、p，这些都是语义类标签。</p>
+<p>语议是我们说话表达的意思，多数的语义实际上都是由文字来承载的。语义类标签则是纯文字的补充，比如标题、自然段、章节、列表，这些内容都是纯文字无法表达的，我们需要依靠语义标签代为表达。</p>
+<p><strong>好处</strong>：</p>
+<ul>
+<li><p>语义类标签对开发者更为友好，使用语义类标签增强了可读性，即便是在没有CSS的时候，开发者也能够清晰地看出网页的结构，也更为便于团队的开发和维护。</p>
+</li>
+<li><p>除了对人类友好之外，语义类标签也十分适宜机器阅读。它的文字表现力丰富,更适合搜索引擎检索(SEO)，也可以让搜索引擎爬虫更好地获取到更多有效信息，有效提升网页的搜索量，并且语义类还可以支持读屏软件，根据文章可以自动生成目录等等。</p>
+</li>
+</ul>
+<p>但使用语义化标签的前提是需要正确的使用，如果不能正确使用语义化标签，那还不如直接使用div和span。</p>
+<h3 id="2-作为整体结构的语义类标签"><a href="#2-作为整体结构的语义类标签" class="headerlink" title="2. 作为整体结构的语义类标签"></a>2. 作为整体结构的语义类标签</h3><p>在学习h5时，就出现了一种典型的body：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">header</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">nav</span>&gt;</span></span><br><span class="line">            ……</span><br><span class="line">        <span class="tag">&lt;/<span class="name">nav</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">header</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">aside</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">nav</span>&gt;</span></span><br><span class="line">            ……</span><br><span class="line">        <span class="tag">&lt;/<span class="name">nav</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">aside</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">section</span>&gt;</span>……<span class="tag">&lt;/<span class="name">section</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">section</span>&gt;</span>……<span class="tag">&lt;/<span class="name">section</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">section</span>&gt;</span>……<span class="tag">&lt;/<span class="name">section</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">footer</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">address</span>&gt;</span>……<span class="tag">&lt;/<span class="name">address</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">footer</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>除此之外，还有artidle, article 是一种特别的结构, 它表示具有一定独立性质的文章。 所以，article 和body具有相似的结构，同时，一个HTML页面中，可能有多个article存在。</p>
+<p>一个典型的场景是多篇新闻展示在同一个新闻专题页面中，这种类似报纸的多文章结构适合用article来组织。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">header</span>&gt;</span>……<span class="tag">&lt;/<span class="name">header</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">article</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">header</span>&gt;</span>……<span class="tag">&lt;/<span class="name">header</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">section</span>&gt;</span>……<span class="tag">&lt;/<span class="name">section</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">section</span>&gt;</span>……<span class="tag">&lt;/<span class="name">section</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">section</span>&gt;</span>……<span class="tag">&lt;/<span class="name">section</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">footer</span>&gt;</span>……<span class="tag">&lt;/<span class="name">footer</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">article</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">article</span>&gt;</span></span><br><span class="line">        ……</span><br><span class="line">    <span class="tag">&lt;/<span class="name">article</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">article</span>&gt;</span></span><br><span class="line">        ……</span><br><span class="line">    <span class="tag">&lt;/<span class="name">article</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">footer</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">address</span>&gt;</span><span class="tag">&lt;/<span class="name">address</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">footer</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>body里面有自己的header和footer,然后里面是竖篇的article,每-个article里面都有自己的header、section、footer。这是一个典型的多文章结构。</p>
+<ul>
+<li>aside 表示跟文章主体不相关的部分，可能包含导航，广告工具性质的内容；aside很容易被理解为侧边栏，实际上二者是包含关系，侧边栏是aside，aside不一定是侧边栏</li>
+<li>aside和header中都可能出现导航(nav 标签)，二者的区别是，header 中的导航多数是到文章自己的目录，而aside中的导航多数是到关联页面或者是整站地图。</li>
+</ul>
+<p>最后footer中包含address,这是个非常容易被误用的标签。address 并非像date一样，赫一个给机器阅读的地址，是示“文章(作者)的联系方式”，address 明确地只关联到article和body。</p>
+<h3 id="3-是否要语义化"><a href="#3-是否要语义化" class="headerlink" title="3. 是否要语义化"></a>3. 是否要语义化</h3><p>我们应该分开些场景来看语义, 把它用在合适的场景下，可以获得额外的效果。本篇文中，我们至少涉及了三个明确的场景:</p>
+<ul>
+<li>自然语言表达能力的补充;</li>
+<li>文章标题摘要;</li>
+<li>适合机器阅读的整体结构。</li>
+</ul>
+<h1 id="二、运用语义化标签来呈现页面"><a href="#二、运用语义化标签来呈现页面" class="headerlink" title="二、运用语义化标签来呈现页面"></a>二、运用语义化标签来呈现页面</h1><p>在文章中，winter列举了一个wiki的文章来做分析<br>页面副本：<a href="http://static001.geekbang.org/static/time/quote/World_Wide_Web-Wikipedia.html" target="_blank" rel="noopener">http://static001.geekbang.org/static/time/quote/World_Wide_Web-Wikipedia.html</a></p>
+<h3 id="1-aside"><a href="#1-aside" class="headerlink" title="1. aside"></a>1. aside</h3><p>导航性质的工具内容<br><img src="https://img-blog.csdnimg.cn/20190223111112233.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="wiki文章页面"></p>
+<h3 id="2-article"><a href="#2-article" class="headerlink" title="2. article"></a>2. article</h3><p>文章的主体部分，因为主体部分具有明确的独立性，所以可用article来包裹<br><img src="https://img-blog.csdnimg.cn/2019022311154750.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="article"></p>
+<h3 id="3-hgroup、h1、h2"><a href="#3-hgroup、h1、h2" class="headerlink" title="3. hgroup、h1、h2"></a>3. hgroup、h1、h2</h3><p>hgroup是标题组，h1是一级标题，h2是二级标题<br><img src="https://img-blog.csdnimg.cn/20190223111709338.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="标题组"><br>代码应如下所示：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">hgroup</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>World Wide Web <span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h2</span>&gt;</span>From Wikipedia, the free encyclopedia<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">hgroup</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="4-abbr"><a href="#4-abbr" class="headerlink" title="4. abbr"></a>4. abbr</h3><p>abbr标签表示缩写，考虑到 WWW 是 World Wide Web 的缩写<br><img src="https://img-blog.csdnimg.cn/20190223111822380.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="abbr"><br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">abbr</span> <span class="attr">title</span>=<span class="string">"World Wide Web"</span>&gt;</span>WWW<span class="tag">&lt;/<span class="name">abbr</span>&gt;</span>.</span><br></pre></td></tr></table></figure></p>
+<h3 id="5-hr"><a href="#5-hr" class="headerlink" title="5. hr"></a>5. hr</h3><p>如下图所示，出现了一条横线，但这这篇文章里没有使用hr标签，因为hr 表示故事向的转变或者话题的转变，显然此处两个标题并非这种关系，所以我们应该使用CSS的border来把它当作纯视觉效果来实现，所以这里是不需要用hr的。</p>
+<p><img src="https://img-blog.csdnimg.cn/20190223111910865.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="hr"></p>
+<h3 id="6-p"><a href="#6-p" class="headerlink" title="6. p"></a>6. p</h3><p>红色框圈起来的属于注记，在文章中作额外注释。<br>但是HTML中没有note相关的语义，所以通过普通的p标签，加上class=”note”来实现。后面的多数自然段都是普通的段落，则用p标签来实现。<br><img src="https://img-blog.csdnimg.cn/20190223112118179.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="p"></p>
+<h3 id="7-strong"><a href="#7-strong" class="headerlink" title="7. strong"></a>7. strong</h3><p>字体呈现黑体，表示这个词很重要，所以使用strong标签<br><img src="https://img-blog.csdnimg.cn/20190223112402445.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="strong"><br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span> </span><br><span class="line">A global map of the web index for countries in 2014</span><br><span class="line"><span class="tag">&lt;<span class="name">strong</span>&gt;</span>The World Wide Web (WWW)<span class="tag">&lt;/<span class="name">strong</span>&gt;</span>, also called <span class="tag">&lt;<span class="name">strong</span>&gt;</span>the Web<span class="tag">&lt;/<span class="name">strong</span>&gt;</span>,</span><br><span class="line">......</span><br></pre></td></tr></table></figure></p>
+<h3 id="8-blockquote、q、cite"><a href="#8-blockquote、q、cite" class="headerlink" title="8. blockquote、q、cite"></a>8. blockquote、q、cite</h3><p>在文章中有个[1]，当鼠标移入时，出现了引述的相关信息<br><img src="https://img-blog.csdnimg.cn/20190223112536643.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="引述"><br>在HTML中，有三个跟引述相关的标签</p>
+<ul>
+<li>blockquote表示段落级引述内容</li>
+<li>q示行内的引述内容</li>
+<li>cite 表示引述的作品名。</li>
+</ul>
+<p>这里的作品名称”What is the difference between the Web and the Internet?”，应当用cite标签。<br>如果是直接引用的内容，那么，我们还应该加上 blockquote或者q标签。</p>
+<h3 id="9-time"><a href="#9-time" class="headerlink" title="9. time"></a>9. time</h3><p>出现日期，加上time标签，可以使机器阅读更方便<br><img src="https://img-blog.csdnimg.cn/20190223112841109.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="time"><br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">cite</span>&gt;</span>"What is the difference between the Web and the Internet?"<span class="tag">&lt;/<span class="name">cite</span>&gt;</span>. W3C Help and FAQ. W3C. 2009. Archived from the original on <span class="tag">&lt;<span class="name">time</span> <span class="attr">datetime</span>=<span class="string">"2015-07-09"</span>&gt;</span>9 July 2015<span class="tag">&lt;/<span class="name">time</span>&gt;</span>. Retrieved <span class="tag">&lt;<span class="name">time</span> <span class="attr">datetime</span>=<span class="string">"2015-07-16"</span>&gt;</span>16 July 2015<span class="tag">&lt;/<span class="name">time</span>&gt;</span>.</span><br></pre></td></tr></table></figure></p>
+<h3 id="10-figure、figcaption"><a href="#10-figure、figcaption" class="headerlink" title="10. figure、figcaption"></a>10. figure、figcaption</h3><p>红色框中不仅仅是一个img标签，它和图片下面的文字组成了一个figure，figure是一种用于表示与主文章相关的图像、照片等流内容的标签。<br><img src="https://img-blog.csdnimg.cn/20190223113008435.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="标注"><br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">figure</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"https://.....440px-NeXTcube_first_webserver.JPG"</span>/&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">figcaption</span>&gt;</span>The NeXT Computer used by Tim Berners-Lee at CERN.<span class="tag">&lt;/<span class="name">figcaption</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">figure</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>这种插入文章中的内容，不仅限图片，代码、表格等，只要是具有一自包含性(类似独立句子)的内容,都可以用figure.这里面，我们用figcaption表示内容的标题，当然，也可以没有标题。</p>
+<h3 id="11-dfn"><a href="#11-dfn" class="headerlink" title="11. dfn"></a>11. dfn</h3><p><img src="https://img-blog.csdnimg.cn/20190223135221915.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="dfn"><br>在这段文字中观察代码可以看到：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">The terms Internet and World Wide Web are often used without much distinction. However, the two are not the same. </span><br><span class="line">The <span class="tag">&lt;<span class="name">dfn</span>&gt;</span>Internet<span class="tag">&lt;/<span class="name">dfn</span>&gt;</span> is a global system of interconnected computer networks.</span><br><span class="line">In contrast, the <span class="tag">&lt;<span class="name">dfn</span>&gt;</span>World Wide Web<span class="tag">&lt;/<span class="name">dfn</span>&gt;</span> is a global collection of documents and other resources, linked by hyperlinks and URIs.</span><br></pre></td></tr></table></figure></p>
+<p>Internet 和 World Wide Web被标签包裹了，所以dfn标签是用来包裹被定义的名词。</p>
+<h3 id="12-nav、ol、ul"><a href="#12-nav、ol、ul" class="headerlink" title="12. nav、ol、ul"></a>12. nav、ol、ul</h3><p>这里的目录链接到文章的各个章节，我们可以使用nav标签。因为这里的目录顺序不可随意变化，所以我们这里使用多级的ol结构。</p>
+<p><img src="https://img-blog.csdnimg.cn/20190223135634230.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="目录"><br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">nav</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">h2</span>&gt;</span>Contents<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">ol</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"..."</span>&gt;</span>History<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"..."</span>&gt;</span>Function<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">ol</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"..."</span>&gt;</span>Linking<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"..."</span>&gt;</span>Dynamic updates of web pages<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">        ...</span><br><span class="line">      <span class="tag">&lt;/<span class="name">ol</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    ...</span><br><span class="line">  <span class="tag">&lt;/<span class="name">ol</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">nav</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>ol 和ul的区分是内容是否有顺序关系，每一项的前面不论是数字还是点，都不会影响语义的判断。所以，你可以注意一下这里， 不要因为视觉表现效果，而改变语义的使用。</p>
+<h3 id="13-pre、samp、code"><a href="#13-pre、samp、code" class="headerlink" title="13. pre、samp、code"></a>13. pre、samp、code</h3><p>代码段标签可保证不适用浏览器自动换行，也不需用浏览器进行排版<br><img src="https://img-blog.csdnimg.cn/20190223140021409.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="代码段"></p>
+<p>因为这是一段计算机程序的示例输出，所以我们可以使用 samp标签<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">pre</span>&gt;</span><span class="tag">&lt;<span class="name">samp</span>&gt;</span></span><br><span class="line">GET /home.html HTTP/1.1</span><br><span class="line">Host: www.example.org</span><br><span class="line"><span class="tag">&lt;/<span class="name">samp</span>&gt;</span><span class="tag">&lt;/<span class="name">pre</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="三、其他标签补充说明"><a href="#三、其他标签补充说明" class="headerlink" title="三、其他标签补充说明"></a>三、其他标签补充说明</h1><p><img src="https://img-blog.csdnimg.cn/20190223140254256.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="标签"></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2019/02/23/总结HTML语义化标签.html" data-title="总结HTML语义化标签 | Welkin" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2019/02/23/npm-save和-save-dev的区别.html"  title="npm --save和--save-dev的区别">
+ <strong>NEXT:</strong><br/> 
+ <span>npm --save和--save-dev的区别
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、语义化标签"><span class="toc-number">1.</span> <span class="toc-text">一、语义化标签</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-语义化标签是什么，使用的好处是什么？"><span class="toc-number">1.0.1.</span> <span class="toc-text">1. 语义化标签是什么，使用的好处是什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-作为整体结构的语义类标签"><span class="toc-number">1.0.2.</span> <span class="toc-text">2. 作为整体结构的语义类标签</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-是否要语义化"><span class="toc-number">1.0.3.</span> <span class="toc-text">3. 是否要语义化</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、运用语义化标签来呈现页面"><span class="toc-number">2.</span> <span class="toc-text">二、运用语义化标签来呈现页面</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-aside"><span class="toc-number">2.0.1.</span> <span class="toc-text">1. aside</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-article"><span class="toc-number">2.0.2.</span> <span class="toc-text">2. article</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-hgroup、h1、h2"><span class="toc-number">2.0.3.</span> <span class="toc-text">3. hgroup、h1、h2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-abbr"><span class="toc-number">2.0.4.</span> <span class="toc-text">4. abbr</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-hr"><span class="toc-number">2.0.5.</span> <span class="toc-text">5. hr</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-p"><span class="toc-number">2.0.6.</span> <span class="toc-text">6. p</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-strong"><span class="toc-number">2.0.7.</span> <span class="toc-text">7. strong</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-blockquote、q、cite"><span class="toc-number">2.0.8.</span> <span class="toc-text">8. blockquote、q、cite</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-time"><span class="toc-number">2.0.9.</span> <span class="toc-text">9. time</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-figure、figcaption"><span class="toc-number">2.0.10.</span> <span class="toc-text">10. figure、figcaption</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-dfn"><span class="toc-number">2.0.11.</span> <span class="toc-text">11. dfn</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-nav、ol、ul"><span class="toc-number">2.0.12.</span> <span class="toc-text">12. nav、ol、ul</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#13-pre、samp、code"><span class="toc-number">2.0.13.</span> <span class="toc-text">13. pre、samp、code</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#三、其他标签补充说明"><span class="toc-number">3.</span> <span class="toc-text">三、其他标签补充说明</span></a></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2019 
+		
+		<a href="http://yoursite.com" target="_blank" title="welkin">welkin</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>
