@@ -1,0 +1,286 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>webpack使用babel基本配置 | Welkin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="welkin">
+    
+    <meta name="description" content="配置es6使用的babel1. package.json文件123456789101112131415161718192021222324252627&amp;#123;  &quot;name&quot;: &quot;webpack_class&quot;,  &quot;version&quot;: &quot;1.0.0&quot;,  &quot;description&quot;: &quot;&quot;,  ">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="Welkin" title="Welkin"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Welkin">Welkin</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2019/03/03/webpack使用babel基本配置.html" title="webpack使用babel基本配置" itemprop="url">webpack使用babel基本配置</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="welkin">welkin</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2019-03-03T13:46:52.000Z" itemprop="datePublished">2019-03-03</time>
+    Updated:<time datetime="2019-03-03T13:47:04.380Z" itemprop="dateModified">2019-03-03</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#配置es6使用的babel"><span class="toc-number">1.</span> <span class="toc-text">配置es6使用的babel</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-package-json文件"><span class="toc-number">1.0.1.</span> <span class="toc-text">1. package.json文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-装包"><span class="toc-number">1.0.2.</span> <span class="toc-text">2. 装包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-配置webpack"><span class="toc-number">1.0.3.</span> <span class="toc-text">3. 配置webpack</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-在main-js中引入common-js"><span class="toc-number">1.0.4.</span> <span class="toc-text">4. 在main.js中引入common.js</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-在cal-js中导出"><span class="toc-number">1.0.5.</span> <span class="toc-text">5. 在cal.js中导出</span></a></li></ol></li></ol></li></ol>
+		</div>
+		
+		<h1 id="配置es6使用的babel"><a href="#配置es6使用的babel" class="headerlink" title="配置es6使用的babel"></a>配置es6使用的babel</h1><h3 id="1-package-json文件"><a href="#1-package-json文件" class="headerlink" title="1. package.json文件"></a>1. package.json文件</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"name"</span>: <span class="string">"webpack_class"</span>,</span><br><span class="line">  <span class="string">"version"</span>: <span class="string">"1.0.0"</span>,</span><br><span class="line">  <span class="string">"description"</span>: <span class="string">""</span>,</span><br><span class="line">  <span class="string">"main"</span>: <span class="string">"index.js"</span>,</span><br><span class="line">  <span class="string">"scripts"</span>: &#123;</span><br><span class="line">    <span class="string">"test"</span>: <span class="string">"echo \"Error: no test specified\" &amp;&amp; exit 1"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"keywords"</span>: [],</span><br><span class="line">  <span class="string">"author"</span>: <span class="string">""</span>,</span><br><span class="line">  <span class="string">"license"</span>: <span class="string">"ISC"</span>,</span><br><span class="line">  <span class="string">"devDependencies"</span>: &#123;</span><br><span class="line">    <span class="string">"autoprefixer-loader"</span>: <span class="string">"^3.2.0"</span>,</span><br><span class="line">    <span class="string">"css-loader"</span>: <span class="string">"^0.28.4"</span>,</span><br><span class="line">    <span class="string">"file-loader"</span>: <span class="string">"^0.11.2"</span>,</span><br><span class="line">    <span class="string">"html-webpack-plugin"</span>: <span class="string">"^2.30.1"</span>,</span><br><span class="line">    <span class="string">"less"</span>: <span class="string">"^2.7.2"</span>,</span><br><span class="line">    <span class="string">"less-loader"</span>: <span class="string">"^4.0.5"</span>,</span><br><span class="line">    <span class="string">"style-loader"</span>: <span class="string">"^0.18.2"</span>,</span><br><span class="line">    <span class="string">"url-loader"</span>: <span class="string">"^0.5.9"</span>,</span><br><span class="line">    <span class="string">"webpack"</span>: <span class="string">"^3.4.1"</span>,</span><br><span class="line">    <span class="string">"webpack-dev-server"</span>: <span class="string">"^2.6.1"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"dependencies"</span>: &#123;</span><br><span class="line">    <span class="string">"vue"</span>: <span class="string">"^2.4.2"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-装包"><a href="#2-装包" class="headerlink" title="2. 装包"></a>2. 装包</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cnpm install babel-loader babel-core babel-preset-es2015 babel-plugin-transform-runtime -D</span><br></pre></td></tr></table></figure>
+<h3 id="3-配置webpack"><a href="#3-配置webpack" class="headerlink" title="3. 配置webpack"></a>3. 配置webpack</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> htmlWebpackPlugin = <span class="built_in">require</span>(<span class="string">'html-webpack-plugin'</span>);</span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>)</span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    entry:&#123; <span class="comment">//main是默认入口,也可以是多入口</span></span><br><span class="line">        main:<span class="string">'./src/main.js'</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">//出口</span></span><br><span class="line">    output:&#123;</span><br><span class="line">        filename:<span class="string">'./build.js'</span>, <span class="comment">//指定js文件</span></span><br><span class="line">        path: path.join(__dirname,<span class="string">'dist'</span>)          <span class="comment">//最好是绝对路径</span></span><br><span class="line">        <span class="comment">//代表当前目录的上一级的dist</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="built_in">module</span>:&#123;</span><br><span class="line">        <span class="comment">//一样的功能rules:   webpack2.x之后新加的</span></span><br><span class="line">        loaders:[       <span class="comment">//require('./a.css||./a.js')</span></span><br><span class="line">            &#123;<span class="attr">test</span>:<span class="regexp">/\.css$/</span>,</span><br><span class="line">             loader:<span class="string">'style-loader!css-loader'</span>,</span><br><span class="line">             <span class="comment">//顺序是反过来的2!1</span></span><br><span class="line">            &#125;,</span><br><span class="line">            &#123;</span><br><span class="line">             test:<span class="regexp">/\.(jpg|svg|png|gif)$/</span>,</span><br><span class="line">             loader:<span class="string">'url-loader?limit=4096&amp;name=[name].[ext]'</span>,</span><br><span class="line">             <span class="comment">//顺序是反过来的2!1 </span></span><br><span class="line">             <span class="comment">//[name].[ext]内置提供的，因为本身是先读这个文件</span></span><br><span class="line">             <span class="comment">// options:&#123;</span></span><br><span class="line">             <span class="comment">//    limit:4096,</span></span><br><span class="line">             <span class="comment">//    name:'[name].[ext]'</span></span><br><span class="line">             <span class="comment">// &#125;</span></span><br><span class="line">            &#125;,&#123;<span class="comment">//处理ES6的js</span></span><br><span class="line">                test:<span class="regexp">/\.js$/</span>,</span><br><span class="line">                loader:<span class="string">'babel-loader'</span>,</span><br><span class="line">                <span class="comment">//排除 node_modules下的所有</span></span><br><span class="line">                exclude:<span class="regexp">/node_modules/</span>,</span><br><span class="line">                options:&#123;</span><br><span class="line">                    presets:[<span class="string">'es2015'</span>],<span class="comment">//关键字</span></span><br><span class="line">                    plugins:[<span class="string">'transform-runtime'</span>],<span class="comment">//函数</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    plugins:[</span><br><span class="line">        <span class="comment">//插件的执行顺序是依次执行的</span></span><br><span class="line">        <span class="keyword">new</span> htmlWebpackPlugin(&#123;</span><br><span class="line">            template:<span class="string">'./src/index.html'</span>,</span><br><span class="line">            &#125;)</span><br><span class="line">            <span class="comment">//将src下的template属性描述的文件根据当前配置的output.path，将文件移动到该目录</span></span><br><span class="line">    ]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="4-在main-js中引入common-js"><a href="#4-在main-js中引入common-js" class="headerlink" title="4. 在main.js中引入common.js"></a>4. 在main.js中引入common.js</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//commonjs引入cal对象</span></span><br><span class="line"><span class="comment">// var cal = require('./cal.js');</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//es6的模块引入</span></span><br><span class="line"><span class="keyword">import</span> cal <span class="keyword">from</span> <span class="string">'./cal.js'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//获取按钮</span></span><br><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">'btn'</span>).onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> n1 = <span class="built_in">document</span>.getElementById(<span class="string">'n1'</span>).value - <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">var</span> n2 = <span class="built_in">document</span>.getElementById(<span class="string">'n2'</span>).value - <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">var</span> sum = cal.add(n1,n2);</span><br><span class="line">    <span class="built_in">document</span>.getElementById(<span class="string">'result'</span>).value = sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="5-在cal-js中导出"><a href="#5-在cal-js中导出" class="headerlink" title="5. 在cal.js中导出"></a>5. 在cal.js中导出</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> cal = &#123;</span><br><span class="line">    add:<span class="function"><span class="keyword">function</span>(<span class="params">n1,n2</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> n1 + n2;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//commonjs导出</span></span><br><span class="line"><span class="comment">// module.exports = cal;</span></span><br><span class="line"><span class="comment">// ES6导出</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> cal;</span><br></pre></td></tr></table></figure>
+<hr>
+
+<p>附上index.html文件</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>01_模块化计算机<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">""</span> <span class="attr">id</span>=<span class="string">"n1"</span>&gt;</span> + </span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">""</span> <span class="attr">id</span>=<span class="string">"n2"</span>&gt;</span> </span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">"btn"</span>&gt;</span>=<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">""</span> <span class="attr">id</span>=<span class="string">"result"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">   </span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2019/03/03/webpack使用babel基本配置.html" data-title="webpack使用babel基本配置 | Welkin" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2019/03/03/MUI和Mint-UI组件的使用.html"  title="MUI和Mint-UI组件的使用">
+ <strong>NEXT:</strong><br/> 
+ <span>MUI和Mint-UI组件的使用
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#配置es6使用的babel"><span class="toc-number">1.</span> <span class="toc-text">配置es6使用的babel</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-package-json文件"><span class="toc-number">1.0.1.</span> <span class="toc-text">1. package.json文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-装包"><span class="toc-number">1.0.2.</span> <span class="toc-text">2. 装包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-配置webpack"><span class="toc-number">1.0.3.</span> <span class="toc-text">3. 配置webpack</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-在main-js中引入common-js"><span class="toc-number">1.0.4.</span> <span class="toc-text">4. 在main.js中引入common.js</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-在cal-js中导出"><span class="toc-number">1.0.5.</span> <span class="toc-text">5. 在cal.js中导出</span></a></li></ol></li></ol></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2019 
+		
+		<a href="http://yoursite.com" target="_blank" title="welkin">welkin</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>
