@@ -1,0 +1,471 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>字节跳动一面总结 | Welkin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="welkin">
+    
+    <meta name="description" content="1. let，const 和 varvar如果使用关键字 var 声明一个变量，那么这个变量就属于当前函数作用域如果声明是发生在任何函数的顶层声明，那么这个变量就属于全局作用域。 
+letES6新增，用于声明变量，用法和 var 类似，但是所声明的变量只在let 命令所在的代码块内有效
+举个例子：
+">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="Welkin" title="Welkin"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Welkin">Welkin</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2019/03/09/字节跳动一面总结.html" title="字节跳动一面总结" itemprop="url">字节跳动一面总结</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="welkin">welkin</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2019-03-09T14:15:29.000Z" itemprop="datePublished">2019-03-09</time>
+    Updated:<time datetime="2019-03-09T14:15:58.616Z" itemprop="dateModified">2019-03-09</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-let，const-和-var"><span class="toc-number">1.</span> <span class="toc-text">1. let，const 和 var</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#var"><span class="toc-number">1.0.0.0.1.</span> <span class="toc-text">var</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#let"><span class="toc-number">1.0.0.0.2.</span> <span class="toc-text">let</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#区别："><span class="toc-number">1.0.0.0.3.</span> <span class="toc-text">区别：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#const"><span class="toc-number">1.0.0.0.4.</span> <span class="toc-text">const</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#顶层对象的属性"><span class="toc-number">1.0.0.0.5.</span> <span class="toc-text">顶层对象的属性</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-mvc-和-mvvm"><span class="toc-number">2.</span> <span class="toc-text">2. mvc 和 mvvm</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#mvc-Model-View-Controller"><span class="toc-number">2.0.1.</span> <span class="toc-text">mvc  = Model View Controller</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mvvm-model-viewmodel-view"><span class="toc-number">2.0.2.</span> <span class="toc-text">mvvm  = model - viewmodel -view</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数据双向绑定"><span class="toc-number">2.0.3.</span> <span class="toc-text">数据双向绑定</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#实现双向绑定的做法"><span class="toc-number">2.0.3.0.1.</span> <span class="toc-text">实现双向绑定的做法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#vue是什么？"><span class="toc-number">2.0.4.</span> <span class="toc-text">vue是什么？</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-js作用域和闭包"><span class="toc-number">3.</span> <span class="toc-text">3. js作用域和闭包</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#作用域"><span class="toc-number">3.0.1.</span> <span class="toc-text">作用域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#闭包"><span class="toc-number">3.0.2.</span> <span class="toc-text">闭包</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-v-model"><span class="toc-number">4.</span> <span class="toc-text">4. v-model</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-toast"><span class="toc-number">5.</span> <span class="toc-text">5. toast</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-session，cookies"><span class="toc-number">6.</span> <span class="toc-text">6. session，cookies</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#cookies"><span class="toc-number">6.0.1.</span> <span class="toc-text">cookies</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Web-Storage"><span class="toc-number">6.0.2.</span> <span class="toc-text">Web Storage</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cookie-和-sessionStorage-localStorage"><span class="toc-number">6.0.3.</span> <span class="toc-text">cookie 和 sessionStorage localStorage</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#7-中间件"><span class="toc-number">7.</span> <span class="toc-text">7. 中间件</span></a></li></ol>
+		</div>
+		
+		<h1 id="1-let，const-和-var"><a href="#1-let，const-和-var" class="headerlink" title="1. let，const 和 var"></a>1. let，const 和 var</h1><h5 id="var"><a href="#var" class="headerlink" title="var"></a>var</h5><p>如果使用关键字 var 声明一个变量，那么这个变量就属于当前函数作用域<br>如果声明是发生在任何函数的顶层声明，那么这个变量就属于全局作用域。 </p>
+<h5 id="let"><a href="#let" class="headerlink" title="let"></a>let</h5><p>ES6新增，用于声明<strong>变量</strong>，用法和 var 类似，但是所声明的变量只在let 命令所在的代码块内有效</p>
+<p>举个例子：</p>
+<ul>
+<li>对于var：<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a=[]</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++)&#123;</span><br><span class="line">        a[i] = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(i)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    a[<span class="number">6</span>](); <span class="comment">//10</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>在这个代码中，变量i 是var声明的，在全局范围内都有效，所以全局只有一个变量 i，每一次循环，变量i 的值都会发生改变，而循环内，被赋给数组a 的函数内部console.log(i) 中的i 指向全局的i 。也就是说，所有数组a的成员中的i 所指向的都是同一个i ，导致运行时最后输出的是最后一轮的i 值</p>
+<ul>
+<li>对于 let<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a=[]</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++)&#123;</span><br><span class="line">        a[i] = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(i)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    a[<span class="number">6</span>](); <span class="comment">//10</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>在这个代码中，变量 i 是let声明的，当前的i 只在本轮循环内有效，所以每一次循环的i 其实都是一个新的变量<br><strong>问题1</strong><br>如果每一轮循环的变量 i都是重新声明的，那它怎么知道上一轮循环的值从而计算出本轮循环的值？</p>
+<p>这是因为js 引擎内部会记住上一轮循环的值，初始化本轮的变量i时，就在上一轮循环的基础上进行计算</p>
+<p><strong>问题2</strong><br>for 循环有一个特别之处，就是设置循环变量的那部分其实是一个父作用域，而循环体内部是一个单独的子作用域。标明函数内部的变量 i和循环变量i不在同一个作用域，而是各有各自单独的作用域。</p>
+<h5 id="区别："><a href="#区别：" class="headerlink" title="区别："></a>区别：</h5><ol>
+<li>不存在变量提升<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// var</span></span><br><span class="line"><span class="built_in">console</span>.log(foo)<span class="comment">//undefined</span></span><br><span class="line"><span class="keyword">var</span> foo = <span class="number">2</span> </span><br><span class="line"></span><br><span class="line"><span class="comment">// let</span></span><br><span class="line"><span class="built_in">console</span>.log(bar)</span><br><span class="line"><span class="keyword">let</span> bar = <span class="number">2</span>; <span class="comment">//ReferenceError</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>let 改变了语法行为，它所声明的变量一定要在声明后使用，否则就会报错</p>
+<ol>
+<li>暂时性死区</li>
+</ol>
+<p><strong>本质</strong>：<br>只要进入当前作用域，所要使用的变量就已经存在，但是不可获取，只有等到声明变量的那一行代码出现时，才可以获取和使用该变量</p>
+<hr>
+<p>在这里我涉及一点也是面试官问到我的问题：有关作用域，</p>
+<ul>
+<li>对于var而言，只要进入该作用域，所要使用的变量就已经存在，会被赋值为undefined，可以使用和和获取</li>
+<li>而对于let而言，只要进入该作用域，所要使用的变量也会存在，但是不能使用和获取<br>（我想，这应该是面试官想听见的）</li>
+</ul>
+<hr>
+<p>只要块级作用域里内存在let命令，它所声明的变量就绑定这个区域，不再受外部的影响<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> tmp = <span class="number">123</span></span><br><span class="line"><span class="keyword">if</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">	tmp = <span class="number">123</span> <span class="comment">//ReferenceError</span></span><br><span class="line">	<span class="keyword">let</span> tmp </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>注意</strong>：<br>ES6规定，如果区块中存在let 和const 这两个命令，则这个区块对这些命令声明的变量从一开始就形成封闭作用域。</p>
+<ol>
+<li>不允许重复声明<br>let 不允许在相同作用域内重复声明一个变量<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Error</span></span><br><span class="line"><span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">var</span> a = <span class="number">15</span>;</span><br><span class="line">	<span class="keyword">let</span> a = <span class="number">2</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//Error</span></span><br><span class="line"><span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">let</span> a = <span class="number">15</span>;</span><br><span class="line">	<span class="keyword">let</span> a = <span class="number">8</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h5 id="const"><a href="#const" class="headerlink" title="const"></a>const</h5><ul>
+<li>声明一个只读的常量，一旦声明，常量的值就不可以改变。</li>
+<li>const一旦声明常量，就必须立即初始化，不能留到以后赋值</li>
+<li>const 命令声明的常量作用域与let相同，只在声明所在的块级作用域有效，不会变量提升，同样存在暂时性死区，只能在声明后使用</li>
+</ul>
+<p><strong>本质</strong><br>实际上保证的并不是变量的值不得改动，二是变量指向的那个内存地址不得改动；<br>const 只能保证这个指针是固定的，至于它指向的数据结构是不是可变的，这不能控制</p>
+<hr>
+<h5 id="顶层对象的属性"><a href="#顶层对象的属性" class="headerlink" title="顶层对象的属性"></a>顶层对象的属性</h5><p><strong>顶层对象</strong></p>
+<ul>
+<li>在浏览器中指的是windows对象</li>
+<li>在node中指的是global对象</li>
+<li>ES5中，顶层对象与全局变量是等价的</li>
+</ul>
+<hr>
+<ul>
+<li>var命令和 function 命令生成的全局变量是顶层对象的属性</li>
+<li>let，const，class 命令声明的全局变量不属于顶层对象的属性</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>let</th>
+<th>const</th>
+<th>var</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>变量</td>
+<td>常量</td>
+<td>常量</td>
+</tr>
+<tr>
+<td>不存在变量提升</td>
+<td>不存在变量提升</td>
+<td>存在变量提升（undefined）</td>
+</tr>
+<tr>
+<td>暂时性死区</td>
+<td>暂时性死区</td>
+<td>不存在暂时性死区</td>
+</tr>
+<tr>
+<td>不允许重复赋值</td>
+<td>不允许重复赋值</td>
+<td>允许重复赋值</td>
+</tr>
+<tr>
+<td>声明后允许不赋值（undefined）</td>
+<td>声明后必须初始化</td>
+<td>声明后允许不赋值（undefined）</td>
+</tr>
+</tbody>
+</table>
+<h1 id="2-mvc-和-mvvm"><a href="#2-mvc-和-mvvm" class="headerlink" title="2. mvc 和 mvvm"></a>2. mvc 和 mvvm</h1><h3 id="mvc-Model-View-Controller"><a href="#mvc-Model-View-Controller" class="headerlink" title="mvc  = Model View Controller"></a>mvc  = Model View Controller</h3><p>模型 - 视图 - 控制器</p>
+<ol>
+<li>model 和 view 永远不能相互通信，只能通过 controller 传递</li>
+<li>controller 可以直接与 model 对话（读写调用model），model 通过notification 和 kvo 机制与controller 间接通信</li>
+<li>Controller可以直接与View对话，通过outlet，直接操作View，outlet直接对应到View中的控件,view 通过action向controller报告事件的发生（比如用户touch我了）。controller是view的直接数据源（数据很可能是controller 从model 中取得并经过加工了）。controller 是view 的代理。</li>
+</ol>
+<p><strong>缺点</strong><br> 在通常的开发中，除了简单的model，view 以外的所有部分都被放在了controller中，controller 负责显示界面，响应用户的操作，网络请求以及与model交互，这就导致了controller</p>
+<ol>
+<li>逻辑复杂，难以维护</li>
+<li>和view 紧耦合，无法测试</li>
+</ol>
+<h3 id="mvvm-model-viewmodel-view"><a href="#mvvm-model-viewmodel-view" class="headerlink" title="mvvm  = model - viewmodel -view"></a>mvvm  = model - viewmodel -view</h3><p>一个 MVC 的增强版，我们正式连接了视图和控制器，并将表示逻辑从 Controller 移出放到一个新的对象里，即 View Model。MVVM 听起来很复杂，但它本质上就是一个精心优化的 MVC 架构</p>
+<ul>
+<li>model： 数据的拥有者，实现具体的业务逻辑</li>
+<li>ViewModel： 属于view+model，是一个放置用户输入验证逻辑，视图显示验证，发起网络等其他的地方。换句话说，就是把原来的View Controller 层的业务逻辑和页面逻辑等剥离出来放到viewModel层</li>
+<li>view层：就是view层和viewController层，他的任务就是从view层获得数据，然后显示<br><img src="https://img-blog.csdnimg.cn/20190308165646734.png" alt="mvvm"></li>
+</ul>
+<p><strong>mvvm的优点</strong></p>
+<ol>
+<li>mvvm降低了一个视图控制器的复杂性</li>
+<li>mvvm与现有的mvc架构兼容</li>
+<li>mvvm使程序更容易测试</li>
+<li>mvvm适合使用绑定机制</li>
+</ol>
+<p>mvvm 采用数据双向绑定，v的变动直接反应在vm上，m的变化也直接反应在vm上</p>
+<h3 id="数据双向绑定"><a href="#数据双向绑定" class="headerlink" title="数据双向绑定"></a>数据双向绑定</h3><p>文章详情：<a href="https://github.com/DMQ/mvvm" target="_blank" rel="noopener">https://github.com/DMQ/mvvm</a></p>
+<h5 id="实现双向绑定的做法"><a href="#实现双向绑定的做法" class="headerlink" title="实现双向绑定的做法"></a>实现双向绑定的做法</h5><ol>
+<li><p>发布者- 订阅模式（backbone.js）<br>一般通过sub，pub的方式实现数据和视图的绑定监视，更新数据的方式通常是<code>vm.set(&#39;property&#39;,value)</code><br>我们更希望的是通过<code>vm.set(&#39;property&#39;,value)</code>这种方式更新数据，同时更新视图、</p>
+</li>
+<li><p>脏值检查（angular.js）<br>angular.js 是通过脏值检测的方式比对数据是否有变更，来决定是否更新视图，angular只有在指定的事件触发时进入脏值检测（最简单的方式就是通过<code>setInterval()</code>定时轮询检测数据变动）</p>
+</li>
+<li>数据劫持（vue.js）<br>vue.js是通过采用 数据劫持 的方式结合 发布者-订阅者 的方式，通过<code>object.definePrpperty()</code>来劫持各个属性的<code>setter</code>，<code>getter</code>在数据变动时发布消息给订阅者，触发相应的监听回调</li>
+</ol>
+<h3 id="vue是什么？"><a href="#vue是什么？" class="headerlink" title="vue是什么？"></a>vue是什么？</h3><p>vue是一个构建用户界面的框架库，目标是通过尽可能简单的api 实现相应的数据绑定和组合的视图集合，vue自身不是一个全能的框架，核心只是关心视图层。</p>
+<h1 id="3-js作用域和闭包"><a href="#3-js作用域和闭包" class="headerlink" title="3. js作用域和闭包"></a>3. js作用域和闭包</h1><h3 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h3><p>记得之前写过一篇作用域的文章<br><a href="https://blog.csdn.net/Welkin_qing/article/details/80673682" target="_blank" rel="noopener">https://blog.csdn.net/Welkin_qing/article/details/80673682</a></p>
+<p>先来介绍三个职位：</p>
+<ul>
+<li>引擎： 从头到尾，负责整个js 程序的编译及执行过程</li>
+<li>编译器： 引擎的好朋友之一，负责语法分析及代码生成等脏活和累活</li>
+<li>作用域： 引擎的另一位好朋友，负责收集并维护由所有变量（声明的标识符）组成的一系列查询，并实施一套非常严格的规则，确定当前执行的代码对这些变量的访问权限</li>
+</ul>
+<p>作用域分为两个步骤：1. 声明 2. 查找<br>首先编译器会在当前作用域声明一个变量（如果之前没声明过），其次，在运行时引擎会在作用域查找该变量，如果找到会对它赋值。</p>
+<h3 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h3><ul>
+<li>简单的理解是函数的嵌套形成闭包，闭包包括函数本身以及它的外部作用域<br>闭包是指有权访问另一个函数作用域中的变量的<strong>函数</strong></li>
+<li>创建闭包的常见方式就是：在一个函数内部创建另一个函数</li>
+<li>使用闭包可以形成独立的空间，延长变量的生命周期，包括中间状态值</li>
+</ul>
+<h1 id="4-v-model"><a href="#4-v-model" class="headerlink" title="4. v-model"></a>4. v-model</h1><p>引述：<a href="https://blog.csdn.net/xidongdong1/article/details/79539243" target="_blank" rel="noopener">https://blog.csdn.net/xidongdong1/article/details/79539243</a></p>
+<p>v-model虽然很像使用了双向数据绑定的 Angular 的 ng-model，但是 Vue 是单项数据流，v-model 只是语法糖而已。</p>
+<p>第一行的代码其实只是第二行的语法糖。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">v-model</span>=<span class="string">"sth"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">v-bind:value</span>=<span class="string">"sth"</span> <span class="attr">v-on:input</span>=<span class="string">"sth = $event.target.value"</span> /&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>然后第二行代码还能简写成这样：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">:value</span>=<span class="string">"sth"</span> @<span class="attr">input</span>=<span class="string">"sth = $event.target.value"</span> /&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>要理解这行代码，首先你要知道 input 元素本身有个 oninput 事件，这是 HTML5 新增加的，类似 onchange ，每当输入框内容发生变化时，就会触发oninput，把最新的value传递给 sth。</p>
+<p>我们仔细观察语法糖和原始语法那两行代码，可以得出一个结论：</p>
+<p>在给<input>元素添加v-model属性时，默认会把value作为元素的属性，然后把’input’事件作为实时传递value的触发事件</p>
+<h1 id="5-toast"><a href="#5-toast" class="headerlink" title="5. toast"></a>5. toast</h1><p>引述：<a href="https://www.jianshu.com/p/ae0c4a055cce" target="_blank" rel="noopener">https://www.jianshu.com/p/ae0c4a055cce</a><br>步骤：</p>
+<ol>
+<li>初始化toast：<br>使用section设计toast 弹出内容，确保一个页面只有一个toast，对这个toast 设置隐藏使用section设计toast 弹出内容，确保一个页面只有一个toast，对这个toast 设置隐藏</li>
+<li>显示toast<ul>
+<li>显示toast时，需要确保上一个TimeOut已经被清空</li>
+<li>判断弹出内容，不能为空</li>
+</ul>
+</li>
+<li>隐藏toast<br>判断TimeOut 是否存在，若存在则清空</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 用原生 JS 封装一个 Toast 组件</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> Toast = &#123;</span><br><span class="line">    <span class="comment">// 隐藏的 setTimeOut 引用</span></span><br><span class="line">    hideTimeOut: <span class="literal">null</span>,</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 初始化</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    init: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> toastNode = <span class="built_in">document</span>.createElement(<span class="string">'section'</span>);</span><br><span class="line">        toastNode.innerHTML = <span class="string">'&lt;i class="iconfont icon-success"&gt;&lt;/i&gt;&lt;i class="iconfont icon-error"&gt;&lt;/i&gt;&lt;span class="text"&gt;111&lt;/span&gt;'</span>;</span><br><span class="line">        toastNode.id = <span class="string">'toastWaka'</span>; <span class="comment">// 设置id，一个页面有且仅有一个Toast</span></span><br><span class="line">        toastNode.setAttribute(<span class="string">'class'</span>, <span class="string">'toast'</span>);   <span class="comment">// 设置类名</span></span><br><span class="line">        toastNode.style.display = <span class="string">'none'</span>;   <span class="comment">// 设置隐藏</span></span><br><span class="line">        <span class="built_in">document</span>.body.appendChild(toastNode);</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 显示Toast</span></span><br><span class="line"><span class="comment">     * @param text 文本内容</span></span><br><span class="line"><span class="comment">     * @param type 类型 success error</span></span><br><span class="line"><span class="comment">     * @param duration 持续时间</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    show: <span class="function"><span class="keyword">function</span> (<span class="params">text, type, duration</span>) </span>&#123;</span><br><span class="line">        <span class="comment">// 确保上一次的 TimeOut 已被清空</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>.hideTimeOut) &#123;</span><br><span class="line">            clearTimeout(<span class="keyword">this</span>.hideTimeOut);</span><br><span class="line">            <span class="keyword">this</span>.hideTimeOut = <span class="literal">null</span>;</span><br><span class="line">            <span class="comment">// console.error('上一次的 TimeOut 还未走完!');</span></span><br><span class="line">            <span class="comment">// return;</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (!text) &#123;</span><br><span class="line">            <span class="built_in">console</span>.error(<span class="string">'text 不能为空!'</span>);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">var</span> domToastWaka = <span class="built_in">document</span>.getElementById(<span class="string">'toastWaka'</span>);</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'domToastWaka'</span>, domToastWaka);</span><br><span class="line">        <span class="keyword">if</span> (!domToastWaka) &#123;</span><br><span class="line">            <span class="built_in">console</span>.error(<span class="string">'toastWaka DOM 不存在!'</span>);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">var</span> domIconSuccess = domToastWaka.querySelector(<span class="string">'.icon-success'</span>);   <span class="comment">// 成功图标</span></span><br><span class="line">        <span class="keyword">var</span> domIconError = domToastWaka.querySelector(<span class="string">'.icon-error'</span>);   <span class="comment">// 错误图标</span></span><br><span class="line">        <span class="keyword">var</span> domToastText = domToastWaka.querySelector(<span class="string">'.text'</span>);   <span class="comment">// 文字</span></span><br><span class="line">        domToastText.innerHTML = text || <span class="string">''</span>;</span><br><span class="line">        <span class="keyword">switch</span> (type) &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">'success'</span>:</span><br><span class="line">                domIconSuccess.style.display = <span class="string">'inline'</span>;</span><br><span class="line">                domIconError.style.display = <span class="string">'none'</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">'error'</span>:</span><br><span class="line">                domIconSuccess.style.display = <span class="string">'none'</span>;</span><br><span class="line">                domIconError.style.display = <span class="string">'inline'</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">default</span>:</span><br><span class="line">                domIconSuccess.style.display = <span class="string">'none'</span>;</span><br><span class="line">                domIconError.style.display = <span class="string">'none'</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        domToastWaka.style.display = <span class="string">'block'</span>;</span><br><span class="line">        <span class="comment">// 不传的话默认2s</span></span><br><span class="line">        <span class="keyword">var</span> that = <span class="keyword">this</span>;</span><br><span class="line">        <span class="keyword">this</span>.hideTimeOut = setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            domToastWaka.style.display = <span class="string">'none'</span>;</span><br><span class="line">            that.hideTimeOut = <span class="literal">null</span>;    <span class="comment">// 置 TimeOut 引用为空</span></span><br><span class="line">        &#125;, duration || <span class="number">2000</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 隐藏 Toast</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    hide: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="comment">// 如果 TimeOut 存在</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>.hideTimeOut) &#123;</span><br><span class="line">            <span class="comment">// 清空 TimeOut 引用</span></span><br><span class="line">            clearTimeout(<span class="keyword">this</span>.hideTimeOut);</span><br><span class="line">            <span class="keyword">this</span>.hideTimeOut = <span class="literal">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">var</span> domToastWaka = <span class="built_in">document</span>.getElementById(<span class="string">'toastWaka'</span>);</span><br><span class="line">        <span class="keyword">if</span> (domToastWaka) &#123;</span><br><span class="line">            domToastWaka.style.display = <span class="string">'none'</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Toast.init();</span><br><span class="line">Toast.show(<span class="string">'123'</span>, <span class="string">'success'</span>, <span class="number">10000</span>);</span><br><span class="line">setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    Toast.hide();</span><br><span class="line">&#125;, <span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
+<h1 id="6-session，cookies"><a href="#6-session，cookies" class="headerlink" title="6. session，cookies"></a>6. session，cookies</h1><h3 id="cookies"><a href="#cookies" class="headerlink" title="cookies"></a>cookies</h3><p>cookie的作用是与服务器进行交互（在浏览器和服务器来回传递），作为HTTP规范的一部分而存在。<br>服务器和客户端都可以访问，大小只有4kb左右；存在有效期，过期后将会被删除。<br>Cookies 的大小是受限的，并且每次你请求一个新的页面的时候Cookies都会被发送过去，这样无形浪费了带宽，另外，cookie还需要指定作用域，不可以跨域调用。</p>
+<h3 id="Web-Storage"><a href="#Web-Storage" class="headerlink" title="Web Storage"></a>Web Storage</h3><p>web storage 仅仅是为了在本地“存储”数据而生。<br>除此之外，web Storage 拥有setItem，getItem，removeItem，clear 等方法，不像cookie 需要前端开发者自己封装setCookie，getCookie。</p>
+<ul>
+<li><p>session：（sessionStorage）中的数据，这些数据只有在同一个会话找那个的页面才能访问，并且当会话结束后数据也随之销毁，因此session 不是一种持久化的本地存储，仅仅是会话级别的存储。</p>
+</li>
+<li><p>localStorage：（本地存储）用于持久化的本地存储，除非主动删除数据，否则数据是永远不会过期。只有本地浏览器端可以访问数据，服务器不能访问本地存储直到故意通过POST 或者GET的通道发送到服务器；每个域5MB，没有过期数据，它将保留直到用户从浏览器清除或者使用js 代码清除。</p>
+</li>
+</ul>
+<h3 id="cookie-和-sessionStorage-localStorage"><a href="#cookie-和-sessionStorage-localStorage" class="headerlink" title="cookie 和 sessionStorage localStorage"></a>cookie 和 sessionStorage localStorage</h3><ul>
+<li>sessionStorage 和 localStorage 的存储空间更大</li>
+<li>sessionStorage 和 localStorage 有更多的丰富易用的接口</li>
+<li>sessionStorage 和 localStorage各自独立的存储空间</li>
+</ul>
+<h1 id="7-中间件"><a href="#7-中间件" class="headerlink" title="7. 中间件"></a>7. 中间件</h1><p>引文：<a href="http://expressjs.com/en/guide/using-middleware.html" target="_blank" rel="noopener">http://expressjs.com/en/guide/using-middleware.html</a><br>我之前写过一篇博客：<a href="https://blog.csdn.net/Welkin_qing/article/details/84175499" target="_blank" rel="noopener">https://blog.csdn.net/Welkin_qing/article/details/84175499</a></p>
+<p>提及一下express：<br>express 是一个路由和中间件Web框架，它具有自己的最小功能：Express应用程序本质上是一系列中间件函数调用。</p>
+<p>Express 应用程序可以使用以下类型的中间件：</p>
+<ul>
+<li>应用程序级中间件</li>
+<li>路由器级中间件</li>
+<li>错误处理中间件</li>
+<li>内置中间件</li>
+<li>第三方中间件</li>
+</ul>
+<p>可以使用可选的装载路径加载应用程序级和路由器级中间级。还可以将一系列中间件功能加载在一起，从而在安装点创建中间件系统的子堆栈。<br>（详情见引述）</p>
+<hr>
+<p>中间件函数是可以访问请求对象（req），响应对象（res）以及应用程序的请求，去响应周期中的下一个中间件函数的函数，下一个中间件函数通常由名为 next 的变量表示。</p>
+<p>中间件的功能可以执行以下任务：</p>
+<ul>
+<li>执行任何代码</li>
+<li>更改请求和响应对象</li>
+<li>结束请求 - 响应循环</li>
+<li>调用堆栈中的下一个中间件函数</li>
+</ul>
+<p>如果当前的中间件函数没有结束请求 - 响应周期，则必须调用 next() 以将控制传递给下一个中间件函数。否则，请求将被挂起。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2019/03/09/字节跳动一面总结.html" data-title="字节跳动一面总结 | Welkin" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2019/03/05/js抖动和节流.html"  title="js抖动和节流">
+ <strong>NEXT:</strong><br/> 
+ <span>js抖动和节流
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-let，const-和-var"><span class="toc-number">1.</span> <span class="toc-text">1. let，const 和 var</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#var"><span class="toc-number">1.0.0.0.1.</span> <span class="toc-text">var</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#let"><span class="toc-number">1.0.0.0.2.</span> <span class="toc-text">let</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#区别："><span class="toc-number">1.0.0.0.3.</span> <span class="toc-text">区别：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#const"><span class="toc-number">1.0.0.0.4.</span> <span class="toc-text">const</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#顶层对象的属性"><span class="toc-number">1.0.0.0.5.</span> <span class="toc-text">顶层对象的属性</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-mvc-和-mvvm"><span class="toc-number">2.</span> <span class="toc-text">2. mvc 和 mvvm</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#mvc-Model-View-Controller"><span class="toc-number">2.0.1.</span> <span class="toc-text">mvc  = Model View Controller</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mvvm-model-viewmodel-view"><span class="toc-number">2.0.2.</span> <span class="toc-text">mvvm  = model - viewmodel -view</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数据双向绑定"><span class="toc-number">2.0.3.</span> <span class="toc-text">数据双向绑定</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#实现双向绑定的做法"><span class="toc-number">2.0.3.0.1.</span> <span class="toc-text">实现双向绑定的做法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#vue是什么？"><span class="toc-number">2.0.4.</span> <span class="toc-text">vue是什么？</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-js作用域和闭包"><span class="toc-number">3.</span> <span class="toc-text">3. js作用域和闭包</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#作用域"><span class="toc-number">3.0.1.</span> <span class="toc-text">作用域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#闭包"><span class="toc-number">3.0.2.</span> <span class="toc-text">闭包</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-v-model"><span class="toc-number">4.</span> <span class="toc-text">4. v-model</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-toast"><span class="toc-number">5.</span> <span class="toc-text">5. toast</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-session，cookies"><span class="toc-number">6.</span> <span class="toc-text">6. session，cookies</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#cookies"><span class="toc-number">6.0.1.</span> <span class="toc-text">cookies</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Web-Storage"><span class="toc-number">6.0.2.</span> <span class="toc-text">Web Storage</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cookie-和-sessionStorage-localStorage"><span class="toc-number">6.0.3.</span> <span class="toc-text">cookie 和 sessionStorage localStorage</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#7-中间件"><span class="toc-number">7.</span> <span class="toc-text">7. 中间件</span></a></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2019 
+		
+		<a href="http://yoursite.com" target="_blank" title="welkin">welkin</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>
