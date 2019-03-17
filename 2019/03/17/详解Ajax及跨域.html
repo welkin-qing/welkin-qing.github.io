@@ -1,0 +1,452 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>详解Ajax及跨域 | Welkin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="welkin">
+    
+    <meta name="description" content="@TOC
+一、Ajax1. Ajax是什么？Ajax 全称是 asynchronous Javascript and XML， 即异步 javaScript 和XML，用于在web 页面中实现异步数据交互，实现页面局部刷新。
+AJAX 是无需刷新页面就能从服务器获得数据的一种方法。是一种用于创建快速">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="Welkin" title="Welkin"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Welkin">Welkin</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2019/03/17/详解Ajax及跨域.html" title="详解Ajax及跨域" itemprop="url">详解Ajax及跨域</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="welkin">welkin</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2019-03-17T14:46:56.000Z" itemprop="datePublished">2019-03-17</time>
+    Updated:<time datetime="2019-03-17T14:47:12.434Z" itemprop="dateModified">2019-03-17</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、Ajax"><span class="toc-number">1.</span> <span class="toc-text">一、Ajax</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Ajax是什么？"><span class="toc-number">1.0.1.</span> <span class="toc-text">1. Ajax是什么？</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#AJAX-是无需刷新页面就能从服务器获得数据的一种方法。"><span class="toc-number">1.0.1.0.1.</span> <span class="toc-text">AJAX 是无需刷新页面就能从服务器获得数据的一种方法。</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Ajax的优缺点"><span class="toc-number">1.0.2.</span> <span class="toc-text">2. Ajax的优缺点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Ajax-最大的特点是什么？"><span class="toc-number">1.0.3.</span> <span class="toc-text">3. Ajax 最大的特点是什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-简述Ajax的过程"><span class="toc-number">1.0.4.</span> <span class="toc-text">4. 简述Ajax的过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-Ajax的交互模型"><span class="toc-number">1.0.5.</span> <span class="toc-text">5. Ajax的交互模型</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、详解Ajax"><span class="toc-number">2.</span> <span class="toc-text">二、详解Ajax</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-XMLHttpRequest"><span class="toc-number">2.0.1.</span> <span class="toc-text">1. XMLHttpRequest</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#方法是："><span class="toc-number">2.0.1.0.1.</span> <span class="toc-text">方法是：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#虽然名字中包含XML-但是Ajax通信与数据格式无关；这种技术就是无需刷新页面即可从服务器取得数据，但不一定是XML数据"><span class="toc-number">2.0.1.0.2.</span> <span class="toc-text">虽然名字中包含XML 但是Ajax通信与数据格式无关；这种技术就是无需刷新页面即可从服务器取得数据，但不一定是XML数据</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-使用XHR-对象"><span class="toc-number">2.0.2.</span> <span class="toc-text">2. 使用XHR 对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-XHR的用法"><span class="toc-number">2.0.3.</span> <span class="toc-text">2. XHR的用法</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#要发送特定的请求，必须调用send-方法"><span class="toc-number">2.0.3.0.1.</span> <span class="toc-text">要发送特定的请求，必须调用send()方法</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#对于同步请求"><span class="toc-number">2.0.3.0.1.1.</span> <span class="toc-text">对于同步请求</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#对于异步请求"><span class="toc-number">2.0.3.0.1.2.</span> <span class="toc-text">对于异步请求</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#在onreadystatechange事件处理程序中使用XHR对象没有使用this对象的原因是什么？"><span class="toc-number">2.0.3.0.2.</span> <span class="toc-text">在onreadystatechange事件处理程序中使用XHR对象没有使用this对象的原因是什么？</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-HTTP头部信息"><span class="toc-number">2.0.4.</span> <span class="toc-text">3. HTTP头部信息</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#设置自定义请求头部信息"><span class="toc-number">2.0.4.0.1.</span> <span class="toc-text">设置自定义请求头部信息</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-Get请求"><span class="toc-number">2.0.5.</span> <span class="toc-text">4. Get请求</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#查询字符串中的每个参数的名称和值都必须使用-encodeURIComponent-进行编码，才能放到url末尾；而且所有的名-值对都必须有和号（-amp-）分割"><span class="toc-number">2.0.5.0.1.</span> <span class="toc-text">查询字符串中的每个参数的名称和值都必须使用 encodeURIComponent 进行编码，才能放到url末尾；而且所有的名-值对都必须有和号（&amp;）分割</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-Post请求"><span class="toc-number">2.0.6.</span> <span class="toc-text">5. Post请求</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#XMLHttpReauest-2级"><span class="toc-number">3.</span> <span class="toc-text">XMLHttpReauest 2级</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-formData"><span class="toc-number">3.0.1.</span> <span class="toc-text">1. formData</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-超时设定"><span class="toc-number">3.0.2.</span> <span class="toc-text">2. 超时设定</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#timeout属性，表示请求在等待响应多少毫秒之后就会终止，"><span class="toc-number">3.0.2.0.1.</span> <span class="toc-text">timeout属性，表示请求在等待响应多少毫秒之后就会终止，</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-overrideMimeType方法"><span class="toc-number">3.0.3.</span> <span class="toc-text">3. overrideMimeType方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-进度事件"><span class="toc-number">3.0.4.</span> <span class="toc-text">4. 进度事件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-跨源资源共享-CORS"><span class="toc-number">3.0.5.</span> <span class="toc-text">5. 跨源资源共享 CORS</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#CORS的几种解决方案"><span class="toc-number">3.0.5.1.</span> <span class="toc-text">CORS的几种解决方案</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#Preglighted-Requests-透明服务器验证机制（使用自定义头部，get或者post之外的方法）"><span class="toc-number">3.0.5.1.0.1.</span> <span class="toc-text">Preglighted Requests 透明服务器验证机制（使用自定义头部，get或者post之外的方法）</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-其他跨域技术"><span class="toc-number">3.0.6.</span> <span class="toc-text">6. 其他跨域技术</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#1-图像Ping（只能用于浏览器和服务器之间的单向通信）"><span class="toc-number">3.0.6.0.0.1.</span> <span class="toc-text">1. 图像Ping（只能用于浏览器和服务器之间的单向通信）</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#2-JSONP（被包含在函数调用中的JSON）"><span class="toc-number">3.0.6.0.0.2.</span> <span class="toc-text">2. JSONP（被包含在函数调用中的JSON）</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#3-Comet-P588"><span class="toc-number">3.0.6.0.0.3.</span> <span class="toc-text">3. Comet  P588</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#考点轮询"><span class="toc-number">3.0.6.0.0.4.</span> <span class="toc-text">考点轮询</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#4-SSE-服务器发送事件-P590"><span class="toc-number">3.0.6.0.0.5.</span> <span class="toc-text">4. SSE 服务器发送事件 P590</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#5-Web-Sockets-P591"><span class="toc-number">3.0.6.0.0.6.</span> <span class="toc-text">5. Web Sockets   P591</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li></ol>
+		</div>
+		
+		<p>@<a href="文章目录">TOC</a></p>
+<h1 id="一、Ajax"><a href="#一、Ajax" class="headerlink" title="一、Ajax"></a>一、Ajax</h1><h3 id="1-Ajax是什么？"><a href="#1-Ajax是什么？" class="headerlink" title="1. Ajax是什么？"></a>1. Ajax是什么？</h3><p>Ajax 全称是 asynchronous Javascript and XML， 即异步 javaScript 和XML，用于在web 页面中实现异步数据交互，实现页面局部刷新。</p>
+<h5 id="AJAX-是无需刷新页面就能从服务器获得数据的一种方法。"><a href="#AJAX-是无需刷新页面就能从服务器获得数据的一种方法。" class="headerlink" title="AJAX 是无需刷新页面就能从服务器获得数据的一种方法。"></a>AJAX 是无需刷新页面就能从服务器获得数据的一种方法。</h5><p>是一种用于创建快速动态网页的技术。<br>通过在后台与服务器进行少量数据交换，AJAX 可以使网页实现异步更新。这意味着可以在不重新加载整个网页的情况下，对网页的某部分进行更新。<br>传统的网页（不使用 AJAX）如果需要更新内容，必需重载整个网页面。<br>有很多使用 AJAX 的应用程序案例：新浪微博、Google 地图、开心网等等。</p>
+<h3 id="2-Ajax的优缺点"><a href="#2-Ajax的优缺点" class="headerlink" title="2. Ajax的优缺点"></a>2. Ajax的优缺点</h3><ul>
+<li>优点：<br>可以使得页面不重载全部内容的情况下加载局部内容，降低数据传输量，避免用户不断刷新或者跳转页面，提高用户体验。<ol>
+<li>通过异步模式，提升了用户体验</li>
+<li>优化了浏览器和服务器之间的传输，减少不必要的数据往返，减少了带宽占用</li>
+<li>Ajax在客户端运行，承担了一部分本来由服务器承担的工作吗，减少了大用户量下的服务器负载</li>
+</ol>
+</li>
+<li>缺点：<ol>
+<li>ajax 不支持浏览器back 按钮</li>
+<li>安全问题ajax 暴露了与服务器交互的细节</li>
+<li>对搜索引擎支持比较弱</li>
+<li>破坏了程序的异常机制</li>
+</ol>
+</li>
+</ul>
+<h3 id="3-Ajax-最大的特点是什么？"><a href="#3-Ajax-最大的特点是什么？" class="headerlink" title="3. Ajax 最大的特点是什么？"></a>3. Ajax 最大的特点是什么？</h3><p>Ajax 可以实现异步通信效果，实现页面局部刷新，带来更好的用户体验，按需获取数据，节约宽带资源。</p>
+<h3 id="4-简述Ajax的过程"><a href="#4-简述Ajax的过程" class="headerlink" title="4. 简述Ajax的过程"></a>4. 简述Ajax的过程</h3><ol>
+<li>创建XMLHttpRequest 对象，也就是创建一个异步调用对象</li>
+<li>创建一个新的HTTP请求，并指定该HTTP请求的方法，URL及验证信息</li>
+<li>设置响应HTTP请求状态变化的函数</li>
+<li>发送HTTP请求</li>
+<li>获取异步调用返回的数据</li>
+<li>使用JavaScript 和DOM 实现局部刷新</li>
+</ol>
+<h3 id="5-Ajax的交互模型"><a href="#5-Ajax的交互模型" class="headerlink" title="5. Ajax的交互模型"></a>5. Ajax的交互模型</h3><p><img src="https://img-blog.csdnimg.cn/20190315193708813.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>浏览器的普通交互方式<br><img src="https://img-blog.csdnimg.cn/20190315193734342.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>浏览器的ajax交互方式<br><img src="https://img-blog.csdnimg.cn/20190315193759637.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h1 id="二、详解Ajax"><a href="#二、详解Ajax" class="headerlink" title="二、详解Ajax"></a>二、详解Ajax</h1><h3 id="1-XMLHttpRequest"><a href="#1-XMLHttpRequest" class="headerlink" title="1. XMLHttpRequest"></a>1. XMLHttpRequest</h3><p>Ajax 的核心对象是XMLHttpRequest对象，简称XHR </p>
+<h5 id="方法是："><a href="#方法是：" class="headerlink" title="方法是："></a>方法是：</h5><ol>
+<li>使用XHR 对象获得新数据</li>
+<li>通过DOM 将数据插入到页面中<h5 id="虽然名字中包含XML-但是Ajax通信与数据格式无关；这种技术就是无需刷新页面即可从服务器取得数据，但不一定是XML数据"><a href="#虽然名字中包含XML-但是Ajax通信与数据格式无关；这种技术就是无需刷新页面即可从服务器取得数据，但不一定是XML数据" class="headerlink" title="虽然名字中包含XML 但是Ajax通信与数据格式无关；这种技术就是无需刷新页面即可从服务器取得数据，但不一定是XML数据"></a>虽然名字中包含XML 但是Ajax通信与数据格式无关；这种技术就是无需刷新页面即可从服务器取得数据，但不一定是XML数据</h5></li>
+</ol>
+<h3 id="2-使用XHR-对象"><a href="#2-使用XHR-对象" class="headerlink" title="2. 使用XHR 对象"></a>2. 使用XHR 对象</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createXHR</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(<span class="keyword">typeof</span> XMLHttpRequest != <span class="string">"undefined"</span>)&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> XMLHttpRequest(); <span class="comment">//对原生XHR对象的支持</span></span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(<span class="keyword">typeof</span> ActiveXObject != <span class="string">"undefined"</span>)&#123;</span><br><span class="line">                <span class="keyword">if</span>(<span class="keyword">typeof</span> <span class="built_in">arguments</span>.callee.activeXString != <span class="string">"string"</span>)&#123;  </span><br><span class="line">                    <span class="comment">//callee 是 arguments 对象的一个属性。它可以用于引用该函数的函数体内当前正在执行的函数</span></span><br><span class="line">                    <span class="keyword">var</span> versions = [<span class="string">"MSXML2.XMLHttp.6.0"</span>, <span class="string">"MSXML2.XMLHttp.3.0"</span>,<span class="string">"MSXML2.XMLHttp"</span>],</span><br><span class="line">                        i,len;</span><br><span class="line">                    <span class="keyword">for</span>(i=<span class="number">0</span>, len=versions.length; i&lt;len; i++)&#123;</span><br><span class="line">                        <span class="keyword">try</span>&#123;</span><br><span class="line">                            <span class="keyword">new</span> ActiveXObject(versions[i]);</span><br><span class="line">                            <span class="built_in">arguments</span>.callee,activeXString = versions[i];</span><br><span class="line">                            <span class="keyword">break</span>;</span><br><span class="line">                        &#125;<span class="keyword">catch</span>(ex)&#123;</span><br><span class="line">                            <span class="comment">//跳过</span></span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> ActiveXObject(<span class="built_in">arguments</span>.callee.activeXString)</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">"No XHR object available"</span>)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">var</span> xhr = <span class="keyword">new</span> createXHR();  <span class="comment">//创建XHR对象</span></span><br></pre></td></tr></table></figure>
+<p>这个函数的作用：</p>
+<ol>
+<li>先检测原生XHR对象是否存在，如果存在则返回它的新实例</li>
+<li>如果袁姗姗对象不存在，则检测ActiveX对象</li>
+<li>如果以上两种对象都不存在，则抛出一个错误</li>
+</ol>
+<h3 id="2-XHR的用法"><a href="#2-XHR的用法" class="headerlink" title="2. XHR的用法"></a>2. XHR的用法</h3><p>在使用XHR对象时，要调用的第一个方法是 open()，他接收3个参数</p>
+<ol>
+<li>要发送请求的的类型</li>
+<li>请求的URL;</li>
+<li>表示是否异步发送请求的布尔值</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">xhr.open(<span class="string">"get"</span>, <span class="string">"example.php"</span>, <span class="literal">false</span>)</span><br><span class="line"><span class="comment">//这行代码将会启动一个针对example.php 的get请求</span></span><br></pre></td></tr></table></figure>
+<p>说明：</p>
+<ol>
+<li>URL 相对于执行这行代码的当前页面（也可以使用绝对路径）</li>
+<li>调用open() 方法并不会真正发送数据，只是启动一个请求以备发送</li>
+</ol>
+<p>注意：<br>只能向同一个域中使用相同的端口和协议的URL发送请求。如果URL与启动请求的页面有任何差别，都会引发安全错误。</p>
+<h5 id="要发送特定的请求，必须调用send-方法"><a href="#要发送特定的请求，必须调用send-方法" class="headerlink" title="要发送特定的请求，必须调用send()方法"></a>要发送特定的请求，必须调用send()方法</h5><h6 id="对于同步请求"><a href="#对于同步请求" class="headerlink" title="对于同步请求"></a>对于同步请求</h6><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">xhr.open(<span class="string">"get"</span>, <span class="string">"example.php"</span>, <span class="literal">false</span>)</span><br><span class="line">xhr.send(<span class="literal">null</span>)</span><br></pre></td></tr></table></figure>
+<p>这里的send接收一个参数，作为请求主体发送的数据。<br>如果不需要通过请求主体发送数据，则必须传入null（因为这个参数对有些浏览器来说是必需的）<br>调用send之后，请求就会被分派到服务器。<br>由于这次请求是同步的，js代码会等到服务器响应之后再继续执行。在收到响应后，响应的数据会自动填充XHR对象的属性，相关属性简介如下：</p>
+<ul>
+<li>responseText：作为响应主体被返回的文本</li>
+<li>responseXML：如果响应的内容类型是“text/xml”或者“qpplication/xml”，这个属性中将保存包含着响应数据的XML DOM 文档</li>
+<li>status：响应的HTTP状态</li>
+<li>statusText：http状态的说明</li>
+</ul>
+<p>在接到响应后，第一步是检查status 属性，以确定响应已经成功返回（一般来说，200作为成功的标志）。<br>此时，responseText 属性的内容已经就绪，而且在内容类型正确的情况下，responseXML 也应该能够访问了。此外。304表示请求的资源并没有被修改，可以直接使用浏览器中缓存的版本，当然也意味着响应是有效的。为确保接收到合适的响应，应该进行检查<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">xhr.open(<span class="string">"get"</span>, <span class="string">"example.php"</span>, <span class="literal">false</span>)</span><br><span class="line">        xhr.send(<span class="literal">null</span>)</span><br><span class="line">        <span class="keyword">if</span>((xhr.status&gt;=<span class="number">200</span> &amp;&amp; xhr.status&lt;<span class="number">300</span>) || xhr.status == <span class="number">304</span>)&#123;</span><br><span class="line">            alert(xhr.responseText);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            alert(<span class="string">"Request was unsuccessful:"</span>+ xhr.status)</span><br><span class="line">   </span><br><span class="line">   		&#125;     </span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></p>
+<p>根据返回的状态码，这个例子可能会显示由服务器返回的内容，也有可能会显示一条错误消息。<br>所以建议通过检测status来决定下一步的操作，不要依赖statusText（跨浏览器使用不太可靠）。</p>
+<p>无论内容类型是什么，响应主体的内容都会保存到responseText 属性中；而对于非XML 数据而言，responseXML 的属性将为NULL。</p>
+<h6 id="对于异步请求"><a href="#对于异步请求" class="headerlink" title="对于异步请求"></a>对于异步请求</h6><p>可以利用XHR 对象的readyState 属性（该属性表示请求/响应过程的当前活动阶段），取值如下：</p>
+<ul>
+<li>0：未初始化。尚未调用open方法</li>
+<li>1：启动。已经调用了open方法，但未调用send 方法</li>
+<li>2 ：发送。已经调用了send 方法，但未接收到响应</li>
+<li>3：接收：已经接收到部分响应的数据</li>
+<li>4：完成。已经接收到全部响应数据，而且已经可以在客户端使用了（只对4的值感兴趣，因为这时候所有数据都已经准备就绪）</li>
+</ul>
+<p>只要readyState 属性的值从一个值变成另一个值，就会触发一次readystatechange 事件。可以利用这点检测每次状态变化后readyState 的值。</p>
+<p>必须在调用open 之前指定onreadystatechange事件才能确保跨浏览器兼容性。P574</p>
+<h5 id="在onreadystatechange事件处理程序中使用XHR对象没有使用this对象的原因是什么？"><a href="#在onreadystatechange事件处理程序中使用XHR对象没有使用this对象的原因是什么？" class="headerlink" title="在onreadystatechange事件处理程序中使用XHR对象没有使用this对象的原因是什么？"></a>在onreadystatechange事件处理程序中使用XHR对象没有使用this对象的原因是什么？</h5><p>onreadystatechange事件处理程序的作用域问题。如果使用this 对象，在有的浏览器中会导致函数执行失败，或者导致错误发生。因此，使用实际的XHR对象实例变量是较为可靠的一种方式。</p>
+<h3 id="3-HTTP头部信息"><a href="#3-HTTP头部信息" class="headerlink" title="3. HTTP头部信息"></a>3. HTTP头部信息</h3><p>XHR 对象提供了两种头部信息</p>
+<ul>
+<li>请求头部</li>
+<li>响应头部</li>
+</ul>
+<p>默认情况下在发送XHR 请求的同时，还会发送以下头部信息：</p>
+<ol>
+<li>Accept：浏览器能处理的内容类型</li>
+<li>Accept-Encoding：浏览器能处理的压缩编码</li>
+<li>Accept-Language：浏览器当前设置的语言</li>
+<li>Accept-Charset：浏览器能显示的字符集</li>
+<li>Connection：浏览器与当前服务器之间连接的类型</li>
+<li>Cookie：当前页面设置的任何cookie</li>
+<li>Host：发出请求的页面所在的域</li>
+<li>Referer：发出请求的压面的URL，</li>
+<li>User-Agent：浏览器的用户代理字符集</li>
+</ol>
+<h5 id="设置自定义请求头部信息"><a href="#设置自定义请求头部信息" class="headerlink" title="设置自定义请求头部信息"></a>设置自定义请求头部信息</h5><p>setRequestHeader()  可以自定义设置请求头部信息。<br>这个方法接收两个参数：</p>
+<ul>
+<li>头部字段的名称</li>
+<li>头部字段的值</li>
+</ul>
+<p>要成功发送请求头部信息，必须在调用open方法之后且调用send方法之前调用setRequestHeader()<br>例子详见P575</p>
+<p>服务器在接收到这种自定义的头部信息之后，可以执行相应的后续操作。<br>建议使用自定义头部字段名称，不要使用浏览器正常发送的字段名称，否则有可能会影响服务器的响应（有的浏览器允许开发人员重写默认的头部信息，但有的浏览器不允许这样做）</p>
+<p>调用XHR 对象的 getResponseHeader()方法并传入头部字段名称，可以取得相应的响应头部信息。而调用getAllResponseHeader()方法，则可以取得一个包含所有头部信息的长字符串（例子详见P576）</p>
+<h3 id="4-Get请求"><a href="#4-Get请求" class="headerlink" title="4. Get请求"></a>4. Get请求</h3><p>get是最常见的请求类型，常用于向服务器查询某些信息<br>对于XHR而言，位于传入的URL 末尾的查询字符串 必须经过正确的编码才行。</p>
+<h5 id="查询字符串中的每个参数的名称和值都必须使用-encodeURIComponent-进行编码，才能放到url末尾；而且所有的名-值对都必须有和号（-amp-）分割"><a href="#查询字符串中的每个参数的名称和值都必须使用-encodeURIComponent-进行编码，才能放到url末尾；而且所有的名-值对都必须有和号（-amp-）分割" class="headerlink" title="查询字符串中的每个参数的名称和值都必须使用 encodeURIComponent 进行编码，才能放到url末尾；而且所有的名-值对都必须有和号（&amp;）分割"></a>查询字符串中的每个参数的名称和值都必须使用 encodeURIComponent 进行编码，才能放到url末尾；而且所有的名-值对都必须有和号（&amp;）分割</h5><p>P576详见代码</p>
+<h3 id="5-Post请求"><a href="#5-Post请求" class="headerlink" title="5. Post请求"></a>5. Post请求</h3><p>通常用于向服务器发送应该被保存的数据<br>Post 请求应该把数据作为请求的主体提交，而get 请求传统上不是这样的<br>post 请求可以包含非常多的数据，而且格式不限。</p>
+<ol>
+<li><p>初始化post</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xhr.open(<span class="string">"open"</span>, <span class="string">"example.php"</span>, <span class="literal">true</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>向send 方法传入某些数据<br>最初的设计是为了处理XML， 因此可以传入XML DOM 文档，传入的文档经序列化之后将作为请求主体被提交到服务器。<br>使用XHR 模仿表单提交：</p>
+<ol>
+<li>将Content-Type头部信息设置为application/x-www-form-urlencode，也就是表单提交时的内容相同</li>
+<li>一适当格式创建一个字符串</li>
+<li>post数据的格式与查询字符串格式相同，如果需要将表单的数据进行序列化，则使用serialize()</li>
+</ol>
+</li>
+</ol>
+<p>如果不设置content-type 头部信息，那么发送给服务器的数据就不会出现在 <code>$_POST</code>超级全局变量中，这时候要访问同样的数据，就必须借助于<code>$HTTP_RAW_POST_DATA</code></p>
+<h1 id="XMLHttpReauest-2级"><a href="#XMLHttpReauest-2级" class="headerlink" title="XMLHttpReauest 2级"></a>XMLHttpReauest 2级</h1><h3 id="1-formData"><a href="#1-formData" class="headerlink" title="1. formData"></a>1. formData</h3><p>为序列化表单以及创建与表单格式相同的数据带来了便利<br>使用append创建formData对象</p>
+<p>append() 方法接收两个参数</p>
+<ul>
+<li>键  对应表单字段的名字</li>
+<li>值 对应字段中包含的值</li>
+</ul>
+<p>使用formdata 的方便之处是不必明确的在XHR对象上设置请求头部，XHR 对象能够识别传入的数据类型是FormData 的实例</p>
+<h3 id="2-超时设定"><a href="#2-超时设定" class="headerlink" title="2. 超时设定"></a>2. 超时设定</h3><h5 id="timeout属性，表示请求在等待响应多少毫秒之后就会终止，"><a href="#timeout属性，表示请求在等待响应多少毫秒之后就会终止，" class="headerlink" title="timeout属性，表示请求在等待响应多少毫秒之后就会终止，"></a>timeout属性，表示请求在等待响应多少毫秒之后就会终止，</h5><p>再给timeout 设置一个数值后，在规定的时间内浏览器还没有收到响应吗，那么就会触发timeout事件，进而会调用ontimeout 事件处理程序</p>
+<p>注意：<br>请求终止时，会调用ontimeout事件处理程序，但此时readyState 可能已解决改变为4了，这意味着会调用 onreadystatechange 事件处理程序，如果在超时终止之后再访问status 属性就会导致错误。为了避免浏览器报告错误，可以将检查status 属性的语句封装在一个try-catch语句中</p>
+<h3 id="3-overrideMimeType方法"><a href="#3-overrideMimeType方法" class="headerlink" title="3. overrideMimeType方法"></a>3. overrideMimeType方法</h3><p>用于重写XHR的MIME类型（返回响应的MIME类型决定了XHR对象如何处理它）P580</p>
+<h3 id="4-进度事件"><a href="#4-进度事件" class="headerlink" title="4. 进度事件"></a>4. 进度事件</h3><p>详情：<a href="https://www.w3cmm.com/ajax/progress-events.html" target="_blank" rel="noopener">https://www.w3cmm.com/ajax/progress-events.html</a>  P581</p>
+<ul>
+<li>loadstart：在接收到相应数据的第一个字节时触发。</li>
+<li>progress：在接收相应期间持续不断触发。</li>
+<li>error：在请求发生错误时触发。</li>
+<li>abort：在因为调用abort()方法而终止链接时触发。</li>
+<li>load：在接收到完整的相应数据时触发。</li>
+<li>loadend：在通信完成或者触发error、abort或load事件后触发。</li>
+</ul>
+<h3 id="5-跨源资源共享-CORS"><a href="#5-跨源资源共享-CORS" class="headerlink" title="5. 跨源资源共享 CORS"></a>5. 跨源资源共享 CORS</h3><p>使用自定义的HTTP头部让浏览器与服务器进行沟通 ，从而决定请求或响应是成功还是失败</p>
+<ul>
+<li>需要加上一个额外的Origin 头部（其中包含请求页面的源信息：协议、域名和端口），以便服务器根据这个头部信息来决定是否给予响应</li>
+<li>使用Access-Control-Allow-Origin头部中回发相同的源信息，表示服务器可以接受<br>如果没有这个头部，或者这个头部但源信息不匹配，浏览器就会驳回请求，正常情况下，浏览器会处理请求</li>
+</ul>
+<h4 id="CORS的几种解决方案"><a href="#CORS的几种解决方案" class="headerlink" title="CORS的几种解决方案"></a>CORS的几种解决方案</h4><p>CORS背后的基本思想是使用自定义的HTTP头部允许浏览器和服务器相互了解对方，从而决定请求或响应成功与否.</p>
+<h6 id="Preglighted-Requests-透明服务器验证机制（使用自定义头部，get或者post之外的方法）"><a href="#Preglighted-Requests-透明服务器验证机制（使用自定义头部，get或者post之外的方法）" class="headerlink" title="Preglighted Requests 透明服务器验证机制（使用自定义头部，get或者post之外的方法）"></a>Preglighted Requests 透明服务器验证机制（使用自定义头部，get或者post之外的方法）</h6><p>Access-Control-Allow-Origin:指定授权访问的域<br>Access-Control-Allow-Methods：授权请求的方法（GET, POST, PUT, DELETE，OPTIONS等)</p>
+<p>一：简单的自定义CORSFilter / Interceptor<br>适合设置单一的（或全部）授权访问域，所有配置都是固定的，特简单。也没根据请求的类型做不同的处理</p>
+<p>在web.xml 中添加filter<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">filter</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>cros<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter-class</span>&gt;</span>cn.ifengkou.test.filter.CORSFilter<span class="tag">&lt;/<span class="name">filter-class</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">filter</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">filter-mapping</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>cros<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/*<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">filter-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>新增CORSFilter 类<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@Component</span><br><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">CORSFilter</span> <span class="keyword">extends</span> <span class="title">OncePerRequestFilter</span> </span>&#123;</span><br><span class="line">    @Override</span><br><span class="line">    protected <span class="keyword">void</span> doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException &#123;</span><br><span class="line">        response.addHeader(<span class="string">"Access-Control-Allow-Origin"</span>, <span class="string">"*"</span>);</span><br><span class="line">        response.addHeader(<span class="string">"Access-Control-Allow-Methods"</span>, <span class="string">"GET, POST, PUT, DELETE"</span>);</span><br><span class="line">        response.addHeader(<span class="string">"Access-Control-Allow-Headers"</span>, <span class="string">"Content-Type"</span>);</span><br><span class="line">        response.addHeader(<span class="string">"Access-Control-Max-Age"</span>, <span class="string">"1800"</span>);<span class="comment">//30 min</span></span><br><span class="line">        filterChain.doFilter(request, response);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Access-Control-Allow-Origin只能配置 或者一个域名*<br>比如配置了192.168.56.130，那么只有192.168.56.130 能拿到数据，否则全部报403异常<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">response.addHeader(<span class="string">"Access-Control-Allow-Origin"</span>, <span class="string">"http://192.168.56.130"</span>);</span><br></pre></td></tr></table></figure></p>
+<p>还有两种，详见原文<a href="https://www.cnblogs.com/sloong/p/cors.html" target="_blank" rel="noopener">https://www.cnblogs.com/sloong/p/cors.html</a></p>
+<h3 id="6-其他跨域技术"><a href="#6-其他跨域技术" class="headerlink" title="6. 其他跨域技术"></a>6. 其他跨域技术</h3><h6 id="1-图像Ping（只能用于浏览器和服务器之间的单向通信）"><a href="#1-图像Ping（只能用于浏览器和服务器之间的单向通信）" class="headerlink" title="1. 图像Ping（只能用于浏览器和服务器之间的单向通信）"></a>1. 图像Ping（只能用于浏览器和服务器之间的单向通信）</h6><p>是与服务器进行简单。单向的跨域通信的一种方式（请求的数据是通过字符串形式发送的）<br>图像ping 常用于跟踪用户点击页面或动态广告曝光次数</p>
+<p>缺点：</p>
+<ol>
+<li>只能发送get请求</li>
+<li>无法访问服务器的响应文本<h6 id="2-JSONP（被包含在函数调用中的JSON）"><a href="#2-JSONP（被包含在函数调用中的JSON）" class="headerlink" title="2. JSONP（被包含在函数调用中的JSON）"></a>2. JSONP（被包含在函数调用中的JSON）</h6>由两部分组成</li>
+</ol>
+<ul>
+<li>回调函数：是响应到来时应该在页面回调的函数（回调函数的名字一般是在请求中指定的）</li>
+<li>数据：传入回调函数中的JSON数据</li>
+</ul>
+<p>jsonp 是通过script 元素来使用的，使用时为src 属性指定一个跨域URL（这里的script和img 元素类似，都有能力不受限制从其他域加载资源）<br>因为jsonp 是有效的js代码，所以在请求完成后，即在jsonp 响应加载到页面中，就会立即执行</p>
+<p>JSONP和图像Ping相比的优点：<br>能够直接访问响应文本，支持在浏览器和服务器之间的双向通信</p>
+<p>不足：</p>
+<ol>
+<li>JSONP 是从其他域中加载代码执行。如果其他域不安全，很可能在响应中夹带一些恶意代码，而此时除了完全放弃JSONP调用之外，没有办法追究。因此在使用不是你自己运维的web服务时，一定得保证它安全可靠。</li>
+<li>要确定JSONP 请求是否失败并不容易。（开发人员不得不使用计时器检测指定时间内是否收到了响应，但是就算这样也不能尽如人意，毕竟不是每一个用户上网的速度和带宽都是一样）</li>
+</ol>
+<h6 id="3-Comet-P588"><a href="#3-Comet-P588" class="headerlink" title="3. Comet  P588"></a>3. Comet  P588</h6><h6 id="考点轮询"><a href="#考点轮询" class="headerlink" title="考点轮询"></a>考点轮询</h6><p>Ajax是一种页面向服务器请求数据的技术，而Comet 则是一种服务器向页面推送数据的技术。<br>Comet 能够让信息近乎实时的被推送到页面上（适合体育分数和股票报价）</p>
+<p>有两种方式实现Comet：</p>
+<ul>
+<li>长轮询：浏览器定时的向服务器发送请求，看看有没有更新的数据（等待发送响应）<br>短轮询：立即发送响应，无论数据是否有效<br>轮询的优势就是所有浏览器都支持</li>
+<li>流：生命周期内只使用一个HTTP连接，具体来说就是：浏览器向服务器发送一个请求，而服务器保持连接打开，然后周期性的向浏览器发送数据<h6 id="4-SSE-服务器发送事件-P590"><a href="#4-SSE-服务器发送事件-P590" class="headerlink" title="4. SSE 服务器发送事件 P590"></a>4. SSE 服务器发送事件 P590</h6>是围绕只读Comet 交互推出的API ，用于创建到服务器的单向连接，服务器通过这个连接可以发送任意数量的数据<br>服务器响应的MIME 类型必须是 text/event-stream，而且是以浏览器的js API 能解析的格式输出<br>SSE 支持长短轮询和HTTP流，而且能在断开连接的时候自动确定何时重新连接<h6 id="5-Web-Sockets-P591"><a href="#5-Web-Sockets-P591" class="headerlink" title="5. Web Sockets   P591"></a>5. Web Sockets   P591</h6>目标是在一个单独的持久连接上提供全双工，双向通信</li>
+</ul>
+<hr>
+<p>SSE：只读取服务器<br>Web Socket：双向通信</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2019/03/17/详解Ajax及跨域.html" data-title="详解Ajax及跨域 | Welkin" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2019/03/17/详解js垃圾回收机制.html"  title="详解js垃圾回收机制">
+ <strong>NEXT:</strong><br/> 
+ <span>详解js垃圾回收机制
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、Ajax"><span class="toc-number">1.</span> <span class="toc-text">一、Ajax</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Ajax是什么？"><span class="toc-number">1.0.1.</span> <span class="toc-text">1. Ajax是什么？</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#AJAX-是无需刷新页面就能从服务器获得数据的一种方法。"><span class="toc-number">1.0.1.0.1.</span> <span class="toc-text">AJAX 是无需刷新页面就能从服务器获得数据的一种方法。</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Ajax的优缺点"><span class="toc-number">1.0.2.</span> <span class="toc-text">2. Ajax的优缺点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Ajax-最大的特点是什么？"><span class="toc-number">1.0.3.</span> <span class="toc-text">3. Ajax 最大的特点是什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-简述Ajax的过程"><span class="toc-number">1.0.4.</span> <span class="toc-text">4. 简述Ajax的过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-Ajax的交互模型"><span class="toc-number">1.0.5.</span> <span class="toc-text">5. Ajax的交互模型</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、详解Ajax"><span class="toc-number">2.</span> <span class="toc-text">二、详解Ajax</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-XMLHttpRequest"><span class="toc-number">2.0.1.</span> <span class="toc-text">1. XMLHttpRequest</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#方法是："><span class="toc-number">2.0.1.0.1.</span> <span class="toc-text">方法是：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#虽然名字中包含XML-但是Ajax通信与数据格式无关；这种技术就是无需刷新页面即可从服务器取得数据，但不一定是XML数据"><span class="toc-number">2.0.1.0.2.</span> <span class="toc-text">虽然名字中包含XML 但是Ajax通信与数据格式无关；这种技术就是无需刷新页面即可从服务器取得数据，但不一定是XML数据</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-使用XHR-对象"><span class="toc-number">2.0.2.</span> <span class="toc-text">2. 使用XHR 对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-XHR的用法"><span class="toc-number">2.0.3.</span> <span class="toc-text">2. XHR的用法</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#要发送特定的请求，必须调用send-方法"><span class="toc-number">2.0.3.0.1.</span> <span class="toc-text">要发送特定的请求，必须调用send()方法</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#对于同步请求"><span class="toc-number">2.0.3.0.1.1.</span> <span class="toc-text">对于同步请求</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#对于异步请求"><span class="toc-number">2.0.3.0.1.2.</span> <span class="toc-text">对于异步请求</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#在onreadystatechange事件处理程序中使用XHR对象没有使用this对象的原因是什么？"><span class="toc-number">2.0.3.0.2.</span> <span class="toc-text">在onreadystatechange事件处理程序中使用XHR对象没有使用this对象的原因是什么？</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-HTTP头部信息"><span class="toc-number">2.0.4.</span> <span class="toc-text">3. HTTP头部信息</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#设置自定义请求头部信息"><span class="toc-number">2.0.4.0.1.</span> <span class="toc-text">设置自定义请求头部信息</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-Get请求"><span class="toc-number">2.0.5.</span> <span class="toc-text">4. Get请求</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#查询字符串中的每个参数的名称和值都必须使用-encodeURIComponent-进行编码，才能放到url末尾；而且所有的名-值对都必须有和号（-amp-）分割"><span class="toc-number">2.0.5.0.1.</span> <span class="toc-text">查询字符串中的每个参数的名称和值都必须使用 encodeURIComponent 进行编码，才能放到url末尾；而且所有的名-值对都必须有和号（&amp;）分割</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-Post请求"><span class="toc-number">2.0.6.</span> <span class="toc-text">5. Post请求</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#XMLHttpReauest-2级"><span class="toc-number">3.</span> <span class="toc-text">XMLHttpReauest 2级</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-formData"><span class="toc-number">3.0.1.</span> <span class="toc-text">1. formData</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-超时设定"><span class="toc-number">3.0.2.</span> <span class="toc-text">2. 超时设定</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#timeout属性，表示请求在等待响应多少毫秒之后就会终止，"><span class="toc-number">3.0.2.0.1.</span> <span class="toc-text">timeout属性，表示请求在等待响应多少毫秒之后就会终止，</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-overrideMimeType方法"><span class="toc-number">3.0.3.</span> <span class="toc-text">3. overrideMimeType方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-进度事件"><span class="toc-number">3.0.4.</span> <span class="toc-text">4. 进度事件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-跨源资源共享-CORS"><span class="toc-number">3.0.5.</span> <span class="toc-text">5. 跨源资源共享 CORS</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#CORS的几种解决方案"><span class="toc-number">3.0.5.1.</span> <span class="toc-text">CORS的几种解决方案</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#Preglighted-Requests-透明服务器验证机制（使用自定义头部，get或者post之外的方法）"><span class="toc-number">3.0.5.1.0.1.</span> <span class="toc-text">Preglighted Requests 透明服务器验证机制（使用自定义头部，get或者post之外的方法）</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-其他跨域技术"><span class="toc-number">3.0.6.</span> <span class="toc-text">6. 其他跨域技术</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#1-图像Ping（只能用于浏览器和服务器之间的单向通信）"><span class="toc-number">3.0.6.0.0.1.</span> <span class="toc-text">1. 图像Ping（只能用于浏览器和服务器之间的单向通信）</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#2-JSONP（被包含在函数调用中的JSON）"><span class="toc-number">3.0.6.0.0.2.</span> <span class="toc-text">2. JSONP（被包含在函数调用中的JSON）</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#3-Comet-P588"><span class="toc-number">3.0.6.0.0.3.</span> <span class="toc-text">3. Comet  P588</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#考点轮询"><span class="toc-number">3.0.6.0.0.4.</span> <span class="toc-text">考点轮询</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#4-SSE-服务器发送事件-P590"><span class="toc-number">3.0.6.0.0.5.</span> <span class="toc-text">4. SSE 服务器发送事件 P590</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#5-Web-Sockets-P591"><span class="toc-number">3.0.6.0.0.6.</span> <span class="toc-text">5. Web Sockets   P591</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2019 
+		
+		<a href="http://yoursite.com" target="_blank" title="welkin">welkin</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>
