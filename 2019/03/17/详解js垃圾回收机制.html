@@ -1,0 +1,309 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>详解js垃圾回收机制 | Welkin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="welkin">
+    
+    <meta name="description" content="@[toc]
+垃圾回收js 具有垃圾回收机制
+原理：找出那些不再继续使用的变量，然后释放其占用的内存，垃圾回收器会按照固定的时间间隔（或者代码中预定的收集时间）周期性的执行这一操作垃圾收集器必须跟踪那个变量有用哪个变量没用，对于不再有用的变量打上标记，以备将来收回其占用的内存。
+1. 标记清除思想是">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="Welkin" title="Welkin"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Welkin">Welkin</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2019/03/17/详解js垃圾回收机制.html" title="详解js垃圾回收机制" itemprop="url">详解js垃圾回收机制</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="welkin">welkin</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2019-03-17T14:44:09.000Z" itemprop="datePublished">2019-03-17</time>
+    Updated:<time datetime="2019-03-17T14:44:58.617Z" itemprop="dateModified">2019-03-17</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#垃圾回收"><span class="toc-number">1.</span> <span class="toc-text">垃圾回收</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#原理："><span class="toc-number">1.0.0.0.0.1.</span> <span class="toc-text">原理：</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-标记清除"><span class="toc-number">1.1.</span> <span class="toc-text">1. 标记清除</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#思想是给当前不使用的值加上标记，然后再回收其内存"><span class="toc-number">1.1.0.0.0.1.</span> <span class="toc-text">思想是给当前不使用的值加上标记，然后再回收其内存</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-引用计数"><span class="toc-number">1.2.</span> <span class="toc-text">2. 引用计数</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#思想是：跟踪每个值被引用的次数"><span class="toc-number">1.2.0.0.0.1.</span> <span class="toc-text">思想是：跟踪每个值被引用的次数</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#存在的问题：循环引用导致不能回收"><span class="toc-number">1.2.0.0.0.2.</span> <span class="toc-text">存在的问题：循环引用导致不能回收</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#性能问题"><span class="toc-number">1.3.</span> <span class="toc-text">性能问题</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#工作方式：触发垃圾收集的变量分配字面量或者数组元素的临界值被调整为动态"><span class="toc-number">1.3.0.0.0.1.</span> <span class="toc-text">工作方式：触发垃圾收集的变量分配字面量或者数组元素的临界值被调整为动态</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#注意"><span class="toc-number">1.3.0.0.0.2.</span> <span class="toc-text">注意</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#管理内存"><span class="toc-number">1.4.</span> <span class="toc-text">管理内存</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#解除引用"><span class="toc-number">1.4.0.0.1.</span> <span class="toc-text">解除引用</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#解除的目的"><span class="toc-number">1.4.0.0.1.1.</span> <span class="toc-text">解除的目的</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li></ol>
+		</div>
+		
+		<p>@[toc]</p>
+<h1 id="垃圾回收"><a href="#垃圾回收" class="headerlink" title="垃圾回收"></a>垃圾回收</h1><p>js 具有垃圾回收机制</p>
+<h6 id="原理："><a href="#原理：" class="headerlink" title="原理："></a>原理：</h6><p>找出那些不再继续使用的变量，然后释放其占用的内存，垃圾回收器会按照固定的时间间隔（或者代码中预定的收集时间）周期性的执行这一操作<br>垃圾收集器必须跟踪那个变量有用哪个变量没用，对于不再有用的变量打上标记，以备将来收回其占用的内存。</p>
+<h2 id="1-标记清除"><a href="#1-标记清除" class="headerlink" title="1. 标记清除"></a>1. 标记清除</h2><h6 id="思想是给当前不使用的值加上标记，然后再回收其内存"><a href="#思想是给当前不使用的值加上标记，然后再回收其内存" class="headerlink" title="思想是给当前不使用的值加上标记，然后再回收其内存"></a>思想是给当前不使用的值加上标记，然后再回收其内存</h6><p>垃圾收集器在运行的时候会给存储在内存中的所有变量加上标记，然后他会去掉环境中的变量以及被环境中变量引用的变量的标记，而在此之后再被加上标记的变量将被视为准备删除的变量，原因是环境中的变量已经无法访问到这些变量了。最后，垃圾收集器完成内存清除工作，销毁那些带标记的值，并回收它们所占的内存空间</p>
+<h2 id="2-引用计数"><a href="#2-引用计数" class="headerlink" title="2. 引用计数"></a>2. 引用计数</h2><h6 id="思想是：跟踪每个值被引用的次数"><a href="#思想是：跟踪每个值被引用的次数" class="headerlink" title="思想是：跟踪每个值被引用的次数"></a>思想是：跟踪每个值被引用的次数</h6><ul>
+<li>当声明了一个变量并将一个引用类型的值赋给该变量时，这个值的引用次数就是1</li>
+<li>如果同一个值被赋给了另一个变量，则该值的引用次数加一</li>
+<li>如果包含对这个值引用的变量又取得了另一个值，则这个值的引用次数减一</li>
+<li>当这个值的引用次数变为0时，则说明没有办法再访问这个值了，因此就可以将这个值占用的内存空间回收回来</li>
+<li>当下次垃圾收集器运行时，就会释放那些引用次数为0的值所占的内存</li>
+</ul>
+<h6 id="存在的问题：循环引用导致不能回收"><a href="#存在的问题：循环引用导致不能回收" class="headerlink" title="存在的问题：循环引用导致不能回收"></a>存在的问题：循环引用导致不能回收</h6><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">problem</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">var</span> objedt1 = <span class="keyword">new</span> object();</span><br><span class="line">	<span class="keyword">var</span> objedt2 = <span class="keyword">new</span> object();</span><br><span class="line"></span><br><span class="line">	object1.someOtherObject = object2;</span><br><span class="line">	object2.someOtherObject = object1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>object1和 object2通过各自的属性相互引用，这两个对象的引用次数都是2。当函数执行完毕后，他俩还继续存在，因为他们的引用次数永远不是0，假如这个函数被重复调用，就会导致大量内存得不到回收</p>
+<p>为了避免这种问题，最好在不使用他们的时候手工断开原生js 对象和Dom 之间的连接<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">object1.someOtherObject = <span class="literal">null</span>;</span><br><span class="line">object2.someOtherObject = <span class="literal">null</span>;</span><br></pre></td></tr></table></figure></p>
+<p>将变量设置为null 意味着切断变量与它此前引用的值之间的连接。当垃圾收集器下次运行时，就会删除这些值并回收他们占用的内存</p>
+<h2 id="性能问题"><a href="#性能问题" class="headerlink" title="性能问题"></a>性能问题</h2><p>垃圾收集器是周期性运行的，如果为变量分配的内存数量很可观，那么回收工作量也是相当大的。</p>
+<h6 id="工作方式：触发垃圾收集的变量分配字面量或者数组元素的临界值被调整为动态"><a href="#工作方式：触发垃圾收集的变量分配字面量或者数组元素的临界值被调整为动态" class="headerlink" title="工作方式：触发垃圾收集的变量分配字面量或者数组元素的临界值被调整为动态"></a>工作方式：触发垃圾收集的变量分配字面量或者数组元素的临界值被调整为动态</h6><ul>
+<li>如果垃圾收集例程回收的内存分配量低于15%，则变量，字面量和数组元素的临界值就会加倍</li>
+<li>如果例程回收了85%的内存分配量，则将各种临界值重置回默认值</li>
+</ul>
+<h6 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h6><ol>
+<li>在IE中，调用window.CollectGarbage()方法会立即执行垃圾收集</li>
+<li>在高版本中，调用window.opera.collect()会启动垃圾收集例程</li>
+</ol>
+<h2 id="管理内存"><a href="#管理内存" class="headerlink" title="管理内存"></a>管理内存</h2><p>分配给Web 浏览器的可用内存数量通常要比分配给桌面应用程序的少。<br>目的是防止运行js网页耗尽全部系统内存而导致系统崩溃</p>
+<p>内存限制问题不仅会影响给变量分配内存，同时会影响调用栈以及在一个线程中能够同时执行的语句数量</p>
+<h5 id="解除引用"><a href="#解除引用" class="headerlink" title="解除引用"></a>解除引用</h5><p>使用将值设置为null 来释放其引用（适合于大量的全局变量和全局对象的属性）<br>局部变量会在它们离开执行环境时自动被解除引用<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createPerson</span>(<span class="params">name</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">var</span> localPerson = <span class="keyword">new</span> object();</span><br><span class="line">	localPerson.name = name;</span><br><span class="line">	<span class="keyword">return</span> localPerson; <span class="comment">//因为是局部变量所以无需解除</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> globalPerson = createPerson(<span class="string">"zhangsan"</span>);</span><br><span class="line"><span class="comment">//手动解除引用</span></span><br><span class="line">globalPerson = <span class="literal">null</span>;</span><br></pre></td></tr></table></figure></p>
+<h6 id="解除的目的"><a href="#解除的目的" class="headerlink" title="解除的目的"></a>解除的目的</h6><p>解除一个值的引用并不意味着自动回收该值所占用的内存。解除引用真正的目的是让值脱离执行环境，以便垃圾收集器下次运行时将其回收<br>解除变量的引用不仅有助于消除循环引用现象，而且对垃圾收集也有好处。为了确保有效的回收内存，应该及时解除不再使用的全局对象，全局对象属性以及循环引用变量的引用。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2019/03/17/详解js垃圾回收机制.html" data-title="详解js垃圾回收机制 | Welkin" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2019/03/15/前端知识点总结（一）.html"  title="前端知识点总结（一）">
+ <strong>NEXT:</strong><br/> 
+ <span>前端知识点总结（一）
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#垃圾回收"><span class="toc-number">1.</span> <span class="toc-text">垃圾回收</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#原理："><span class="toc-number">1.0.0.0.0.1.</span> <span class="toc-text">原理：</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-标记清除"><span class="toc-number">1.1.</span> <span class="toc-text">1. 标记清除</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#思想是给当前不使用的值加上标记，然后再回收其内存"><span class="toc-number">1.1.0.0.0.1.</span> <span class="toc-text">思想是给当前不使用的值加上标记，然后再回收其内存</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-引用计数"><span class="toc-number">1.2.</span> <span class="toc-text">2. 引用计数</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#思想是：跟踪每个值被引用的次数"><span class="toc-number">1.2.0.0.0.1.</span> <span class="toc-text">思想是：跟踪每个值被引用的次数</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#存在的问题：循环引用导致不能回收"><span class="toc-number">1.2.0.0.0.2.</span> <span class="toc-text">存在的问题：循环引用导致不能回收</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#性能问题"><span class="toc-number">1.3.</span> <span class="toc-text">性能问题</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#工作方式：触发垃圾收集的变量分配字面量或者数组元素的临界值被调整为动态"><span class="toc-number">1.3.0.0.0.1.</span> <span class="toc-text">工作方式：触发垃圾收集的变量分配字面量或者数组元素的临界值被调整为动态</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#注意"><span class="toc-number">1.3.0.0.0.2.</span> <span class="toc-text">注意</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#管理内存"><span class="toc-number">1.4.</span> <span class="toc-text">管理内存</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#解除引用"><span class="toc-number">1.4.0.0.1.</span> <span class="toc-text">解除引用</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#解除的目的"><span class="toc-number">1.4.0.0.1.1.</span> <span class="toc-text">解除的目的</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2019 
+		
+		<a href="http://yoursite.com" target="_blank" title="welkin">welkin</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>
