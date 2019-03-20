@@ -1,0 +1,358 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>字节跳动一面总结 | Welkin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="welkin">
+    
+    <meta name="description" content="@[toc]
+1. css 实现一个自适应搜索框，输入框部分宽度自适应，搜索按钮宽度固定使用父级盒子进行包裹，对于文本框使用盒子包裹，使用margin 距离右边距为button留下位置对button 使用绝对定位 absolute 进行定位盒子内部的input设置宽度为100%即可完成输入框大小随窗">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="Welkin" title="Welkin"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Welkin">Welkin</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2019/03/20/字节跳动一面总结-1.html" title="字节跳动一面总结" itemprop="url">字节跳动一面总结</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="welkin">welkin</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2019-03-20T10:17:19.000Z" itemprop="datePublished">2019-03-20</time>
+    Updated:<time datetime="2019-03-20T10:18:55.723Z" itemprop="dateModified">2019-03-20</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-css-实现一个自适应搜索框，输入框部分宽度自适应，搜索按钮宽度固定"><span class="toc-number">1.</span> <span class="toc-text">1. css 实现一个自适应搜索框，输入框部分宽度自适应，搜索按钮宽度固定</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-改变-this-的指向有哪些方法呢"><span class="toc-number">2.</span> <span class="toc-text">2. 改变 this 的指向有哪些方法呢?</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#a-this-与执行时有关"><span class="toc-number">2.0.1.</span> <span class="toc-text">a. this 与执行时有关</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#b-改变this指向的方法"><span class="toc-number">2.0.2.</span> <span class="toc-text">b. 改变this指向的方法</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-new关键字改变this指向"><span class="toc-number">2.0.2.0.1.</span> <span class="toc-text">1. new关键字改变this指向</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-call（）"><span class="toc-number">2.0.2.0.2.</span> <span class="toc-text">2. call（）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-apply"><span class="toc-number">2.0.2.0.3.</span> <span class="toc-text">3. apply()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-bind"><span class="toc-number">2.0.2.0.4.</span> <span class="toc-text">4. bind()</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-关于const"><span class="toc-number">3.</span> <span class="toc-text">3. 关于const</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-数组的方法是哪来的？"><span class="toc-number">4.</span> <span class="toc-text">4. 数组的方法是哪来的？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-请说明-cookie、sessionStorage、localStorage-之间的区别？"><span class="toc-number">5.</span> <span class="toc-text">5. 请说明 cookie、sessionStorage、localStorage 之间的区别？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#localStorage和sessionStorage"><span class="toc-number">5.0.1.</span> <span class="toc-text">localStorage和sessionStorage</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cookie"><span class="toc-number">5.0.2.</span> <span class="toc-text">cookie</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#localStorage与sessionStorage-vs-Cookies"><span class="toc-number">5.0.3.</span> <span class="toc-text">localStorage与sessionStorage vs. Cookies</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#客户端与服务器端"><span class="toc-number">5.0.4.</span> <span class="toc-text">客户端与服务器端</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#localStorage是怎么实现数据保护的？session是怎么记录用户登录状态的"><span class="toc-number">6.</span> <span class="toc-text">localStorage是怎么实现数据保护的？session是怎么记录用户登录状态的</span></a></li></ol>
+		</div>
+		
+		<p>@[toc]</p>
+<h1 id="1-css-实现一个自适应搜索框，输入框部分宽度自适应，搜索按钮宽度固定"><a href="#1-css-实现一个自适应搜索框，输入框部分宽度自适应，搜索按钮宽度固定" class="headerlink" title="1. css 实现一个自适应搜索框，输入框部分宽度自适应，搜索按钮宽度固定"></a>1. css 实现一个自适应搜索框，输入框部分宽度自适应，搜索按钮宽度固定</h1><p>使用父级盒子进行包裹，对于文本框使用盒子包裹，使用margin 距离右边距为button留下位置<br>对button 使用绝对定位 absolute 进行定位<br>盒子内部的input设置宽度为100%<br>即可完成输入框大小随窗口变化，而button 大小不改变<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=&lt;device-width&gt;, initial-scale=1.0"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"ie=edge"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">    *&#123;</span></span><br><span class="line"><span class="undefined">        padding: 0;</span></span><br><span class="line"><span class="undefined">        margin: 0;</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="css">    <span class="selector-class">.search</span> &#123;</span></span><br><span class="line"><span class="undefined">        height: 35px;</span></span><br><span class="line"><span class="undefined">        border: 1px solid black;</span></span><br><span class="line"><span class="undefined">        position: relative;</span></span><br><span class="line"><span class="undefined">        text-align: center;</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="css">    <span class="selector-class">.search_input</span>&#123;<span class="attribute">margin-right</span>: <span class="number">110px</span>;&#125;</span></span><br><span class="line"><span class="css">    <span class="selector-class">.search_input</span>&gt;<span class="selector-tag">input</span>&#123;</span></span><br><span class="line"><span class="undefined">        width: 100%;</span></span><br><span class="line"><span class="undefined">        display: inline-block;</span></span><br><span class="line"><span class="undefined">        height: 30px;</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="css">    <span class="selector-class">.search_btn</span>&gt;<span class="selector-tag">button</span>&#123;</span></span><br><span class="line"><span class="undefined">        width: 100px;</span></span><br><span class="line"><span class="undefined">        height: 32px;</span></span><br><span class="line"><span class="undefined">        background-color: darkcyan;</span></span><br><span class="line"><span class="undefined">        position: absolute;</span></span><br><span class="line"><span class="undefined">        right: 5px;</span></span><br><span class="line"><span class="css">        <span class="selector-tag">top</span><span class="selector-pseudo">:4px</span>;</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined">    </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"search"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"search_input"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">""</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"search_btn"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">button</span>&gt;</span><span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="2-改变-this-的指向有哪些方法呢"><a href="#2-改变-this-的指向有哪些方法呢" class="headerlink" title="2. 改变 this 的指向有哪些方法呢?"></a>2. 改变 this 的指向有哪些方法呢?</h1><h3 id="a-this-与执行时有关"><a href="#a-this-与执行时有关" class="headerlink" title="a. this 与执行时有关"></a>a. this 与执行时有关</h3><p>   在实际的项目开发中，我们经常会遇到需要改变 this 指向的情况。改变 this 的指向有哪些方法呢？</p>
+<ol>
+<li><p>如果一个函数中有this，但是它没有被上一级的对象所调用，那么this指向的就是window，<br>这里需要说明的是在js的严格版中this指向的不是window，但是我们这里不探讨严格版的问题(在严格版中的默认的this不再是window，而是undefined。)</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> user = <span class="string">"追梦子"</span>;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.user); <span class="comment">//undefined</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>); <span class="comment">//Window</span></span><br><span class="line">&#125;</span><br><span class="line">a(); <span class="comment">//相当于window.a();</span></span><br><span class="line"><span class="comment">//this最终指向的是调用它的对象，这里的函数a实际是被Window对象所点出来的</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果一个函数中有this，这个函数有被上一级的对象所调用，那么this指向的就是上一级的对象。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o = &#123;</span><br><span class="line">    user:<span class="string">"追梦子"</span>,</span><br><span class="line">    fn:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.user); <span class="comment">//追梦子</span></span><br><span class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>); <span class="comment">//&#123;user: "追梦子", fn: ƒ&#125;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">o.fn(); <span class="comment">//this执行时被它的上一级对象o&#123;user: "追梦子", fn: ƒ&#125;调用</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果一个函数中有this，这个函数中包含多个对象，尽管这个函数是被最外层的对象所调用，this指向的也只是它上一级的对象</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o = &#123;</span><br><span class="line">    a:<span class="number">10</span>,</span><br><span class="line">    b:&#123;</span><br><span class="line">        <span class="comment">//a:12,</span></span><br><span class="line">        fn:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="keyword">this</span>.a); <span class="comment">//undefind  在b中只有fn没有定义a，所以输出 undefined</span></span><br><span class="line">            <span class="built_in">console</span>.log(<span class="keyword">this</span>);<span class="comment">//&#123;fn: ƒ&#125;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    fn1:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.a);  <span class="comment">//10 </span></span><br><span class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>) <span class="comment">//&#123;a: 10, b: &#123;…&#125;, fn1: ƒ&#125;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">o.fn1();  <span class="comment">//this执行时被它的上一级对象o调用 所以fn1中this指向o this.a = a</span></span><br><span class="line">o.b.fn();</span><br><span class="line">o.fn()  <span class="comment">//Uncaught TypeError: o.fn5 is not a function</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>当this遇到return</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>)  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    <span class="keyword">this</span>.user = <span class="string">'追梦子'</span>;  </span><br><span class="line">    <span class="keyword">return</span>  </span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> fn;  </span><br><span class="line"><span class="built_in">console</span>.log(a.user); <span class="comment">//追梦子</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>)  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    <span class="keyword">this</span>.user = <span class="string">'追梦子'</span>;  </span><br><span class="line">    <span class="comment">//return  </span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> fn;  </span><br><span class="line"><span class="built_in">console</span>.log(a.user); <span class="comment">//追梦子</span></span><br></pre></td></tr></table></figure>
+<p>return 为空的时候和没有return，this直接指向实例</p>
+<hr>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>)  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    <span class="keyword">this</span>.user = <span class="string">'追梦子'</span>;  </span><br><span class="line">    <span class="keyword">return</span> &#123;&#125;;  </span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> fn;  </span><br><span class="line"><span class="built_in">console</span>.log(a.user); <span class="comment">//undefined</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>)  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    <span class="keyword">this</span>.user = <span class="string">'追梦子'</span>;  </span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;;  <span class="comment">//return了一个空函数</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> fn;  </span><br><span class="line"><span class="built_in">console</span>.log(a.user); <span class="comment">//undefined</span></span><br></pre></td></tr></table></figure>
+<p>reurn指向一个对象，则this指向该对象</p>
+<hr>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>)  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    <span class="keyword">this</span>.user = <span class="string">'追梦子'</span>;  </span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> fn;  </span><br><span class="line"><span class="built_in">console</span>.log(a.user); <span class="comment">//追梦子</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>)  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    <span class="keyword">this</span>.user = <span class="string">'追梦子'</span>;  </span><br><span class="line">    <span class="keyword">return</span> <span class="literal">undefined</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> fn;  </span><br><span class="line"><span class="built_in">console</span>.log(a.user); <span class="comment">//追梦子</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>)  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    <span class="keyword">this</span>.user = <span class="string">'追梦子'</span>;  </span><br><span class="line">    <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> fn;  </span><br><span class="line"><span class="built_in">console</span>.log(a.user); <span class="comment">//追梦子</span></span><br></pre></td></tr></table></figure>
+<p><strong>如果返回值是一个对象，那么this指向的就是那个返回的对象，如果返回值不是一个对象那么this还是指向函数的实例。还有一点就是虽然null也是对象，但是在这里this还是指向那个函数的实例，因为null比较特殊。</strong></p>
+<ol>
+<li>this 指向最后调用它的对象<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o = &#123;</span><br><span class="line">    a:<span class="number">10</span>,</span><br><span class="line">    b:&#123;</span><br><span class="line">        a:<span class="number">12</span>,</span><br><span class="line">        fn:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="keyword">this</span>.a); <span class="comment">//undefined</span></span><br><span class="line">            <span class="built_in">console</span>.log(<span class="keyword">this</span>); <span class="comment">//window</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> j = o.b.fn;<span class="comment">//</span></span><br><span class="line">j();</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>虽然函数 fn 是被对象 b 所引用，但是在将fn赋值给变量 j 的时候并没有执行所以，当j 执行的时候最终指向的是window </p>
+<h3 id="b-改变this指向的方法"><a href="#b-改变this指向的方法" class="headerlink" title="b. 改变this指向的方法"></a>b. 改变this指向的方法</h3><h5 id="1-new关键字改变this指向"><a href="#1-new关键字改变this指向" class="headerlink" title="1. new关键字改变this指向"></a>1. new关键字改变this指向</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//构造函数版this</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Fn</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.user = <span class="string">"追梦子"</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> Fn();</span><br><span class="line"><span class="built_in">console</span>.log(a.user); <span class="comment">//追梦子</span></span><br></pre></td></tr></table></figure>
+<p>用变量a创建了一个Fn的实例（相当于复制了一份Fn到对象a里面），此时仅仅只是创建，并没有执行，而调用这个函数Fn的是对象a，那么this指向的自然是对象a，那么为什么对象a中会有user，因为你已经复制了一份Fn函数到对象a中，用了new关键字就等同于复制了一份</p>
+<p>相当于下面的代码：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">   <span class="keyword">var</span> a= &#123;</span><br><span class="line">       user: <span class="string">"追梦子"</span>,</span><br><span class="line">       Fn: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">           <span class="built_in">console</span>.log(a.user);<span class="comment">//console.log(this.user);</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">a.Fn()</span><br></pre></td></tr></table></figure></p>
+<h5 id="2-call（）"><a href="#2-call（）" class="headerlink" title="2. call（）"></a>2. call（）</h5><p>把b添加到第一个参数的环境中，简单来说，this就会指向那个对象。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = &#123;</span><br><span class="line">    user:<span class="string">"追梦子"</span>,</span><br><span class="line">    fn:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.user); <span class="comment">//追梦子</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> b = a.fn;</span><br><span class="line">b.call(a);  <span class="comment">//若不用call，则b()执行后this指的是Window对象</span></span><br></pre></td></tr></table></figure></p>
+<p>call方法除了第一个参数以外还可以添加多个参数，如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = &#123;</span><br><span class="line">    user:<span class="string">"追梦子"</span>,</span><br><span class="line">    fn:<span class="function"><span class="keyword">function</span>(<span class="params">e,ee</span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.user); <span class="comment">//追梦子</span></span><br><span class="line">        <span class="built_in">console</span>.log(e+ee); <span class="comment">//3</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> b = a.fn;</span><br><span class="line">b.call(a,<span class="number">1</span>,<span class="number">2</span>);</span><br></pre></td></tr></table></figure></p>
+<h5 id="3-apply"><a href="#3-apply" class="headerlink" title="3. apply()"></a>3. apply()</h5><p>apply方法和call方法有些相似，它也可以改变this的指向，也可以有多个参数，但是不同的是，第二个参数必须是一个数组，如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = &#123;</span><br><span class="line">    user:<span class="string">"追梦子"</span>,</span><br><span class="line">    fn:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.user); <span class="comment">//追梦子</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> b = a.fn;</span><br><span class="line">b.apply(a);</span><br></pre></td></tr></table></figure></p>
+<p>参数为数组：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = &#123;</span><br><span class="line">    user:<span class="string">"追梦子"</span>,</span><br><span class="line">    fn:<span class="function"><span class="keyword">function</span>(<span class="params">e,ee</span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.user); <span class="comment">//追梦子</span></span><br><span class="line">        <span class="built_in">console</span>.log(e+ee); <span class="comment">//11</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> b = a.fn;</span><br><span class="line">b.apply(a,[<span class="number">10</span>,<span class="number">1</span>]);</span><br></pre></td></tr></table></figure></p>
+<p><strong>注意如果call和apply的第一个参数写的是null，那么this指向的是window对象</strong><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = &#123;</span><br><span class="line">    user:<span class="string">"追梦子"</span>,</span><br><span class="line">    fn:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>); </span><br><span class="line">        <span class="comment">//Window &#123;external: Object, chrome: Object, document: document, a: Object, speechSynthesis: SpeechSynthesis…&#125;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> b = a.fn;</span><br><span class="line">b.apply(<span class="literal">null</span>);</span><br></pre></td></tr></table></figure></p>
+<h5 id="4-bind"><a href="#4-bind" class="headerlink" title="4. bind()"></a>4. bind()</h5><p>bind方法和call、apply方法有些不同，如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = &#123;</span><br><span class="line">    user:<span class="string">"追梦子"</span>,</span><br><span class="line">    fn:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.user);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> b = a.fn;</span><br><span class="line">b.bind(a);  <span class="comment">//代码没有被打印</span></span><br></pre></td></tr></table></figure></p>
+<p>我们发现代码没有被打印，对，这就是bind和call、apply方法的不同，实际上bind方法返回的是一个修改过后的函数。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = &#123;</span><br><span class="line">    user:<span class="string">"追梦子"</span>,</span><br><span class="line">    fn:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.user);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> b = a.fn;</span><br><span class="line"><span class="keyword">var</span> c = b.bind(a);</span><br><span class="line"><span class="built_in">console</span>.log(c); <span class="comment">//f() &#123; console.log(this.user); &#125;</span></span><br><span class="line"><span class="comment">//其实c是a中的fn函数  即 c = a.fn</span></span><br><span class="line">c();  <span class="comment">//追梦子  == a.fn()</span></span><br></pre></td></tr></table></figure></p>
+<p>同样bind也可以有多个参数，并且参数可以执行的时候再次添加，但是要注意的是，参数是按照形参的顺序进行的。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = &#123;</span><br><span class="line">    user:<span class="string">"追梦子"</span>,</span><br><span class="line">    fn:<span class="function"><span class="keyword">function</span>(<span class="params">e,d,f</span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.user); <span class="comment">//追梦子</span></span><br><span class="line">        <span class="built_in">console</span>.log(e,d,f); <span class="comment">//10 1 2</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> b = a.fn;</span><br><span class="line"><span class="keyword">var</span> c = b.bind(a,<span class="number">10</span>);</span><br><span class="line">c(<span class="number">1</span>,<span class="number">2</span>);</span><br></pre></td></tr></table></figure>
+<p><strong>总结：</strong><br> call和apply都是改变上下文中的this并立即执行这个函数，bind方法可以让对应的函数想什么时候调就什么时候调用，并且可以将参数在执行的时候添加，这是它们的区别</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="number">123</span>;</span><br><span class="line"><span class="keyword">var</span> a = &#123;</span><br><span class="line">    name: <span class="number">345</span>,</span><br><span class="line">    sayName: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.name)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> b = &#123;</span><br><span class="line">    name: <span class="number">789</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> sayName = a.sayName;  <span class="comment">//只是将这个函数赋给新变量 sayname</span></span><br><span class="line">a.sayName();<span class="comment">//345  调用这个函数时this指向 a</span></span><br><span class="line">sayName();  <span class="comment">//123  调用这个函数时，this指向window</span></span><br><span class="line">a.sayName.call(b)  <span class="comment">//789</span></span><br></pre></td></tr></table></figure>
+<h1 id="3-关于const"><a href="#3-关于const" class="headerlink" title="3. 关于const"></a>3. 关于const</h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> a = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">const</span> b = &#123; <span class="attr">t</span> : <span class="number">2</span>&#125;;</span><br><span class="line">        <span class="keyword">var</span> c = <span class="number">3</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>t 的值可以改吗？<br>答案是可以，虽然const 是定义个常量，里面保存的是常量的地址<br>即保存的是 t 的地址，但是t 的值可以改</p>
+<h1 id="4-数组的方法是哪来的？"><a href="#4-数组的方法是哪来的？" class="headerlink" title="4. 数组的方法是哪来的？"></a>4. 数组的方法是哪来的？</h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">'name abc tce'</span>;</span><br><span class="line"><span class="keyword">var</span> arr = str.split(<span class="string">' '</span>);</span><br></pre></td></tr></table></figure>
+<p>主要想知道Array 的原型链，方法是对象自带的</p>
+<h1 id="5-请说明-cookie、sessionStorage、localStorage-之间的区别？"><a href="#5-请说明-cookie、sessionStorage、localStorage-之间的区别？" class="headerlink" title="5. 请说明 cookie、sessionStorage、localStorage 之间的区别？"></a>5. 请说明 cookie、sessionStorage、localStorage 之间的区别？</h1><h3 id="localStorage和sessionStorage"><a href="#localStorage和sessionStorage" class="headerlink" title="localStorage和sessionStorage"></a>localStorage和sessionStorage</h3><p>localStorage和sessionStorage是相对较新的API（意思是，并非所有传统浏览器都支持它们）并且几乎完全相同（包括API和功能），唯一的例外是持久性。sessionStorage（顾名思义）仅在浏览器会话期间可用（并且在选项卡或窗口关闭时被删除） - 然而，它确实存在页面重新加载（源DOM存储指南 - Mozilla开发人员网络）。</p>
+<p>显然，如果您正在存储的数据需要持续可用，那么localStorage比sessionStorage更可取 - 尽管您应该注意两者都可以被用户清除，因此您不应该依赖于任何一种情况下数据的持续存在。</p>
+<p>localStorage和sessionStorage非常适合在页面之间保存客户端脚本中所需的非敏感数据（例如：首选项，游戏中的分数）。存储在localStorage和sessionStorage中的数据可以在客户端/浏览器中轻松读取或更改，因此不应依赖于在应用程序中存储敏感或安全相关的数据。</p>
+<h3 id="cookie"><a href="#cookie" class="headerlink" title="cookie"></a>cookie</h3><p>对于cookie也是如此，这些可以被用户轻易篡改，并且也可以以纯文本方式从中读取数据 - 因此，如果您想要存储敏感数据，那么会话实际上是您唯一的选择。如果您不使用SSL，cookie信息也可能在传输过程中被截获，尤其是在开放的wifi上。</p>
+<p>从积极的方面来看，通过设置仅HTTP标记，可以从跨站点脚本（XSS）/脚本注入等安全风险中获得一定程度的保护，这意味着现代（支持）浏览器将阻止从JavaScript访问cookie和值（这也会阻止您自己的合法JavaScript访问它们。这对于身份验证cookie尤其重要，身份验证Cookie用于存储包含登录用户详细信息的令牌 - 如果您拥有该cookie的副本，那么就所有意图和目的而言，只要Web应用程序成为该用户，关注，并具有相同的用户访问数据和功能。</p>
+<p>由于cookie用于身份验证和用户数据的持久性，因此对于同一域的每个请求，所有对页面有效的cookie都会从浏览器发送到服务器- 这包括原始页面请求，任何后续Ajax请求，所有图像，样式表，脚本和字体。因此，cookie不应用于存储大量信息。浏览器还可以对可以存储在cookie中的信息的大小施加限制。通常，cookie用于存储用于身份验证，会话和广告跟踪的标识令牌。令牌通常不是人类可读的信息本身，而是链接到您的应用程序或数据库的加密标识符。</p>
+<h3 id="localStorage与sessionStorage-vs-Cookies"><a href="#localStorage与sessionStorage-vs-Cookies" class="headerlink" title="localStorage与sessionStorage vs. Cookies"></a>localStorage与sessionStorage vs. Cookies</h3><p>在功能方面，cookies，sessionStorage和localStorage只允许您存储字符串 - 可以在设置时隐式转换原始值（这些将需要转换回来，以便在读取后将它们用作类型）但不能转换为对象或数组（JSON可以将它们序列化以使用API​​存储它们）。会话存储通常允许您存储服务器端语言/框架支持的任何基元或对象。</p>
+<p>这是一个范围非常广泛的问题，很多优点/缺点都与情况有关。</p>
+<p>在所有情况下，这些存储机制将特定于单个计算机/设备上的单个浏览器。任何跨会话持续存储数据的要求都需要涉及您的应用服务器端 - 最有可能使用数据库，但可能使用XML或文本/ CSV文件。</p>
+<p>localStorage，sessionStorage和cookies都是客户端存储解决方案。会话数据保存在服务器上，直接由您控制。</p>
+<p>localStorage和sessionStorage<br>localStorage和sessionStorage是相对较新的API（意思是，并非所有传统浏览器都支持它们）并且几乎完全相同（包括API和功能），唯一的例外是持久性。sessionStorage（顾名思义）仅在浏览器会话期间可用（并且在选项卡或窗口关闭时被删除） - 然而，它确实存在页面重新加载（源DOM存储指南 - Mozilla开发人员网络）。</p>
+<p>显然，如果您正在存储的数据需要持续可用，那么localStorage比sessionStorage更可取 - 尽管您应该注意两者都可以被用户清除，因此您不应该依赖于任何一种情况下数据的持续存在。</p>
+<p>localStorage和sessionStorage非常适合在页面之间保存客户端脚本中所需的非敏感数据（例如：首选项，游戏中的分数）。存储在localStorage和sessionStorage中的数据可以在客户端/浏览器中轻松读取或更改，因此不应依赖于在应用程序中存储敏感或安全相关的数据。</p>
+<p>饼干<br>对于cookie也是如此，这些可以被用户轻易篡改，并且也可以以纯文本方式从中读取数据 - 因此，如果您想要存储敏感数据，那么会话实际上是您唯一的选择。如果您不使用SSL，cookie信息也可能在传输过程中被截获，尤其是在开放的wifi上。</p>
+<p>从积极的方面来看，通过设置仅HTTP标记，可以从跨站点脚本（XSS）/脚本注入等安全风险中获得一定程度的保护，这意味着现代（支持）浏览器将阻止从JavaScript访问cookie和值（这也会阻止您自己的合法JavaScript访问它们。这对于身份验证cookie尤其重要，身份验证Cookie用于存储包含登录用户详细信息的令牌 - 如果您拥有该cookie的副本，那么就所有意图和目的而言，只要Web应用程序成为该用户，关注，并具有相同的用户访问数据和功能。</p>
+<p>由于cookie用于身份验证和用户数据的持久性，因此对于同一域的每个请求，所有对页面有效的cookie都会从浏览器发送到服务器- 这包括原始页面请求，任何后续Ajax请求，所有图像，样式表，脚本和字体。因此，cookie不应用于存储大量信息。浏览器还可以对可以存储在cookie中的信息的大小施加限制。通常，cookie用于存储用于身份验证，会话和广告跟踪的标识令牌。令牌通常不是人类可读的信息本身，而是链接到您的应用程序或数据库的加密标识符。</p>
+<p>localStorage与sessionStorage vs. Cookies<br>在功能方面，cookies，sessionStorage和localStorage只允许您存储字符串 - 可以在设置时隐式转换原始值（这些将需要转换回来，以便在读取后将它们用作类型）但不能转换为对象或数组（JSON可以将它们序列化以使用API​​存储它们）。会话存储通常允许您存储服务器端语言/框架支持的任何基元或对象。</p>
+<h3 id="客户端与服务器端"><a href="#客户端与服务器端" class="headerlink" title="客户端与服务器端"></a>客户端与服务器端</h3><p>由于HTTP是无状态协议 - Web应用程序无法在返回网站时识别以前访问的用户 - 会话数据通常依赖于cookie令牌来识别用户重复访问（尽管很少有URL参数可用于同样的目的）。数据通常具有滑动到期时间（每次用户访问时更新），并且根据您的服务器/框架数据将被存储在进程中（意味着数据将在Web服务器崩溃或重新启动时丢失）或外部存在状态服务器或数据库。使用Web场（给定网站的多个服务器）时，这也是必需的。</p>
+<p>由于会话数据完全由您的应用程序（服务器端）控制，因此它是本质上任何敏感或安全的最佳位置。</p>
+<p>服务器端数据的明显缺点是可扩展性 - 在会话期间每个用户都需要服务器资源，并且每个请求都必须发送客户端所需的任何数据。由于服务器无法知道用户是否导航到另一个站点或关闭其浏览器，因此会话数据必须在给定时间后过期，以避免被放弃的会话占用所有服务器资源。因此，在使用会话数据时，您应该意识到数据可能已过期并丢失，尤其是在具有长格式的页面上。如果用户删除其cookie或切换浏览器/设备，它也将丢失。</p>
+<p>一些Web框架/开发人员使用隐藏的HTML输入将数据从表单的一个页面持久保存到另一个页面，以避免会话过期。</p>
+<p>localStorage，sessionStorage和cookie都受“同源”规则的约束，这意味着浏览器应该阻止访问除设置信息开头的域之外的数据。</p>
+<h1 id="localStorage是怎么实现数据保护的？session是怎么记录用户登录状态的"><a href="#localStorage是怎么实现数据保护的？session是怎么记录用户登录状态的" class="headerlink" title="localStorage是怎么实现数据保护的？session是怎么记录用户登录状态的"></a>localStorage是怎么实现数据保护的？session是怎么记录用户登录状态的</h1><ul>
+<li><p>localStorage只能存储字符串，非字符串的数据在存储之前会被转换成字符串。所以在存储一些复杂数据类型时可能有些麻烦，通常的做法是先使用JSON.stringfy()方法将其转换为字符串后存储，使用时取出后再使用JSON.parse()方法进行还原。<br>引文：<a href="https://www.jianshu.com/p/fd6205334b16" target="_blank" rel="noopener">https://www.jianshu.com/p/fd6205334b16</a><br><strong>localStorage数据是不会随着网络请求传输给服务端的，所以就不会被其他人截获（相反，cookie是随着每次网络请求传输给后台的）</strong></p>
+</li>
+<li><p>session是保存在服务器端，根据前端发送过来的cookie来判断和设置用户登录状态<br><strong>session有很多实现方式，很常见的一种实现是在后端数据库或内存中记录用户的状态，并生成一个sessionId，这个ID会通过cookie返回给浏览器，此后浏览器每次请求的时候都会带上session id，服务端就能获取到用户状态了</strong></p>
+</li>
+</ul>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2019/03/20/字节跳动一面总结-1.html" data-title="字节跳动一面总结 | Welkin" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2019/03/17/详解Ajax及跨域.html"  title="详解Ajax及跨域">
+ <strong>NEXT:</strong><br/> 
+ <span>详解Ajax及跨域
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-css-实现一个自适应搜索框，输入框部分宽度自适应，搜索按钮宽度固定"><span class="toc-number">1.</span> <span class="toc-text">1. css 实现一个自适应搜索框，输入框部分宽度自适应，搜索按钮宽度固定</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-改变-this-的指向有哪些方法呢"><span class="toc-number">2.</span> <span class="toc-text">2. 改变 this 的指向有哪些方法呢?</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#a-this-与执行时有关"><span class="toc-number">2.0.1.</span> <span class="toc-text">a. this 与执行时有关</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#b-改变this指向的方法"><span class="toc-number">2.0.2.</span> <span class="toc-text">b. 改变this指向的方法</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-new关键字改变this指向"><span class="toc-number">2.0.2.0.1.</span> <span class="toc-text">1. new关键字改变this指向</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-call（）"><span class="toc-number">2.0.2.0.2.</span> <span class="toc-text">2. call（）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-apply"><span class="toc-number">2.0.2.0.3.</span> <span class="toc-text">3. apply()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-bind"><span class="toc-number">2.0.2.0.4.</span> <span class="toc-text">4. bind()</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-关于const"><span class="toc-number">3.</span> <span class="toc-text">3. 关于const</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-数组的方法是哪来的？"><span class="toc-number">4.</span> <span class="toc-text">4. 数组的方法是哪来的？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-请说明-cookie、sessionStorage、localStorage-之间的区别？"><span class="toc-number">5.</span> <span class="toc-text">5. 请说明 cookie、sessionStorage、localStorage 之间的区别？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#localStorage和sessionStorage"><span class="toc-number">5.0.1.</span> <span class="toc-text">localStorage和sessionStorage</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cookie"><span class="toc-number">5.0.2.</span> <span class="toc-text">cookie</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#localStorage与sessionStorage-vs-Cookies"><span class="toc-number">5.0.3.</span> <span class="toc-text">localStorage与sessionStorage vs. Cookies</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#客户端与服务器端"><span class="toc-number">5.0.4.</span> <span class="toc-text">客户端与服务器端</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#localStorage是怎么实现数据保护的？session是怎么记录用户登录状态的"><span class="toc-number">6.</span> <span class="toc-text">localStorage是怎么实现数据保护的？session是怎么记录用户登录状态的</span></a></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2019 
+		
+		<a href="http://yoursite.com" target="_blank" title="welkin">welkin</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>
