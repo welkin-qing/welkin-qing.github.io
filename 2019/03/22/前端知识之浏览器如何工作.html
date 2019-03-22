@@ -1,0 +1,367 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>前端知识之浏览器如何工作 | Welkin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="welkin">
+    
+    <meta name="description" content="@[toc]
+一、首先提两个问题1. 一个页面从输入URL到页面加载完成，这个过程都发生了什么？
+当发送一个URL 请求，不管这个页面是URL web 页面的URL 还是Web 页面上每个资源的URL ，浏览器都会开启一个线程去处理这个请求，同时在远程DNS 服务器上启动一个DNS查询，使得浏览器获">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="Welkin" title="Welkin"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Welkin">Welkin</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2019/03/22/前端知识之浏览器如何工作.html" title="前端知识之浏览器如何工作" itemprop="url">前端知识之浏览器如何工作</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="welkin">welkin</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2019-03-22T14:57:53.000Z" itemprop="datePublished">2019-03-22</time>
+    Updated:<time datetime="2019-03-22T14:59:55.875Z" itemprop="dateModified">2019-03-22</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、首先提两个问题"><span class="toc-number">1.</span> <span class="toc-text">一、首先提两个问题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-一个页面从输入URL到页面加载完成，这个过程都发生了什么？"><span class="toc-number">1.1.</span> <span class="toc-text">1. 一个页面从输入URL到页面加载完成，这个过程都发生了什么？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-如何把一个URL-变成一个屏幕上显示的网页？"><span class="toc-number">1.2.</span> <span class="toc-text">2. 如何把一个URL 变成一个屏幕上显示的网页？</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、网络通讯"><span class="toc-number">2.</span> <span class="toc-text">二、网络通讯</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-HTTP"><span class="toc-number">2.1.</span> <span class="toc-text">1. HTTP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-HTTP-method"><span class="toc-number">2.2.</span> <span class="toc-text">2. HTTP method</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-HTTP-Status-code（状态码）和-Status-text（状态文本）"><span class="toc-number">2.3.</span> <span class="toc-text">3. HTTP Status code（状态码）和 Status text（状态文本）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#response-line-的状态码以及所表达的意义"><span class="toc-number">2.3.1.</span> <span class="toc-text">response line 的状态码以及所表达的意义</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-HTTP-HEAD"><span class="toc-number">2.4.</span> <span class="toc-text">4. HTTP HEAD</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-HTTP-Request-Body"><span class="toc-number">2.5.</span> <span class="toc-text">5. HTTP Request Body</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#三、HTTPS"><span class="toc-number">3.</span> <span class="toc-text">三、HTTPS</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-HTTPS-的作用"><span class="toc-number">3.1.</span> <span class="toc-text">1. HTTPS 的作用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-HTTPS-如何加密"><span class="toc-number">3.2.</span> <span class="toc-text">2. HTTPS 如何加密</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#https-是通过首先和服务端建立一条-TLS-加密通道，然后使用加密通道来传输http-的内容"><span class="toc-number">3.2.0.0.0.1.</span> <span class="toc-text">https 是通过首先和服务端建立一条 TLS 加密通道，然后使用加密通道来传输http 的内容</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#四、HTTP2"><span class="toc-number">4.</span> <span class="toc-text">四、HTTP2</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-HTTP2-的改进"><span class="toc-number">4.1.</span> <span class="toc-text">1. HTTP2 的改进</span></a></li></ol></li></ol>
+		</div>
+		
+		<p>@[toc]</p>
+<h1 id="一、首先提两个问题"><a href="#一、首先提两个问题" class="headerlink" title="一、首先提两个问题"></a>一、首先提两个问题</h1><h2 id="1-一个页面从输入URL到页面加载完成，这个过程都发生了什么？"><a href="#1-一个页面从输入URL到页面加载完成，这个过程都发生了什么？" class="headerlink" title="1. 一个页面从输入URL到页面加载完成，这个过程都发生了什么？"></a>1. 一个页面从输入URL到页面加载完成，这个过程都发生了什么？</h2><ol>
+<li>当发送一个URL 请求，不管这个页面是URL web 页面的URL 还是Web 页面上每个资源的URL ，<strong>浏览器都会开启一个线程去处理这个请求，同时在远程DNS 服务器上启动一个DNS查询，使得浏览器获得对应的ip地址</strong></li>
+<li>浏览器和远程服务器通过TCP 三次握手建立一个TCP/IP 连接。（该握手包括一个同步报文，一个同步-应答报文，一个应答报文，这三个报文在浏览器和服务器之间传递）<strong>该握手首先由客户端尝试建立通信，然后服务器应答并接受客户端的请求，最后由客户端发出该请求已经被接受的报文</strong></li>
+<li><strong>一旦TCP/IP 连接建立，浏览器就会通过该链接向远程服务器发送http 的get 请求。远程服务器找到资源并使用http 响应返回该资源</strong>，值为200 的HTTP 响应状态表示一个正确的响应</li>
+<li>web 服务器提供该资源服务，客户端开始下载资源</li>
+</ol>
+<h2 id="2-如何把一个URL-变成一个屏幕上显示的网页？"><a href="#2-如何把一个URL-变成一个屏幕上显示的网页？" class="headerlink" title="2. 如何把一个URL 变成一个屏幕上显示的网页？"></a>2. 如何把一个URL 变成一个屏幕上显示的网页？</h2><ol>
+<li>浏览器首先使用http 协议或者https 协议，向服务器请求页面</li>
+<li>把请求回来的HTML 代码经过解析，构建成DOM 树</li>
+<li>计算dom 树上的css 属性</li>
+<li>最后根据css属性对元素逐个进行渲染，得到内存中的位图（点阵图，是由像素的单个点组成的，这些点可以进行不同的排列和染色构成图样）</li>
+<li>一个可选的步骤是对位图进行合成，这会极大的增加后续绘制的速度</li>
+<li>合成之后，再绘制到界面上</li>
+</ol>
+<p>需要知道的是：<br>从http请求回来开始，这个过程就并非一般想象中的一步做完再做下一步，而是一条流水线</p>
+<p>从http请求回来，就产生了流式的数据，后续的DOM 树构建，css计算，渲染，合成，绘制，都是尽可能的流式的处理前一步的产出；即不需要等到上一步完全结束，就直接开始上一步的输出，这样我们在浏览网页时，才会看到逐步出现的页面。</p>
+<h1 id="二、网络通讯"><a href="#二、网络通讯" class="headerlink" title="二、网络通讯"></a>二、网络通讯</h1><h2 id="1-HTTP"><a href="#1-HTTP" class="headerlink" title="1. HTTP"></a>1. HTTP</h2><ul>
+<li>http协议是基于tcp协议出现的，对于tcp协议来说，tcp是一种双向的通讯信道</li>
+<li>http 在tcp 的基础上，规定了Request-Response 的模式。这个模式决定了通讯必定是由浏览器首先发起的</li>
+<li>http 协议是纯粹的文本协议，规定了使用tcp 协议来传输文本格式的一个应用层协议<br><img src="https://img-blog.csdnimg.cn/20190322220409161.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
+</ul>
+<ol>
+<li><p>请求部分：第一行被称作 request line，分为三个部分：http method（请求方法），请求路径和请求的协议和版本</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">GET</span> <span class="string">/</span> HTTP/1.1</span><br><span class="line"><span class="attribute">Host</span>: time.geekbang.org</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>响应部分：第一行被称作response line ，分为三个部分：协议和版本，状态码，状态文本</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 <span class="number">301</span> Moved Permanently</span><br><span class="line"><span class="attribute">Date</span>: Fri, 25 Jan 2019 13:28:12 GMT</span><br><span class="line"><span class="attribute">Content-Type</span>: text/html</span><br><span class="line"><span class="attribute">Content-Length</span>: 182</span><br><span class="line"><span class="attribute">Connection</span>: keep-alive</span><br><span class="line"><span class="attribute">Location</span>: https://time.geekbang.org/</span><br><span class="line"><span class="attribute">Strict-Transport-Security</span>: max-age=15768000</span><br><span class="line"></span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;&lt;title&gt;301 Moved Permanently&lt;/title&gt;&lt;/head&gt;</span><br><span class="line">&lt;body bgcolor="white"&gt;</span><br><span class="line">&lt;center&gt;&lt;h1&gt;301 Moved Permanently&lt;/h1&gt;&lt;/center&gt;</span><br><span class="line">&lt;hr&gt;&lt;center&gt;openresty&lt;/center&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在 request line/response line 之后，是请求头/响应头，这些头由若干行组成，每行是用冒号分割的名称和值</p>
+</li>
+<li>在头之后，以一个空行（两个换行符）为分割，是请求体/响应体，请求体可能包含文件或者表单数据，响应体则是html 代码</li>
+</ol>
+<h2 id="2-HTTP-method"><a href="#2-HTTP-method" class="headerlink" title="2. HTTP method"></a>2. HTTP method</h2><ul>
+<li>GET  浏览器通过地址栏访问页面都是get 方法</li>
+<li>POST  表单提交</li>
+<li>HEAD 跟get类似，只是返回请求头</li>
+<li>PUT 添加资源</li>
+<li>DELETE 删除资源</li>
+<li>CONNECT 用于https 和websocket</li>
+<li>OPTION  用于调试，多数线上服务器不支持</li>
+<li>TRACE用于调试，多数线上服务器不支持</li>
+</ul>
+<h2 id="3-HTTP-Status-code（状态码）和-Status-text（状态文本）"><a href="#3-HTTP-Status-code（状态码）和-Status-text（状态文本）" class="headerlink" title="3. HTTP Status code（状态码）和 Status text（状态文本）"></a>3. HTTP Status code（状态码）和 Status text（状态文本）</h2><h3 id="response-line-的状态码以及所表达的意义"><a href="#response-line-的状态码以及所表达的意义" class="headerlink" title="response line 的状态码以及所表达的意义"></a>response line 的状态码以及所表达的意义</h3><ul>
+<li>1xx 临时回应，表示客户端请继续（通常情况下，1xx的状态码都会被浏览器 http库直接处理掉了，不会让上层知道）</li>
+<li>2xx 请求成功 （网页请求成功的标志）<ul>
+<li>200 请求成功</li>
+</ul>
+</li>
+<li>3xx 表示请求的目标有变化，希望客户端做进一步处理<ul>
+<li>301 永久性重定向（实际上，301更接近一种报错，提示客户端下次别来了）</li>
+<li>302 临时重定向</li>
+<li>304 客户端缓存没有更新（产生这个状态的前提是：客户端本地已经有缓存的版本了，并在请求中告诉了服务端，当服务端发现没有更新的时候，就会返回一个不含body 的304状态）</li>
+</ul>
+</li>
+<li>4xx 客户端请求错误<ul>
+<li>403 无权限</li>
+<li>404 表示请求页面不存在</li>
+</ul>
+</li>
+<li>5xx 服务端错误<ul>
+<li>500 服务端错误</li>
+<li>503 服务端暂时性错误，可以一会再试</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-HTTP-HEAD"><a href="#4-HTTP-HEAD" class="headerlink" title="4. HTTP HEAD"></a>4. HTTP HEAD</h2><p>http 头可以看做一个键值对。原则上http 也是一种数据，我们可以自由定义 http 头和值</p>
+<ul>
+<li>请求头<br><img src="https://img-blog.csdnimg.cn/20190322222610589.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
+<li>响应头<br><img src="https://img-blog.csdnimg.cn/20190322222649303.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dlbGtpbl9xaW5n,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><h2 id="5-HTTP-Request-Body"><a href="#5-HTTP-Request-Body" class="headerlink" title="5. HTTP Request Body"></a>5. HTTP Request Body</h2>http 请求的body 主要用于提交表单场景。（一般情况下，http请求的body 是比较自由的格式，只要浏览器发送的body 服务端认可就可以了）<br>常见的body格式：</li>
+<li>application/json</li>
+<li>application/x-www-form-urlencoded（使用html的form 标签提交时产生的html请求，默认会使用这种格式）</li>
+<li>multipart/form-data （文件上传）</li>
+<li>text/xml</li>
+</ul>
+<h1 id="三、HTTPS"><a href="#三、HTTPS" class="headerlink" title="三、HTTPS"></a>三、HTTPS</h1><p>不管是https 还是http2 ，基本上保持了HTTP 的设计思想，即：使用上的Request-Response 模式</p>
+<h2 id="1-HTTPS-的作用"><a href="#1-HTTPS-的作用" class="headerlink" title="1. HTTPS 的作用"></a>1. HTTPS 的作用</h2><ol>
+<li>确定请求目标服务端身份</li>
+<li>保证传输的数据不会被网络中间节点窃听或篡改</li>
+</ol>
+<h2 id="2-HTTPS-如何加密"><a href="#2-HTTPS-如何加密" class="headerlink" title="2. HTTPS 如何加密"></a>2. HTTPS 如何加密</h2><h6 id="https-是通过首先和服务端建立一条-TLS-加密通道，然后使用加密通道来传输http-的内容"><a href="#https-是通过首先和服务端建立一条-TLS-加密通道，然后使用加密通道来传输http-的内容" class="headerlink" title="https 是通过首先和服务端建立一条 TLS 加密通道，然后使用加密通道来传输http 的内容"></a>https 是通过首先和服务端建立一条 TLS 加密通道，然后使用加密通道来传输http 的内容</h6><p>TLS 构建于 tcp 协议之上，实际上是对传输内容做一次加密，所以从传输内容上来看，https 和 http 没有任何区别</p>
+<h1 id="四、HTTP2"><a href="#四、HTTP2" class="headerlink" title="四、HTTP2"></a>四、HTTP2</h1><p>HTTP2是 HTTP 1.1 的升级版本</p>
+<h2 id="1-HTTP2-的改进"><a href="#1-HTTP2-的改进" class="headerlink" title="1. HTTP2 的改进"></a>1. HTTP2 的改进</h2><ol>
+<li>支持服务端推送<br>在客户端发送一个请求到服务端时，提前把一部分内容推送给客户端，放入缓存中，这可以避免客户端请求顺序带来的并行度不高，从而导致的性能问题</li>
+<li>支持TCP 连接复用<br>使用同一个TCP 连接传输多个http 请求，避免了TCP 连接建立的三次握手开销，和初建TCP 连接时传输窗口小的问题</li>
+</ol>
+<p>（本文来自我对极客时间winter的重学前端的知识整理，如有转载请声明，同时有不全可以参考原著）</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2019/03/22/前端知识之浏览器如何工作.html" data-title="前端知识之浏览器如何工作 | Welkin" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2019/03/21/脱离文档流和恢复文档流的方法.html"  title="脱离文档流和恢复文档流的方法">
+ <strong>NEXT:</strong><br/> 
+ <span>脱离文档流和恢复文档流的方法
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、首先提两个问题"><span class="toc-number">1.</span> <span class="toc-text">一、首先提两个问题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-一个页面从输入URL到页面加载完成，这个过程都发生了什么？"><span class="toc-number">1.1.</span> <span class="toc-text">1. 一个页面从输入URL到页面加载完成，这个过程都发生了什么？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-如何把一个URL-变成一个屏幕上显示的网页？"><span class="toc-number">1.2.</span> <span class="toc-text">2. 如何把一个URL 变成一个屏幕上显示的网页？</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、网络通讯"><span class="toc-number">2.</span> <span class="toc-text">二、网络通讯</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-HTTP"><span class="toc-number">2.1.</span> <span class="toc-text">1. HTTP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-HTTP-method"><span class="toc-number">2.2.</span> <span class="toc-text">2. HTTP method</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-HTTP-Status-code（状态码）和-Status-text（状态文本）"><span class="toc-number">2.3.</span> <span class="toc-text">3. HTTP Status code（状态码）和 Status text（状态文本）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#response-line-的状态码以及所表达的意义"><span class="toc-number">2.3.1.</span> <span class="toc-text">response line 的状态码以及所表达的意义</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-HTTP-HEAD"><span class="toc-number">2.4.</span> <span class="toc-text">4. HTTP HEAD</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-HTTP-Request-Body"><span class="toc-number">2.5.</span> <span class="toc-text">5. HTTP Request Body</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#三、HTTPS"><span class="toc-number">3.</span> <span class="toc-text">三、HTTPS</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-HTTPS-的作用"><span class="toc-number">3.1.</span> <span class="toc-text">1. HTTPS 的作用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-HTTPS-如何加密"><span class="toc-number">3.2.</span> <span class="toc-text">2. HTTPS 如何加密</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#https-是通过首先和服务端建立一条-TLS-加密通道，然后使用加密通道来传输http-的内容"><span class="toc-number">3.2.0.0.0.1.</span> <span class="toc-text">https 是通过首先和服务端建立一条 TLS 加密通道，然后使用加密通道来传输http 的内容</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#四、HTTP2"><span class="toc-number">4.</span> <span class="toc-text">四、HTTP2</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-HTTP2-的改进"><span class="toc-number">4.1.</span> <span class="toc-text">1. HTTP2 的改进</span></a></li></ol></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2019 
+		
+		<a href="http://yoursite.com" target="_blank" title="welkin">welkin</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>
